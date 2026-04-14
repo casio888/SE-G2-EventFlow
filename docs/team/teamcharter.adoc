@@ -1,5 +1,6 @@
-= Teamcharta: {project-name}
+= Teamcharta: {EventFlow}
 Vorname Nachname <email@domain.org>; Vorname2 Nachname2 <email2@domain.org>; Vorname3 Nachname3 <email3@domain.org>
+Elias Lange <s88205@htw-dresden.de>; Michael (Michi) Lisek <s88218@htw-dresden.de>; Michael (Micha) Müller <s88229@htw-dresden.de>; Nataliia Tsurkan <s88984@htw-dresden.de>; Nina Steyer <s88509@htw-dresden.de>;Paul Daniel Matyjaszczuk <s86398@htw-dresden.de>; Tomy Minh Ngoc Nguyen <s88934@htw-dresden.de>
 {localdatetime}
 include::../_includes/default-attributes.inc.adoc[]
 :version: 1.0
@@ -13,6 +14,9 @@ _Hier können Sie einen Teamnamen und ggf. ein Motto oder eine kurze Beschreibun
 
 _Hier die Produktvision und den Projektzweck in 2–3 Sätzen beschreiben._
 
+Wir wollen ein Programm entwickeln, mit dem Veranstaltungen organisiert werden können. Dabei sollen Benutzer sowohl als Gäste, Gestalter sowie Organisatoren das Programm nutzen können und entsprechend auf andere Informationen zugriff haben.
+//noch ausbaufähig//
+
 == Rollen
 
 [cols="1,2", options="header"]
@@ -20,19 +24,19 @@ _Hier die Produktvision und den Projektzweck in 2–3 Sätzen beschreiben._
 | Rolle | Person
 
 | Product Owner
-| [Name]
+| Nataliia Tsurkan
 
 | Scrum Master
-| [Name]
+| Elias Lange
 
 | Tech Lead footnote:[optionale Rolle, aber empfohlen, um technische Entscheidungen zu koordinieren]
-| [Name]
+| Michael Müller
 
 | Entwickler:innen
-| [Namen]
+| Michael Lisek, Nina Steyer, Paul Daniel Matyjaszczuk, Tomy Minh Ngoc Nguyen
 
 | Stakeholder (Hauptansprechpartner)
-| [Name]
+| [Noch unbekannt]
 |===
 
 
