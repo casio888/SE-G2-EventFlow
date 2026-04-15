@@ -47,29 +47,30 @@ Wir wollen ein Programm entwickeln, mit dem Veranstaltungen organisiert werden k
 | Ereignis | Wann | Dauer | Moderation
 
 | Standup (Daily / Weekly)
-| [z. B. täglich 09:30]
-| [z. B. 15 min]
-| [Rolle / Person]
+| Asynchron 
+| kein Rahmen
+| keine Moderation
 
 | Sprint Planning
-| [z. B. montags, Sprintstart]
-| [z. B. 2 h]
-| [Rolle / Person]
+| jeweils vor Sprint
+| 2h
+| Scrum-Master Elias Lange
 
 | Sprint Review
-| [z. B. freitags, Sprintende]
-| [z. B. 1 h]
-| [Rolle / Person]
+| Ende eines Sprints
+| ca.1h
+| Product Owner, Tech-Lead
 
 | Retrospektive
-| [z. B. freitags, nach Review]
-| [z. B. 1 h]
-| [Rolle / Person]
+| Am Ende eines Sprints. (Nach Review)
+| ca.1h (Wenn kürzer auch gut.)
+| Micha wollte erste übernehmen.
 
 | Backlog Refinement
-| [z. B. mittwochs, wöchentlich]
-| [z. B. 1 h]
-| [Rolle / Person]
+| Anfang-Mitte vom Sprint
+| ca. 1/2h 
+//Zeiten jeweils anzupassen//
+| Product Owner
 |===
 
 == Kommunikation
@@ -79,28 +80,30 @@ Wir wollen ein Programm entwickeln, mit dem Veranstaltungen organisiert werden k
 | Thema | Vereinbarung
 
 | Primärer Kanal
-| [z. B. Discord – #projektname]
+| Discord SE-I #EventFolw
 
 | Entscheidungsprotokoll
-| [z. B. Wiki oder per Asciidoc in Ordner <Ordnername>]
+| Am Ende eines Standup-Protokolls.(Sollen nochmal zusammengefasst werden.)
 
 | Erwartete Reaktionszeit
-| [z. B. innerhalb von 4 Stunden während Kernzeit]
+| Innerhalb eines Tages eine Information zurück.
 
 | Kernarbeitszeit
-| [z. B. 09:00 – 16:00 Uhr]
+| Keine angebbar. (Erkennbar an Anwesenheit im Discord)
 
 | Videokonferenz-Tool
-| [z. B. Teams / Discord / Google Meet]
+| Discord
 
 | Asynchrone Abstimmung
-| [z. B. kurze Statusupdates im Issue-Diskussion]
+| [Keine Angaben gemacht!]
 |===
 
 == Arbeitsweise
 
 === Definition of Ready (DoR)
-_Eine User Story ist bereit für die Entwicklung, wenn:_
+_Eine User Story ist bereit für die Entwicklung, wenn:
+Dazu bitte nochmal was sagen! Dazu haben wir nichts gesagt @PO Wie sieht es bei dir aus, wegen den User-Storys?
+_
 
 // Hier können die Kriterien individuell angepasst werden, z. B.:
 * [ ] Die Akzeptanzkriterien sind klar und vollständig beschrieben
@@ -128,7 +131,7 @@ _Eine User Story gilt als fertig, wenn:_
 | Thema | Vereinbarung
 
 | Branching-Strategie
-| [z. B. Feature Branches, Trunk-Based Development]
+| Micha wollte da noch was zu sagen (nächstes Treffen?)
 
 | PR-Review-Regeln
 | [z. B. mind. 1 Approval, kein Merge ohne grüne Pipeline]
@@ -144,11 +147,13 @@ _Eine User Story gilt als fertig, wenn:_
 
 _Diese Vereinbarungen haben wir gemeinsam getroffen:_
 
-. [z. B. Wir gehen respektvoll und offen miteinander um.]
-. [z. B. Wir sprechen Probleme frühzeitig an, anstatt sie zu ignorieren.]
-. [z. B. Fehler sind Lernchancen – wir suchen keine Schuldigen.]
-. [z. B. Meetings beginnen pünktlich; wer verhindert ist, gibt rechtzeitig Bescheid.]
-. [z. B. Entscheidungen werden dort dokumentiert, wo alle sie finden können.]
+. Wir gehen respektvoll und offen miteinander um.
+. Wir sprechen Probleme frühzeitig an, anstatt sie zu ignorieren.
+. Fehler sind Lernchancen – wir suchen keine Schuldigen.
+. Wenn es Probleme gibt, versuchen wir diese gemeinsam zu Lösen und Aufgaben zu verteilen.
+. Meetings beginnen pünktlich; wer verhindert ist, gibt rechtzeitig Bescheid.
+. Entscheidungen werden dort dokumentiert, wo alle sie finden können.
+
 
 
 _Nächste Überprüfung: [Datum / Sprint] — Diese Charta wird regelmäßig in der Retrospektive aktualisiert._
