@@ -1,0 +1,106 @@
+= Engineering-Vereinbarungen
+Elias Lange <s88205@htw-dresden.de>; Michael (Michi) Lisek <s88218@htw-dresden.de>; Michael (Micha) Müller <s88229@htw-dresden.de>; Nataliia Tsurkan <s88984@htw-dresden.de>; Nina Steyer <s88509@htw-dresden.de>;Paul Daniel Matyjaszczuk <s86398@htw-dresden.de>; Tomy Minh Ngoc Nguyen <s88934@htw-dresden.de>
+{localdatetime}
+include::../_includes/default-attributes.inc.adoc[]
+:version: 1.0
+
+== Frameworks und Software
+Für die Entwicklung einer Webapp verwenden das Python Django-Webframework (https://www.djangoproject.com/)
+[Grund: Im Team sind Python Grundlagen breiter als PHP.]
+
+Als Datenbank wird MS-SQL verwendet.
+[Grund: Ermöglicht die Verwendung der HTW Server, und Grundlagen (im MS Dialekt) durch bisherige Module bei allen vorhanden.]
+
+Als Skriptsprache im Frontend wird JavaScript (mit JQuery Bibliothek) verwendet.
+[Grund: JS Kenntnisse bei Dediziertem Frontend Developer vorhanden. Typescript wäre skalierbarer, aber für unseren Scope umständlicher. JQuery ist einfach und hat größte Knowledge Base]
+
+Als CSS Framework verwenden wir Bootstrap.
+[Grund: Weit verbreitet, vorgefertigte Komponenten. Gibt Junior Developern mehr Vorlagen/Guidlines im vergleich zu z.B. Tailwind.]
+
+== Umgang mit Git
+Dieser Abschnitt beschreibt übliche Arbeitsweisen mit Git und Konventionen
+
+=== Branches
+Branches werden für zu bearbeitende Userstories angelegt. Die Erstellung und Benennung erfolgt vom bearbeitenden Developer.
+Namen für Branches folgen diesem Schema (alles lowercase): <issueNR>-<developer-Kürzel>-<Titel des Issue>
+z.B.: 1-mmichael-django-framwork-gerüst, 123-elange-hotfix-login-security, 24-nina-grundlegende-rollen
+
+Es sollten maximal 3 Wörter zur Beschreibung genutzt werden, auch wenn Issue-Titel länger ausfallen können.
+Nachdem ein Branch (lokal) angelegt wurde, sollt dieser direkt (ohne Änderungen) dem github repo bekannt gemacht werden. `git checkout -b 11-lmicha-chatfunktion; git push -u origin 11-lmicha-chatfunktion`.
+
+Grob gesprochen sollte es für jede User Story (Feature) einen Branch geben. Wenn die Entwicklung abgeschlossen und bestätigt ist, wird der Branch in den main-Branch gemerged.
+
+=== Commits und Commit Nachrichten
+Commit Nachrichten sollen sich an einer vereinfachten Variante der "Conventional Commits" (https://www.conventionalcommits.org/en/v1.0.0/) orientieren.
+Das bedeutet, dass jede Commit Nachricht folgendes Schema besitzen soll: <Bezeichner>: Nachricht
+Nachrichten sind in Deutsch zu schreiben.
+
+Mögliche Bezeichner sind:
+ - fix: Behebt bugs in bereits vorhandenen Code
+ - feature: Code stellt ein neues feature bereit
+ - typo: Behebung von schreibfehlern
+ - docs: Hinzufügen von neuen Dokumenten oder anpassungen von Dokumenten (docs Ordner, README Dateien)
+ - style: Änderungen die keine Auswirkungen auf die Funktionaität von Code haben
+ - refactor: Umbenennung von Variablen/Funktionen
+ - test: Alle arbeiten an Tests
+ - wip: Für nicht abgeschlossene Arbeiten
+
+Bei Bedarf kann sich ein neuer passenderer Bezeichner ausgedacht werden. 
+
+Die Länge von Commitnachrichten sollte 70 Zeichen nich überschreiten. Sollte es für die Verständlichkeit aber zwingend Notwendig sein, können Commit Nachrichten dieses Limit überschreiten.
+
+Es sollte am Ende jedes Arbeitstages alle lokalen Änderungen commited werden (siehe wip Bezeichner) UND auf github gepusht werden.
+Dadurch haben alle Teammitglieder bei spontenen Ausfällen oder Krankheit volle Übersicht über Fortschritte und der Verlust von lokalen Kopien ist minimal.
+
+Direkte Commits auf den main-Branch sollten nur vom Typ docs und typo sein. Alle Code ändernden Commits (Hotfixes eingeschlossen) werden über Issues und Branches zu besagten Issues mit abschließendem Review und Merge eingepflegt.
+
+=== Merge Requests (Pull Requests)
+Wenn Features fertig gecoded sind, wird vom bearbeitenden Entwickler ein Merge Request auf den main-Branch erstellt.
+Dieser muss von einem anderen Developer reviewed werden. Wenn der Reviewer sein approval gibt, wird der Scrum-Master im asynchronen Daily informiert.
+Aufgaben eines Reviewers: 
+  - Linter über den Code laufen lassen
+  - Schauen ob Naming Conventions eingehalten wurden
+  - Feedback ob die Funktion des Codes verständlich ist (Struktur, Kommentare, etc.)
+  - Analyse ob effizienter Code geschrieben wurden (keine unnötigen schleifen, sleeps, etc.)
+  - Prüfen ob die Tests funktionieren (evtl. später via CI/CD) und ob die geschriebenen Tests sinnvoll sind
+
+Wichtig: Reviewer ändern keinen Code, Sie zeigen nur auf was noch fehlt, bzw geben Vorschläge wie verbessert werden kann. 
+Die aufgezeigten Punkte werden vom ursprünglichen Developer abgearbeitet. Wenn die Punkte erledigt sind, prüft der Reviewer (die Änderungen) und gibt erneut Feedback.
+Wenn der Reviewer keine weitere Kritik mehr hat, gibt er approval.
+
+
+Am Ende eines Sprints kann der PO alle User Stories (approved Merge-Requests) mit den Stakeholdern besprechen.
+
+=== Tags und Releases
+Am Ende jedes Sprints nach Abnahme durch die Stakeholder werden alle approved Merge Requests in den main-Branch gemerged und es wird ein Tag und ein Release erstellt.
+Dieses Vorgehen kann sich später verändern, wenn CI/CD und eine Testplatform bereitstehen.
+
+=== Coding style
+
+Für Python verwenden wir den Black Linter (https://github.com/psf/black) mit PEP8 Guidelines (official python style guide).
+Docstrings werden in folgenden Format geschrieben (angelehnt ans Google Format):
+```
+"""[Short Summary]
+
+[Detailed Description]
+
+Arguments:
+    [variable_name] {[type]} -- [Description]
+    fizz {String} -- Enthält Suchwort
+
+Returns:
+    [type] -- [Description]
+    int -- Anzahl der Antworten
+
+Raises:
+    [type] -- [Description]
+    ValueError -- Bei ungültigem Suchwort 
+"""
+```
+Entweder wird direkt bei der Entwicklung mit dem Linter gearbeitet oder vor einem Merge request wird der Linter laufen gelassen und alle Änderungen als style-Commit commited.
+
+Wir verwernden Python TypeHints.
+
+Für Javascript nutzen wir vorerst keinen Linter (weil quasi alle NPM/node Installationen benötigen) später evtl ESLint
+
+Für CSS gibt es nur 2 Regeln: Klassen Namen in snake_case. 1 Attribut pro Zeile.
