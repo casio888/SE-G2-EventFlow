@@ -29,7 +29,7 @@ Wir wollen ein Programm entwickeln, mit dem Veranstaltungen organisiert werden k
 | Scrum Master
 | Elias Lange
 
-| Tech Lead footnote:[optionale Rolle, aber empfohlen, um technische Entscheidungen zu koordinieren]
+| Tech Lead
 | Michael Müller
 
 | Entwickler:innen
@@ -126,22 +126,7 @@ _Eine User Story gilt als fertig, wenn:_
 
 === Code & Versionierung
 
-[cols="1,2", options="header"]
-|===
-| Thema | Vereinbarung
-
-| Branching-Strategie
-| Micha wollte da noch was zu sagen (nächstes Treffen?)
-
-| PR-Review-Regeln
-| [z. B. mind. 1 Approval, kein Merge ohne grüne Pipeline]
-
-| Merge-Berechtigung
-| [z. B. jedes Teammitglied nach Approval]
-
-| Commit-Konventionen
-| [z. B. Conventional Commits]
-|===
+Engineering Vereinbarungen sind xref:../technical/engineering_guidlines.adoc[hier] in einer eigenen Datei festgehalten.
 
 == Teamvereinbarungen
 
