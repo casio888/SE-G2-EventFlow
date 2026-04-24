@@ -1,0 +1,34 @@
+= Betreuer Meeting 01
+Freitag 24.04.2026 15:00-15:38
+
+Anwesend:
+- Robert Ringel, Michael L, Nina, Nataliia, Paul, Michael M
+
+== Inhalt
+=== Meetingstrukturen
+
+  Jedes Meeting braucht eine Agenda, die zur Termineinladung mitgeteilt wird und einen strengen Zeitrahmen.
+  Der Wichtigste Punkt ist dass bei Meetings keine tiefen fachlichen Diskussionen stattfinden. Es werden Probleme vorgetragen und alternativen vorgeschlagen und dann entscheidet das Team ein Vorgehen.
+  Am Ende Von Meetings muss festehen:
+  - Welche Maßnahmen wurden entschieden
+  - Nächste Termine
+  - Follow Up Aufgaben die sich ergeben
+    
+=== Generelle Tipps 
+  Wichtig am Anfang von der Projektarbeit sind ein klares Ziel was erarbeitet werden soll und regelmäßige persönliche Treffen mit allen Teammitgliedern.
+
+  Zur Produktvision gehören en VErständnis über das Frontend (UI) und über die TEchnologie im Backend (Welche Frameworks, welche/wie viele Server/Datenbanken).
+    
+  Um das Feedback von Nutzern (andere Studenten) gut auszunutzen müssen wir den Studenten eine klare Produktvision präsentieren und ihnen eine Persona zuweisen.
+  Dadurch strukturieren wir das Feedback der Nutzer so, dass wir es nicht allzusehr von dem geplanten Produkt abweicht und es nutzbar wird.
+
+  Die Bewertunge des Projektes besteht aus dem Endergebnis (kleiner Teil), dem Eigenanteil der jeweiligen Studenten (kleiner Teil) und der Dokumentation der Lernerfolge (großer Teil)
+  Hier sind vor allem Meetingnotizen wichtig um zu zeigen wie mit positiven und negativen Situationen umgegangen wurde und die die Methoden und Praktiken aus der Vorlesung angewendet wurden.
+
+=== Nächste Termine
+    Projekttreffen Dienstag 28.04.2026 für Abstimmung zur Produktvision und Personas
+
+=== Follow Up
+    Michael M. erstellt Spikes um bei allen eine Basis für das Framework zu etablieren
+    Elias stimmt das nächste Meeting ab
+    Michael M. klärt mit Christoph Zirkelback den Zugang zu Servern die für die Projektarbeit notwendig sind.
