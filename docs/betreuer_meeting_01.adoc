@@ -17,13 +17,13 @@ Anwesend:
 === Generelle Tipps 
   Wichtig am Anfang von der Projektarbeit sind ein klares Ziel was erarbeitet werden soll und regelmäßige persönliche Treffen mit allen Teammitgliedern.
 
-  Zur Produktvision gehören en VErständnis über das Frontend (UI) und über die TEchnologie im Backend (Welche Frameworks, welche/wie viele Server/Datenbanken).
+  Zur Produktvision gehören en Verständnis über das Frontend (UI) und über die TEchnologie im Backend (Welche Frameworks, welche/wie viele Server/Datenbanken).
     
   Um das Feedback von Nutzern (andere Studenten) gut auszunutzen müssen wir den Studenten eine klare Produktvision präsentieren und ihnen eine Persona zuweisen.
   Dadurch strukturieren wir das Feedback der Nutzer so, dass wir es nicht allzusehr von dem geplanten Produkt abweicht und es nutzbar wird.
 
-  Die Bewertunge des Projektes besteht aus dem Endergebnis (kleiner Teil), dem Eigenanteil der jeweiligen Studenten (kleiner Teil) und der Dokumentation der Lernerfolge (großer Teil)
-  Hier sind vor allem Meetingnotizen wichtig um zu zeigen wie mit positiven und negativen Situationen umgegangen wurde und die die Methoden und Praktiken aus der Vorlesung angewendet wurden.
+  Die Bewertung des Projektes besteht aus dem Endergebnis (kleiner Teil), dem Eigenanteil der jeweiligen Studenten (kleiner Teil) und der Dokumentation der Lernerfolge (großer Teil)
+  Hier sind vor allem Meetingnotizen wichtig um zu zeigen wie mit positiven und negativen Situationen umgegangen wurde und die Methoden und Praktiken aus der Vorlesung angewendet wurden.
 
 === Nächste Termine
     Projekttreffen Dienstag 28.04.2026 für Abstimmung zur Produktvision und Personas
