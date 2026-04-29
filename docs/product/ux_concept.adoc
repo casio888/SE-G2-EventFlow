@@ -47,30 +47,32 @@ _Hinweis: Im link:product_concept.adoc[Produktkonzept] werden Zielgruppen nur be
 | [Warum ist dieses Produkt für sie relevant? Was ist ihr primärer Nutzen?]
 |===
 
-=== Persona 2: [Name]
+=== Persona 2: Jargen Ünke
 
 [cols="1,3"]
 |===
 | *Rolle*
-| [z. B. Verwaltungsangestellte, zuständig für Raumvergabe]
+| großer Veranstalter, Festivalveranstalter
 
 | *Alter*
-| [z. B. 45 Jahre]
+| 28 Jahre
 
 | *Zitat*
-| _„[Prägnantes Zitat]"_
+| _„Ich brauche einen Überblick über hunderte Einreichungen, ohne diesen zu verlieren"_
 
 | *Ziele*
-| [Ziele]
+| Strukturierte und effiziente Planung von mehreren Events
 
 | *Frustrationen*
-| [Frustrationen]
+| Zu viele Einreichungen bei vielen unterschiedlichen Events sind schwer zu überblicken + 
+Manuelle Kommunikation kostet viel Zeit
 
 | *Verhalten & Kontext*
-| [Verhalten & Kontext]
+| Arbeitet unter viel Zeitstress und koodiniert mehrere Personen +
+Arbeitet mit komplexer Software und kennt sich mit Eventmangament gut aus
 
 | *Bezug zum Produkt*
-| [Bezug zum Produkt]
+| Möchte mit dem Produkt Events und Einreicher effizient verwalten
 |===
 
 === Persona 3: Mark Dieter Kling
