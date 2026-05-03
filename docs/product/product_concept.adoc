@@ -56,7 +56,7 @@ NOTE: Das Visions-Statement kann im Team mit der „Elevator Pitch"-Methode oder
 === Zielbild
 
 _Optional: Beschreibe in 2–4 Sätzen, wie die Welt mit diesem Produkt aussieht. Was hat sich für die Nutzer:innen verändert?_
-//Mit EventFlow läuft die Organisation von Eventbeiträgen zentral und übersichtlich über eine einzige Plattform. Veranstalter behalten jederzeit den Überblick über Einreichungen, Status und Planung, während Einreicher klar sehen, wo und wie sie Beiträge einreichen können. Der gesamte Prozess ist transparent, strukturiert und deutlich schneller, da Kommunikation und Entscheidungen direkt im System stattfinden. Dadurch wird der organisatorische Aufwand reduziert und die Zusammenarbeit für alle Beteiligten spürbar verbessert.]
+//[Mit EventFlow läuft die Organisation von Eventbeiträgen zentral und übersichtlich über eine einzige Plattform. Veranstalter behalten jederzeit den Überblick über Einreichungen, Status und Planung, während Einreicher klar sehen, wo und wie sie Beiträge einreichen können. Der gesamte Prozess ist transparent, strukturiert und deutlich schneller, da Kommunikation und Entscheidungen direkt im System stattfinden. Dadurch wird der organisatorische Aufwand reduziert und die Zusammenarbeit für alle Beteiligten spürbar verbessert.]
 
 
 == Produktpositionierung
