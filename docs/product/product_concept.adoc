@@ -19,10 +19,7 @@ _Warum wird dieses Produkt gebaut? Welches Problem existiert heute, und warum is
 Dieser Abschnitt beschreibt den Ausgangszustand und den Handlungsbedarf — ohne bereits eine
 Lösung zu nennen. 3–5 Sätze genügen._
 
-[Hier die Ausgangssituation und den Handlungsbedarf beschreiben. Beispiel:
-„Studierende an der Hochschule haben heute keinen zentralen Überblick über verfügbare
-Lernräume. Die Suche nach freien Plätzen kostet täglich wertvolle Zeit und führt zu Frust.
-Eine einfache, mobil nutzbare Lösung fehlt bisher."]
+Die Organisation von Veranstaltungen mit Beiträgen ist oft unübersichtlich, weil Einreichungen über verschiedene Kanäle wie E-Mail oder Cloud-Dienste verteilt sind. Dadurch entsteht hoher manueller Aufwand bei Kommunikation, Bewertung und Planung, während gleichzeitig Transparenz und klare Prozesse fehlen. Eine zentrale Plattform wie EventFlow bündelt alle Einreichungen und Abläufe, sorgt für mehr Übersicht und optimiert den gesamten Organisationsprozess.
 
 == Produktvision
 
@@ -33,13 +30,23 @@ nicht wesentlich verändern._
 === Visions-Statement
 
 ____
-Für [Zielgruppe],
-die [Problem oder Bedarf],
-ist [Produktname]
-ein [Produktkategorie],
-das [zentraler Nutzen].
-Im Gegensatz zu [Alternative]
-bietet unser Produkt [entscheidender Unterschied].
+Für Veranstalter von Events mit Beiträgen,
+die den Überblick über Einreichungen und Planung verlieren,
+ist EventFlow
+eine zentrale Webplattform,
+die Beiträge, Status und Agenda übersichtlich an einem Ort verwaltet.
+Im Gegensatz zu E-Mail oder verstreuten Tools
+bietet unser Produkt einen klaren und effizienten Organisationsprozess.
+____
+
+____
+Für Einreicher von Eventbeiträgen,
+die nicht wissen, wo und wie sie Beiträge einreichen und welchen Status diese haben,
+ist EventFlow
+eine zentrale Webplattform,
+die eine einfache Einreichung und transparente Statusverfolgung ermöglicht.
+Im Gegensatz zu unstrukturierten Kommunikationswegen
+bietet unser Produkt klare Prozesse und automatische Rückmeldungen.
 ____
 
 //Beispiel: Für Studierende der HTWD, die zu wenig Zeit in der Mittagspause zum Essen haben, ist Flying Burger ein  Lieferdient für Burger, der per Drohne liefert. Anders als landgestützte Lieferdienste kann unser Produkt durchs Fenster direkt in den Hörsaal liefern.
@@ -49,7 +56,7 @@ NOTE: Das Visions-Statement kann im Team mit der „Elevator Pitch"-Methode oder
 === Zielbild
 
 _Optional: Beschreibe in 2–4 Sätzen, wie die Welt mit diesem Produkt aussieht. Was hat sich für die Nutzer:innen verändert?_
-//[Hier das Zielbild beschreiben]
+//Mit EventFlow läuft die Organisation von Eventbeiträgen zentral und übersichtlich über eine einzige Plattform. Veranstalter behalten jederzeit den Überblick über Einreichungen, Status und Planung, während Einreicher klar sehen, wo und wie sie Beiträge einreichen können. Der gesamte Prozess ist transparent, strukturiert und deutlich schneller, da Kommunikation und Entscheidungen direkt im System stattfinden. Dadurch wird der organisatorische Aufwand reduziert und die Zusammenarbeit für alle Beteiligten spürbar verbessert.]
 
 
 == Produktpositionierung
