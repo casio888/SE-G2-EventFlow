@@ -54,9 +54,7 @@ ____
 NOTE: Das Visions-Statement kann im Team mit der „Elevator Pitch"-Methode oder dem „Future Press Release"-Format erarbeitet werden.
 
 === Zielbild
-
-_Optional: Beschreibe in 2–4 Sätzen, wie die Welt mit diesem Produkt aussieht. Was hat sich für die Nutzer:innen verändert?_
-[Mit EventFlow läuft die Organisation von Eventbeiträgen zentral und übersichtlich über eine einzige Plattform. Veranstalter behalten jederzeit den Überblick über Einreichungen, Status und Planung, während Einreicher klar sehen, wo und wie sie Beiträge einreichen können. Der gesamte Prozess ist transparent, strukturiert und deutlich schneller, da Kommunikation und Entscheidungen direkt im System stattfinden. Dadurch wird der organisatorische Aufwand reduziert und die Zusammenarbeit für alle Beteiligten spürbar verbessert.]
+_Mit EventFlow läuft die Organisation von Eventbeiträgen zentral und übersichtlich über eine einzige Plattform. Veranstalter behalten jederzeit den Überblick über Einreichungen, Status und Planung, während Einreicher klar sehen, wo und wie sie Beiträge einreichen können. Der gesamte Prozess ist transparent, strukturiert und deutlich schneller, da Kommunikation und Entscheidungen direkt im System stattfinden. Dadurch wird der organisatorische Aufwand reduziert und die Zusammenarbeit für alle Beteiligten spürbar verbessert._
 
 
 == Produktpositionierung
@@ -68,14 +66,14 @@ _Wer sind die Zielgruppen, und wie positioniert sich das Produkt im Vergleich zu
 |===
 | Zielgruppe | Beschreibung
 
-| [Veranstalter]
-| [Personen oder Teams, die ein Event planen, Beiträge koordinieren und über Annahme oder Ablehnung entscheiden]
+| Veranstalter
+| Personen oder Teams, die ein Event planen, Beiträge koordinieren und über Annahme oder Ablehnung entscheiden
 
-| [Einreicher]
-| [Personen, die Beiträge wie Vorträge oder Workshops für ein Event einreichen]
+| Einreicher
+| Personen, die Beiträge wie Vorträge oder Workshops für ein Event einreichen
 
-| [evtl. Gutachter]
-| [Personen, die eingereichte Beiträge bewerten und eine Empfehlung für die Entscheidung abgeben]
+| evtl. Gutachter
+| Personen, die eingereichte Beiträge bewerten und eine Empfehlung für die Entscheidung abgeben
 |===
 
 NOTE: Ausführliche Beschreibungen der Nutzenden — Personas, Nutzungskontext,
@@ -110,25 +108,25 @@ erklärt, warum bestimmte Entscheidungen getroffen wurden.
 |===
 | Stakeholder | Rolle / Interesse | Erwartungen an das Produkt | Einfluss
 
-| [z. B. Hochschulverwaltung]
-| [Betreiber der Infrastruktur; will Raumauslastung optimieren]
-| [Auslastungsberichte, DSGVO-Konformität]
+| Veranstalter
+| Planen und organisieren Events und verwalten alle Beiträge
+| Übersichtliche Verwaltung, einfache Planung, effiziente Prozesse
 | Hoch
 
-| [z. B. Studierende]
-| [Hauptnutzer:innen; wollen schnell freie Plätze finden]
-| [Einfache Bedienung, mobiler Zugang]
+| Einreicher
+| Reichen Beiträge für Events ein
+| Einfache Einreichung, klare Informationen, transparente Statusanzeige
+| Hoch
+
+| Gutachter
+| Bewerten eingereichte Beiträge und unterstützen Entscheidungen
+| Strukturierte Bewertung, gute Übersicht über Beiträge
 | Mittel
 
-| [z. B. Lehrende]
-| [Nutzen Räume für Lehrveranstaltungen; wollen Konflikte vermeiden]
-| [Sichtbarkeit ihrer Buchungen]
-| Mittel
-
-| [Weiterer Stakeholder]
-| [Beschreibung]
-| [Erwartungen]
-| [Hoch / Mittel / Niedrig]
+| Mitwirkende der Veranstaltung
+| Unterstützen bei Durchführung (z. B. Moderation, Organisation vor Ort)
+| Klarer Zugang zu Informationen und Zeitplänen
+| Niedrig
 |===
 
 == Hauptfunktionen
@@ -235,8 +233,8 @@ organisatorische, rechtliche oder zeitliche Vorgaben._
 | Version | Datum | Änderung
 
 | 1.0
-| [Datum]
-| Initiale Version nach Kick-off-Workshop
+| 03.05.2026
+| Erste Version nach dem Meeting am 28.04
 
 |===
 
