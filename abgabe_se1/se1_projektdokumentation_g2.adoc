@@ -1,9 +1,9 @@
 // --- 1. Projektthema -------------------------
 = SE I - Projektdokumentation: {project-name}
 // --- 2. Teammitglieder -----------------------
-Vorname Nachname <s00000@htw-dresden.de>; Vorname Nachname <s00000@htw-dresden.de>; Vorname Nachname <s00000@htw-dresden.de>; Vorname Nachname <s00000@htw-dresden.de>; Vorname Nachname <s00000@htw-dresden.de>; Vorname Nachname <s00000@htw-dresden.de>
+Elias Lange <s88205@htw-dresden.de>; Michael (Michi) Lisek <s88218@htw-dresden.de>; Michael (Micha) Müller <s88229@htw-dresden.de>; Nataliia Tsurkan <s88984@htw-dresden.de>; Nina Steyer <s88509@htw-dresden.de>; Paul Daniel Matyjaszczuk <s86398@htw-dresden.de>; Tomy Minh Ngoc Nguyen <s88934@htw-dresden.de>
 // --- 3. Abgabedatum --------------------------
-01. Januar 2025
+1. Juni 2026?
 // ---------------------------------------------
 :docs: ../docs
 include::{docs}/_includes/default-attributes.inc.adoc[]
@@ -27,9 +27,7 @@ include::{docs}/_includes/default-attributes.inc.adoc[]
 :experimental:
 // Folders
 :imagesdir-reset: {imagesdir}
-:docs-team: {docs}/team
-:docs-product: {docs}/product
-:docs-technical: {docs}/technical
+
 
 <<<
 

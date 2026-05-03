@@ -1,6 +1,6 @@
 // Meta
-:project-name: Projektthema (X0)
-:project-system-name: Software-Name
+:project-name: EventFlow (G2)
+:project-system-name: EventFlow
 // Settings:
 :toc:
 :toc-title: Inhaltsverzeichnis
@@ -19,8 +19,14 @@
 ifndef::imagesdir[:imagesdir: images]
 ifndef::diagramsdir[:diagramsdir: diagrams]
 ifndef::plantumlsdir[:plantumlsdir: plantuml]
+// docs folders
+:docs-team: {docs}/team
+:docs-product: {docs}/product
+:docs-technical: {docs}/technical
 // Hyphenation for PDF dokumente
 :lang: DE
 :hyphens:
+
 // main document
 :main-document:
+
