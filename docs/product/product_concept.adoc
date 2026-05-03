@@ -139,25 +139,25 @@ Diese Hauptfunktionen sollten als Epics im Product Backlog für die Gruppierung 
 |===
 | Nutzerbedarf | Hauptfunktion | Priorität
 
-| Studierende wollen schnell sehen, welche Räume gerade frei sind.
-| Echtzeit-Übersicht freier Lernräume
+| Nutzer:innen (Veranstalter und Einreicher) wollen sich sicher und einfach im System anmelden und registrieren.
+| Account-Erstellung & Login (Authentifizierung)
 | Hoch
 
-| Nutzer:innen wollen einen Raum für einen bestimmten Zeitraum reservieren.
-| Raumbuchung mit Zeitfenster
+| Einreicher wollen sehen, welche Events verfügbar sind und wofür sie Beiträge einreichen können.
+| Event-Übersicht für Einreicher
 | Hoch
 
-| Nutzer:innen wollen ihre aktiven Buchungen verwalten.
-| Buchungsübersicht & Stornierung
-| Mittel
+| Veranstalter wollen neue Events erstellen und zur Einreichung freigeben.
+| Event-Erstellung und Verwaltung durch Veranstalter
+| Hoch
 
-| Verwaltung will die Auslastung der Räume analysieren.
-| Auslastungsberichte für Administratoren
-| Niedrig
+| Einreicher wollen Beiträge zu einem Event einfach einreichen können.
+| Beitragseinreichung für Events
+| Hoch
 
-| [Nutzerbedarf]
-| [Hauptfunktion]
-| [Hoch / Mittel / Niedrig]
+| Veranstalter wollen alle eingereichten Beiträge zentral sehen und verwalten.
+| Übersicht aller Einreichungen pro Event (inkl. Status)
+| Hoch
 |===
 
 NOTE: Die Reihenfolge entspricht einer ersten groben Priorisierung und wird im Rahmen
