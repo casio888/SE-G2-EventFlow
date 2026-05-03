@@ -56,7 +56,7 @@ NOTE: Das Visions-Statement kann im Team mit der „Elevator Pitch"-Methode oder
 === Zielbild
 
 _Optional: Beschreibe in 2–4 Sätzen, wie die Welt mit diesem Produkt aussieht. Was hat sich für die Nutzer:innen verändert?_
-//[Mit EventFlow läuft die Organisation von Eventbeiträgen zentral und übersichtlich über eine einzige Plattform. Veranstalter behalten jederzeit den Überblick über Einreichungen, Status und Planung, während Einreicher klar sehen, wo und wie sie Beiträge einreichen können. Der gesamte Prozess ist transparent, strukturiert und deutlich schneller, da Kommunikation und Entscheidungen direkt im System stattfinden. Dadurch wird der organisatorische Aufwand reduziert und die Zusammenarbeit für alle Beteiligten spürbar verbessert.]
+[Mit EventFlow läuft die Organisation von Eventbeiträgen zentral und übersichtlich über eine einzige Plattform. Veranstalter behalten jederzeit den Überblick über Einreichungen, Status und Planung, während Einreicher klar sehen, wo und wie sie Beiträge einreichen können. Der gesamte Prozess ist transparent, strukturiert und deutlich schneller, da Kommunikation und Entscheidungen direkt im System stattfinden. Dadurch wird der organisatorische Aufwand reduziert und die Zusammenarbeit für alle Beteiligten spürbar verbessert.]
 
 
 == Produktpositionierung
@@ -68,14 +68,14 @@ _Wer sind die Zielgruppen, und wie positioniert sich das Produkt im Vergleich zu
 |===
 | Zielgruppe | Beschreibung
 
-| [z. B. Studierende]
-| [Kurzbeschreibung: Wer sind sie? Was ist ihre Motivation?]
+| [Veranstalter]
+| [Personen oder Teams, die ein Event planen, Beiträge koordinieren und über Annahme oder Ablehnung entscheiden]
 
-| [z. B. Lehrende]
-| [Kurzbeschreibung]
+| [Einreicher]
+| [Personen, die Beiträge wie Vorträge oder Workshops für ein Event einreichen]
 
-| [Weitere Zielgruppe]
-| [Kurzbeschreibung]
+| [evtl. Gutachter]
+| [Personen, die eingereichte Beiträge bewerten und eine Empfehlung für die Entscheidung abgeben]
 |===
 
 NOTE: Ausführliche Beschreibungen der Nutzenden — Personas, Nutzungskontext,
@@ -87,17 +87,17 @@ typische Aufgaben — sind im link:ux_concept.adoc[UX-Konzept] dokumentiert.
 |===
 | Alternative | Beschreibung | Warum unser Produkt besser passt
 
-| [z. B. E-Mail-Anfrage an Sekretariat]
-| [Wie lösen Nutzer:innen das Problem heute?]
-| [Worin liegt unser Vorteil?]
+| Eventagenturen
+| Externe Dienstleister übernehmen Planung und Organisation von Events und Einreichungen.
+| Hohe Kosten und wenig Flexibilität – EventFlow ist günstiger und direkt selbst nutzbar.
 
-| [z. B. Aushang an schwarzem Brett]
-| [Beschreibung]
-| [Unterschied]
+| Google Docs
+| Beiträge und Planung werden über geteilte Dokumente organisiert.
+| Unübersichtlich und nicht speziell für den Prozess gemacht – EventFlow bietet strukturierte Workflows und Statusverfolgung.
 
-| [Weitere Alternative]
-| [Beschreibung]
-| [Unterschied]
+| Organisation über WhatsApp
+| Kommunikation und Abstimmung laufen über Chatgruppen.
+| Chaotisch und schwer nachverfolgbar – EventFlow bündelt alles zentral und transparent an einem Ort.
 |===
 
 
