@@ -1,0 +1,24 @@
+= Daily: {G2-Eventflow}
+:sectnums: |,all|
+include::../_includes/default-attributes.inc.adoc[]
+
+
+== Durchgehen durch die Storys und Epics
+    @PO Meinung dazu
+
+== Aufwandsabschätzung für Epics
+
+== Welche Epics bekommen Wireframe
+
+== Zuarbeit für Abgabe von Sprint 1
+
+== Weiter Themen
+    - Nutzerziele formulieren
+    - Produktvision
+    - Hauptfunktionen benennen
+
+    - Epics aus Hauptfunktionen
+    - Akzeptanzkriterien aus Userstorys
+
+    - Wesentliche Annahmen über Nutzungskontext
+    - Wireframes erstellen (ux_concept.adoc)
