@@ -1,7 +1,7 @@
 = Feedback: {Eventflow G2}
 
 {localdatetime}
-include::../_includes/default-attributes.inc.adoc[]
+//include::../_includes/default-attributes.inc.adoc[]
 :version: 1.0
 
 = Erstes Feedback 07.05.
