@@ -1,4 +1,5 @@
-= feedback {Eventflow G2}
+= Feedback: {Eventflow G2}
+
 {localdatetime}
 include::../_includes/default-attributes.inc.adoc[]
 :version: 1.0
