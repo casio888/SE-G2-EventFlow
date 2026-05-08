@@ -1,0 +1,76 @@
+= feedback {Eventflow G2}
+{localdatetime}
+include::../_includes/default-attributes.inc.adoc[]
+:version: 1.0
+
+= Erstes Feedback 07.05.
+
+== Was wurde besprochen
+
+* Idee von unserem Produkt.
+* Vorstellung unserer Zielgruppen und Userstorys.
+* Fragen dazu: Was Unterschied zwischen kleinem und großem Veranstalter?
+* Was, wenn Einreicher kurzfristig absagt?
+* (Fragen wurden beantwortet)
+
+== Was ist wichtig
+
+* Anmeldung und zusammenbringen von Veranstalter und Einreicher.
+* Filter nach Kategorien, sodass man nur angezeigt bekommt, was zu dir passt.
+* Automatische Mail, wenn der Veranstalter absagt. Und/Oder Statusverfolgung der Einreichung.
+* Veranstalter braucht Kalender in dem er die Einreichungen ordnet und Organisiert. (Anzeige)
+
+== Fragen zu den Wireframes
+
+=== Startseite
+
+* Filter ist sehr Wichtig. (Fast MVP)
+
+=== Anmeldung
+    * Ein oder zwei Buttons für Anmeldung/ Registrieren
+    * Was wenn Firma der Veranstalter ist. (Ein Account, der mehrere Accounts in Gruppe holt)
+    * Kann man Einreicher und Veranstalter sein? (ja)
+    * Zwei Anmeldeseiten für Veranstalter und Einreicher?
+    * Gutachter und Rating gleiche Aufgabe?(Nein)
+    * Was ist bei Gutachter zu sehen?
+
+=== Event Anlegen
+ * Kategorien auf Event, oder Zeitslots?
+ * Mehrfachauswahl notwendig. (feature, nicht musthave) (Feature, nicht musthave)
+ * Überschneidungen sind zu vermeiden. In Anzeige Freie Räume markieren.
+ * Großer Zeitslots mit Thema und mehrern kleineren Slots (späteres Feature) 
+ * Freiere Einteilung der Slots nach den Zeiten der Einreichungen.
+ * Slots setzen, obwohl Anmeldung noch offen. (späteres Feature)
+
+=== Einreicher anmelden
+    * Was kann man angeben?
+    * Kann man mehrere Kategorien bedienen?
+    * Zeitslotscreen überspringen, bei Anmeldung für Event.
+    * Slider dafür nicht intuitiv. (V2 besser)
+    * Kategorien müssen einheitlich gemacht werden.
+    * Wie ganau müssen die Kategorien sein und kann man diese dann selber anlegen?
+    * Ausschluss von nicht matchenden Kategorien? (harter oder weicher Filter)
+
+=== Application
+    * Was kann man alles Auswählen?
+    * Relevante Kategorie als erstes Angezeigt. Alle weiteren im Profil.
+    * Akzeptanz auch Warnung.
+    * Alle annehmen/ablehnen Button. + Mehrfachauswahl.
+    * Auf Reserve einladen? (späteres Feature)
+
+=== Eventplaner
+    * Person zweimal einladbar? (nicht vorgesehen. Dann zwei Bewerbungen)
+    * Gilt eine Anmeldung für ein Event (über mehrere Tage) für einen tag, oder alles?
+    * Drag & Drop nicht ideal.
+    * Beiträge und Zeitslots aneinander anpassend. (Zeitslot passt sich der Einreichung an).
+
+=== Weitere Features und Probleme
+    * Welche Funktionen hat man Mobil? (Eventplaner schlecht möglich)
+    * Benachrichtigungen, wenn Event freigegeben wird. (mit Option "Möchte Informiert werden über...")
+    Messagequeue in Profil (Folgefeature)
+    * technische Voraussetzung für Tagging (Filter) (ist ein nice to have)
+    * Telefonnummer hinterlegen für schnelle kontaktaufnahme?
+    * Footer Navigation links/rechts oder oben/unten?
+    * Wie Seiten zusammengesetzt?
+    * Gute Arbeit. Weitere Anmerkungen werden mit der Zeit aufkommen :) 
+
