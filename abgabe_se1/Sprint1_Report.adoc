@@ -155,22 +155,46 @@ Beschreiben Sie kurz, welche nicht-funktionalen Anforderungen, Randbedingungen o
 * Welche technischen, organisatorischen, rechtlichen oder fachlichen Randbedingungen gibt es?
 * Welche möglichen Schäden, Missbrauchsszenarien oder Ausschlussrisiken haben Sie erkannt?
 
-
 [cols="1,3", options="header"]
 |===
 | Kriterium | Ihre Antwort
 
 | Qualitätsanforderungen
-| 
+a|
+* Hohe Benutzbarkeit und einfache Bedienung ohne lange Einarbeitung
+* Schnelle Reaktionszeiten und flüssiger Workflow
+* Hohe Verfügbarkeit während der Betriebszeiten
+* Schutz sensibler Nutzerdaten
+* Barrierefreie und inklusive Nutzung
 
 | Randbedingungen
+a|
+* Betrieb auf vorhandener Hochschulinfrastruktur
+* Einhaltung der DSGVO bei Speicherung und Verarbeitung personenbezogener Daten
+* Umsetzung innerhalb eines Semesters (~4 Monate)
+* Webbasierte Nutzung ohne komplizierte Installation
+
 | Datenschutz für persönliche Informationen
+a|
+* Keine Speicherung von Klartextpasswörtern
+* Verschlüsselte Speicherung sensibler Daten
+* Geschützter Zugriff durch Rollen- und Rechtemanagement
+* Minimierung personenbezogener Daten auf notwendige Informationen
 
 | Ethische Aspekte / Risiken
-| Keine Speicherung von Klartextpasswörtern +
-Verhinderung von Missbrauch (Schutz von Nutzerkonten) +
-Verhinderung von Spam an Einreichungen
+a|
+* Verhinderung von Missbrauch der Plattform durch Spam oder unangemessene Inhalte
+* Schutz von Nutzerkonten vor unbefugtem Zugriff
+* Vermeidung der Benachteiligung kleiner Veranstalter
+* Sicherstellung von Barrierefreiheit und inklusiver Nutzung
+* Transparenter Umgang mit Datenverarbeitung und Nutzerrechten
+
 |===
+
+[NOTE]
+====
+Weiterführende und detaillierte Informationen befinden sich in den Dokumenten `product_concept.adoc` und `ux_concept.adoc`.
+====
 
 
 == 6. Anpassung der Arbeitsweise für Sprint 2
