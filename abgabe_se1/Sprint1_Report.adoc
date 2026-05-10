@@ -118,8 +118,8 @@ Beschreiben Sie 2–3 zentrale Erkenntnisse aus Sprint 1. Leitfragen:
 Positivbeispiel: Meeting zu Personas war strukturiert produktiver, aber Timeboxing war noch verbesserungswürdig)
 
 | Erkenntnis 3
-| 
 |Offene Kommunikation ist extrem wichtig um produktiv zu Arbeiten und ein gutes Arbeitsklima zu erschaffen
+|===
  
 == 4. Änderungen am Produktkonzept
 
