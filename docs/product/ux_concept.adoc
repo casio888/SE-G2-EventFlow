@@ -177,8 +177,7 @@ a|
 _Wie lösen die Nutzenden ihr Problem heute? Diese Beschreibung zeigt, was das Produkt
 verbessern soll — und macht den Mehrwert explizit._
 
-[Beschreibe den heutigen Ablauf in 3–5 Sätzen oder als kurze Schrittfolge. Beispiel: „Heute fragt Maria an der Infotheke nach freien Räumen, erhält eine Liste per E-Mail, und stellt beim Ankommen fest, dass der Raum bereits belegt ist.
-Der Prozess kostet sie im Schnitt 20 Minuten pro Tag."]
+Aktuell erfolgt die Eventorganisation über viele verschiedene Kanäle wie WhatsApp, E-Mails und private Listen, wodurch Informationen schnell verloren gehen. Die Beteiligten müssen den Status von Einreichungen ständig manuell nachfragen und mühsam dokumentieren, was sehr zeitaufwendig ist. Das Produkt löst dieses Problem, indem es alle Daten an einem zentralen Ort bündelt und den aktuellen Stand für jeden jederzeit einsehbar macht. Dadurch entfällt die aufwendige Einzelkommunikation und die Planung wird deutlich übersichtlicher.
 
 === Nutzungshürden & Risiken
 
