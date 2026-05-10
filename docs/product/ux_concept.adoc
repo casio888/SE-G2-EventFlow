@@ -187,14 +187,24 @@ _Was könnte die Akzeptanz oder Nutzung des Produkts beeinträchtigen?_
 |===
 | Hürde / Risiko | Mögliche Reaktion im Design
 
-| [z. B. Datenschutzbedenken bei Registrierungspflicht]
-| [z. B. Gastzugang für erste Nutzung anbieten]
+| Fehlende Verbindlichkeit (Events finden nicht statt oder Einreicher erscheinen nicht)
+| Einführung eines Bestätigungssystems oder automatischer Erinnerungen; ggf. ein einfaches Bewertungssystem für Zuverlässigkeit etablieren.
 
-| [z. B. Schlechte WLAN-Verfügbarkeit in Gebäudeteilen]
-| [z. B. Offline-Ansicht für zuletzt geladene Daten]
+| Datenschutzbedenken & Missbrauch
+| Transparente Kommunikation über Datenspeicherung; Implementierung von Rollen- und Rechtemanagement, um Datenzugriff streng zu begrenzen.
 
-| [Weitere Hürde]
-| [Reaktion]
+| Benachteiligung kleiner Veranstalter durch die Dominanz großer Anbieter
+| Algorithmen und Sortierungen so gestalten, dass auch kleine Events sichtbar bleiben (z. B. durch "Neu in deiner Nähe" statt nur nach Größe).
+
+| Technische Angriffe (SQL-Injection, XSS, DDOS-Attacken laut Board)
+| Einsatz moderner Sicherheits-Frameworks, regelmäßige Validierung von Nutzereingaben und serverseitige Sicherheits-Updates.
+
+| Missbrauch für moralisch verwerfliche Events
+| Einführung von Meldefunktionen (Report-Button) und klare Community-Richtlinien, um unangebrachte Inhalte schnell entfernen zu können.
+
+| Ausschluss von Menschen mit Beeinträchtigungen
+| Barrierefreies Design (Accessibility) konsequent umsetzen
+
 |===
 
 == Systemweite Interaktionsflüsse
