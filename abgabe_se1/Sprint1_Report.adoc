@@ -33,13 +33,11 @@ Formulieren Sie Ihr Sprintziel in 1–2 Sätzen. Leitfragen:
 
 | Sprintziel
 | In diesem Sprint wollten wir als Team eine klare Vision unseres Produktes etablieren und die Kernprobleme erkennen, welche unser Produkt lösen soll. +
-Zusätzlich haben wir uns als Team näher zusammen gefunden, Kompetenzen geprüft und Rollen verteilt.
+Dadurch konnten wir falsche Annahmen korrigieren, eine klarere Produktvision formulieren und unser Produktkonzept auf eine deutlich besser begründete Grundlage stellen.
 
 | Zentrale Unsicherheit / Annahme
-| Primär: Anforderungen an das Produkt +
-Sekundär: Fähigkeiten und Motivation
+| Wir wussten noch nicht wie gut wir als Team zusammenarbeiten, welche Fähigkeiten jeder einbringen kann und wie motiviert wir für die gemeinsame Arbeitsweise sind.
 |===
-
 
 == 2. Erwartete Praktiken in Sprint 1
 
