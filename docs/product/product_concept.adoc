@@ -183,20 +183,25 @@ technischen Entscheidungen, die sich daraus ergeben — ohne sie hier zu wiederh
 | Qualitätsziel | Beschreibung | Messkriterium
 
 | Benutzbarkeit
-| Das Produkt ist ohne Einarbeitung nutzbar.
-| Neue Nutzer:innen finden die Kernfunktion innerhalb von 2 Minuten ohne Hilfe.
+| Das Produkt ist ohne Einarbeitung nutzbar und bietet eine hohe Übersichtlichkeit.
+| Neue Nutzer:innen finden die Kernfunktionen (Events erstellen / Beiträge einreichen) innerhalb von 2 Minuten ohne Hilfe.
 
 | Performance
-| Das Produkt reagiert schnell auf Nutzerinteraktionen.
-| Seitenladezeit unter 2 Sekunden bei normaler Netzwerkverbindung.
+| Das System reagiert schnell auf Nutzerinteraktionen, um einen flüssigen Workflow zu garantieren.
+| Seitenladezeit / Systemreaktion dauerhaft unter 200ms.
 
 | Verfügbarkeit
 | Das Produkt ist während der Hochschulöffnungszeiten zuverlässig erreichbar.
 | Verfügbarkeit ≥ 99 % während Betriebszeiten.
 
-| [Qualitätsziel]
-| [Beschreibung]
-| [Messkriterium]
+| Datensicherheit
+| Sensible Daten wie Passwörter und Nutzerprofile sind vor unbefugtem Zugriff geschützt.
+| Verschlüsselte Datenbank und Übermittlung.
+
+| Barrierefreiheit
+| Das Produkt ist inklusiv gestaltet und für Menschen mit Einschränkungen zugänglich.
+| Erfüllung der Barrierefreiheits-Standards
+
 |===
 
 === Einschränkungen
@@ -233,8 +238,8 @@ organisatorische, rechtliche oder zeitliche Vorgaben._
 | Version | Datum | Änderung
 
 | 1.0
-| 03.05.2026
-| Erste Version nach dem Meeting am 28.04
+| 10.05.2026
+| Nach dem Meeting am 05.05.2026
 
 |===
 
