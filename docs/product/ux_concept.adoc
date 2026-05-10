@@ -20,7 +20,7 @@ auf Annahmen allein._
 
 _Hinweis: Im link:product_concept.adoc[Produktkonzept] werden Zielgruppen nur benannt. Hier werden sie als Personas ausgearbeitet._
 
-Persona 1: Lukas Schneider
+*Persona 1: Lukas Schneider*
 [cols="1,3"]
 |===
 | *Rolle*
@@ -119,22 +119,24 @@ _Der Nutzungskontext gemäß DIN EN ISO 9241-11 beschreibt die Lebenswirklichkei
 | Aspekt | Beschreibung
  
 | Benutzer
-| [Eigenschaften, Kenntnisse, Erfahrung, Motivation der Nutzenden.
-(Verweis auf Personas für ausführliche Beschreibungen)]
+| Die Nutzerschaft ist heterogen und reicht von studentischen Gelegenheits-Organisatoren (Lukas, 25) über professionelle Festivalplaner (Jargen, 28) bis hin zu externen Einreichern/Künstlern (Mark, 32).
+  • Kenntnisse: Reichen von durchschnittlicher Web-Affinität bis zu Expertenwissen in Event-Software.
+  • Motivation: Reduktion von Kommunikationschaos (WhatsApp-Flut), Effizienzsteigerung bei hohen Einreichungszahlen und zentrale Statusübersicht.
  
 | Ziele & Aufgaben
-| [Was wollen Nutzende erreichen?
-Welche konkreten Aufgaben führen sie dazu aus?]
+| • Veranstalter: Events anlegen, Einreichungen strukturieren, Eventagenda erstellen, Beiträge zusagen/ablehen ohne den Überblick zu verlieren.
+  • Einreicher: Passende Events finden, Beiträge unkompliziert einreichen und den Status der Bewerbung an einem zentralen Ort verfolgen.
+  • Kernaufgabe: Bündelung der Kommunikation, um manuelle Rückfragen zu minimieren.
  
 | Ressourcen
-| [Hardware, Software, Eingabegeräte, Hilfsmittel, die zur Nutzung des Produkts benötigt werden oder vorhanden sind.]
+| • Hardware: Desktop-PCs und Laptops (z. B. 15" Laptop, Surface Pro 5) für die Hauptverwaltung; Smartphones (z. B. iPhone 11) für schnelle Checks und mobile Antworten.
+  • Software: Webbrowser; die Anwendung muss ohne komplizierte Einrichtung („kein Tech-Pro nötig“) funktionieren.
+  • Input: Tastatur/Maus für Planung, Touch-Bedienung für unterwegs.
  
 | Umgebung
-| [Technische Umgebung: Netzwerk, Plattformen, Betriebssysteme, Interoperabilität.
-
- Physische Umgebung: Ort der Nutzung, Lichtverhältnisse, Lärm, Mobilität.
-
-Soziale & organisatorische Umgebung: Organisationsstruktur, Zusammenarbeit, Unterbrechungen, rechtliche oder regulatorische Rahmenbedingungen.]
+| • Technische Umgebung: Überall verfügbar (Web-basiert) wo es Zugang zum Internet gibt.
+  • Physische Umgebung: Nutzung im Büro oder Home-Office (fokussiertes Arbeiten), aber auch unterwegs/mobil (unter Zeitstress, in der Freizeit oder direkt vor Ort beim Event).
+  • Soziale & organisatorische Umgebung: Geprägt durch hohen Zeitdruck, Koordinationsaufwand mit vielen Beteiligten und das Bedürfnis nach schneller Information bei Unterbrechungen.
  
 |===
 
