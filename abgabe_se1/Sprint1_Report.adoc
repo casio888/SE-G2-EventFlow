@@ -1,4 +1,5 @@
 = Sprint-1-Report: Produktkonzept und agile Arbeitsweise
+Elias Lange <s88205@htw-dresden.de>; Michael Lisek <s88218@htw-dresden.de>; Michael  Müller <s88229@htw-dresden.de>; Nataliia Tsurkan <s88984@htw-dresden.de>; Nina Steyer <s88509@htw-dresden.de>; Paul_Daniel Matyjaszczuk <s86398@htw-dresden.de>; Tomy_Minh_Ngoc Nguyen <s88934@htw-dresden.de>
 
 // Bitte fügen Sie hier die Informationen zu Ihrem Team, Projekt, Datum und Repository ein.
 Team:: G2
@@ -43,25 +44,7 @@ Dadurch konnten wir falsche Annahmen korrigieren, eine klarere Produktvision for
 
 Wählen Sie 3–5 Praktiken aus, die für Ihren Sprint besonders relevant waren.
 Beziehen Sie sich bevorzugt auf Praktiken, die in den Hinweisen für Sprint 1 beschrieben werden. Mögliche Praktiken:
-====
-MM: wichtige Praktiken mit # markiert und unten vorgearbeitet
-====
 
-* Produktvision formulieren
-* # Problem und Zielgruppe eingrenzen
-* Stakeholder identifizieren
-* # Personas oder Nutzergruppen beschreiben
-* Nutzerziele formulieren
-* # Epics und User Stories ableiten
-* Product Backlog initial strukturieren und priorisieren
-* Akzeptanzkriterien für ausgewählte User Stories formulieren
-* User Stories zerlegen oder verfeinern
-* Wireframes oder Low-Fidelity-Prototypen erstellen
-* Feedback zum Produktkonzept einholen
-* Feedback auswerten und Artefakte anpassen
-* Qualitätsanforderungen und Randbedingungen erfassen
-* ethische Risiken, Missbrauchsszenarien oder Ausschlussrisiken reflektieren
-* # Rollen, Zusammenarbeit oder Arbeitsvereinbarungen im Team klären
 
 [cols="1,2,2,2", options="header"]
 |===
@@ -71,30 +54,31 @@ MM: wichtige Praktiken mit # markiert und unten vorgearbeitet
 | Nutzen, Erkenntnis oder Anpassung
 
 | Problem und Zielgruppe eingrenzen
-| In den ersten Meetings haben wir das Problem welches wir lösen wollen ausführlich besprochen.
-| link:{{docs-product}/product_concept.adoc}[product_concept.adoc]
-| Wir haben die verschiedenen impliziten Annahmen jedes Teammitgliedes ausgesprochen und dadurch Fehlannahmen in der Produktvision ausgeräumt.
+| In den ersten Meetings haben wir das Problem, welches wir lösen wollen, ausführlich besprochen. 
+| link:{https://github.com/casio888/SE-G2-EventFlow/blob/main/docs/product/product_concept.adoc}[product_concept.adoc]
+| Wir haben die verschiedenen impliziten Annahmen jedes Teammitgliedes ausgesprochen und dadurch Fehlannahmen in der Produktvision ausgeräumt, damit alle an demselben Strang ziehen.
 
 | Personas beschrieben
-| Wir haben den zusammen die Personas ausgearbeitet und typische Ziele dieser definiert.
-| link:{{docs-product}/ux_concept.adoc}[ux_concept.adoc]
-| Dies hat zu einer klareren Grundlage für die Erstellung von Epics und User Stories beigetragen.
+| Wir haben zusammen die Personas ausgearbeitet und typische Ziele definiert.
+| link:{https://github.com/casio888/SE-G2-EventFlow/blob/main/docs/product/ux_concept.adoc}[ux_concept.adoc]
+| Dies hat zu einer klareren Grundlage für die Erstellung von Epics und User Storys beigetragen.
 
 | Epics ableiten
 | Wir haben konkrete Anforderungen von Nutzern an unser Produkt in Epics festgehalten.
-| https://github.com/casio888/SE-G2-EventFlow/issues?q=is%3Aissue%20Epic%3A
-| Erlaubt der PO Prioritäten zu ermitteln und die Ausarbeitung von User Stories für die Epics besser zu priorisieren.
+| link:{https://github.com/casio888/SE-G2-EventFlow/issues?q=is%3Aissue%20Epic%3A}[GitHub issues]
+| Erlaubt der PO, Prioritäten zu ermitteln und die Ausarbeitung von User Storys für die Epics besser zu priorisieren.
+
+| Feedback zum Produktkonzept
+| Wir sind zusammen mit den Feedbackgebenden das bisherige Konzept durchgegangen (Vision, Wireframe, Epics, Personas …).
+
+| link:{https://github.com/casio888/SE-G2-EventFlow/blob/main/docs/team/feedback.adoc}[feedback.adoc] +
+link:{https://miro.com/app/board/uXjVHdpWllE=/}[Miro]
+| Wichtige Vorgedanken, über die wir uns noch keine Gedanken gemacht hatten, wurden aufgezeigt. Diese werden zukünftige Effekte auf das Produktkonzept/das Produktdesign einflus haben.
 
 | Rollen, Zusammenarbeit oder Arbeitsvereinbarungen im Team klären
-| Wir haben im Ersten Meeting Erwartungen an unsere Teammitglieder ausgetauscht, Rollen verteilt und grobe Arbeitsweisen definiert.
-| link:{{docs-team}/teamcharter.adoc}[Teamcharta.adoc]
-
-| Hat uns als Team zusammen gebracht, Erwartungen angeglichen und Struktur für das Projekt vorgegeben.
-
-| 
-| 
-| 
-| 
+| Wir haben im ersten Meeting Erwartungen an unsere Teammitglieder ausgetauscht, Rollen verteilt und grobe Arbeitsweisen definiert.
+| link:{https://github.com/casio888/SE-G2-EventFlow/blob/main/docs/team/teamcharter.adoc}[Teamcharta.adoc]
+| Dies hat uns als Team zusammengebracht, Erwartungen wurden angeglichen und eine Struktur für das Projekt vorgegeben.
 |===
 
 
