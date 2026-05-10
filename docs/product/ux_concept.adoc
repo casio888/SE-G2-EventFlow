@@ -20,31 +20,36 @@ auf Annahmen allein._
 
 _Hinweis: Im link:product_concept.adoc[Produktkonzept] werden Zielgruppen nur benannt. Hier werden sie als Personas ausgearbeitet._
 
-=== Persona 1: [Name]
-
+Persona 1: Lukas Schneider
 [cols="1,3"]
 |===
 | *Rolle*
-| [z. B. Studierende im 3. Semester, Informatik]
+| Erasmus-Organisator / studentischer Eventplaner
 
 | *Alter*
-| [z. B. 22 Jahre]
+| 25 Jahre
 
 | *Zitat*
-| _„[Ein prägnanter Satz, der ihre Haltung oder ihr Problem auf den Punkt bringt.]"_
+| „Ich will nicht hundert WhatsApp-Nachrichten beantworten müssen, nur um ein kleines Event zu organisieren.“
 
 | *Ziele*
-| [Was will diese Person erreichen? Was motiviert sie?]
-
+| Lukas möchte unkompliziert eine Länderparty für Erasmus-Studierende organisieren.
+Er will Präsentationen, Aufgaben, Teilnehmer und Kommunikation an einem Ort verwalten, um den Überblick zu behalten und weniger Stress zu haben.
 
 | *Frustrationen*
-| [Was hindert sie heute daran, ihre Ziele zu erreichen?]
+| Zu viele Nachrichten über verschiedene Kanäle wie WhatsApp.
+Teilnehmende fragen ständig nach Updates oder ob Inhalte schon angeschaut wurden.
+Wichtige Informationen gehen im Chat verloren und die Organisation wird schnell chaotisch.
 
 | *Verhalten & Kontext*
-| [Wie und wann nutzt sie digitale Produkte? Welche Geräte? Welche Erfahrung?]
+| Lukas organisiert Events neben dem Studium und hat wenig Zeit.
+Er nutzt hauptsächlich ein Surface Pro 5 für die Planung und manchmal ein iPhone 11 unterwegs.
+Er verwendet digitale Tools täglich, bevorzugt aber einfache und übersichtliche Lösungen ohne komplizierte Einrichtung.
 
 | *Bezug zum Produkt*
-| [Warum ist dieses Produkt für sie relevant? Was ist ihr primärer Nutzen?]
+| Das Produkt hilft Lukas dabei, alle Informationen, Aufgaben und Kommunikationsprozesse zentral zu bündeln.
+Dadurch muss er weniger Einzelnachrichten beantworten und kann einfacher nachvollziehen, wer was gesehen oder erledigt hat.
+Der größte Nutzen für ihn ist ein klarer Überblick über die gesamte Eventorganisation.
 |===
 
 === Persona 2: Jargen Ünke
