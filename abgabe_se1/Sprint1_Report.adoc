@@ -10,23 +10,9 @@ Repository-Link:: https://github.com/casio888/SE-G2-EventFlow
 :docs: ../docs
 include::{docs}/_includes/default-attributes.inc.adoc[]
 
-====
-Dieser Report soll auf maximal einer Seite zeigen, wie Ihr Team in Sprint 1 gearbeitet hat,
-welche Praktiken Sie angewendet haben, welche Artefakte entstanden sind und was Sie daraus gelernt haben.
-
-Der Report ist kein Tätigkeitsprotokoll. Beschreiben Sie nicht nur, _was_ Sie gemacht haben,
-sondern vor allem, _warum_ Sie es gemacht haben und was sich dadurch verbessert oder verändert hat.
-====
 
 == 1. Sprintziel und zentrale Fragestellung
 
-====
-Formulieren Sie Ihr Sprintziel in 1–2 Sätzen. Leitfragen:
-
-* Welches Produktproblem oder Nutzerbedürfnis wollte Ihr Team in diesem Sprint besser verstehen?
-* Welche zentrale Unsicherheit sollte Sprint 1 reduzieren?
-* Warum ist Ihr Produktkonzept nach diesem Sprint besser begründet als vorher?
-====
 
 [cols="1,3", options="header"]
 |===
@@ -41,9 +27,6 @@ Dadurch konnten wir falsche Annahmen korrigieren, eine klarere Produktvision for
 |===
 
 == 2. Erwartete Praktiken in Sprint 1
-
-Wählen Sie 3–5 Praktiken aus, die für Ihren Sprint besonders relevant waren.
-Beziehen Sie sich bevorzugt auf Praktiken, die in den Hinweisen für Sprint 1 beschrieben werden. Mögliche Praktiken:
 
 
 [cols="1,2,2,2", options="header"]
@@ -84,30 +67,23 @@ link:{https://miro.com/app/board/uXjVHdpWllE=/}[Miro]
 
 == 3. Wichtigste Lernergebnisse aus Sprint 1
 
-Beschreiben Sie 2–3 zentrale Erkenntnisse aus Sprint 1. Leitfragen:
-
-* Was hat Ihr Team über Nutzer, Problem, Kontext oder Produktidee gelernt?
-* Welche Annahme wurde bestätigt, widerlegt oder präzisiert?
-* Welche Rückmeldung hatte den größten Einfluss auf Ihr Produktkonzept?
 
 [cols="1,3", options="header"]
 |===
 | Kriterium | Ihre Antwort
 
 | Erkenntnis 1
-| MM: Gemeinsame Produktvision ist essentiell um Arbeit außerhalb von Meetings zu ermöglichen.
+| Eine gemeinsame Produktvision ist essentiell um Arbeit außerhalb von Meetings zu ermöglichen.
 
 | Erkenntnis 2
-| Meetings müssen vorbereitet sein. (Negativbeispiel: 1. Meeting ging zu lang, Timeboxing ohne Agende nicht möglich. 
-Positivbeispiel: Meeting zu Personas war strukturiert produktiver, aber Timeboxing war noch verbesserungswürdig)
+| Meetings müssen vorbereitet sein. (Negativbeispiel: 1. Meeting ging zu lang, Timeboxing ohne Agenda nicht möglich. 
+Positivbeispiel: Meeting zu Personas war strukturiert und damit produktiver, aber Timeboxing war noch verbesserungswürdig)
 
 | Erkenntnis 3
-|Offene Kommunikation ist extrem wichtig um produktiv zu Arbeiten und ein gutes Arbeitsklima zu erschaffen
+|Offene Kommunikation ist extrem wichtig um produktiv zu Arbeiten und ein gutes Arbeitsklima zu erschaffen.
 |===
  
 == 4. Änderungen am Produktkonzept
-
-Beschreiben Sie konkret anhand von drei Beispielen, was sich durch Ihre Arbeit und Ihr Feedback verändert hat.
 
 [cols="2,2,2", options="header"]
 |===
@@ -119,23 +95,17 @@ Beschreiben Sie konkret anhand von drei Beispielen, was sich durch Ihre Arbeit u
 | Das Produkt dient primär der einfachen Einreichung von Eventbeiträgen und Verwaltung derer durch Veranstalter.
 | Siehe Produktvision in productvision.adoc
 
-| 
-| 
-| 
+| 2 Rollen für Einreichende und Veranstalter sind ausreichend um unsere 3 Personas abzudecken.
+| Eine Rolle, welche Veranstalter Gruppiert (Firma) ist notwendig.
+| Vorerst nur auf Miro Board vermerkt, Aufarbeitung in Dokumente steht aus.
 
-| 
-| 
-| 
+| Unsicherheit über die Platzierung von Bedienelementen (Header). Verschiedene Vorschläge in Wireframes
+| Entscheidung für Seitenleiste mit Navigationselementen.
+| Vorerst nur auf Miro Board vermerkt, Aufarbeitung in Dokumente steht aus.
 |===
 
 
 == 5. Qualität, Randbedingungen und Verantwortung
-
-Beschreiben Sie kurz, welche nicht-funktionalen Anforderungen, Randbedingungen oder ethischen Aspekte Sie identifiziert haben. Leitfragen:
-
-* Welche Qualitätsanforderungen sind für Ihr Produkt besonders wichtig?
-* Welche technischen, organisatorischen, rechtlichen oder fachlichen Randbedingungen gibt es?
-* Welche möglichen Schäden, Missbrauchsszenarien oder Ausschlussrisiken haben Sie erkannt?
 
 [cols="1,3", options="header"]
 |===
@@ -193,11 +163,18 @@ Nach Sprintretro: Beschreiben Sie, was Ihr Team im nächsten Sprint beibehalten,
 | Kriterium | Ihre Antwort
 
 | Beibehalten
-| 
+| - Kommunikation über Discord +
+- Feste Termine für Meetings +
+- Nachfragen bei Unsicherheiten +
+- Zügige Bearbeitung vergebener Aufgaben
 
 | Ändern / verbessern
-| 
+| - Scrum Master arbeitet Resourcen für Timeboxing durch um diesen Aspekt zu verbessern +
+- Weiterhin transparent Aufgaben verteilen, um das Gefühl von "Ich habe wenig beitragen" einzudämmen+
+- Discord Kanalstruktur wird umgearbeitet um Kommunikationskanäle klarer zu strukturieren (Verwirrung minimieren und Ort für Meetingagendas)+
+Rückmeldung über die Art der Kommunikation beachten und umsetzen (Reagieren auf Mitteilungen)
+
 
 | Offene Frage für Sprint 2
-| 
+| Welche Ttechnischen Mittel sind geeignet um unsere Produkt-Vision umzusetzen?
 |===
