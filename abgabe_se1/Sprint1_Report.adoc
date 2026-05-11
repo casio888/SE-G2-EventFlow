@@ -177,5 +177,5 @@ a|
 
 
 | Offene Frage für Sprint 2
-| Welche Ttechnischen Mittel sind geeignet um unsere Produkt-Vision umzusetzen?
+| Welche technischen Mittel sind geeignet um unsere Produkt-Vision umzusetzen?
 |===
