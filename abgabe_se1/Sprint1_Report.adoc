@@ -163,16 +163,17 @@ Nach Sprintretro: Beschreiben Sie, was Ihr Team im nächsten Sprint beibehalten,
 | Kriterium | Ihre Antwort
 
 | Beibehalten
-| - Kommunikation über Discord +
-- Feste Termine für Meetings +
-- Nachfragen bei Unsicherheiten +
-- Zügige Bearbeitung vergebener Aufgaben
+a| * Kommunikation über Discord +
+* Feste Termine für Meetings +
+* Nachfragen bei Unsicherheiten +
+* Zügige Bearbeitung vergebener Aufgaben
 
 | Ändern / verbessern
-| - Scrum Master arbeitet Resourcen für Timeboxing durch um diesen Aspekt zu verbessern +
-- Weiterhin transparent Aufgaben verteilen, um das Gefühl von "Ich habe wenig beitragen" einzudämmen+
-- Discord Kanalstruktur wird umgearbeitet um Kommunikationskanäle klarer zu strukturieren (Verwirrung minimieren und Ort für Meetingagendas)+
-Rückmeldung über die Art der Kommunikation beachten und umsetzen (Reagieren auf Mitteilungen)
+a| 
+* Scrum Master arbeitet Resourcen für Timeboxing durch um diesen Aspekt zu verbessern
+* Weiterhin transparent Aufgaben verteilen, um das Gefühl von "Ich habe wenig beitragen" einzudämmen
+* Discord Kanalstruktur wird umgearbeitet um Kommunikationskanäle klarer zu strukturieren (Verwirrung minimieren und Ort für Meetingagendas)
+* Rückmeldung über die Art der Kommunikation beachten und umsetzen (Reagieren auf Mitteilungen)
 
 
 | Offene Frage für Sprint 2
