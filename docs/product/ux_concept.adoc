@@ -119,9 +119,9 @@ _Der Nutzungskontext gemäß DIN EN ISO 9241-11 beschreibt die Lebenswirklichkei
 
 | Benutzer
 a|
-Die Nutzerschaft ist heterogen und reicht von studentischen Gelegenheits-Organisatoren (Lukas, 25) über professionelle Festivalplaner (Jargen, 28) bis hin zu externen Einreichern/Künstlern (Mark, 32).
+Die Nutzerschaft ist verschieden und reicht von studentischen Gelegenheits-Organisatoren (Lukas, 25) über professionelle Festivalplaner (Jargen, 28) bis hin zu externen Einreichern/Künstlern (Mark, 32).
 
-* Kenntnisse: Reichen von durchschnittlicher Web-Affinität bis zu Expertenwissen in Event-Software.
+* Kenntnisse: Reichen von durchschnittlicher Web-Wissen bis zu Expertenwissen in Event-Software.
 * Motivation: Reduktion von Kommunikationschaos (WhatsApp-Flut), Effizienzsteigerung bei hohen Einreichungszahlen und zentrale Statusübersicht.
 
 | Ziele & Aufgaben
