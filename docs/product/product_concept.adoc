@@ -1,4 +1,4 @@
-= Produktkonzept: {project-name}
+= Produktkonzept: EventFlow Webanwendung
 Vorname Nachname <email@domain.org>; Vorname2 Nachname2 <email2@domain.org>; Vorname3 Nachname3 <email3@domain.org>
 {localdatetime}
 include::../_includes/default-attributes.inc.adoc[]
@@ -19,10 +19,7 @@ _Warum wird dieses Produkt gebaut? Welches Problem existiert heute, und warum is
 Dieser Abschnitt beschreibt den Ausgangszustand und den Handlungsbedarf — ohne bereits eine
 Lösung zu nennen. 3–5 Sätze genügen._
 
-[Hier die Ausgangssituation und den Handlungsbedarf beschreiben. Beispiel:
-„Studierende an der Hochschule haben heute keinen zentralen Überblick über verfügbare
-Lernräume. Die Suche nach freien Plätzen kostet täglich wertvolle Zeit und führt zu Frust.
-Eine einfache, mobil nutzbare Lösung fehlt bisher."]
+Die Organisation von Veranstaltungen mit Beiträgen ist oft unübersichtlich, weil Einreichungen über verschiedene Kanäle wie E-Mail oder Cloud-Dienste verteilt sind. Dadurch entsteht hoher manueller Aufwand bei Kommunikation, Bewertung und Planung, während gleichzeitig Transparenz und klare Prozesse fehlen. Eine zentrale Plattform wie EventFlow bündelt alle Einreichungen und Abläufe, sorgt für mehr Übersicht und optimiert den gesamten Organisationsprozess.
 
 == Produktvision
 
@@ -33,13 +30,23 @@ nicht wesentlich verändern._
 === Visions-Statement
 
 ____
-Für [Zielgruppe],
-die [Problem oder Bedarf],
-ist [Produktname]
-ein [Produktkategorie],
-das [zentraler Nutzen].
-Im Gegensatz zu [Alternative]
-bietet unser Produkt [entscheidender Unterschied].
+Für Veranstalter von Events mit Beiträgen,
+die den Überblick über Einreichungen und Planung verlieren,
+ist EventFlow
+eine zentrale Webplattform,
+die Beiträge, Status und Agenda übersichtlich an einem Ort verwaltet.
+Im Gegensatz zu E-Mail oder verstreuten Tools
+bietet unser Produkt einen klaren und effizienten Organisationsprozess.
+____
+
+____
+Für Einreicher von Eventbeiträgen,
+die nicht wissen, wo und wie sie Beiträge einreichen und welchen Status diese haben,
+ist EventFlow
+eine zentrale Webplattform,
+die eine einfache Einreichung und transparente Statusverfolgung ermöglicht.
+Im Gegensatz zu unstrukturierten Kommunikationswegen
+bietet unser Produkt klare Prozesse und automatische Rückmeldungen.
 ____
 
 //Beispiel: Für Studierende der HTWD, die zu wenig Zeit in der Mittagspause zum Essen haben, ist Flying Burger ein  Lieferdient für Burger, der per Drohne liefert. Anders als landgestützte Lieferdienste kann unser Produkt durchs Fenster direkt in den Hörsaal liefern.
@@ -47,9 +54,7 @@ ____
 NOTE: Das Visions-Statement kann im Team mit der „Elevator Pitch"-Methode oder dem „Future Press Release"-Format erarbeitet werden.
 
 === Zielbild
-
-_Optional: Beschreibe in 2–4 Sätzen, wie die Welt mit diesem Produkt aussieht. Was hat sich für die Nutzer:innen verändert?_
-//[Hier das Zielbild beschreiben]
+_Mit EventFlow läuft die Organisation von Eventbeiträgen zentral und übersichtlich über eine einzige Plattform. Veranstalter behalten jederzeit den Überblick über Einreichungen, Status und Planung, während Einreicher klar sehen, wo und wie sie Beiträge einreichen können. Der gesamte Prozess ist transparent, strukturiert und deutlich schneller, da Kommunikation und Entscheidungen direkt im System stattfinden. Dadurch wird der organisatorische Aufwand reduziert und die Zusammenarbeit für alle Beteiligten spürbar verbessert._
 
 
 == Produktpositionierung
@@ -61,14 +66,14 @@ _Wer sind die Zielgruppen, und wie positioniert sich das Produkt im Vergleich zu
 |===
 | Zielgruppe | Beschreibung
 
-| [z. B. Studierende]
-| [Kurzbeschreibung: Wer sind sie? Was ist ihre Motivation?]
+| Veranstalter
+| Personen oder Teams, die ein Event planen, Beiträge koordinieren und über Annahme oder Ablehnung entscheiden
 
-| [z. B. Lehrende]
-| [Kurzbeschreibung]
+| Einreicher
+| Personen, die Beiträge wie Vorträge oder Workshops für ein Event einreichen
 
-| [Weitere Zielgruppe]
-| [Kurzbeschreibung]
+| evtl. Gutachter
+| Personen, die eingereichte Beiträge bewerten und eine Empfehlung für die Entscheidung abgeben
 |===
 
 NOTE: Ausführliche Beschreibungen der Nutzenden — Personas, Nutzungskontext,
@@ -80,17 +85,17 @@ typische Aufgaben — sind im link:ux_concept.adoc[UX-Konzept] dokumentiert.
 |===
 | Alternative | Beschreibung | Warum unser Produkt besser passt
 
-| [z. B. E-Mail-Anfrage an Sekretariat]
-| [Wie lösen Nutzer:innen das Problem heute?]
-| [Worin liegt unser Vorteil?]
+| Eventagenturen
+| Externe Dienstleister übernehmen Planung und Organisation von Events und Einreichungen.
+| Hohe Kosten und wenig Flexibilität – EventFlow ist günstiger und direkt selbst nutzbar.
 
-| [z. B. Aushang an schwarzem Brett]
-| [Beschreibung]
-| [Unterschied]
+| Google Docs
+| Beiträge und Planung werden über geteilte Dokumente organisiert.
+| Unübersichtlich und nicht speziell für den Prozess gemacht – EventFlow bietet strukturierte Workflows und Statusverfolgung.
 
-| [Weitere Alternative]
-| [Beschreibung]
-| [Unterschied]
+| Organisation über WhatsApp
+| Kommunikation und Abstimmung laufen über Chatgruppen.
+| Chaotisch und schwer nachverfolgbar – EventFlow bündelt alles zentral und transparent an einem Ort.
 |===
 
 
@@ -103,25 +108,25 @@ erklärt, warum bestimmte Entscheidungen getroffen wurden.
 |===
 | Stakeholder | Rolle / Interesse | Erwartungen an das Produkt | Einfluss
 
-| [z. B. Hochschulverwaltung]
-| [Betreiber der Infrastruktur; will Raumauslastung optimieren]
-| [Auslastungsberichte, DSGVO-Konformität]
+| Veranstalter
+| Planen und organisieren Events und verwalten alle Beiträge
+| Übersichtliche Verwaltung, einfache Planung, effiziente Prozesse
 | Hoch
 
-| [z. B. Studierende]
-| [Hauptnutzer:innen; wollen schnell freie Plätze finden]
-| [Einfache Bedienung, mobiler Zugang]
+| Einreicher
+| Reichen Beiträge für Events ein
+| Einfache Einreichung, klare Informationen, transparente Statusanzeige
+| Hoch
+
+| Gutachter
+| Bewerten eingereichte Beiträge und unterstützen Entscheidungen
+| Strukturierte Bewertung, gute Übersicht über Beiträge
 | Mittel
 
-| [z. B. Lehrende]
-| [Nutzen Räume für Lehrveranstaltungen; wollen Konflikte vermeiden]
-| [Sichtbarkeit ihrer Buchungen]
-| Mittel
-
-| [Weiterer Stakeholder]
-| [Beschreibung]
-| [Erwartungen]
-| [Hoch / Mittel / Niedrig]
+| Mitwirkende der Veranstaltung
+| Unterstützen bei Durchführung (z. B. Moderation, Organisation vor Ort)
+| Klarer Zugang zu Informationen und Zeitplänen
+| Niedrig
 |===
 
 == Hauptfunktionen
@@ -134,25 +139,25 @@ Diese Hauptfunktionen sollten als Epics im Product Backlog für die Gruppierung 
 |===
 | Nutzerbedarf | Hauptfunktion | Priorität
 
-| Studierende wollen schnell sehen, welche Räume gerade frei sind.
-| Echtzeit-Übersicht freier Lernräume
+| Nutzer:innen (Veranstalter und Einreicher) wollen sich sicher und einfach im System anmelden und registrieren.
+| Account-Erstellung & Login (Authentifizierung)
 | Hoch
 
-| Nutzer:innen wollen einen Raum für einen bestimmten Zeitraum reservieren.
-| Raumbuchung mit Zeitfenster
+| Einreicher wollen sehen, welche Events verfügbar sind und wofür sie Beiträge einreichen können.
+| Event-Übersicht für Einreicher
 | Hoch
 
-| Nutzer:innen wollen ihre aktiven Buchungen verwalten.
-| Buchungsübersicht & Stornierung
-| Mittel
+| Veranstalter wollen neue Events erstellen und zur Einreichung freigeben.
+| Event-Erstellung und Verwaltung durch Veranstalter
+| Hoch
 
-| Verwaltung will die Auslastung der Räume analysieren.
-| Auslastungsberichte für Administratoren
-| Niedrig
+| Einreicher wollen Beiträge zu einem Event einfach einreichen können.
+| Beitragseinreichung für Events
+| Hoch
 
-| [Nutzerbedarf]
-| [Hauptfunktion]
-| [Hoch / Mittel / Niedrig]
+| Veranstalter wollen alle eingereichten Beiträge zentral sehen und verwalten.
+| Übersicht aller Einreichungen pro Event (inkl. Status)
+| Hoch
 |===
 
 NOTE: Die Reihenfolge entspricht einer ersten groben Priorisierung und wird im Rahmen
@@ -178,20 +183,25 @@ technischen Entscheidungen, die sich daraus ergeben — ohne sie hier zu wiederh
 | Qualitätsziel | Beschreibung | Messkriterium
 
 | Benutzbarkeit
-| Das Produkt ist ohne Einarbeitung nutzbar.
-| Neue Nutzer:innen finden die Kernfunktion innerhalb von 2 Minuten ohne Hilfe.
+| Das Produkt ist ohne Einarbeitung nutzbar und bietet eine hohe Übersichtlichkeit.
+| Neue Nutzer:innen finden die Kernfunktionen (Events erstellen / Beiträge einreichen) innerhalb von 2 Minuten ohne Hilfe.
 
 | Performance
-| Das Produkt reagiert schnell auf Nutzerinteraktionen.
-| Seitenladezeit unter 2 Sekunden bei normaler Netzwerkverbindung.
+| Das System reagiert schnell auf Nutzerinteraktionen, um einen flüssigen Workflow zu garantieren.
+| Seitenladezeit / Systemreaktion dauerhaft unter 200ms.
 
 | Verfügbarkeit
 | Das Produkt ist während der Hochschulöffnungszeiten zuverlässig erreichbar.
 | Verfügbarkeit ≥ 99 % während Betriebszeiten.
 
-| [Qualitätsziel]
-| [Beschreibung]
-| [Messkriterium]
+| Datensicherheit
+| Sensible Daten wie Passwörter und Nutzerprofile sind vor unbefugtem Zugriff geschützt.
+| Verschlüsselte Datenbank und Übermittlung.
+
+| Barrierefreiheit
+| Das Produkt ist inklusiv gestaltet und für Menschen mit Einschränkungen zugänglich.
+| Erfüllung der Barrierefreiheits-Standards
+
 |===
 
 === Einschränkungen
@@ -228,8 +238,8 @@ organisatorische, rechtliche oder zeitliche Vorgaben._
 | Version | Datum | Änderung
 
 | 1.0
-| [Datum]
-| Initiale Version nach Kick-off-Workshop
+| 10.05.2026
+| Nach dem Meeting am 05.05.2026
 
 |===
 

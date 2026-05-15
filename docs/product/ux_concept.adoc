@@ -1,4 +1,4 @@
-= UX-Konzept: {project-name}
+= UX-Konzept: EventFlow
 Vorname Nachname <email@domain.org>; Vorname2 Nachname2 <email2@domain.org>; Vorname3 Nachname3 <email3@domain.org>
 {localdatetime}
 include::../_includes/default-attributes.inc.adoc[]
@@ -20,31 +20,36 @@ auf Annahmen allein._
 
 _Hinweis: Im link:product_concept.adoc[Produktkonzept] werden Zielgruppen nur benannt. Hier werden sie als Personas ausgearbeitet._
 
-=== Persona 1: [Name]
-
+*Persona 1: Lukas Schneider*
 [cols="1,3"]
 |===
 | *Rolle*
-| [z. B. Studierende im 3. Semester, Informatik]
+| Erasmus Länderparty Organisator / studentischer Eventplaner
 
 | *Alter*
-| [z. B. 22 Jahre]
+| 25 Jahre
 
 | *Zitat*
-| _„[Ein prägnanter Satz, der ihre Haltung oder ihr Problem auf den Punkt bringt.]"_
+| „Ich will nicht hundert WhatsApp-Nachrichten beantworten müssen, nur um ein kleines Event zu organisieren.“
 
 | *Ziele*
-| [Was will diese Person erreichen? Was motiviert sie?]
-
+| Lukas möchte unkompliziert eine Länderparty für Erasmus-Studierende organisieren.
+Er will Präsentationen, Aufgaben, Teilnehmer und Kommunikation an einem Ort verwalten, um den Überblick zu behalten und weniger Stress zu haben.
 
 | *Frustrationen*
-| [Was hindert sie heute daran, ihre Ziele zu erreichen?]
+| Zu viele Nachrichten über verschiedene Kanäle wie WhatsApp.
+Teilnehmende fragen ständig nach Updates oder ob Inhalte schon angeschaut wurden.
+Wichtige Informationen gehen im Chat verloren und die Organisation wird schnell chaotisch.
 
 | *Verhalten & Kontext*
-| [Wie und wann nutzt sie digitale Produkte? Welche Geräte? Welche Erfahrung?]
+| Lukas organisiert Events neben dem Studium und hat wenig Zeit.
+Er nutzt hauptsächlich ein Surface Pro 5 für die Planung und manchmal ein iPhone 11 unterwegs.
+Er verwendet digitale Tools täglich, bevorzugt aber einfache und übersichtliche Lösungen ohne komplizierte Einrichtung.
 
 | *Bezug zum Produkt*
-| [Warum ist dieses Produkt für sie relevant? Was ist ihr primärer Nutzen?]
+| Das Produkt hilft Lukas dabei, alle Informationen, Aufgaben und Kommunikationsprozesse zentral zu bündeln.
+Dadurch muss er weniger Einzelnachrichten beantworten und kann einfacher nachvollziehen, wer was gesehen oder erledigt hat.
+Der größte Nutzen für ihn ist ein klarer Überblick über die gesamte Eventorganisation.
 |===
 
 === Persona 2: Jargen Ünke
@@ -104,7 +109,6 @@ Kommt mit üblicher Webseitenavigation klar
 | Möchte in dem Produkt seine Eventeinreichungen verwalten
 |===
 
-
 == Nutzungskontext
 
 _Der Nutzungskontext gemäß DIN EN ISO 9241-11 beschreibt die Lebenswirklichkeit der Personas — unabhängig vom Produkt. Er zeigt, in welchem Umfeld, mit welchen Mitteln und unter welchen Bedingungen das Produkt genutzt wird._
@@ -112,25 +116,60 @@ _Der Nutzungskontext gemäß DIN EN ISO 9241-11 beschreibt die Lebenswirklichkei
 [cols="1,3", options="header"]
 |===
 | Aspekt | Beschreibung
- 
+
 | Benutzer
-| [Eigenschaften, Kenntnisse, Erfahrung, Motivation der Nutzenden.
-(Verweis auf Personas für ausführliche Beschreibungen)]
- 
+a|
+Die Nutzerschaft ist verschieden und reicht von studentischen Gelegenheits-Organisatoren (Lukas, 25) über professionelle Festivalplaner (Jargen, 28) bis hin zu externen Einreichern/Künstlern (Mark, 32).
+
+* Kenntnisse: Reichen von durchschnittlicher Web-Wissen bis zu Expertenwissen in Event-Software.
+* Motivation: Reduktion von Kommunikationschaos (WhatsApp-Flut), Effizienzsteigerung bei hohen Einreichungszahlen und zentrale Statusübersicht.
+
 | Ziele & Aufgaben
-| [Was wollen Nutzende erreichen?
-Welche konkreten Aufgaben führen sie dazu aus?]
- 
+a|
+* Veranstalter:
+** Events anlegen
+** Einreichungen strukturieren
+** Eventagenda erstellen
+** Beiträge zusagen oder ablehnen
+** Überblick behalten
+
+* Einreicher:
+** Passende Events finden
+** Beiträge unkompliziert einreichen
+** Bewerbungsstatus zentral verfolgen
+
+* Kernaufgabe:
+** Bündelung der Kommunikation zur Minimierung manueller Rückfragen.
+
 | Ressourcen
-| [Hardware, Software, Eingabegeräte, Hilfsmittel, die zur Nutzung des Produkts benötigt werden oder vorhanden sind.]
- 
+a|
+* Hardware:
+** Desktop-PCs und Laptops (z. B. Surface Pro 5)
+** Smartphones (z. B. iPhone 11)
+
+* Software:
+** Webbrowser
+** Keine komplizierte Einrichtung notwendig
+
+* Input:
+** Tastatur und Maus für Planung
+** Touch-Bedienung unterwegs
+
 | Umgebung
-| [Technische Umgebung: Netzwerk, Plattformen, Betriebssysteme, Interoperabilität.
+a|
+* Technische Umgebung:
+** Web-basierte Nutzung überall mit Internetzugang
 
- Physische Umgebung: Ort der Nutzung, Lichtverhältnisse, Lärm, Mobilität.
+* Physische Umgebung:
+** Büro oder Home-Office
+** Unterwegs oder direkt beim Event
 
-Soziale & organisatorische Umgebung: Organisationsstruktur, Zusammenarbeit, Unterbrechungen, rechtliche oder regulatorische Rahmenbedingungen.]
- 
+* Soziale & organisatorische Umgebung:
+** Hoher Zeitdruck
+** Viele Beteiligte
+** Häufige Unterbrechungen
+** Bedürfnis nach schneller Information
+
 |===
 
 === Aktuelle Situation (ohne das Produkt)
@@ -138,8 +177,7 @@ Soziale & organisatorische Umgebung: Organisationsstruktur, Zusammenarbeit, Unte
 _Wie lösen die Nutzenden ihr Problem heute? Diese Beschreibung zeigt, was das Produkt
 verbessern soll — und macht den Mehrwert explizit._
 
-[Beschreibe den heutigen Ablauf in 3–5 Sätzen oder als kurze Schrittfolge. Beispiel: „Heute fragt Maria an der Infotheke nach freien Räumen, erhält eine Liste per E-Mail, und stellt beim Ankommen fest, dass der Raum bereits belegt ist.
-Der Prozess kostet sie im Schnitt 20 Minuten pro Tag."]
+Aktuell erfolgt die Eventorganisation über viele verschiedene Kanäle wie WhatsApp, E-Mails und private Listen, wodurch Informationen schnell verloren gehen. Die Beteiligten müssen den Status von Einreichungen ständig manuell nachfragen und mühsam dokumentieren, was sehr zeitaufwendig ist. Das Produkt löst dieses Problem, indem es alle Daten an einem zentralen Ort bündelt und den aktuellen Stand für jeden jederzeit einsehbar macht. Dadurch entfällt die aufwendige Einzelkommunikation und die Planung wird deutlich übersichtlicher.
 
 === Nutzungshürden & Risiken
 
@@ -149,14 +187,24 @@ _Was könnte die Akzeptanz oder Nutzung des Produkts beeinträchtigen?_
 |===
 | Hürde / Risiko | Mögliche Reaktion im Design
 
-| [z. B. Datenschutzbedenken bei Registrierungspflicht]
-| [z. B. Gastzugang für erste Nutzung anbieten]
+| Fehlende Verbindlichkeit (Events finden nicht statt oder Einreicher erscheinen nicht)
+| Einführung eines Bestätigungssystems oder automatischer Erinnerungen; ggf. ein einfaches Bewertungssystem für Zuverlässigkeit etablieren.
 
-| [z. B. Schlechte WLAN-Verfügbarkeit in Gebäudeteilen]
-| [z. B. Offline-Ansicht für zuletzt geladene Daten]
+| Datenschutzbedenken & Missbrauch
+| Transparente Kommunikation über Datenspeicherung; Implementierung von Rollen- und Rechtemanagement, um Datenzugriff streng zu begrenzen.
 
-| [Weitere Hürde]
-| [Reaktion]
+| Benachteiligung kleiner Veranstalter durch die Dominanz großer Anbieter
+| Algorithmen und Sortierungen so gestalten, dass auch kleine Events sichtbar bleiben (z. B. durch "Neu in deiner Nähe" statt nur nach Größe).
+
+| Technische Angriffe (SQL-Injection, XSS, DDOS-Attacken laut Board)
+| Einsatz moderner Sicherheits-Frameworks, regelmäßige Validierung von Nutzereingaben und serverseitige Sicherheits-Updates.
+
+| Missbrauch für moralisch verwerfliche Events
+| Einführung von Meldefunktionen (Report-Button) und klare Community-Richtlinien, um unangebrachte Inhalte schnell entfernen zu können.
+
+| Ausschluss von Menschen mit Beeinträchtigungen
+| Barrierefreies Design (Accessibility) konsequent umsetzen
+
 |===
 
 == Systemweite Interaktionsflüsse

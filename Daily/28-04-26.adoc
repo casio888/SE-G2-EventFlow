@@ -1,0 +1,64 @@
+= Daily meeting vom 28.04.2005 
+
+Start 15:35
+
+Agenda einbinden
+
+
+
+Notizen:
+
+Michi: Statt der Events, wo was eingereicht wird, holt der Veranstalter die Einreicher
+Paul: hybrid System. Man kann als Einreicher einreichen, aber der Veranstalter kann auch anfragen
+Micha: Event Privat stellen...
+
+Je nach größe des Events sollte das anders möglich sein.
+Kernfunktionalitäten, mit Grund/Kernelementen.
+
+
+Was ist das Ziel?
+    Abstimmung:
+        Wollen wir Veranstalter und Vortragende zusammen bringen
+        Wollen wir uns mehr auf die vernetzung und die Organisation fokusieren.
+
+
+Annahme/Ablehnen von den Einreichenden. 
+Slots dann für die Acts.
+
+Minh: Background. Also veranstalter nicht so mit dem Timetable...
+
+Nataliia: Vergleich zu Jobbewerbung
+
+Motivation: 
+Kanäle für Einreichung veringern. --> Ein Weg
+Alles an einem Ort in einer Übersicht. 
+(Angaben zu zeit, benötigtes Equipment,...)
+
+
+Was gibt es schon: 
+    Google forms. (zum einreichen von Formularen.)
+
+
+reputation system...
+
+
+(Bewerbung mit Anforderungen an den Veranstalter)   (feature)
+(automatische Mails)                                (feature)
+
+
+Next: 
+    2 leute machen eine Persona. 
+    /*Jeder nimmt sich 2 Epics und legt ein Issue dazu an. (Hohe Priorität.)*/
+    Aufsplitten, was dazu gemacht werden muss. 2Leute eine Persona...
+    Alles ins Backlog
+
+        Persona 1: Michi+Elias
+        Persona 2: Paul+ Nina
+        Persona 3: Micha+Minh
+        Prio: Nataliia
+    Deadline bis Sonntag.
+
+    Ende 18:00
+
+
+

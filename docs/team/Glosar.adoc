@@ -1,0 +1,18 @@
+= Wichtige Begriffe: {Eventflow G2}
+
+{localdatetime}
+//include::../_includes/default-attributes.inc.adoc[]
+:version: 1.0
+
+== Legende:
+
+[cols="1,2", options="header"]
+|=== 
+|Name | Beschreibung
+|Einreicher |Person, die auf dem Event auftritt, bzw. dort ihren Vortrag einreichen.
+|Einreichung | Bewerbung des Einreichers für ein Event.
+|Veranstalter |Person, die ein Event anbietet.
+|Gutachter | Person mit fachlicher kompetenz, die Vorträge/Einreichugen bewertet.
+| Event |Eine zeitlich und örtlich begrenzte Veranstaltung, die durch einen Veranstalter organisiert und von Einreichern ausgestaltet wird.
+
+|===
