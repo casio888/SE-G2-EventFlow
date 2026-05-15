@@ -1,5 +1,5 @@
 = Domänenmodell und Glossar: {project-name}
-Vorname Nachname <email@domain.org>; Vorname2 Nachname2 <email2@domain.org>; Vorname3 Nachname3 <email3@domain.org>
+Elias Lange <s88205@htw-dresden.de>; Michael (Michi) Lisek <s88218@htw-dresden.de>; Michael (Micha) Müller <s88229@htw-dresden.de>; Nataliia Tsurkan <s88984@htw-dresden.de>; Nina Steyer <s88509@htw-dresden.de>; Paul Daniel Matyjaszczuk <s86398@htw-dresden.de>; Tomy Minh Ngoc Nguyen <s88934@htw-dresden.de>
 {localdatetime}
 include::../_includes/default-attributes.inc.adoc[]
 // Platzhalter für weitere Dokumenten-Attribute
@@ -46,9 +46,6 @@ Technische Implementierungsdetails gehören nicht hierher!
 
 == Domänenmodell
 
-_Das Domänenmodell zeigt die wichtigsten fachlichen Konzepte (Entitäten) und ihre Beziehungen.
-Es beschreibt die Realität des Problemraums, nicht die Datenbankstruktur._
-
 === Diagramm
 
 //Fügen Sie hier ein Diagramm ein — entweder als eingebettetes PlantUML oder als exportiertes Bild.
@@ -56,32 +53,70 @@ Es beschreibt die Realität des Problemraums, nicht die Datenbankstruktur._
 [plantuml, domain-model, svg]
 ....
 @startuml
-' Beispiel — bitte durch das echte Domänenmodell ersetzen
 
-entity Nutzer {
-  Name
+class Account {
   E-Mail
+  Passwort
+  Name
 }
 
-entity Bestellung {
-  Bestellnummer
+class Veranstalter {
+}
+
+class Einreicher {
+Kategorien
+}
+
+class Event {
+  Name
+  Beschreibung
   Datum
+  Ort
+  Kategorien
+}
+
+class Zeitslot {
+  Startzeit
+  Endzeit
+  Flexibel
+}
+
+class Einreichung {
+  Titel
+  Beschreibung
+  Kategorie
   Status
 }
 
-entity Produkt {
-  Bezeichnung
-  Preis
+class EinreichungsTemplate {
+  Titel
+  Beschreibung
+  Kategorie
 }
 
-Nutzer "1" --> "0..*" Bestellung : gibt auf
-Bestellung "1" --> "1..*" Produkt : enthält
+
+' Account – Rollen
+Account "1" -- "0..1" Einreicher : besitzt
+Account "1" -- "0..1" Veranstalter : besitzt
+
+' Veranstalter – Event
+Veranstalter "1" *-- "0..*" Event : erstellt
+
+' Event – Zeitslot
+Event "1" *-- "1..*" Zeitslot : besitzt
+
+' Event – Einreichung
+Event "1" o-- "0..*" Einreichung : erhält
+
+' Einreicher – Einreichung
+Einreicher "1" *-- "0..*" Einreichung : reicht ein
+
+' Einreicher – Template
+Einreicher "1" *-- "0..*" EinreichungsTemplate : besitzt
 
 @enduml
 ....
 
-NOTE: Das Domänenmodell wird im Laufe des Projekts weiterentwickelt.
-Änderungen sollten immer gemeinsam im Team besprochen und hier nachgepflegt werden.
 
 === Beschreibung der Entitäten
 
@@ -91,17 +126,27 @@ Kurze Erläuterung zu den im Modell enthaltenen Entitäten.
 |===
 | Entität | Beschreibung
 
-| Nutzer
-| [Beschreibung der Entität und ihrer Rolle im System]
+| Account
+| Enthält generelle Eigenschaften von Nutzern
 
-| Bestellung
-| [Beschreibung der Entität und ihrer Rolle im System]
+| Veranstalter
+| Erstellt und verwaltet Events
 
-| Produkt
-| [Beschreibung der Entität und ihrer Rolle im System]
+| Einreicher
+| Reicht Einreichungen bei Events ein.
 
-| [Weitere Entität]
-| [Beschreibung]
+| Einreichungs-Template
+| Vorlage für neue Einreichungen mit selbstgewählten Eisntellungen
+
+| Einreichung
+| Informationen zu einem Beitrag, welche einem Event zugeordnet sind
+
+| Events
+| Informationen zu einer Veranstaltung
+
+| Zeitslots
+| Zeitlicher Rahmen für Beiträge eines Events
+
 |===
 
 === Beschreibung der Beziehungen
@@ -112,20 +157,49 @@ Beschreibung der wichtigsten Beziehungen zwischen den Entitäten, sofern diese b
 |===
 | Von | Zu | Kardinalität | Bedeutung
 
-| Nutzer
-| Bestellung
+| Account
+| Veranstalter
+| 1 zu 0..1
+| Ein Account kann keinem oder einem Veranstalter zugeordnet sein.
+
+| Account
+| Einreicher
+| 1 zu 0..1
+| Ein Account kann keinem oder einem Einreicher zugeordnet sein.
+
+| Account
+| Veranstalter/Einreicher
+| 1 zu 1..2
+| Ein Account muss mindestens einem Veranstalter oder einem Einreicher zugeordnet sein und maximal je einem Veransalter und einem Einreicher.
+
+| Einreicher 
+| Einreichungs-Template
 | 1 zu 0..*
-| Ein Nutzer kann keine oder mehrere Bestellungen aufgeben.
+| Ein Einreichungstemplate gehört zu genau einem Einreicher. Ein Einreicher kann beliebig viele Einreichungs-Templates besitzen.
 
-| Bestellung
-| Produkt
+| Einreicher
+| Einreichung
+| 1 zu 0..*
+| Eine Einreichung wird von genau einem Einreicher getätigt. Ein Einreicher kann beliebig viele Einreichungen machen.
+
+
+| Veranstalter
+| Event
+| 1 zu 0..*
+| Ein Event wird von einem Veranstalter erstellt. Ein Veranstalter kann beliebig viele Events erstellen.
+
+
+| Event
+| Einreichung
+| 1 zu 0..*
+| Eine Einreichung gehört zu einem Event. Ein Event kann beliebig viele Einreichungen erhalten.
+
+
+| Event
+| Zeitslot
 | 1 zu 1..*
-| Eine Bestellung enthält mindestens ein Produkt.
+| Ein Zeitslot gehört zu einem Event. Ein Event benötigt mindestens ein Zeitslot.
 
-| [Entität]
-| [Entität]
-| [z. B. 0..* zu 1]
-| [Beschreibung der Beziehung in natürlicher Sprache]
 |===
 
 _Dieses Dokument wird kontinuierlich gepflegt. Änderungen an Fachbegriffen oder Beziehungen
