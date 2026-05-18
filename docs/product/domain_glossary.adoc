@@ -19,24 +19,25 @@ Technische Implementierungsdetails gehören nicht hierher!
 |===
 | Begriff / Abkürzung | Definition | Synonyme / Abgrenzungen
 
-| Bestellung
-| Eine vom Nutzer ausgelöste Anforderung, ein oder mehrere Produkte zu erwerben.
-  Eine Bestellung durchläuft verschiedene Status (offen, bezahlt, versendet, abgeschlossen).
-| Auftrag; nicht zu verwechseln mit „Warenkorb" (noch nicht abgeschlossen)
+| Veranstalter
+| Eine Person, die eine Zeitlich und Örtlich abgegrenzte Sache Organisiert. (Veranstaltung)
+| 
 
-| Nutzer
-| Eine Person, die das System aktiv verwendet. Nutzer müssen registriert und eingeloggt
-  sein, um Bestellungen aufzugeben.
-| Anwender, Benutzer; abzugrenzen von „Administrator"
+| Veranstaltung
+| Eine Zeitlich und Örtlich Begrenze Aktion, auf der Leute Auftreten.
+| Event
 
-| Produkt
-| Ein im System angebotener Artikel, der bestellt werden kann. Ein Produkt hat eine
-  Bezeichnung, einen Preis und eine Verfügbarkeit.
-| Artikel, Ware
+| Einreicher
+| Eine Person, die etwas zu einem Event beiträgt.
+| Act, Artist, 
 
-| [Begriff]
-| [Präzise, fachliche Definition in 1–3 Sätzen]
-| [Synonyme oder Abgrenzungen zu ähnlichen Begriffen]
+| Einreichung
+| Durch einen Einreicher abgegeben, um bei einer Veranstaltung teil zu nehmen.
+| Bewerbung
+
+| Gutachter
+| Person mit viel fachlichem Wissen. Darum liest sie Einreichungen und bewertet diese.
+| 
 
 | [Begriff]
 | [Präzise, fachliche Definition in 1–3 Sätzen]
