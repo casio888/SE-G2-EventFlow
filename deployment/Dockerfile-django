@@ -1,0 +1,25 @@
+# Alpine for minimal size -> less vulnerabilities
+FROM python:3.14-alpine
+
+WORKDIR /usr/src/EventFlow
+
+# Disable .pyc files and make stdout/err writes unbuffered
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
+# install os dependencies
+RUN apk add --no-cache \
+  postgresql-dev \
+  gcc \
+  musl-dev \
+  vim
+
+# Install python dependencies
+RUN pip install --upgrade pip
+COPY ./requirements_django.txt .
+RUN pip install -r requirements_django.txt
+
+# Project code will be inserted as Volume
+VOLUME /usr/src/EventFlow
+
+
