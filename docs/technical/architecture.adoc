@@ -97,22 +97,33 @@ Diese Sicht gibt an, welche Umgebungen für den Code vorgesehen sind, z.B. JVM, 
 [plantuml, "{diagramsdir}/system-context", svg]
 ....
 @startuml
-' source: https://github.com/plantuml-stdlib/C4-PlantUML
-' C4 Model
 !include <c4/C4_Container.puml>
 
-Person(personAlias, "Label", "Optional Description")
+Person(user, "Benutzer", "Nutzt die Webanwendung")
 
-System_Boundary(c1, "Sample System") {
-    Container(containerAlias, "Container Name", "Technology", "Optional Description")
+System_Boundary(app, "EventFlow") {
+
+    Container(nginx, "Nginx", "Reverse Proxy", "Liefert statische Dateien aus und leitet Requests weiter")
+
+    Container(gunicorn, "Gunicorn", "WSGI Application Server", "Führt Django Code aus")
+
+    Container(django, "Django Application", "Python/Django", "Anwendung")
+
+    ContainerDb(postgres, "PostgreSQL", "Datenbank", "Persistente Speicherung")
 }
-Rel(personAlias, containerAlias, "Label", "Optional Technology")
+
+Rel(user, nginx, "HTTPS")
+Rel(nginx, gunicorn, "Proxy Pass")
+Rel(gunicorn, django, "WSGI")
+Rel(django, postgres, "SQL")
 
 @enduml
 ....
 
 === Verteilungsdiagramm (Deployment Diagramm)
 //Beschreibt die physischen Knoten (Rechner) des Systems und Komponenten, die in diesen Knoten ausgeführt werden. 
+
+TODO: iseproject-server hält docker container, dort je 1 container für PostreSQL, Nginx, Django, Gunicorn
 
 
 == Technologie-Stack
@@ -130,37 +141,38 @@ sind in <<Architekturentscheidungen>> dokumentiert._
 | Frontend
 | [z. B. React 18]
 | [z. B. Teamkenntnisse; große Community; Komponentenmodell]
-| [z. B. ADR-002]
+| ADR-004
 
 | Backend
-| [z. B. Spring Boot 3]
-| [z. B. Vorgabe im Studiengang; gute Dokumentation]
-| [z. B. ADR-001]
+| Django
+| Vorerfahrung im Team und bei Tech-Lead
+| ADR-001, ADR-002
 
 | Datenbank
-| [z. B. PostgreSQL 15]
-| [z. B. Relationales Modell passend; auf Hochschulinfrastruktur verfügbar]
-| [z. B. ADR-003]
+| PostgreSQL
+| Relationales Modell wird benötigt, Industriestandard mit Django (Performance und Features)
+| ADR-003
 
 | Authentifizierung
-| [z. B. OAuth2 / Hochschul-SSO]
-| [z. B. Pflichtintegration; kein eigenes Nutzermanagement nötig]
-| [z. B. ADR-004]
+| - ADR Ausstehend
+| 
+| 
 
 | Containerisierung
-| [z. B. Docker / Docker Compose]
-| [z. B. Reproduzierbare Umgebung für alle Teammitglieder]
-| [z. B. ADR-005]
+| Docker Compose
+| Reproduzierbarer Build auf Produktivserver, Lokale Kopie für Entwicklung einfach
+| ADR-005
 
 | CI/CD
-| [z. B. GitHub Actions]
-| [z. B. Direkte Integration mit Repository; kostenlos für Studierende]
-| [z. B. ADR-006]
+| noch keine
+| 
+| 
 
-| [Weiterer Bereich]
-| [Technologie]
-| [Begründung]
-| [ADR-Referenz oder —]
+| Webserver
+| Nginx (reverseproxy) + gunicorn (WSGI)
+| Bewährte Kombination für Django-Apps, gute Performance, genügend Konfigurationsanleitungen verfügbar
+| ADR-006
+
 |===
 
 == Architekturrelevante Anforderungen
