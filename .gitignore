@@ -12,5 +12,7 @@ deployment/.env.django
 deployment/postgres_db_password.txt
 
 # persistent data
+src/statisticfiles/*
 deployment/postgres_data/
 */db.sqlite3
+

@@ -1,0 +1,60 @@
+services:
+  django:
+    build:
+      context: .
+      dockerfile: Dockerfile-django
+    command: gunicorn EventFlow.wsgi:application --bind 0.0.0.0:8000
+    volumes:
+      - django_sourcecode:/usr/src/EventFlow
+    expose:
+      - 8000
+    env_file:
+      - ./.env.django
+    depends_on:
+      - postgres
+  postgres:
+    image: postgres:18.4-alpine
+    volumes:
+      - postgres_data:/data/postgres/
+    environment:
+      POSTGRES_DB: db_eventflow
+      POSTGRES_USER: postgres_eventflow
+      POSTGRES_PASSWORD_FILE: /run/secrets/db_password
+      PGDATA: /data/postgres
+    secrets:
+      - db_password
+  nginx:
+    build: 
+      context: .
+      dockerfile: Dockerfile-nginx
+    ports:
+      - 1337:80
+    volumes:
+      - django_static:/usr/src/EventFlow/staticfiles
+    depends_on: 
+      - django
+
+volumes:
+  django_sourcecode:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/seproject/SE-G2-EventFlow/src/
+  django_static:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/seproject/SE-G2-EventFlow/src/staticfiles
+  postgres_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/seproject/SE-G2-EventFlow/deployment/postgres_data/
+
+
+secrets:
+  db_password:
+    file: ./postgres_db_password.txt
