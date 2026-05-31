@@ -22,4 +22,6 @@ RUN pip install -r requirements_django.txt
 # Project code will be inserted as Volume
 VOLUME /usr/src/EventFlow
 
+RUN addgroup --system --gid 1000 app && adduser --system -u 1000 -G app app
 
+USER app
