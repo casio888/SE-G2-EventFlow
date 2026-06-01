@@ -281,10 +281,10 @@ Flask: Ist sehr lightwheight, aber gibt damit auch wenig Struktur vor, die für 
 | PostgreSQL
 
 | *Alternativen*
-| 
+| MariaDB,MSSQL,OracleDB,...
 
 | *Konsequenzen*
-| 
+| Das Team muss sich in die Datenbank hineinarbeiten, dafür ist es weitverbreitet und Open-Source, wodurch man viele Informationen findet. Wir sind an diese Relationale Datenbank gebunden, da ein späterer Wechsel auf eine andere Datenbank einen großen Aufwand bedeutet.
 |===
 
 === ADR-004: Frontend Framework
