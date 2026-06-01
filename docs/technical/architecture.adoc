@@ -269,10 +269,10 @@ Flask: Ist sehr lightwheight, aber gibt damit auch wenig Struktur vor, die für 
 [cols="1,3"]
 |===
 | *Status*
-| Vorgeschlagen
+| Akzeptiert
 
 | *Datum*
-| 19.05.2026
+| 01.06.2026
 
 | *Kontext*
 | Die persistente Speicherung von Daten ist über eine Datenbank abzudecken. Dateibasierte Speicherung bietet sich nicht an, beim Projektumfang. Mit Ausblick auf die User Stories empfiehlt sich eine relationale Datenbank.
@@ -284,7 +284,8 @@ Flask: Ist sehr lightwheight, aber gibt damit auch wenig Struktur vor, die für 
 | MariaDB,MSSQL,OracleDB,...
 
 | *Konsequenzen*
-| Das Team muss sich in die Datenbank hineinarbeiten, dafür ist es weitverbreitet und Open-Source, wodurch man viele Informationen findet. Wir sind an diese Relationale Datenbank gebunden, da ein späterer Wechsel auf eine andere Datenbank einen großen Aufwand bedeutet.
+|Wir sind an diese Relationale Datenbank gebunden, da ein späterer Wechsel auf eine andere Datenbank einen großen Aufwand bedeutet. 
+//Das Team muss sich in die Datenbank hineinarbeiten, dafür ist es weitverbreitet und Open-Source, wodurch man viele Informationen findet. 
 |===
 
 === ADR-004: Frontend Framework
