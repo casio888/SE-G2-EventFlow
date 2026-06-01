@@ -377,21 +377,20 @@ Punkte in Vergessenheit geraten._
 |===
 | Risiko | Auswirkung | Wahrscheinlichkeit | Maßnahme
 
-| [z. B. LDAP-Schnittstelle der Hochschule ist undokumentiert]
+| Datenverlust durch fehlerhafte Backups
+| Hoch
+| Niedrig
+| Regelmäßige automatische Backups einrichten und Wiederherstellung testen, zusätzlich Monitoring für den Datenbankserver nutzen und bei Ausfall einen Neustart machen
+
+| Fehlerhafte Authenfizierung und Logins
 | Hoch
 | Mittel
-| [z. B. Frühzeitiger Prototyp zur Validierung; Fallback auf lokale Authentifizierung]
+| Django-Auth verwenden, keine Passwörter selbst speichern
 
-| [z. B. Performance bei > 200 gleichzeitigen Nutzenden unbekannt]
+| Projekt läuft lokal, aber nicht auf anderen Rechnern
 | Mittel
-| Niedrig
-| [z. B. Lasttest ab Sprint 4 eingeplant]
-
-| [Weiteres Risiko]
-| [Hoch / Mittel / Niedrig]
-| [Hoch / Mittel / Niedrig]
-| [Maßnahme oder Akzeptanz]
-|===
+| Mittel
+| README mit Setup Anleitung schreiben 
 
 === Technische Schulden
 
