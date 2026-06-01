@@ -154,7 +154,7 @@ sind in <<Architekturentscheidungen>> dokumentiert._
 | ADR-003
 
 | Authentifizierung
-| - ADR Ausstehend
+| ADR Ausstehend
 | 
 | 
 
@@ -213,17 +213,6 @@ diesen Anforderungen ergeben, und verweist auf die zugehörigen Entscheidungen.
 |===
 
 == Architekturentscheidungen
-
-_Architekturentscheidungen (Architecture Decision Records, ADRs) dokumentieren
-wichtige technische Entscheidungen: Was wurde entschieden, warum, welche
-Alternativen wurden verworfen, und welche Konsequenzen hat die Entscheidung._
-
-_Jede Entscheidung, die schwer rückgängig zu machen ist oder das gesamte System
-betrifft, sollte hier festgehalten werden. Kleine, lokale Implementierungsdetails
-gehören nicht hierher._
-
-NOTE: ADRs werden nicht gelöscht oder überschrieben — sie werden als
-„ersetzt durch ADR-XXX" markiert. So bleibt die Entscheidungshistorie nachvollziehbar.
 
 === ADR-001: Python als Backend-Programmiersprache
 
