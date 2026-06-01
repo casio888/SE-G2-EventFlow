@@ -391,6 +391,7 @@ Punkte in Vergessenheit geraten._
 | Mittel
 | Mittel
 | README mit Setup Anleitung schreiben 
+|===
 
 === Technische Schulden
 
