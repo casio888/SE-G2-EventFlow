@@ -278,7 +278,7 @@ Flask: Ist sehr lightwheight, aber gibt damit auch wenig Struktur vor, die für 
 | Die persistente Speicherung von Daten ist über eine Datenbank abzudecken. Dateibasierte Speicherung bietet sich nicht an, beim Projektumfang. Mit Ausblick auf die User Stories empfiehlt sich eine relationale Datenbank.
 
 | *Entscheidung*
-| PostgreSQL
+| PostgreSQL, da es ein weitverbreitetes Open-Source System ist. Zudem ist es eine relationale Datenbank. Das wohl wichtigste Feature von Postres ist, dass es bereits eine Einbindung in Django gibt. 
 
 | *Alternativen*
 | MariaDB,MSSQL,OracleDB,...
