@@ -63,7 +63,7 @@ Beziehen Sie sich bevorzugt auf Praktiken, die in den Hinweisen für Sprint 2 be
 
 | Architekturanforderungen in ADR's umgewandelt
 | Wir haben Architekturanforderungen gesammelt und daraus ADR's erzeugt um die offenen Fragen
-| Issues in Github TODO Link
+| https://github.com/casio888/SE-G2-EventFlow/issues?q=is%3Aissue%20state%3Aopen%20ADR
 | Die Architekturanforderungen haben die Fragen definiert, auf welche die ADR's die Antworten geben.
 
 | Technische Spikes um Unsicherheiten zu beseitigen
