@@ -21,7 +21,7 @@ django> python manage.py migrate
 ```
 
 
-# ## Container neu bauen
+### Container neu bauen
 
 Sollte sich etwas an der Struktur der Dockerfiles geändert haben, können die Images mit folgendem Befehl neu gebaut werden:
 
@@ -49,7 +49,16 @@ ln -s -f docker-compose.yml.dev docker-compose.yml
 docker compose build
 ```
 
-4. Starte stack
+4. Erstelle config Dateien
+```
+mv .env.django.example .env.django
+# Secret key setzen und und db passwort eintragen
+
+# Schreibe db Passwort in diese Datei
+echo "<password>" > postgres_db_password.txt
+```
+
+5. Starte stack
 ```
 docker compose up -d
 ```
