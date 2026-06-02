@@ -41,7 +41,7 @@ Beziehungsweise kann zum starten folgender Befehl genutzt werden:
 2. Setze dev docker-compose
 ```
 cd deployment
-ln -s docker-compose.yml docker-compose.yml.dev
+ln -s -f docker-compose.yml.dev docker-compose.yml
 ```
 
 3. Baue Images
