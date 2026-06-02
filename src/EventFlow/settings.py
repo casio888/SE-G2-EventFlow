@@ -26,7 +26,7 @@ SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DJANGO_DEBUG", default=False)
 
-ALLOWED_HOSTS = ["iseproject04.informatik.htw-dresden.de"]
+ALLOWED_HOSTS = ["iseproject04.informatik.htw-dresden.de", "0.0.0.0", "127.0.0.1"]
 
 
 # Application definition
