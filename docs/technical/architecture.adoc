@@ -26,8 +26,8 @@ _Der Systemkontext zeigt das System als Ganzes in seiner Umgebung: welche extern
 === Systemkontext
 //Level 1 im C4-Modell
 
-[plantuml, eventflow-context, svg]
-----
+[plantuml, "{diagramsdir}/system-context", svg]
+....
 @startuml
 title C4 – System Context: EventFlow
 
@@ -42,7 +42,7 @@ user --> EventFlow : nutzt
 
 @enduml
 
-----
+....
 
 NOTE: Das Kontextdiagramm zeigt ausschließlich externe Schnittstellen.
 Die interne Struktur des Systems ist im Designdokument beschrieben.
@@ -78,8 +78,8 @@ Die interne Struktur des Systems ist im Designdokument beschrieben.
 //Level 2 im C4-Modell
 Diese Sicht gibt an, welche Umgebungen für den Code vorgesehen sind, z.B. JVM, Node.js, DBMS, Browser, Android Runtime.
 
-[plantuml, eventflow-context, svg]
-----
+[plantuml, "{diagramsdir}/system-context", svg]
+....
 @startuml
 title C4 – Container Diagram: EventFlow
 actor "Benutzer\n(Nutzt die Webanwendung)" as user
@@ -94,8 +94,9 @@ package "EventFlow" {
   nginx --> gunicorn : Proxy Pass
   gunicorn --> Web: WSGI
   Web --> django: API-Aufrufe
-  django --> postgres : SQL@enduml
-----
+  django --> postgres : SQL
+  @enduml
+....
 
 === Verteilungsdiagramm (Deployment Diagramm)
 //Beschreibt die physischen Knoten (Rechner) des Systems und Komponenten, die in diesen Knoten ausgeführt werden. 
