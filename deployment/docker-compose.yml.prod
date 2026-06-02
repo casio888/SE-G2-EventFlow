@@ -28,7 +28,7 @@ services:
       context: .
       dockerfile: Dockerfile-nginx
     ports:
-      - 1337:80
+      - 80:80
     volumes:
       - django_static:/usr/src/EventFlow/staticfiles
     depends_on: 
