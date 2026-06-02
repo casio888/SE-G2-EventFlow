@@ -29,35 +29,19 @@ _Der Systemkontext zeigt das System als Ganzes in seiner Umgebung: welche extern
 [plantuml, "{diagramsdir}/system-context", svg]
 ....
 @startuml
-' source: https://github.com/plantuml-stdlib/C4-PlantUML
-' C4 Model
-!include <c4/C4_Context.puml>
+title C4 – System Context: EventFlow
 
-' Images
-!include <office/Users/user.puml>
-!include <office/Users/mobile_user.puml>
+actor "Benutzer\n(Nutzt die Webanwendung)" as user
 
-LAYOUT_WITH_LEGEND()
+rectangle "EventFlow System" as EventFlow
 
-title System Context Diagram – [Systemname]
 
-Person(user, "Nutzer:in", "Verwendet das System über Web oder Mobile")
-Person(admin, "Administrator:in", "Verwaltet und konfiguriert das System")
 
-System(system, "[Systemname]", "Kernfunktionalität des Systems")
+user --> EventFlow : nutzt
 
-SystemDb(db, "Datenbank", "Persistente Datenhaltung des Systems")
-
-System_Ext(ext1, "Externer Dienst\n[z. B. LDAP / SSO]", "Authentifizierung und Identitätsverwaltung")
-System_Ext(ext2, "Externer Dienst\n[z. B. E-Mail-Server]", "Versand von Benachrichtigungen")
-
-Rel(user, system, "nutzt", "Web / Mobile")
-Rel(admin, system, "verwaltet")
-Rel(system, db, "liest / schreibt", "JDBC / SQL")
-Rel(system, ext1, "authentifiziert über", "LDAP / OAuth2")
-Rel(system, ext2, "sendet Benachrichtigungen über", "SMTP")
 
 @enduml
+
 ....
 
 NOTE: Das Kontextdiagramm zeigt ausschließlich externe Schnittstellen.
@@ -97,27 +81,21 @@ Diese Sicht gibt an, welche Umgebungen für den Code vorgesehen sind, z.B. JVM, 
 [plantuml, "{diagramsdir}/system-context", svg]
 ....
 @startuml
-!include <c4/C4_Container.puml>
-
-Person(user, "Benutzer", "Nutzt die Webanwendung")
-
-System_Boundary(app, "EventFlow") {
-
-    Container(nginx, "Nginx", "Reverse Proxy", "Liefert statische Dateien aus und leitet Requests weiter")
-
-    Container(gunicorn, "Gunicorn", "WSGI Application Server", "Führt Django Code aus")
-
-    Container(django, "Django Application", "Python/Django", "Anwendung")
-
-    ContainerDb(postgres, "PostgreSQL", "Datenbank", "Persistente Speicherung")
-}
-
-Rel(user, nginx, "HTTPS")
-Rel(nginx, gunicorn, "Proxy Pass")
-Rel(gunicorn, django, "WSGI")
-Rel(django, postgres, "SQL")
-
-@enduml
+title C4 – Container Diagram: EventFlow
+actor "Benutzer\n(Nutzt die Webanwendung)" as user
+package "EventFlow" {
+    rectangle "Web-Server\n(Nginx: Reverse Proxy\nLiefert statische Dateien aus\nLeitet Requests weiter)" as nginx
+    rectangle "Application Server\n(Gunicorn:\nFührt Django Code aus)" as gunicorn
+    rectangle "Web-Frontend\n(Vanilla JS/Bootstrap)" as Web
+    rectangle "Backend-API\n(Django Application:\nPython/Django\nAnwendung)" as django
+    database "Datenbank\n(PostgreSQL:\nPersistente Speicherung)" as postgres
+  }
+  user --> nginx : HTTPS
+  nginx --> gunicorn : Proxy Pass
+  gunicorn --> Web: WSGI
+  Web --> django: API-Aufrufe
+  django --> postgres : SQL
+  @enduml
 ....
 
 === Verteilungsdiagramm (Deployment Diagramm)
