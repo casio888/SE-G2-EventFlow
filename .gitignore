@@ -4,3 +4,15 @@
 .DS_Store
 *~
 .vscode
+venv
+*.swp
+
+# secrets
+deployment/.env.django
+deployment/postgres_db_password.txt
+
+# persistent data
+src/staticfiles/*
+deployment/postgres_data/
+*/db.sqlite3
+
