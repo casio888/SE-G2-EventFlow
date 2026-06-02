@@ -107,15 +107,15 @@ Beschreiben Sie konkret anhand von drei Beispielen, was sich durch Ihre Modellie
 
 | Apache + mod_wsgi als Webserver als Idee
 | Etablierter mit Django ist eine Kombination von Nginx als Reverse PRoxy und gunicorn als Application Server
-| Entscheidung im ADR auf Nginx+gunicorn
+| Entscheidung im ADR 006 auf Nginx+gunicorn
 
-| 
-| 
-| 
+| MSSQL als Datenbank
+| Umentschieden auf PostgreSQL da Entwicklung auf Linux stattfindet, es sich strenger an die Acid Richtlinien hält und mehr Features im Zusammenhang mit Python/Django bietet
+| siehe ADR 003
 
-| 
-| 
-| 
+| Anfangs JS und JQuery für Frontend 
+| Umentschieden auf Vanilla JS weil der Lernaufwand für JQuery zu hoch wäre und Vanilla JS unsere Anforderungen erfüllt 
+| siehe ADR 004
 |===
 
 
