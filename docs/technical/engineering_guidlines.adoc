@@ -6,16 +6,12 @@ include::../_includes/default-attributes.inc.adoc[]
 
 == Frameworks und Software
 Für die Entwicklung einer Webapp verwenden das Python Django-Webframework (https://www.djangoproject.com/)
-[Grund: Im Team sind Python Grundlagen breiter als PHP.]
 
-Als Datenbank wird MS-SQL verwendet.
-[Grund: Ermöglicht die Verwendung der HTW Server, und Grundlagen (im MS Dialekt) durch bisherige Module bei allen vorhanden.]
+Als Datenbank wird PostgreSQL verwendet.
 
-Als Skriptsprache im Frontend wird JavaScript (mit JQuery Bibliothek) verwendet.
-[Grund: JS Kenntnisse bei Dediziertem Frontend Developer vorhanden. Typescript wäre skalierbarer, aber für unseren Scope umständlicher. JQuery ist einfach und hat größte Knowledge Base]
+Als Skriptsprache im Frontend wird JavaScript verwendet.
 
 Als CSS Framework verwenden wir Bootstrap.
-[Grund: Weit verbreitet, vorgefertigte Komponenten. Gibt Junior Developern mehr Vorlagen/Guidlines im vergleich zu z.B. Tailwind.]
 
 == Umgang mit Git
 Dieser Abschnitt beschreibt übliche Arbeitsweisen mit Git und Konventionen
