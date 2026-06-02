@@ -278,14 +278,18 @@ Flask: Ist sehr lightwheight, aber gibt damit auch wenig Struktur vor, die für 
 | Die persistente Speicherung von Daten ist über eine Datenbank abzudecken. Dateibasierte Speicherung bietet sich nicht an, beim Projektumfang. Mit Ausblick auf die User Stories empfiehlt sich eine relationale Datenbank.
 
 | *Entscheidung*
-| PostgreSQL, da es ein weitverbreitetes Open-Source System ist. Zudem ist es eine relationale Datenbank. Das wohl wichtigste Feature von Postres ist, dass es bereits eine Einbindung in Django gibt. 
+| PostgreSQL, da es ein weitverbreitetes Open-Source System ist. Es implemetiert die ACID-Regeln sehr streng. sehr Zudem ist es eine relationale Datenbank. Das wohl wichtigste Feature von Postres ist, dass es bereits eine Einbindung in Django gibt. 
 
 | *Alternativen*
-| MariaDB,MSSQL,OracleDB,...
+| MariaDB: Es bietet die Standardkonformen Befehle von SQL und lässt sich ebenfalls sehr gut in Programme einbinden. Ein weiterer Vorteil ist, dass es Open-Source ist. Es bietet aber weniger Features als Postgres zudem gibt es eine größere Communitie von Postgres in kombination mit Django.
+
+  MSSQL: Es funktioniert besonders gut in Kombination mit anderen Microsoftprodukten. Dabei Unterstützt es ebenfalls den Standard von SQL. Da es auf Microsoft optimiert ist, unser System aber auf Linux läuft haben wir uns dagegen entschieden.
+  
+  OracleDB: Ist in der Industrie weit verbreitet und hat einen guten Support, allerdings ist es kostenpflichtig, weshalb es für uns nicht in Frage kommt.
 
 | *Konsequenzen*
 |Wir sind an diese Relationale Datenbank gebunden, da ein späterer Wechsel auf eine andere Datenbank einen großen Aufwand bedeutet. 
-//Das Team muss sich in die Datenbank hineinarbeiten, dafür ist es weitverbreitet und Open-Source, wodurch man viele Informationen findet. 
+Das Team muss sich in die Datenbank hineinarbeiten, dafür ist es weitverbreitet und Open-Source, wodurch man viele Informationen findet. 
 |===
 
 === ADR-004: Frontend Framework
