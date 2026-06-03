@@ -159,12 +159,17 @@ Beschreiben Sie, was Ihr Team im nächsten Sprint beibehalten, ändern oder gezi
 |===
 | Kriterium | Ihre Antwort
 
-| Beibehalten
-| 
+| Beibehalten 
+| * Kommunaktion untereinander +
+* Weekly meetings am Dienstag +
+* Nachfragen bei unsicherheit/helfen untereinander +
+* Zügiges erledigen der Aufgaben 
 
 | Ändern / verbessern
-| 
+| * Timeboxing bei Onlinemeetings besser einahlten +
+* häufigere Benutzung des Project Boards auf unserem Repo
 
 | Kandidat für Sprint 3
-| 
+| * MVP genaue Definition +
+* Aufwandsabschätzung der User Storys
 |===
