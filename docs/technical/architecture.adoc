@@ -284,13 +284,16 @@ Das Team muss sich in die Datenbank hineinarbeiten, dafür ist es weitverbreitet
 | Um Barrierefreiheit zu unterstützen und die Entwicklung des Frontends durch Building Blocks zu beschläunigen, bietet es sich an ein Frontend Framework zu verwenden.
 
 | *Entscheidung*
-| Bootstrap
+| Vorerst wird im Frontend Bootstrap genutzt. Dadurch soll eine einfache und agile umsetzung von Layout und UI gewährleistet werden. Da Bootstrap schlicht ist, bleibt der Aufwand für das Frontend gering. Auch ist die hürde des erlenens für das Team niedrig. 
 
 | *Alternativen*
-| 
+| Vue in kombination mit Vite wäre eine komponenten basierte lösung. Da diese aber einen overhat mit sich bring und kein teammitglied erfahrung mit Vue hat, ist der risiko vorerst zugroß. Wenn das Frontend deutlich komplexer wird wäre dies aber eine grundlage zur neu evaluierung.
+
+React wäre ebenfalls eine lösung da dieses Framwork aber einen erheblichen lernaufwand mit sich bringt wurde dies verworfen.
 
 | *Konsequenzen*
-| 
+| Das Frontend bleibt vorerst simpel und schnell umsetzbar. Es besteht kein zusätzlicher build prozess durch vite o. react. Bootstrap vereinfacht das entwickeln des Layouts. Komplexere logik muss in Vanilla JS umgesetzt werden. Falls das Frontend erheblich interaktiver bzw komponenten lastig wird, ist eine erneute diskusion sinnvoll. Die entscheidung minimiert kurzfristig das Risiko für zeit fehlmanagament durch übermäßige einarbeitungszeit.
+
 |===
 
 === ADR-005: Produktions Deployment Prozess
