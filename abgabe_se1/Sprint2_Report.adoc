@@ -146,7 +146,8 @@ a|
 
 | Technische Evidenz
 a| 
-* *Vorerfahrung im Team:* Wir kennen uns alle schon mit Python, JavaScript, CSS und Bootstrap aus. Außerdem haben wir alle das Django-Tutorial gemacht und damit schon eigene kleine Apps auf einem Server gestartet.
+* *Vorerfahrung im Team:* Die meisten Teammitglieder verfügen über grundlegende Erfahrung in Python, und einige haben zudem bereits in früheren Projekten mit CSS und Bootstrap gearbeitet.
+Als technischer Spike wurde das Django-Tutorial von einzelnen Teammitgliedern durchgeführt, um sich in das Framework einzuarbeiten und erste praktische Erfahrungen mit einer einfachen Anwendung sowie deren Deployment zu sammeln.
 * *Hilfe durch den Tech-Lead:* Unser Tech-Lead hat viel Erfahrung mit Python und Django. Wenn mal jemand von uns nicht weiterkommt, kann er sofort bei Code-Reviews helfen oder uns mit kurzen Beispielen (Spikes) unterstützen.
 * *Gute Kompatibilität:* Die Systeme passen perfekt zusammen. Django läuft nativ mit Python, die PostgreSQL-Datenbank lässt sich leicht anbinden und Bootstrap wird direkt in die Django-Templates eingebaut. Die automatischen E-Mails kann man direkt über Django verschicken, ohne dass man dafür extra andere Tools braucht.
 
