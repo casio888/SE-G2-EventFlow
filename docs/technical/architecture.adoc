@@ -272,8 +272,12 @@ Das Team muss sich in die Datenbank hineinarbeiten, dafür ist es weitverbreitet
 
 === ADR-004: Frontend Framework
 
+
+
 [cols="1,3"]
+
 |===
+
 | *Status*
 | Vorgeschlagen
 
@@ -281,18 +285,27 @@ Das Team muss sich in die Datenbank hineinarbeiten, dafür ist es weitverbreitet
 | 19.05.2026
 
 | *Kontext*
-| Um Barrierefreiheit zu unterstützen und die Entwicklung des Frontends durch Building Blocks zu beschläunigen, bietet es sich an ein Frontend Framework zu verwenden.
+| Um Barrierefreiheit zu unterstützen und die Entwicklung des Frontends durch Building Blocks zu beschleunigen, bietet es sich an, ein Frontend Framework zu verwenden.
 
 | *Entscheidung*
-| Vorerst wird im Frontend Bootstrap genutzt. Dadurch soll eine einfache und agile umsetzung von Layout und UI gewährleistet werden. Da Bootstrap schlicht ist, bleibt der Aufwand für das Frontend gering. Auch ist die hürde des erlenens für das Team niedrig. 
+| Vorerst wird im Frontend Bootstrap genutzt. 
+Dadurch soll eine einfache und agile Umsetzung von Layout und UI gewährleistet werden. 
+Da Bootstrap schlicht ist, bleibt der Aufwand für das Frontend gering. 
+Auch ist die Hürde des Erlernens für das Team niedrig. 
 
 | *Alternativen*
-| Vue in kombination mit Vite wäre eine komponenten basierte lösung. Da diese aber einen overhat mit sich bring und kein teammitglied erfahrung mit Vue hat, ist der risiko vorerst zugroß. Wenn das Frontend deutlich komplexer wird wäre dies aber eine grundlage zur neu evaluierung.
-
-React wäre ebenfalls eine lösung da dieses Framwork aber einen erheblichen lernaufwand mit sich bringt wurde dies verworfen.
+| Vue in Kombination mit Vite wäre eine komponentenbasierte Lösung. 
+Da diese aber einen Overhead mit sich bringt und kein Teammitglied Erfahrung mit Vue hat, ist das Risiko vorerst zu groß. 
+Wenn das Frontend deutlich komplexer wird, wäre dies aber eine Grundlage zur Neuevaluierung.
+React wäre ebenfalls eine Lösung, da dieses Framework aber einen erheblichen Lernaufwand mit sich bringt, wurde dies verworfen.
 
 | *Konsequenzen*
-| Das Frontend bleibt vorerst simpel und schnell umsetzbar. Es besteht kein zusätzlicher build prozess durch vite o. react. Bootstrap vereinfacht das entwickeln des Layouts. Komplexere logik muss in Vanilla JS umgesetzt werden. Falls das Frontend erheblich interaktiver bzw komponenten lastig wird, ist eine erneute diskusion sinnvoll. Die entscheidung minimiert kurzfristig das Risiko für zeit fehlmanagament durch übermäßige einarbeitungszeit.
+| Das Frontend bleibt vorerst simpel und schnell umsetzbar. 
+Es besteht kein zusätzlicher Build-Prozess durch Vite o. React.
+Bootstrap vereinfacht das Entwickeln des Layouts. 
+Komplexere Logik muss in Vanilla JS umgesetzt werden. 
+Falls das Frontend erheblich interaktiver bzw. komponentenlastig wird, ist eine erneute Diskussion sinnvoll. 
+Die Entscheidung minimiert kurzfristig das Risiko für Zeitfehlmanagement durch übermäßige Einarbeitungszeit.
 
 |===
 
