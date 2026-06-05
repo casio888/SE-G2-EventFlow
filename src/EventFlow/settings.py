@@ -127,3 +127,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / "staticfiles"
+
+DEBUG = True
+SECRET_KEY = "dev-secret-key-nur-lokal"
