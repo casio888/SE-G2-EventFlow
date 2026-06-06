@@ -7,9 +7,11 @@ Diese Readme gibt eine kurze Anleitung wie EventFlow auf dem seproject04 Server 
 ```
 # Korrekten Branch auschecken
 git checkout main
-
 # Ins deployment verzeichnis wechseln
 cd /home/seproject/SE-G2-EventFlow/deployment
+
+# Link anlegen
+ln -s docker-compose.yml.prod docker-compose.yml
 
 # Container neu starten
 docker compose down
