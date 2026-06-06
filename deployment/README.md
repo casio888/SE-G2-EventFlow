@@ -53,7 +53,7 @@ docker compose build
 
 4. Erstelle config Dateien
 ```
-mv .env.django.example .env.django
+cp .env.django.example .env.django
 # Secret key setzen und und db passwort eintragen
 
 # Schreibe db Passwort in diese Datei
@@ -64,3 +64,22 @@ echo "<password>" > postgres_db_password.txt
 ```
 docker compose up -d
 ```
+
+## Checkout von neuen Branches
+
+Bei checkouts von anderen Branches kann es zu unterschiedlichen Datenbank-Ständne kommen, um das zu beheben muss man den Stack starten
+
+```
+cd deployment & docker compose up -d
+```
+
+Und dann in den docker container springen und migrations erstellen und ausführen
+
+```
+docker exec -it deployment-django-1 sh
+
+python manage.py makemigrations
+python manage.py migrate
+```
+
+Dann sollte die DB auf dem korrekten Stand des Branches sein.
