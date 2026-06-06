@@ -1,0 +1,24 @@
+<h1>{{ event.titel }}</h1>
+
+<p><strong>Ort:</strong> {{ event.ort }}</p>
+<p><strong>Start:</strong> {{ event.start_datum }}</p>
+<p><strong>Ende:</strong> {{ event.end_datum }}</p>
+<p><strong>Beschreibung:</strong> {{ event.beschreibung }}</p>
+
+<hr>
+
+<h3>Bewerber</h3>
+
+<ul class="list-group">
+    {% for bewerber in event.bewerber %}
+        <li class="list-group-item">{{ bewerber.name }}</li>
+    {% empty %}
+        <li class="list-group-item">Noch keine Bewerber.</li>
+    {% endfor %}
+</ul>
+
+<hr>
+
+<a href="{% url 'veranstaltungen_liste' %}" class="btn btn-secondary">
+    Zurück zur Übersicht
+</a>
