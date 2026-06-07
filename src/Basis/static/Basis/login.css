@@ -1,0 +1,121 @@
+/* Ausgelagertes Styling aus login.html */
+/* Basis-Styling & Reset */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #ffffff;
+    color: #333;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- HEADER BANNER --- */
+header {
+    background-color: #0b1330; /* Exakt das Dunkelblau aus dem Screen 9 */
+    color: white;
+    padding: 30px 10%;
+}
+
+.logo {
+    font-weight: bold;
+    font-size: 1.4rem;
+    text-decoration: none;
+    color: white;
+    display: inline-block;
+}
+
+/* --- MAIN LOGIN CONTAINER --- */
+main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+    background-color: #ffffff;
+}
+
+.login-card {
+    background: #ffffff;
+    border: 1px solid #cbd5e0; /* Subtiler grauer Rand wie im Screenshot */
+    border-radius: 40px; /* Sehr abgerundete Ecken laut Vorlage */
+    padding: 50px 60px;
+    width: 100%;
+    max-width: 580px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.login-card h1 {
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: #2d3748;
+    margin-bottom: 40px;
+}
+
+/* --- FORMULARELEMENTE --- */
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-input {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid #cbd5e0;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    outline: none;
+    color: #4a5568;
+    background-color: #fff;
+}
+
+.form-input::placeholder {
+    color: #a0aec0;
+}
+
+.form-input:focus {
+    border-color: #3b82f6;
+}
+
+/* --- FOOTER IN DER CARD --- */
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 35px;
+}
+
+.register-link {
+    font-size: 0.75rem;
+    color: #3b82f6;
+    text-decoration: none;
+    text-align: left;
+    line-height: 1.4;
+    display: block;
+}
+
+.register-link:hover {
+    text-decoration: underline;
+}
+
+.btn-submit {
+    background-color: #3b82f6; /* Das strahlende Blau aus dem Anmelden-Button */
+    color: white;
+    border: none;
+    padding: 12px 35px;
+    font-size: 0.95rem;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-submit:hover {
+    background-color: #2563eb;
+}

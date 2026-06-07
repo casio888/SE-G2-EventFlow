@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[Website Name] - Anmelden</title>
+    <link rel="stylesheet" href="{% static 'Basis/login.css' %}">
+</head>
+<body>
+
+    <!-- Header mit Dunkelblau-Banner -->
+    <header>
+        <a href="{% url 'Basis:index' %}" class="logo">[Website Name]</a>
+    </header>
+
+    <!-- Login Maske -->
+    <main>
+        <div class="login-card">
+            <h1>Anmelden</h1>
+            
+            <form id="loginForm" action="#" method="POST">
+                <!-- E-Mail Feld -->
+                <div class="form-group">
+                    <input type="email" class="form-input" placeholder="E-Mail Adresse" required>
+                </div>
+                
+                <!-- Passwort Feld -->
+                <div class="form-group">
+                    <input type="password" class="form-input" placeholder="Passwort" required>
+                </div>
+                
+                <!-- Unterer Bereich: Link + Button -->
+                <div class="card-footer">
+                    <a href="#" class="register-link">
+                        Du hast noch keinen Account?<br>Dann erstelle dir einen!
+                    </a>
+                    <button type="submit" class="btn-submit">Anmelden</button>
+                </div>
+            </form>
+        </div>
+    </main>
+    <script src="{% static 'Basis/login.js' %}"></script>
+</body>
+</html>

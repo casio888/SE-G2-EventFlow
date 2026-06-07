@@ -1,0 +1,309 @@
+/* Ausgelagertes Styling aus index.html */
+/* Basis-Styling & Reset */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+/* --- HERO & NAVIGATION --- */
+.hero-section {
+    background-color: #0b1330; /* Dunkelblau aus dem Wireframe */
+    color: white;
+    padding: 20px 10%;
+    text-align: center;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 60px;
+}
+
+.logo {
+    font-weight: bold;
+    font-size: 1.2rem;
+    text-decoration: none;
+    color: white;
+}
+
+.nav-links a {
+    color: #ccc;
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 0.9rem;
+}
+
+.nav-links a:hover {
+    color: white;
+}
+
+.auth-buttons .btn {
+    padding: 8px 18px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    margin-left: 10px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-signup {
+    background-color: white;
+    color: #0b1330;
+}
+
+.btn-login {
+    background-color: #3b82f6; /* Passendes Blau für Login */
+    color: white;
+}
+
+.hero-content h1 {
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+}
+
+.hero-content p {
+    color: #a0aec0;
+    margin-bottom: 30px;
+    font-size: 0.9rem;
+}
+
+/* Suchleiste */
+.search-container {
+    background: white;
+    border-radius: 30px;
+    display: inline-flex;
+    align-items: center;
+    padding: 5px 10px 5px 20px;
+    width: 100%;
+    max-width: 600px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    margin-bottom: -45px; /* Lässt die Leiste leicht herausragen */
+    position: relative;
+    z-index: 10;
+}
+
+.search-input {
+    border: none;
+    outline: none;
+    padding: 10px;
+    font-size: 1rem;
+    flex: 1;
+    color: #333;
+}
+
+.search-divider {
+    color: #cbd5e0;
+    margin: 0 10px;
+}
+
+.search-btn {
+    background-color: #3b82f6;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+        
+.search-btn::after {
+    content: "";
+    width: 12px;
+    height: 12px;
+    border: 2px solid white;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+}
+
+/* --- MAIN CONTENT --- */
+main {
+    max-width: 1200px;
+    margin: 80px auto 40px auto;
+    padding: 0 20px;
+}
+
+section {
+    margin-bottom: 50px;
+}
+
+section h2 {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    color: #2d3748;
+}
+
+/* Popular Events Grid Layout */
+.popular-grid {
+    display: grid;
+    grid-template-columns: 2fr 1.5fr 2fr 1.5fr;
+    gap: 15px;
+}
+
+.event-card {
+    background-color: #c8daff; /* Hellblau aus dem Wireframe */
+    border: 1px solid #a3b8cc;
+    border-radius: 6px;
+    padding: 20px;
+    min-height: 140px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    font-weight: bold;
+    color: #2b6cb0;
+}
+
+/* Spezifische Grid-Anpassungen für das asymmetrische Layout */
+.card-large-1 { grid-row: span 2; min-height: 295px; }
+.card-large-2 { grid-row: span 2; min-height: 295px; }
+
+.badge {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background: rgba(255,255,255,0.8);
+    padding: 3px 8px;
+    font-size: 0.75rem;
+    border-radius: 3px;
+    font-weight: normal;
+    color: #4a5568;
+    border: 1px solid #e2e8f0;
+}
+        
+.circle-indicator {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 14px;
+    height: 14px;
+    background-color: rgba(255,255,255,0.6);
+    border-radius: 50%;
+}
+
+/* Best Rated Artists Section */
+.artists-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 15px;
+}
+
+.artist-card {
+    background-color: #e5dbff; /* Lila aus dem Wireframe */
+    border: 1px solid #b6a6e9;
+    border-radius: 6px;
+    padding: 40px 10px;
+    text-align: center;
+    font-weight: bold;
+    position: relative;
+    color: #6b46c1;
+}
+
+.rating-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: #48bb78;
+    color: white;
+    font-size: 0.7rem;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-weight: bold;
+}
+
+.artist-info {
+    margin-top: 15px;
+    text-align: left;
+    font-weight: normal;
+    font-size: 0.8rem;
+    line-height: 1.4;
+}
+        
+.artist-info strong {
+    color: #2d3748;
+}
+        
+.artist-info .action-text {
+    color: #2b6cb0;
+    font-weight: bold;
+    margin-top: 4px;
+    display: block;
+}
+
+/* VIP Banner */
+.vip-banner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+    padding: 25px;
+    border-radius: 6px;
+    border: 1px dashed #cbd5e0;
+    margin-top: 40px;
+}
+
+.vip-text h3 {
+    font-size: 1rem;
+    margin-bottom: 5px;
+    color: #2d3748;
+}
+
+.vip-text p {
+    font-size: 0.85rem;
+    color: #718096;
+    line-height: 1.4;
+}
+
+.btn-vip {
+    border: 1px solid #3b82f6;
+    background: transparent;
+    color: #3b82f6;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.2s;
+}
+        
+.btn-vip:hover {
+    background-color: #3b82f6;
+    color: white;
+}
+
+/* --- FOOTER --- */
+footer {
+    background-color: #f7fafc;
+    border-top: 1px solid #e2e8f0;
+    padding: 40px 10% 30px 10%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    font-size: 0.8rem;
+    color: #718096;
+    line-height: 1.5;
+}
+
+.footer-links a {
+    display: block;
+    color: #718096;
+    text-decoration: none;
+    margin-bottom: 6px;
+    text-align: right;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}
