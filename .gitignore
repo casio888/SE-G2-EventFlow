@@ -19,5 +19,4 @@ deployment/docker-compose.yml
 */db.sqlite3
 
 #Projektspezifische Datein
-*/__init__.py
 *.pyc
