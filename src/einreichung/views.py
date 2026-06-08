@@ -1,8 +1,14 @@
 from django.shortcuts import render
-from .models import Event
+from .models import Einreichung
+from veranstaltungen.models import Veranstaltung
 
 def event_list(request):
-    events=Event.object.all()
+    events=Veranstaltung.objects.all()
     context={'events': events}
     return render(request,'einreichung/einreichung.html',context)
+
+def event_bewerbung(request):
+    event=Veranstaltung.objects.all() #hier muss geändert werden, auf das gewollte Event
+    context={'event':event}
+    return render(request,'einreichung/bewerbung.html',context)
 # Create your views here.

@@ -26,19 +26,21 @@
                     <tr>
                         <th data-column="Marker">Marker</th>
                         <th data-column="Name">Name</th>
-                        <th data-column="Zeit">Zeit</th>
+                        <th data-column="startzeit">Beginn</th>
+                        <th data-column="endzeit">Ende</th>
                         <th data-column="Ort">Ort</th>
-                        <th data-column="Kategorien">Kategorien</th>
+                        <!--<th data-column="Kategorien">Kategorien</th>-->
                     </tr>
                 </thead>
                 <tbody id="tableBody">
-                    {% For events in events %}
+                    {% for events in events %}
                     <tr>
                     <td>{{event.marker}}</td>
-                    <td>{{event.name}}</td>
-                    <td>{{event.zeit}}</td>
+                    <td>{{event.title}}</td>
+                    <td>{{event.start_datum}}</td>
+                    <td>{{event.end_datum}}</td>
                     <td>{{event.ort}}</td>
-                    <td>{{event.kategorien}}</td>
+                    <!--<td>{{event.kategorien}}</td>-->
                         </tr>
                         {%empty%}
                     <tr>
@@ -49,7 +51,10 @@
             </table>
         </section>
         <section name="Auswahl">
-            <button>Auf Event Bewerden</button>
+            <a href="{% url 'event_bewerbung' %}" class="btn btn-secondary">
+                <button>Auf Event Bewerden</button>
+            </a>
+            
         </section>
     </main>
 

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Elias Lange">
+    <title>Einreichungen</title>
+    <link rel="stylesheet" href="styles.css">
+
+    <script>
+        function Anhang(){
+            alert("Sie versuchen eine Datei anzuhängen.");
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Liste der Events.</h1>
+    </header>
+
+    <main>
+        <section name="Eventinfo">
+            Hier finden Sie Informationen zu dem Event.
+        </section>
+        <section name="back">
+            <a href="{% url 'event_list' %}" class="btn btn-secondary">
+                <button>Zurück zur Liste</button>
+            </a>
+        </section>
+
+        <section name="Beschreibung">
+            Hier können sie eine Beschreibung eingeben.
+            <br>
+            <textarea name="Beschreibung" rows="10" cols="50">
+            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+            </textarea>
+        </section>
+
+        <section name="Anforderungen">
+            Hier können sie Ihre Anforderungen an das Event vermerken.
+            <br>
+            <textarea name="Anforderungen" rows="10" cols="50">
+            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+            </textarea>
+        </section>
+        
+
+        <section name="Anhang">
+            <button id="Anhang" onclick="Anhang()">Anhang</button>
+        </section>
+    </main>
+
+    <footer>
+        
+    </footer>
+
+</body>
+</html>

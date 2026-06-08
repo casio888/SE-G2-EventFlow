@@ -1,12 +1,11 @@
 from django.db import models
+from veranstaltungen.models import Veranstaltung
 
-class Event_foreinreicher(models.Model):
-    name=models.CharField(max_length=200)
-    zeit=models.DateTimeField()
-    ort= models.CharField(max_length=200)
-    kategorien= models.CharField(max_length=200)
-    maker=models.CharField(max_length=50,blank=True)
-
+class Einreichung():
+    fk=models.ForeignKey(Veranstaltung, on_delete=models.CASCADE) 
+    eingereicht=models.BooleanField()
+    Beschreibung=models.CharField(max_length="400")
+    Anforderungen=models.TextField(max_length="400")
     def __str__(self):
-        return self.name
+        return self.id
 # Create your models here.
