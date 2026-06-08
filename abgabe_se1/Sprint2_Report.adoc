@@ -39,15 +39,15 @@ include::{docs}/_includes/default-attributes.inc.adoc[]
 | Das hat uns eine gute Vorlage für die Containerisierung gegeben und bei der Strukturierung unserer Technischen Dienste geholfen.
 
 | Architekturanforderungen in ADR's umgewandelt
-| Wir haben Architekturanforderungen gesammelt und daraus ADR's erzeugt welche den Technologiestack defineiren.
+| Wir haben Architekturanforderungen gesammelt und daraus ADR's erzeugt, welche den Technologiestack definieren.
 | https://github.com/casio888/SE-G2-EventFlow/issues?q=is%3Aissue%20state%3Aopen%20ADR
-| Die Architekturanforderungen haben die Fragen definiert, auf welche wir in den ADR's die Antworten gefunden und festgelegt haben.
+| Die Architekturanforderungen haben die zentralen Fragen an unseren Technologiestack definiert. In den ADR's haben wir diese Fragen untersucht und uns auf eine Antwort festgelegt.
 
 | Technische Spikes um Unsicherheiten zu beseitigen
-| Wir haben Spikes gemacht um Entscheidungen in ADR's treffen zu können und um relevante Grundkenntnisse der Programmierung aufzufrischen
+| Wir haben Spikes gemacht um Entscheidungen in ADR's treffen zu können und um relevante Grundkenntnisse der Programmierung aufzufrischen.
 | https://github.com/casio888/SE-G2-EventFlow/issues?q=is%3Aissue%20Spike%3A
 | Alle Teammitglieder haben das Django Tutorial lokal durchgetanzt um Grundlagen mit Python und Django aufzufrischen. +
-Für die ADR's von Frontend und Datanbank gab es Spikes um Möglichkeiten für eine Diskussion mit Tech Lead vorzubereiten.
+Für ADR 003 Datanbank und ADR 004 Frontend Framework gab es Spikes um Optionen zu untersuchen.
 |===
 
 
@@ -77,12 +77,12 @@ Für die ADR's von Frontend und Datanbank gab es Spikes um Möglichkeiten für e
 | Wir haben Django beibehalten, aber nach Recherche und Spikes haben wir uns auf PostreSQL, nginx und gunicorn festgelegt.
 | Entscheidungen in ADR 003 & 006
 
-| Offen wie wir die Webanwendung strukturieren wollen (Single Page, Multi Page und/oder PWA)
-| Am Anfang des Sprint hatten wir keine klare Meinung zum Stil unserer Webanwendung. Durch nutzung von Django ergibt sich eine Multi-Page Anwendung ohne Grund für PWA.
-| aktuell nur implizit. Es fehlt ein geeignerter Ort um das festzuhalten.
+| Unklar wie wir die Webanwendung strukturieren wollen (Single Page, Multi Page und/oder PWA)
+| Am Anfang des Sprints hatten wir keine klare Meinung zum Stil unserer Webanwendung. Durch Nutzung von Django ergibt sich eine Multi-Page Anwendung ohne Grund für PWA.
+| Aktuell nur implizit. Es fehlt ein geeignerter Ort um das festzuhalten.
 
 | Keine Pläne für den Deployment Prozess
-| Um das Walking-Skeleton auf dem Produktivserver aufzusetzen hat es sich angeboten direkt über eine Deployment-Strategie nachzudenken. Mit unserer Docker Strategie können wir gleichzeitig gewährleisten, dass alle lokalen Entwicklungen keine weiteren Anpassun gen für den Produktivserver benötigen
+| Um das Walking-Skeleton auf dem Produktivserver aufzusetzen hat es sich angeboten direkt über eine Deployment-Strategie nachzudenken. Mit unserer Docker Strategie können wir gleichzeitig gewährleisten, dass alle lokalen Entwicklungen keine weiteren Anpassungen für den Produktivserver benötigen.
 | siehe ADR 005 Docker + Docker Compose
 |===
 
@@ -98,8 +98,8 @@ a|
 * *Rollen- und Berechtigungssystem:* Das System muss zwischen verschiedenen Nutzern wie Veranstaltern, Einreichern (und später Gutachtern) unterscheiden und geschützte Bereiche bieten.
 * *Sicherer Datei-Upload und Logins:* Die eingereichten Beiträge müssen sicher gespeichert und die Passwörter der Nutzer verschlüsselt werden.
 * *Automatische E-Mails:* Das System soll Nutzer automatisch per E-Mail benachrichtigen, sobald sich der Status ihrer Einreichung ändert.
-* *Einfache und barrierefreie Oberfläche:* Die Webseite muss übersichtlich sein, auf verschiedenen Geräten gut aussehen und für alle Benutzer leicht bedienbar sein.
-* *Schnelle Reaktionszeit (unter 200ms):* Die Anwendung muss zügig laden und schnell auf Eingaben reagieren, damit keine Unzufriedenheit bei langen Wartezeiten auftritt.
+* *Einfache und barrierefreie Oberfläche:* Die Webseite muss übersichtlich sein, primär auf Laptops gut aussehen und für alle Benutzer leicht bedienbar sein. Handy Layouts sollen später auch unterstützt werden, aber nur für begrenzte User Flows.
+* *Schnelle Reaktionszeit (unter 200ms):* Die Anwendung muss zügig laden und schnell auf Eingaben reagieren, damit keine Unzufriedenheit bei langen Wartezeiten auftritt. Unsere Zielgruppe sind auch professionellere Veranstalter, für diese sind lange Ladezeiten ein starkes negatives Signal.
 
 | Wichtigste Entscheidungen / ADRs
 | Nach einer gründlichen Recherche und unter Berücksichtigung unserer Architekturtreiber haben wir uns für den Stack aus *Python (ADR-001)*, *Django (ADR-002)*, *PostgreSQL (ADR-003)*, *Bootstrap (ADR-004)*, *Docker (ADR-005)* und *Nginx (ADR-006)* entschieden.
@@ -136,7 +136,10 @@ a|
 * Strenger an Commit-Richtlinien halten
 
 | Kandidat für Sprint 3
-| * MVP muss ausdefiniert werden +
-* Wichtige User Stories müssen in Tasks zerlegt werden +
-* Aufwandsabschätzung der User Storys fehlt noch
+| Das erste Produktinkrement sowie die Aufwandsabschätzung der zu implementierenden User Stories werden im Sprint-Planning-Termin festgelegt. Aktuell umfasst die grobe Planung: +
+
+Implementierung der Account-Erstellung +
+Entwicklung der Startseite +
+Möglichkeit für Veranstalter, Events anzulegen +
+Erstellung und Verwaltung von Einreicher-Profilen
 |===
