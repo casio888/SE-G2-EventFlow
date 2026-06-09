@@ -1,0 +1,184 @@
+= Meeting zum 09.06.2026
+
+== Statusupdate
+
+=== Aktueller Stand des Walking Skeletons
+
+* Alles commited 
+* prs da 
+* tests müssen noch gemacht werden (von Micha)
+
+=== Offene Punkte / Themen von Micha
+
+"nö" 
+
+== MVP & User Stories 
+
+=== Vorstellung des MVPs
+
+siehe Sprint3Planning
+
+.Einreicher mvp flow
+[plantuml, Einreichermvp, svg]
+----
+
+@startuml
+start
+if (Account vorhanden) then (ja)
+:anmelden;
+else (nein)
+:registrieren;
+endif
+:Verfügbare Events ansehen;
+:Für Event bewerben;
+:Status der eigenen Einreichung ansehen;
+
+stop
+@enduml
+----
+
+.Veranstalter mvp flow
+[plantuml, Veranstalter-mvp, svg]
+----
+@startuml
+start
+
+if (Account vorhanden) then (ja)
+:anmelden;
+else (nein)
+:registrieren;
+endif
+
+if (events vorhanden) then (ja)
+:Event bearbeiten oder löschen;
+else (nein)
+:Event anlegen;
+endif
+
+if (Einreichungen vorhanden?) then (ja)
+  :Eingegangene Einreichungen ansehen;
+  :Einreichung bewerten;
+
+  if (Einreichung geeignet?) then (ja)
+    :Einreichung zusagen;
+    :Einreicher einem Zeitslot zuweisen;
+  else (nein)
+    :Einreichung absagen;
+  endif
+
+else (nein)
+  :Auf Einreichungen warten;
+endif
+stop
+@enduml
+
+----
+
+* nur auf event bewerben ohne zeitslot Logik (z.b. nur btn auf event bewerben)
+
+=== Vorstellung der User Stories für Sprint 3
+
+* US1 – Registrierung und Login für Veranstalter
+* US2 – Startseite mit Eventübersicht
+* US3 – Events unkompliziert anlegen
+* US4 – Persönliche Eventverwaltung
+
+TODO: Akzeptanzkriterien müssen konkretisiert werden
+
+==  Sprint-3-Ziel definieren
+
+=== Vorstellung des Sprint-Ziels
+
+=== Abstimmung und gemeinsames Verständnis des Ziels
+
+
+== Aufwandsschätzung 
+
+=== Teamweite Schätzung der User Stories in Story Points
+
+Eine einschätzung zwischen 1 und 13 mit PlanitPoker
+
+* US1 – Registrierung und Login für Veranstalter
+** Authentifizierung und Authorisierung
+** Ergebniseinschätzung: 5
+** Session cookies
+** Tests 
+** security
+
+* US2 – Startseite mit Eventübersicht
+** Ergebniseinschätzung: 3
+** Lesen aus DB und anzeigen
+
+* US3 – Events unkompliziert anlegen
+** Ergebniseinschätzung: 5
+
+* US4 – Persönliche Eventverwaltung
+** Ergebniseinschätzung: 5
+
+
+TODO: kurze uml flows erstellen 
+
+== Akzeptanzkriterien 
+
+=== Definition und Abstimmung der Akzeptanzkriterien für jede User Story
+
+TODO: Akzeptanz kriterien verteilen und schreiben -> Abstimmung mit Nataliia
+
+== Definition of Ready & Definition of Done
+
+=== Definition of Ready (DoR) festlegen bzw. überprüfen
+
+Muss vorliegen bevor Implementierung beginnt
+
+Ergänzungen:
+
+* Komplexe aufgaben als Tasks festlegen (in subissues unterteilen)
+
+
+=== Definition of Done (DoD) festlegen bzw. überprüfen
+
+Umformulierungen:
+
+zu 3. neuer code bekommt tests und alter code läuft weiterhin fehlerfrei
+
+* Der code wurde Reviewed
+
+== Aufgabenverteilung & Umsetzung
+
+=== Grobe Zuordnung der User Stories
+
+
+* US1 – Registrierung und Login für Veranstalter
+** Paul
+
+* US2 – Startseite mit Eventübersicht
+** Elias
+
+* US3 – Events unkompliziert anlegen
+** Nina
+
+* US4 – Persönliche Eventverwaltung
+** Michael L
+
+* TS1 - Header und Footer Template
+** Michael M
+
+* Other
+** Minh frontend (mit bootstrap)
+** Michael M (ansprechparter für alles)
+** Nataliia Presentation vorbereiten
+
+=== Jeder schreibt Implementierungsansatz
+
+Siehe bild vorlesung (in discord)
+
+=== Festlegung von Deadlines
+
+Implementierung bis zum 16.06.2026
+
+20.06 video für Presentation wird aufgenommen
+
+
+== Weiteres
+
+* Gemeinsames Treffen für Selbstevaluation
