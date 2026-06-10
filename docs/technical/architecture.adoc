@@ -117,8 +117,8 @@ sind in <<Architekturentscheidungen>> dokumentiert._
 | Bereich | Technologie | Begründung | Entscheidung
 
 | Frontend
-| [z. B. React 18]
-| [z. B. Teamkenntnisse; große Community; Komponentenmodell]
+| Bootstrap
+| Wir wollen kein Frontend Framework, welches extra setup benötigt und eine eigenen Buildprozess mitbringt. Bootstrap lässt sich gut in Django-Templates integrieren.
 | ADR-004
 
 | Backend
@@ -167,27 +167,22 @@ diesen Anforderungen ergeben, und verweist auf die zugehörigen Entscheidungen.
 |===
 | Anforderung (aus Produktkonzept) | Technische Konsequenz | Entscheidung
 
-| Performanceziel: Seitenladezeit < 2 s
-| Server-Side Rendering für initiales Laden erforderlich;
-  statische Assets über CDN ausliefern
+| Performanceziel: Seitenladezeit < 200ms
+| Server-Side Rendering erforderlich; Optimierung von Database Queries; Eventuell lange Loads asynchron machen
 | ADR-002
 
-| DSGVO-Konformität
-| Keine personenbezogenen Daten in Logs; Datensparsamkeit im Datenbankmodell;
-  Recht auf Löschung muss implementierbar sein
-| ADR-003, ADR-004
-
-| Betrieb auf Hochschulinfrastruktur
-| Keine Cloud-only-Dienste; Containerisierung für Portabilität erforderlich
+| Verfügbarkeit
+| Schneller und robuster Deployment-Prozess; Extra Server für Produktion.
 | ADR-005
 
-| Verfügbarkeit ≥ 99 % während Betriebszeiten
-| Statusüberwachung und automatischer Neustart über Container-Orchestrierung
+| Datensicherheit
+| Authentifizierung und Nutzeraccounts, welche nur eigene und offene Daten anzeigen.
+| ADR Authentifizierung steht aus
+
+| Barrierefreiheit
+| Nutzung von barrierefreien Layouts; Nutzung von Bootstrap Objekten, welche Barrierefreiheit unterstützen.
 | ADR-005
 
-| [Anforderung]
-| [Technische Konsequenz]
-| [ADR-Referenz oder —]
 |===
 
 == Architekturentscheidungen
@@ -272,8 +267,12 @@ Das Team muss sich in die Datenbank hineinarbeiten, dafür ist es weitverbreitet
 
 === ADR-004: Frontend Framework
 
+
+
 [cols="1,3"]
+
 |===
+
 | *Status*
 | Vorgeschlagen
 
@@ -281,16 +280,28 @@ Das Team muss sich in die Datenbank hineinarbeiten, dafür ist es weitverbreitet
 | 19.05.2026
 
 | *Kontext*
-| Um Barrierefreiheit zu unterstützen und die Entwicklung des Frontends durch Building Blocks zu beschläunigen, bietet es sich an ein Frontend Framework zu verwenden.
+| Um Barrierefreiheit zu unterstützen und die Entwicklung des Frontends durch Building Blocks zu beschleunigen, bietet es sich an, ein Frontend Framework zu verwenden.
 
 | *Entscheidung*
-| Bootstrap
+| Vorerst wird im Frontend Bootstrap genutzt. 
+Dadurch soll eine einfache und agile Umsetzung von Layout und UI gewährleistet werden. 
+Da Bootstrap schlicht ist, bleibt der Aufwand für das Frontend gering. 
+Auch ist die Hürde des Erlernens für das Team niedrig. 
 
 | *Alternativen*
-| 
+| Vue in Kombination mit Vite wäre eine komponentenbasierte Lösung. 
+Da diese aber einen Overhead mit sich bringt und kein Teammitglied Erfahrung mit Vue hat, ist das Risiko vorerst zu groß. 
+Wenn das Frontend deutlich komplexer wird, wäre dies aber eine Grundlage zur Neuevaluierung.
+React wäre ebenfalls eine Lösung, da dieses Framework aber einen erheblichen Lernaufwand mit sich bringt, wurde dies verworfen.
 
 | *Konsequenzen*
-| 
+| Das Frontend bleibt vorerst simpel und schnell umsetzbar. 
+Es besteht kein zusätzlicher Build-Prozess durch Vite o. React.
+Bootstrap vereinfacht das Entwickeln des Layouts. 
+Komplexere Logik muss in Vanilla JS umgesetzt werden. 
+Falls das Frontend erheblich interaktiver bzw. komponentenlastig wird, ist eine erneute Diskussion sinnvoll. 
+Die Entscheidung minimiert kurzfristig das Risiko für Zeitfehlmanagement durch übermäßige Einarbeitungszeit.
+
 |===
 
 === ADR-005: Produktions Deployment Prozess

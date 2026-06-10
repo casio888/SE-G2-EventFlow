@@ -1,0 +1,9 @@
+<h1>Neue Veranstaltung erstellen</h1>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button type="submit" class="btn btn-success">Speichern</button>
+    <a href="{% url 'veranstaltungen_liste' %}" class="btn btn-secondary">Abbrechen</a>
+</form>
