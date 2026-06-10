@@ -3,16 +3,11 @@
 // Bitte fügen Sie hier die Informationen zu Ihrem Team, Projekt, Datum und Repository ein.
 Team:: G2
 Projektname:: EventFlow
-Datum:: 01.06.2026
+Datum:: 07.06.2026
 Repository-Link:: https://github.com/casio888/SE-G2-EventFlow
 
-====
-Dieser Report soll auf maximal einer Seite zeigen, wie Ihr Team in Sprint 2 gearbeitet hat,
-welche Praktiken Sie angewendet haben, welche technischen Artefakte entstanden sind und was Sie daraus gelernt haben.
-
-Der Report ist kein Tätigkeitsprotokoll und kein vollständiges Architekturdokument. Beschreiben Sie nicht nur, _was_ Sie gemacht haben,
-sondern vor allem, _warum_ Sie es gemacht haben, welche Evidenz dadurch entstanden ist und wie diese Evidenz Ihren technischen Ansatz begründet oder verändert hat.
-====
+:docs: ../docs
+include::{docs}/_includes/default-attributes.inc.adoc[]
 
 == 1. Sprintziel und zentrale Fragestellung
 
@@ -22,32 +17,14 @@ sondern vor allem, _warum_ Sie es gemacht haben, welche Evidenz dadurch entstand
 | Kriterium | Ihre Antwort
 
 | Sprintziel
-| Festlegung auf einen Technologiestack nach Klärung der technischen Anforderungen.  
+| Wir haben unsere technischen Anforderungen gefunden und ausformuliert und darauf aufbauend unsere Entscheidungen zum Technologiestack getroffen.  
 
 | Zentrale technische Unsicherheit / Annahme
-| Unsicherheit an die Teschichen Anforderungen verringern.
+| Am Anfang des Sprints hatten wir nur vage Ideen über die Technologien die für uns passen könnten.
 |===
 
 
 == 2. Erwartete Praktiken in Sprint 2
-
-Wählen Sie 3–5 Praktiken aus, die für Ihren Sprint besonders relevant waren.
-Beziehen Sie sich bevorzugt auf Praktiken, die in den Hinweisen für Sprint 2 beschrieben werden. Mögliche Praktiken:
-
-* Domänenmodell erstellen oder überarbeiten
-* Partielles logisches Datenmodell erarbeiten
-* Architekturtreiber aus Domäne, Qualitätsanforderungen, Randbedingungen, Nutzerflüssen und Teamfähigkeiten ableiten
-* Systemgrenzen und externe Systeme identifizieren sowie C4-Kontextdiagramm erstellen
-* Wesentliche Subsysteme identifizieren sowie C4-Containerdiagramm erstellen
-* technische Services identifizieren und mittels Attributen beschreiben
-* einfache Komponentensicht oder Projektstruktur skizzieren
-* minimale Architekturleitplanken für die Codebasis festlegen
-* Technologieoptionen vergleichen und auswählen
-* ADRs für wichtige technische Entscheidungen schreiben
-* technische Spikes oder Experimente durchführen
-* Walking Skeleton als lauffähigen Nachweis des technischen Konzepts aufbauen
-* technische Risiken identifizieren und dokumentieren
-* Kandidaten für einen ersten nützlichen MVP-Ausschnitt in Sprint 3 identifizieren
 
 [cols="1,2,2,2", options="header"]
 |===
@@ -58,46 +35,37 @@ Beziehen Sie sich bevorzugt auf Praktiken, die in den Hinweisen für Sprint 2 be
 
 | C4-Containerdiagramm erstellt
 | Wir haben unsere technischne Komponenten identifiziert und in einem Containermodell dargestellt.
-| TODO Link
-| Das hat uns eine gute Vorlage für die Containerisierung gegeben.
+| link:{https://github.com/casio888/SE-G2-EventFlow/blob/main/docs/technical/architecture.adoc}[architecture.adoc]
+| Das hat uns eine gute Vorlage für die Containerisierung gegeben und bei der Strukturierung unserer Technischen Dienste geholfen.
 
 | Architekturanforderungen in ADR's umgewandelt
-| Wir haben Architekturanforderungen gesammelt und daraus ADR's erzeugt um die offenen Fragen
+| Wir haben Architekturanforderungen gesammelt und daraus ADR's erzeugt, welche den Technologiestack definieren.
 | https://github.com/casio888/SE-G2-EventFlow/issues?q=is%3Aissue%20state%3Aopen%20ADR
-| Die Architekturanforderungen haben die Fragen definiert, auf welche die ADR's die Antworten geben.
+| Die Architekturanforderungen haben die zentralen Fragen an unseren Technologiestack definiert. In den ADR's haben wir diese Fragen untersucht und uns auf eine Antwort festgelegt.
 
 | Technische Spikes um Unsicherheiten zu beseitigen
-| Wir haben Spikes gemacht um Entscheidungen in ADR's treffen zu können
-| TODO Github issues spikes
-| Alle Teammitglieder haben das django Tutorial als Spike gemacht um Grundlagen zu festigen. Für ADR's Frontend und Datanbank gab es Spikes um Möglichkeiten für eine Diskussion mit Tech Lead vorzubereiten.
+| Wir haben Spikes gemacht um Entscheidungen in ADR's treffen zu können und um relevante Grundkenntnisse der Programmierung aufzufrischen.
+| https://github.com/casio888/SE-G2-EventFlow/issues?q=is%3Aissue%20Spike%3A
+| Alle Teammitglieder haben das Django Tutorial lokal durchgetanzt um Grundlagen mit Python und Django aufzufrischen. +
+Für ADR 003 Datanbank und ADR 004 Frontend Framework gab es Spikes um Optionen zu untersuchen.
 |===
 
 
 == 3. Wichtigste technische Lernergebnisse aus Sprint 2
-
-Beschreiben Sie 2–3 zentrale Erkenntnisse aus Sprint 2. Leitfragen:
-
-* Was hat Ihr Team über die technische Machbarkeit des Produkts gelernt?
-* Welche Annahme zum Architekturansatz, Technologie-Stack oder Projektaufbau wurde bestätigt, widerlegt oder präzisiert?
-* Welche technische Evidenz hatte den größten Einfluss auf Ihre Entscheidungen?
 
 [cols="1,3", options="header"]
 |===
 | Kriterium | Ihre Antwort
 
 | Erkenntnis 1
-| Eine frühe Entscheidung zum Front und Backend ist die Grundlage für weitere Entscheidungen (Datenbank, Webserver) und Realisierung.
+| Eine frühe Entscheidung zum Front- und Backend war die Grundlage für weitere Entscheidungen (Datenbank und Webserver) und Realisierung.
 
 | Erkenntnis 2
 | Es hat sich bestätigt, dass unsere geplanten Features mit Django realisierbar sind.
 
-| Erkenntnis 3
-| 
 |===
  
 == 4. Änderungen am technischen Ansatz
-
-Beschreiben Sie konkret anhand von drei Beispielen, was sich durch Ihre Modellierung, Entscheidungen, Spikes oder den Walking Skeleton verändert hat.
 
 [cols="2,2,2", options="header"]
 |===
@@ -105,28 +73,20 @@ Beschreiben Sie konkret anhand von drei Beispielen, was sich durch Ihre Modellie
 | Neue Erkenntnis oder Evidenz
 | Anpassung am technischen Ansatz, an der Architektur oder am Backlog
 
-| Apache + mod_wsgi als Webserver als Idee
-| Etablierter mit Django ist eine Kombination von Nginx als Reverse PRoxy und gunicorn als Application Server
-| Entscheidung im ADR 006 auf Nginx+gunicorn
+| Erste Idee: Django + MSSQL + Apache (mod_wsgi) als möglicher Technologiestack, weil der Tech Lead damit vertraut ist.
+| Wir haben Django beibehalten, aber nach Recherche und Spikes haben wir uns auf PostreSQL, nginx und gunicorn festgelegt.
+| Entscheidungen in ADR 003 & 006
 
-| MSSQL als Datenbank
-| Umentschieden auf PostgreSQL da Entwicklung auf Linux stattfindet, es sich strenger an die Acid Richtlinien hält und mehr Features im Zusammenhang mit Python/Django bietet
-| siehe ADR 003
+| Unklar wie wir die Webanwendung strukturieren wollen (Single Page, Multi Page und/oder PWA)
+| Am Anfang des Sprints hatten wir keine klare Meinung zum Stil unserer Webanwendung. Durch Nutzung von Django ergibt sich eine Multi-Page Anwendung ohne Grund für PWA.
+| Aktuell nur implizit. Es fehlt ein geeignerter Ort um das festzuhalten.
 
-| Anfangs JS und JQuery für Frontend 
-| Umentschieden auf Vanilla JS weil der Lernaufwand für JQuery zu hoch wäre und Vanilla JS unsere Anforderungen erfüllt 
-| siehe ADR 004
+| Keine Pläne für den Deployment Prozess
+| Um das Walking-Skeleton auf dem Produktivserver aufzusetzen hat es sich angeboten direkt über eine Deployment-Strategie nachzudenken. Mit unserer Docker Strategie können wir gleichzeitig gewährleisten, dass alle lokalen Entwicklungen keine weiteren Anpassungen für den Produktivserver benötigen.
+| siehe ADR 005 Docker + Docker Compose
 |===
 
-
 == 5. Architekturtreiber, Entscheidungen und technische Evidenz
-
-Beschreiben Sie kurz, welche Treiber, Entscheidungen und Nachweise für Ihren technischen Ansatz besonders wichtig sind. Leitfragen:
-
-* Welche Qualitätsanforderungen, Randbedingungen oder Nutzerflüsse haben Ihre technischen Entscheidungen besonders geprägt?
-* Welche Architektur- oder Technologieentscheidungen sind für das weitere Projekt besonders wichtig?
-* Welche Evidenz zeigt, dass der gewählte technische Ansatz grundsätzlich tragfähig ist?
-* Welche technischen Risiken oder offenen Fragen bleiben bestehen?
 
 [cols="1,3", options="header"]
 |===
@@ -135,11 +95,11 @@ Beschreiben Sie kurz, welche Treiber, Entscheidungen und Nachweise für Ihren te
 | Wichtigste Architekturtreiber
 a| 
 * *Zeitmangel:* Wir müssen das Projekt schnell umsetzen. Deshalb war es uns wichtig, Technologien zu wählen, bei denen die Einarbeitung nicht viel Zeit kostet.
-* *Rollen- und Berechtigungssystem:* Das System muss zwischen verschiedenen Nutzern wie Veranstaltern, Einreichern und Gutachtern unterscheiden und geschützte Bereiche bieten.
+* *Rollen- und Berechtigungssystem:* Das System muss zwischen verschiedenen Nutzern wie Veranstaltern, Einreichern (und später Gutachtern) unterscheiden und geschützte Bereiche bieten.
 * *Sicherer Datei-Upload und Logins:* Die eingereichten Beiträge müssen sicher gespeichert und die Passwörter der Nutzer verschlüsselt werden.
-* *Automatische E-Mails:* Das System soll Nutzer automatisch per E-Mail benachrichtigen, sobald sich der Status ihres Beitrags ändert.
-* *Einfache und barrierefreie Oberfläche:* Die Webseite muss übersichtlich sein, auf verschiedenen Geräten gut aussehen und für alle Benutzer leicht bedienbar sein.
-* *Schnelle Reaktionszeit (unter 200ms):* Die Anwendung muss zügig laden und schnell auf Eingaben reagieren, um lange Wartezeiten zu vermeiden.
+* *Automatische E-Mails:* Das System soll Nutzer automatisch per E-Mail benachrichtigen, sobald sich der Status ihrer Einreichung ändert.
+* *Einfache und barrierefreie Oberfläche:* Die Webseite muss übersichtlich sein, primär auf Laptops gut aussehen und für alle Benutzer leicht bedienbar sein. Handy Layouts sollen später auch unterstützt werden, aber nur für begrenzte User Flows.
+* *Schnelle Reaktionszeit (unter 200ms):* Die Anwendung muss zügig laden und schnell auf Eingaben reagieren, damit keine Unzufriedenheit bei langen Wartezeiten auftritt. Unsere Zielgruppe sind auch professionellere Veranstalter, für diese sind lange Ladezeiten ein starkes negatives Signal.
 
 | Wichtigste Entscheidungen / ADRs
 | Nach einer gründlichen Recherche und unter Berücksichtigung unserer Architekturtreiber haben wir uns für den Stack aus *Python (ADR-001)*, *Django (ADR-002)*, *PostgreSQL (ADR-003)*, *Bootstrap (ADR-004)*, *Docker (ADR-005)* und *Nginx (ADR-006)* entschieden.
@@ -147,25 +107,18 @@ a|
 | Technische Evidenz
 a| 
 * *Vorerfahrung im Team:* Die meisten Teammitglieder verfügen grundlegende Erfahrung in Python, und einige haben zudem bereits in früheren Projekten mit CSS und Bootstrap gearbeitet.
-Als technischer Spike wurde das Django-Tutorial von einzelnen Teammitgliedern durchgeführt, um sich in das Framework einzuarbeiten und erste praktische Erfahrungen mit einer einfachen Anwendung sowie deren Deployment zu sammeln.
-* *Hilfe durch den Tech-Lead:* Unser Tech-Lead hat viel Erfahrung mit Python und Django. Wenn mal jemand von uns nicht weiterkommt, kann er sofort bei Code-Reviews helfen oder uns mit kurzen Beispielen (Spikes) unterstützen.
+Als technischer Spike wurde das Django-Tutorial von allen Teammitgliedern durchgearbeitet, um sich in das Framework einzuarbeiten und erste praktische Erfahrungen mit einer einfachen Anwendung sowie deren Deployment zu sammeln.
+* *Hilfe durch den Tech-Lead:* Unser Tech-Lead hat viel Erfahrung mit Python und Django. Wenn mal jemand von uns nicht weiterkommt, kann er sofort direkt unterstützen, bei Code-Reviews helfen oder uns mit gezielten Spikes aushelfen.
 * *Gute Kompatibilität:* Die Systeme passen perfekt zusammen. Django läuft nativ mit Python, die PostgreSQL-Datenbank lässt sich leicht anbinden und Bootstrap wird direkt in die Django-Templates eingebaut. Die automatischen E-Mails kann man direkt über Django verschicken, ohne dass man dafür extra andere Tools braucht.
 
 | Verbleibende Risiken / offene Fragen
 a| 
 * *Echtzeit-Funktionen sind schwierig:* Django läuft standardmäßig synchron. Wenn wir später Live-Updates für die Timeslot-Planung brauchen, wird der Umbau ziemlich aufwendig.
-* *Keine Live-Server-Erfahrung:* Wir haben noch nie einen Nginx-Webserver für den echten Live-Betrieb eingerichtet. Da müssen wir uns erst einarbeiten, was Zeit kosten kann.
+* *Keine Erfahrung mit Nginx:* Wir haben noch nie einen Nginx-Webserver eingerichtet. Da müssen wir uns erst einarbeiten, was Zeit kosten kann.
 * *Timeslots-Planungs-Logik:* Die Programmierung im Backend, damit sich bei den Timeslots absolut keine Termine überschneiden, kann kompliziert sein und muss erst noch gelöst werden.
 |===
 
 == 6. Anpassung der Arbeitsweise für Sprint 3
-
-Beschreiben Sie, was Ihr Team im nächsten Sprint beibehalten, ändern oder gezielt verbessern will. Leitfragen:
-
-* Welche technische oder organisatorische Arbeitsweise hat gut funktioniert?
-* Was hat Ihre technische Zusammenarbeit, Entscheidungsfindung oder Umsetzung behindert?
-* Was wollen Sie in Sprint 3 konkret anders machen?
-* Welcher erste nützliche MVP-Ausschnitt soll in Sprint 3 umgesetzt oder weiter validiert werden?
 
 [cols="1,3", options="header"]
 |===
@@ -178,10 +131,15 @@ Beschreiben Sie, was Ihr Team im nächsten Sprint beibehalten, ändern oder gezi
 * Zügiges erledigen der Aufgaben 
 
 | Ändern / verbessern
-| * Timeboxing bei Onlinemeetings besser einahlten +
-* häufigere Benutzung des Project Boards auf unserem Repo
+| * Timeboxing bei Onlinemeetings besser einhalten +
+* Benutzung des Project Boards auf unserem Repo um den aktuellen Status zu protokollieren. +
+* Strenger an Commit-Richtlinien halten
 
 | Kandidat für Sprint 3
-| * MVP genaue Definition +
-* Aufwandsabschätzung der User Storys
+| Das erste Produktinkrement sowie die Aufwandsabschätzung der zu implementierenden User Stories werden im Sprint-Planning-Termin festgelegt. Aktuell umfasst die grobe Planung: +
+
+Implementierung der Account-Erstellung +
+Entwicklung der Startseite +
+Möglichkeit für Veranstalter, Events anzulegen +
+Erstellung und Verwaltung von Einreicher-Profilen
 |===

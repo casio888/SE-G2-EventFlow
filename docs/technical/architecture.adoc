@@ -117,8 +117,8 @@ sind in <<Architekturentscheidungen>> dokumentiert._
 | Bereich | Technologie | Begründung | Entscheidung
 
 | Frontend
-| [z. B. React 18]
-| [z. B. Teamkenntnisse; große Community; Komponentenmodell]
+| Bootstrap
+| Wir wollen kein Frontend Framework, welches extra setup benötigt und eine eigenen Buildprozess mitbringt. Bootstrap lässt sich gut in Django-Templates integrieren.
 | ADR-004
 
 | Backend
@@ -167,27 +167,22 @@ diesen Anforderungen ergeben, und verweist auf die zugehörigen Entscheidungen.
 |===
 | Anforderung (aus Produktkonzept) | Technische Konsequenz | Entscheidung
 
-| Performanceziel: Seitenladezeit < 2 s
-| Server-Side Rendering für initiales Laden erforderlich;
-  statische Assets über CDN ausliefern
+| Performanceziel: Seitenladezeit < 200ms
+| Server-Side Rendering erforderlich; Optimierung von Database Queries; Eventuell lange Loads asynchron machen
 | ADR-002
 
-| DSGVO-Konformität
-| Keine personenbezogenen Daten in Logs; Datensparsamkeit im Datenbankmodell;
-  Recht auf Löschung muss implementierbar sein
-| ADR-003, ADR-004
-
-| Betrieb auf Hochschulinfrastruktur
-| Keine Cloud-only-Dienste; Containerisierung für Portabilität erforderlich
+| Verfügbarkeit
+| Schneller und robuster Deployment-Prozess; Extra Server für Produktion.
 | ADR-005
 
-| Verfügbarkeit ≥ 99 % während Betriebszeiten
-| Statusüberwachung und automatischer Neustart über Container-Orchestrierung
+| Datensicherheit
+| Authentifizierung und Nutzeraccounts, welche nur eigene und offene Daten anzeigen.
+| ADR Authentifizierung steht aus
+
+| Barrierefreiheit
+| Nutzung von barrierefreien Layouts; Nutzung von Bootstrap Objekten, welche Barrierefreiheit unterstützen.
 | ADR-005
 
-| [Anforderung]
-| [Technische Konsequenz]
-| [ADR-Referenz oder —]
 |===
 
 == Architekturentscheidungen
