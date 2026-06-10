@@ -18,3 +18,5 @@ deployment/postgres_data/*
 deployment/docker-compose.yml
 */db.sqlite3
 
+#Projektspezifische Datein
+*.pyc
