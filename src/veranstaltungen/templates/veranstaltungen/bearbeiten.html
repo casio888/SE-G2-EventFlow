@@ -1,0 +1,9 @@
+<h1>Veranstaltung bearbeiten</h1>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_div }}
+
+    <button type="submit" class="btn btn-success">Speichern</button>
+    <a href="{% url 'veranstaltung_detail' event.id  %}" class="btn btn-secondary">Zurueck</a>
+</form>
