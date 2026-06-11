@@ -17,6 +17,7 @@ class VeranstaltungForm(forms.ModelForm):
         fields = ["titel", "beschreibung", "ort", "start_datum", "end_datum"]
         
         widgets = {
+<<<<<<< HEAD
         "start_datum": forms.DateInput(attrs={
         "placeholder": "17.06.2026", 
         "onfocus": "(this.type='date')", 
@@ -32,6 +33,13 @@ class VeranstaltungForm(forms.ModelForm):
         "titel": forms.TextInput(attrs={"placeholder": "[Event Name]"}),
         "beschreibung": forms.Textarea(attrs={"placeholder": "[Catch Phrase / Beschreibung]", "rows": 3}),
         "ort": forms.TextInput(attrs={"placeholder": "Venue / Ort"}),
+=======
+            "titel": forms.TextInput(attrs={"class": "form-control"}),
+            "beschreibung": forms.Textarea(attrs={"class": "form-control", "rows": 4}),
+            "start_datum": forms.DateInput(attrs={"class": "form-control", "type":"date"}),
+            "end_datum": forms.DateInput(attrs={"class": "form-control", "type":"date"}),
+            "ort": forms.TextInput(attrs={"class": "form-control"}),
+>>>>>>> d8e4f2d (feature: add event editing)
         }
 
     def clean_timeslots(self):
@@ -119,4 +127,8 @@ class VeranstaltungForm(forms.ModelForm):
                 kategorie=slot["kategorie"],
             )
 
+<<<<<<< HEAD
         return veranstaltung
+=======
+        return veranstaltung
+>>>>>>> d8e4f2d (feature: add event editing)

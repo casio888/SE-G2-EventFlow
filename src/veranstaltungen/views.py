@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Veranstaltung
 from .forms import VeranstaltungForm
+from .utils import get_veranstaltung_form, save_veranstaltung_form
 
 def veranstaltung_erstellen(request):
     """
@@ -52,3 +53,15 @@ def veranstaltungen_your_events(request):
     """
     events = Veranstaltung.objects.all()
     return render(request, "veranstaltungen/your_events.html", {"events": events})
+
+def veranstaltung_bearbeiten(request, id):
+    event = get_object_or_404(Veranstaltung, pk=id)
+    form = get_veranstaltung_form(request, event)
+
+    if request.method == "POST":
+        save_veranstaltung_form(form)
+
+    return render(request, "veranstaltungen/bearbeiten.html", {
+            "form" : form,
+            "event": event
+        })
