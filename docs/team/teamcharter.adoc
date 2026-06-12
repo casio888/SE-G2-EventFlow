@@ -101,27 +101,23 @@ Wir wollen ein Programm entwickeln, mit dem Veranstaltungen organisiert werden k
 
 === Definition of Ready (DoR)
 _Eine User Story ist bereit für die Entwicklung, wenn:
-Dazu bitte nochmal was sagen! Dazu haben wir nichts gesagt @PO Wie sieht es bei dir aus, wegen den User-Storys?
 _
 
 // Hier können die Kriterien individuell angepasst werden, z. B.:
-* [ ] Die Akzeptanzkriterien sind klar und vollständig beschrieben
-* [ ] Der Aufwand wurde vom Team geschätzt
-* [ ] Abhängigkeiten sind identifiziert und geklärt
-* [ ] Designs / Mockups sind vorhanden (falls relevant)
-* [ ] [Weitere Kriterien ergänzen]
+* [ ] Die User Story ist klar formuliert und verständlich.
+* [ ] Die Akzeptanzkriterien sind klar und vollständig beschrieben.
+* [ ] Aufwandschätzung vorhanden.
+* [ ] Alle notwendigen Informationen, Mockups oder Anforderungen liegen vor.
+* [ ] Die User Story wurde vom Product Owner priorisiert und für den Sprint vorgesehen.
 
 === Definition of Done (DoD)
 _Eine User Story gilt als fertig, wenn:_
 
 // Hier können die Kriterien individuell angepasst werden, z. B.:
-* [ ] Der Code wurde implementiert und in den Hauptbranch gemergt
-* [ ] Unit- und Integrationstests wurden geschrieben und sind grün
-* [ ] Der Code wurde von mindestens einer weiteren Person reviewt
-* [ ] Die Funktionalität wurde im Staging-System getestet
-* [ ] Dokumentation wurde aktualisiert (falls erforderlich)
+* [ ] Alle Akzeptanzkriterien der User Story erfüllt sind.
+* [ ] Der Code wurde getestet und funktioniert fehlerfrei.
+* [ ] Der Code wurde vom Tech Lead reviewed und erfolgreich in den main Branch gemergt.
 * [ ] Der Product Owner hat die Story abgenommen
-* [ ] [Weitere Kriterien ergänzen]
 
 === Code & Versionierung
 
