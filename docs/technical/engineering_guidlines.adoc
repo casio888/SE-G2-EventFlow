@@ -101,3 +101,6 @@ Wir verwernden Python TypeHints.
 Für Javascript nutzen wir vorerst keinen Linter (weil quasi alle NPM/node Installationen benötigen) später evtl ESLint
 
 Für CSS gibt es nur 2 Regeln: Klassen Namen in snake_case. 1 Attribut pro Zeile.
+
+== Statische Dateien 
+Statische Dateien sind JavaScript und CSS Dateien. Diese werden in `src/static/css` und `src/static/js` abgelegt.
