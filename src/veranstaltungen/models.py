@@ -6,6 +6,7 @@ class Veranstaltung(models.Model):
     start_datum = models.DateField()
     end_datum = models.DateField()
     ort = models.CharField(max_length=200)
+    timeslots = models.JSONField() 
     erstellt_am = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
