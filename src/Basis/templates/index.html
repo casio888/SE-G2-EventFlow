@@ -1,179 +1,141 @@
+{% extends "base_topside.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>[Website Name] - Home</title>
-    <link rel="stylesheet" href="{% static 'Basis/index.css' %}">
-</head>
-<body>
 
-    <!-- Hero Bereich inklusive Navigation -->
-    <header class="hero-section">
-        <nav>
-            <a href="{% url 'Basis:index' %}" class="logo">[Website Name]</a>
-            <div class="nav-links">
-                <a href="#">Popular</a>
-                <a href="#">Your event</a>
-                <a href="#">Your liked Events</a>
-                <a href="#">Impressum</a>
-            </div>
-            <div class="auth-buttons">
-                <a href="#" class="btn btn-signup">Sign up</a>
-                <a href="{% url 'Basis:login' %}" class="btn btn-login">Log in</a>
-            </div>
-        </nav>
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <script src="{% static 'js/index.js' %}"></script>
+{% endblock %}
 
-        <div class="hero-content">
-            <h1>Join your event with [Website Name]</h1>
-            <p>1.203.367 events around the world are waiting for you!</p>
-            
-            <!-- Suchleiste -->
-            <div class="search-container">
-                <input type="text" class="search-input" placeholder="Name, Category">
-                <span class="search-divider">|</span>
-                <input type="text" class="search-input" placeholder="Destination">
-                <button class="search-btn"></button>
+{% block extra_header %}
+<div class="hero-content">
+    <h1>Join your event with [Website Name]</h1>
+    <p>1.203.367 events around the world are waiting for you!</p>
+    
+    <!-- Suchleiste -->
+    <div class="search-container">
+        <input type="text" class="search-input" placeholder="Name, Category">
+        <span class="search-divider">|</span>
+        <input type="text" class="search-input" placeholder="Destination">
+        <button class="search-btn"></button>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<!-- Hauptinhalt -->
+<main>
+    
+    <!-- Sektion: Popular Events -->
+    <section>
+        <h2>Popular events</h2>
+        <div class="popular-grid">
+            <div class="event-card card-large-1">
+                <span class="circle-indicator"></span>
+                [Event Name]
+                <span class="badge">Spain</span>
+            </div>
+            <div class="event-card">
+                <span class="circle-indicator"></span>
+                [Event Name]
+                <span class="badge">London</span>
+            </div>
+            <div class="event-card card-large-2">
+                <span class="circle-indicator"></span>
+                [Event Name]
+                <span class="badge">Croatia</span>
+            </div>
+            <div class="event-card">
+                <span class="circle-indicator"></span>
+                [Event Name]
+                <span class="badge">Bratislava</span>
+            </div>
+            <div class="event-card">
+                <span class="circle-indicator"></span>
+                [Event Name]
+                <span class="badge">Lisbon</span>
+            </div>
+            <div class="event-card">
+                <span class="circle-indicator"></span>
+                [Event Name]
+                <span class="badge">Copenhagen</span>
             </div>
         </div>
-    </header>
+    </section>
 
-    <!-- Hauptinhalt -->
-    <main>
-        
-        <!-- Sektion: Popular Events -->
-        <section>
-            <h2>Popular events</h2>
-            <div class="popular-grid">
-                <div class="event-card card-large-1">
+    <!-- Sektion: Best Rated Events By Other Artists -->
+    <section>
+        <h2>Best rated events by other artists</h2>
+        <div class="artists-grid">
+            <div class="artist-element">
+                <div class="artist-card">
+                    <span class="rating-badge">9.5</span>
                     <span class="circle-indicator"></span>
-                    [Event Name]
-                    <span class="badge">Spain</span>
+                    [Event Logo]
                 </div>
-                <div class="event-card">
-                    <span class="circle-indicator"></span>
-                    [Event Name]
-                    <span class="badge">London</span>
-                </div>
-                <div class="event-card card-large-2">
-                    <span class="circle-indicator"></span>
-                    [Event Name]
-                    <span class="badge">Croatia</span>
-                </div>
-                <div class="event-card">
-                    <span class="circle-indicator"></span>
-                    [Event Name]
-                    <span class="badge">Bratislava</span>
-                </div>
-                <div class="event-card">
-                    <span class="circle-indicator"></span>
-                    [Event Name]
-                    <span class="badge">Lisbon</span>
-                </div>
-                <div class="event-card">
-                    <span class="circle-indicator"></span>
-                    [Event Name]
-                    <span class="badge">Copenhagen</span>
+                <div class="artist-info">
+                    <strong>[Event Name]</strong><br>Barcelona
+                    <span class="action-text">Bewirb dich jetzt!</span>
                 </div>
             </div>
-        </section>
 
-        <!-- Sektion: Best Rated Events By Other Artists -->
-        <section>
-            <h2>Best rated events by other artists</h2>
-            <div class="artists-grid">
-                <div class="artist-element">
-                    <div class="artist-card">
-                        <span class="rating-badge">9.5</span>
-                        <span class="circle-indicator"></span>
-                        [Event Logo]
-                    </div>
-                    <div class="artist-info">
-                        <strong>[Event Name]</strong><br>Barcelona
-                        <span class="action-text">Bewirb dich jetzt!</span>
-                    </div>
+            <div class="artist-element">
+                <div class="artist-card">
+                    <span class="rating-badge">9.5</span>
+                    <span class="circle-indicator"></span>
+                    [Event Logo]
                 </div>
-
-                <div class="artist-element">
-                    <div class="artist-card">
-                        <span class="rating-badge">9.5</span>
-                        <span class="circle-indicator"></span>
-                        [Event Logo]
-                    </div>
-                    <div class="artist-info">
-                        <strong>[Event Name]</strong><br>Berlin
-                        <span class="action-text">Bewirb dich jetzt!</span>
-                    </div>
-                </div>
-
-                <div class="artist-element">
-                    <div class="artist-card">
-                        <span class="rating-badge">9.5</span>
-                        <span class="circle-indicator"></span>
-                        [Event Logo]
-                    </div>
-                    <div class="artist-info">
-                        <strong>[Event Name]</strong><br>Paris
-                        <span class="action-text">Bewirb dich jetzt!</span>
-                    </div>
-                </div>
-
-                <div class="artist-element">
-                    <div class="artist-card">
-                        <span class="rating-badge">9.5</span>
-                        <span class="circle-indicator"></span>
-                        [Event Logo]
-                    </div>
-                    <div class="artist-info">
-                        <strong>[Event Name]</strong><br>Dresden
-                        <span class="action-text">Bewirb dich jetzt!</span>
-                    </div>
-                </div>
-
-                <div class="artist-element">
-                    <div class="artist-card">
-                        <span class="rating-badge">9.5</span>
-                        <span class="circle-indicator"></span>
-                        [Event Logo]
-                    </div>
-                    <div class="artist-info">
-                        <strong>[Event Name]</strong><br>Lisbon
-                        <span class="action-text">Bewirb dich jetzt!</span>
-                    </div>
+                <div class="artist-info">
+                    <strong>[Event Name]</strong><br>Berlin
+                    <span class="action-text">Bewirb dich jetzt!</span>
                 </div>
             </div>
-        </section>
 
-        <!-- VIP Club Sektion -->
-        <div class="vip-banner">
-            <div class="vip-text">
-                <h3>Psst !</h3>
-                <p>Do you want your events to be recognized more ???<br>Sign up to join our VIP Club !</p>
+            <div class="artist-element">
+                <div class="artist-card">
+                    <span class="rating-badge">9.5</span>
+                    <span class="circle-indicator"></span>
+                    [Event Logo]
+                </div>
+                <div class="artist-info">
+                    <strong>[Event Name]</strong><br>Paris
+                    <span class="action-text">Bewirb dich jetzt!</span>
+                </div>
             </div>
-            <button class="btn-vip">Sign up VIP access</button>
+
+            <div class="artist-element">
+                <div class="artist-card">
+                    <span class="rating-badge">9.5</span>
+                    <span class="circle-indicator"></span>
+                    [Event Logo]
+                </div>
+                <div class="artist-info">
+                    <strong>[Event Name]</strong><br>Dresden
+                    <span class="action-text">Bewirb dich jetzt!</span>
+                </div>
+            </div>
+
+            <div class="artist-element">
+                <div class="artist-card">
+                    <span class="rating-badge">9.5</span>
+                    <span class="circle-indicator"></span>
+                    [Event Logo]
+                </div>
+                <div class="artist-info">
+                    <strong>[Event Name]</strong><br>Lisbon
+                    <span class="action-text">Bewirb dich jetzt!</span>
+                </div>
+            </div>
         </div>
+    </section>
 
-    </main>
-
-    <!-- Footer -->
-    <footer>
-        <div>
-            <strong>[Website Name]</strong><br>
-            Your favorite event manager<br>
-            Website since 202*<br><br>
-            <small>Miro 2026</small>
+    <!-- VIP Club Sektion -->
+    <div class="vip-banner">
+        <div class="vip-text">
+            <h3>Psst !</h3>
+            <p>Do you want your events to be recognized more ???<br>Sign up to join our VIP Club !</p>
         </div>
-        <div class="footer-links">
-            <a href="#">Help</a>
-            <a href="#">FAQ</a>
-            <a href="#">Customer service</a>
-            <a href="#">How to guide</a>
-            <a href="#">Contact us</a>
-        </div>
-    </footer>
+        <button class="btn-vip">Sign up VIP access</button>
+    </div>
 
-        <script src="{% static 'Basis/index.js' %}"></script>
-
-    </body>
-    </html>
+</main>
+{% endblock %}

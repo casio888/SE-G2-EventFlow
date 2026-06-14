@@ -1,0 +1,91 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+/* --- HERO & NAVIGATION --- */
+.hero-section {
+    background-color: #0b1330; /* Dunkelblau aus dem Wireframe */
+    color: white;
+    padding: 20px 10%;
+    text-align: center;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 60px;
+}
+
+.logo {
+    font-weight: bold;
+    font-size: 1.2rem;
+    text-decoration: none;
+    color: white;
+}
+
+.nav-links a {
+    color: #ccc;
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 0.9rem;
+}
+
+.nav-links a:hover {
+    color: white;
+}
+
+.auth-buttons .btn {
+    padding: 8px 18px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    margin-left: 10px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-signup {
+    background-color: white;
+    color: #0b1330;
+}
+
+.btn-login {
+    background-color: #3b82f6; /* Passendes Blau für Login */
+    color: white;
+}
+
+
+/* --- FOOTER --- */
+footer {
+    background-color: #f7fafc;
+    border-top: 1px solid #e2e8f0;
+    padding: 40px 10% 30px 10%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    font-size: 0.8rem;
+    color: #718096;
+    line-height: 1.5;
+}
+
+.footer-links a {
+    display: block;
+    color: #718096;
+    text-decoration: none;
+    margin-bottom: 6px;
+    text-align: right;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}

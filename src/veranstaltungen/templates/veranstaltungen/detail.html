@@ -1,3 +1,7 @@
+{% extends "base_topside.html" %}
+{% load static %}
+
+{% block content %}
 <h1>{{ event.titel }}</h1>
 
 <p><strong>Ort:</strong> {{ event.ort }}</p>
@@ -22,3 +26,4 @@
 <a href="{% url 'veranstaltungen_liste' %}" class="btn btn-secondary">
     Zurück zur Übersicht
 </a>
+{% endblock %}
