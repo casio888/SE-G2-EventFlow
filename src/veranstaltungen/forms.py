@@ -8,12 +8,7 @@ class VeranstaltungForm(forms.ModelForm):
 
     class Meta:
         model = Veranstaltung
-        fields = ["titel", "beschreibung", "ort", "start_datum", "end_datum", "timeslots"]
-        widgets = {
-            "start_datum": forms.DateInput(attrs={"type": "date"}),
-            "end_datum": forms.DateInput(attrs={"type": "date"}),
-        }
-
+        fields = ["titel", "beschreibung", "ort", "start_datum", "end_datum"]
 
     def clean_timeslots(self):
         raw = self.cleaned_data["timeslots"]
@@ -33,22 +28,18 @@ class VeranstaltungForm(forms.ModelForm):
             dauer = slot.get("dauer")
             kategorie = slot.get("kategorie")
 
-            
             if not start or not ende:
                 raise forms.ValidationError("Start und Ende müssen ausgefüllt sein.")
 
-           
             try:
                 t_start = datetime.strptime(start, "%H:%M")
                 t_ende = datetime.strptime(ende, "%H:%M")
             except ValueError:
                 raise forms.ValidationError("Ungültiges Zeitformat. Bitte HH:MM verwenden.")
 
-            
             if t_start >= t_ende:
                 raise forms.ValidationError("Startzeit muss vor der Endzeit liegen.")
 
-            
             if dauer:
                 try:
                     dauer_int = int(dauer)
@@ -59,7 +50,6 @@ class VeranstaltungForm(forms.ModelForm):
             else:
                 dauer_int = int((t_ende - t_start).seconds / 60)
 
-            
             if not kategorie:
                 raise forms.ValidationError("Kategorie darf nicht leer sein.")
 
@@ -71,3 +61,22 @@ class VeranstaltungForm(forms.ModelForm):
             })
 
         return cleaned
+
+    def save(self, commit=True):
+        veranstaltung = super().save(commit)
+
+        from .models import Timeslot
+
+        # Timeslots speichern
+        slots = self.cleaned_data.get("timeslots", [])
+        for slot in slots:
+            Timeslot.objects.create(
+                veranstaltung=veranstaltung,
+                start=slot["start"],
+                ende=slot["ende"],
+                dauer=slot["dauer"],
+                kategorie=slot["kategorie"],
+            )
+
+        return veranstaltung
+
