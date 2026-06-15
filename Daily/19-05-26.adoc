@@ -1,0 +1,31 @@
+= Daily Meeting vom 19.05.26
+
+== Was ist geschafft
+    - Userstorys wurden Priorisiert.
+    - Architekturtreiber sind in Miro.
+
+== Aufgaben 
+    - Feedback muss noch von Nataliia gemacht werden.
+    - Spikes müssen noch verteilt werden. (Heute notwendig)
+    - Micha will recharchieren, was wir nutzen. Macht ADR’s.
+    → Verteilt Spikes. Baut Skellet. (Lagert auch bisschen aus)
+    - Wir brauchen was, was wir präsentieren können!!!
+    - Termin mit Betreuer finden… (Was bespricht man mit dem aktuell???) Anfang von dem dritten Sprint oder ende diesem. 
+    - Rücksprache mit feedbackgebern zu ADR’s… 02.06. 15:30 als Feedack. Oder an dem Mittwoch nach Retro (Ich Organisieren)
+    - Einreichung sollte noch Titel bekommen. 
+ 
+ 
+
+
+
+
+== Ablauf
+    - Nataliia stellt vor, was sie gemacht hat.
+
+    - Besprechung was wichtig ist: Framework, Datenbank, Webanwendung,
+    - Problemfolge geklärt
+
+    - Nächste Retro: Wird von Paul gemacht. Vor 8.06. (03.06.) Online
+    - Für Ende: Termin für privates Treffen. 
+    - Vorstellung des Domänenmodells.
+    

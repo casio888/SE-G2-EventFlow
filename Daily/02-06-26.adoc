@@ -1,0 +1,25 @@
+= Daily Meeting 02.06.26
+
+== Was ist geschafft
+    - Recherche
+    - ADR's 
+    - C4-Modell
+    - Userstorys verteilen
+    - Wireframes in einheitliches Gewandt
+
+== Aufgaben 
+    - Walking Skelleton
+    - C4-Modell erweitern
+    - Architekturanforderungen ausarbeiten
+    - Technische Risiken ausarbeiten
+    - Technische Schulden ausarbeiten
+    - Aufgaben für Sprint2 abschließen
+ 
+
+
+
+
+== Ablauf
+    - Vorstellung der Entwicklungsumgebung
+    - Vorstellung der ADR's 
+    - Verteilung der folgenden Aufgaben
