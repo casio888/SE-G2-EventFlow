@@ -22,14 +22,6 @@ header {
     padding: 30px 10%;
 }
 
-.logo {
-    font-weight: bold;
-    font-size: 1.4rem;
-    text-decoration: none;
-    color: white;
-    display: inline-block;
-}
-
 /* --- MAIN LOGIN CONTAINER --- */
 main {
     flex: 1;
