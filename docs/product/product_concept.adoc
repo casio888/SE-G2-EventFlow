@@ -198,9 +198,6 @@ technischen Entscheidungen, die sich daraus ergeben — ohne sie hier zu wiederh
 | Sensible Daten wie Passwörter und Nutzerprofile sind vor unbefugtem Zugriff geschützt.
 | Verschlüsselte Datenbank und Übermittlung.
 
-| Barrierefreiheit
-| Das Produkt ist inklusiv gestaltet und für Menschen mit Einschränkungen zugänglich.
-| Erfüllung der Barrierefreiheits-Standards
 
 |===
 
