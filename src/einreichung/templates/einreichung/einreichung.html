@@ -1,66 +1,51 @@
-<!DOCTYPE html>
-<html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <meta name="author" content="Elias Lange">
-    <title>Einreichungen</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <header>
-        <h1>Liste der Events.</h1>
-    </header>
+{% extends "base_topside.html" %}
+{% load static %}
 
-    <main>
-        <section name="search">
-            <input type="text" value="Name" id="name"> 
-            <button id="looking_for">Suchen</button>
-        </section>
+{% block content %}
+<main>
+    <section name="search">
+        <input type="text" value="Name" id="name"> 
+        <button id="looking_for">Suchen</button>
+    </section>
 
-        <section name="table">
-        
-            <table id="table" >
-                <!--Tabelle wird automatisch gefüllt. Wenn dann muss nur der Kopf vorhanden sein.-->
-                <!-- |Marker | Name | Zeit | Ort | Kathegorien als Kopf-->
-                <thead>
-                    <tr>
-                        <th data-column="Marker">Marker</th>
-                        <th data-column="Name">Name</th>
-                        <th data-column="startzeit">Beginn</th>
-                        <th data-column="endzeit">Ende</th>
-                        <th data-column="Ort">Ort</th>
-                        <!--<th data-column="Kategorien">Kategorien</th>-->
+    <section name="table">
+    
+        <table id="table" >
+            <!--Tabelle wird automatisch gefüllt. Wenn dann muss nur der Kopf vorhanden sein.-->
+            <!-- |Marker | Name | Zeit | Ort | Kathegorien als Kopf-->
+            <thead>
+                <tr>
+                    <th data-column="Marker">Marker</th>
+                    <th data-column="Name">Name</th>
+                    <th data-column="startzeit">Beginn</th>
+                    <th data-column="endzeit">Ende</th>
+                    <th data-column="Ort">Ort</th>
+                    <!--<th data-column="Kategorien">Kategorien</th>-->
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+                {% for events in events %}
+                <tr>
+                <td>{{event.marker}}</td>
+                <td>{{event.title}}</td>
+                <td>{{event.start_datum}}</td>
+                <td>{{event.end_datum}}</td>
+                <td>{{event.ort}}</td>
+                <!--<td>{{event.kategorien}}</td>-->
                     </tr>
-                </thead>
-                <tbody id="tableBody">
-                    {% for events in events %}
-                    <tr>
-                    <td>{{event.marker}}</td>
-                    <td>{{event.title}}</td>
-                    <td>{{event.start_datum}}</td>
-                    <td>{{event.end_datum}}</td>
-                    <td>{{event.ort}}</td>
-                    <!--<td>{{event.kategorien}}</td>-->
-                        </tr>
-                        {%empty%}
-                    <tr>
-                        <td colspan="5">Keine Events gefunden</td>
-                    </tr>
-                    {%endfor%}
-                </tbody>
-            </table>
-        </section>
-        <section name="Auswahl">
-            <a href="{% url 'event_bewerbung' %}" class="btn btn-secondary">
-                <button>Auf Event Bewerden</button>
-            </a>
-            
-        </section>
-    </main>
-
-    <footer>
+                    {%empty%}
+                <tr>
+                    <td colspan="5">Keine Events gefunden</td>
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+    </section>
+    <section name="Auswahl">
+        <a href="{% url 'event_bewerbung' %}" class="btn btn-secondary">
+            <button>Auf Event Bewerden</button>
+        </a>
         
-    </footer>
-
-</body>
-</html>
+    </section>
+</main>
+{% endblock %}
