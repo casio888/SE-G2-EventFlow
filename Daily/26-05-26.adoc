@@ -1,0 +1,16 @@
+= Daily Meeting 26.05.26
+
+Wurde aus Zeitgründen auf den 28.05. verschoben.
+
+== Was wurde gemacht
+    - C4-Modell erstellt
+    - erste ADR's besprochen 
+
+== Was muss gemacht werden
+    - Hinzufügen Periodischer Tasks
+    - In Datei übernehmen
+    - Informatonen ordnen und Aufschreiben
+
+== Ablauf
+    - Vorstellung des C4-Modells
+    - Besprechung der ADR's
