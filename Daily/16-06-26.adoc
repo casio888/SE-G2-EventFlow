@@ -1,0 +1,23 @@
+=
+
+== Was wurde gemacht
+    - Michi's Anteil bereit für Frontend
+    - Nina's bereit für Frontend
+    - Paul noch in Arbeit
+    - Elias bereit für Frontend (Und Überarbeitung+Akzeptanzkriterien)
+
+
+== Was noch zu tun ist
+    - Branches aufräumen
+    - Akzeptanzkriterien (Können aus Issue)
+    - (Userstorrys in Tasks/Subissues und selber zuweisen)
+    - Nur Dinge anzeigen, die noch stattfinden(Elias)
+    - Alle schauen mal in technical/Enginiering-guidline
+    - (Githookes sollen eingeführt werden)
+    - Tests schreiben
+    - Header-Footer einbinden
+
+== Drüber geredet
+    - Login-Seite/Registrieren-Seite (Produkt-Design) 2 Seiten wurden entschieden.
+
+Ende um 16:00

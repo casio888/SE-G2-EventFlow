@@ -137,6 +137,7 @@ _Diese Vereinbarungen haben wir gemeinsam getroffen:_
 . Wenn es Probleme gibt, versuchen wir diese gemeinsam zu Lösen und Aufgaben zu verteilen.
 . Meetings beginnen pünktlich; wer verhindert ist, gibt rechtzeitig Bescheid.
 . Entscheidungen werden dort dokumentiert, wo alle sie finden können.
+. Die Retrospektive wird jedes mal von wem anders gehalten. 
 
 
 
