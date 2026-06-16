@@ -2,6 +2,10 @@
 {% extends "base_topside.html" %}
 {% load static %}
 
+{% block extra_head %}
+<script src="{% static 'js/timeslots.js' %}"></script>
+{% endblock %}
+
 {% block content %}
 <h1>Neue Veranstaltung erstellen</h1>
 
