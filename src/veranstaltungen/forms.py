@@ -1,0 +1,73 @@
+from django import forms
+from .models import Veranstaltung
+import json
+from datetime import datetime
+
+class VeranstaltungForm(forms.ModelForm):
+    timeslots = forms.CharField(widget=forms.HiddenInput(), required=False)
+
+    class Meta:
+        model = Veranstaltung
+        fields = ["titel", "beschreibung", "ort", "start_datum", "end_datum", "timeslots"]
+        widgets = {
+            "start_datum": forms.DateInput(attrs={"type": "date"}),
+            "end_datum": forms.DateInput(attrs={"type": "date"}),
+        }
+
+
+    def clean_timeslots(self):
+        raw = self.cleaned_data["timeslots"]
+        if not raw:
+            return []
+
+        try:
+            data = json.loads(raw)
+        except json.JSONDecodeError:
+            raise forms.ValidationError("Timeslots konnten nicht verarbeitet werden.")
+
+        cleaned = []
+
+        for slot in data:
+            start = slot.get("start")
+            ende = slot.get("ende")
+            dauer = slot.get("dauer")
+            kategorie = slot.get("kategorie")
+
+            
+            if not start or not ende:
+                raise forms.ValidationError("Start und Ende müssen ausgefüllt sein.")
+
+           
+            try:
+                t_start = datetime.strptime(start, "%H:%M")
+                t_ende = datetime.strptime(ende, "%H:%M")
+            except ValueError:
+                raise forms.ValidationError("Ungültiges Zeitformat. Bitte HH:MM verwenden.")
+
+            
+            if t_start >= t_ende:
+                raise forms.ValidationError("Startzeit muss vor der Endzeit liegen.")
+
+            
+            if dauer:
+                try:
+                    dauer_int = int(dauer)
+                    if dauer_int <= 0:
+                        raise forms.ValidationError("Dauer muss größer als 0 sein.")
+                except ValueError:
+                    raise forms.ValidationError("Dauer muss eine Zahl sein.")
+            else:
+                dauer_int = int((t_ende - t_start).seconds / 60)
+
+            
+            if not kategorie:
+                raise forms.ValidationError("Kategorie darf nicht leer sein.")
+
+            cleaned.append({
+                "start": start,
+                "ende": ende,
+                "dauer": dauer_int,
+                "kategorie": kategorie
+            })
+
+        return cleaned

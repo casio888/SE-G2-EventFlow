@@ -8,6 +8,26 @@
     {% csrf_token %}
     {{ form.as_p }}
 
+    <h3>Timeslots</h3>
+
+    <table id="timeslot-table" border="1" style="border-collapse: collapse;">
+        <thead>
+            <tr>
+                <th>Start</th>
+                <th>Ende</th>
+                <th>Dauer (min)</th>
+                <th>Kategorie</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody id="timeslot-body">
+        </tbody>
+    </table>
+
+    <button type="button" onclick="addTimeslot()">+ Timeslot hinzufügen</button>
+
+    <br><br>
+
     <button type="submit" class="btn btn-success">Speichern</button>
     <a href="{% url 'veranstaltungen_liste' %}" class="btn btn-secondary">Abbrechen</a>
 </form>
