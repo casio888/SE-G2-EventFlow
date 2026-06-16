@@ -9,8 +9,19 @@ class VeranstaltungForm(forms.ModelForm):
     class Meta:
         model = Veranstaltung
         fields = ["titel", "beschreibung", "ort", "start_datum", "end_datum"]
+        widgets = {
+            "start_datum": forms.DateInput(attrs={"type": "date"}),
+            "end_datum": forms.DateInput(attrs={"type": "date"}),
+        }
+
+
 
     def clean_timeslots(self):
+        """
+        Validiert die Timeslot-Daten aus dem versteckten JSON-Feld.
+        Prüft Zeitformat, Reihenfolge, Dauer und Kategorie.
+        Gibt eine Liste bereinigter Timeslot-Dictionaries zurück.
+        """
         raw = self.cleaned_data["timeslots"]
         if not raw:
             return []
@@ -63,6 +74,9 @@ class VeranstaltungForm(forms.ModelForm):
         return cleaned
 
     def save(self, commit=True):
+        """
+        Speichert die Veranstaltung und erzeugt zugehörige Timeslot-Objekte.
+        """
         veranstaltung = super().save(commit)
 
         from .models import Timeslot
