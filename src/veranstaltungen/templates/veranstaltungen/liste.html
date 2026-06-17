@@ -8,7 +8,7 @@
 {% block content %}
 <h1>Veranstaltungen</h1>
 
-<a href="{% url 'veranstaltung_erstellen' %}" class="btn btn-primary mb-3">
+<a href="{% url 'veranstaltungen:veranstaltung_erstellen' %}" class="btn btn-primary mb-3">
     Neue Veranstaltung erstellen
 </a>
 
@@ -19,7 +19,7 @@
                 <strong>{{ event.titel }}</strong> – {{ event.ort }}
             </span>
 
-            <a href="{% url 'veranstaltung_detail' event.id %}" class="btn btn-outline-secondary btn-sm">
+            <a href="{% url 'veranstaltungen:veranstaltung_detail' event.id %}" class="btn btn-outline-secondary btn-sm">
                 Details ansehen
             </a>
         </li>

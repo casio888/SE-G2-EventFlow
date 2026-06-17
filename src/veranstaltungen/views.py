@@ -11,7 +11,7 @@ def veranstaltung_erstellen(request):
         form = VeranstaltungForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect("veranstaltungen_liste")
+            return redirect("veranstaltungen:veranstaltungen_liste")
     else:
         form = VeranstaltungForm()
 
