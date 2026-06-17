@@ -1,4 +1,4 @@
-=
+= Daily Meeting vom 19.05.26
 
 == Was wurde gemacht
     - Michi's Anteil bereit für Frontend
