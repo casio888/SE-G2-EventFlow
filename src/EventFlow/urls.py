@@ -6,4 +6,5 @@ urlpatterns = [
     path("", include("Basis.urls")),
     path('veranstaltungen/', include('veranstaltungen.urls')),
     path('einreichung/',include('einreichung.urls')),
+    path('Authentifizierung/',include('Authentifizierung.urls')),
 ]

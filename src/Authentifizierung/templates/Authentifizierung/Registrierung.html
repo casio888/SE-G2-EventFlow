@@ -1,0 +1,17 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <label id="registerLabel"> Registrierung </label>
+        <form method="POST" action="{% url 'Authentifizierung:Registrierung' %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" id="submittButton">Registrieren</button>
+        </form>
+        
+        <p>Existiert schon ein Account <a href="{% url 'Basis:login' %}">Hier zum Login</a>.</p>
+        
+    </body>
+</html>
