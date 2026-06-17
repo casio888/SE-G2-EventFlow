@@ -32,7 +32,27 @@
 
 <section class="events-list-section mt-4">
     <div class="d-flex flex-wrap gap-3">
-        <p class="no-events-text">Es sind noch keine Events vorhanden.</p>
+
+        {% if events %}
+            {% for event in events %}
+                <div class="event-card p-3 border rounded shadow-sm" style="width: 260px;">
+                    <h5 class="mb-1">{{ event.titel }}</h5>
+                    <p class="text-muted mb-1">{{ event.ort }}</p>
+                    <p class="small mb-2">
+                        {{ event.start_datum }} – {{ event.end_datum }}
+                    </p>
+
+                    <a href="{% url 'veranstaltungen:veranstaltung_detail' event.id %}"
+                       class="btn btn-outline-primary btn-sm">
+                        Details ansehen
+                    </a>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p class="no-events-text">Es sind noch keine Events vorhanden.</p>
+        {% endif %}
+
     </div>
 </section>
+
 {% endblock %}
