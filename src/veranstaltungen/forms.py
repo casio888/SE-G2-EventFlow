@@ -8,13 +8,27 @@ class VeranstaltungForm(forms.ModelForm):
 
     class Meta:
         model = Veranstaltung
+        # Falls du "uhrzeit" oder "catchphrase" als echte Model-Felder hast, 
+        # füge sie einfach hier in die Liste ein:
         fields = ["titel", "beschreibung", "ort", "start_datum", "end_datum"]
+        
         widgets = {
-            "start_datum": forms.DateInput(attrs={"type": "date"}),
-            "end_datum": forms.DateInput(attrs={"type": "date"}),
+        "start_datum": forms.DateInput(attrs={
+        "placeholder": "17.06.2026", 
+        "onfocus": "(this.type='date')", 
+        "onblur": "if(!this.value)this.type='text'"
+    }),
+    "end_datum": forms.DateInput(attrs={
+        "placeholder": "17.06.2026", 
+        "onfocus": "(this.type='date')", 
+        "onblur": "if(!this.value)this.type='text'"
+    }),
+            
+    # HIER ERWEITERT: Beispiel-Platzhalter für deine Textfelder
+        "titel": forms.TextInput(attrs={"placeholder": "[Event Name]"}),
+        "beschreibung": forms.Textarea(attrs={"placeholder": "[Catch Phrase / Beschreibung]", "rows": 3}),
+        "ort": forms.TextInput(attrs={"placeholder": "Venue / Ort"}),
         }
-
-
 
     def clean_timeslots(self):
         """
@@ -93,4 +107,3 @@ class VeranstaltungForm(forms.ModelForm):
             )
 
         return veranstaltung
-

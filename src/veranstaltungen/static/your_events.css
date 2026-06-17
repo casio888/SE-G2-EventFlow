@@ -1,0 +1,71 @@
+/* ==========================================================================
+   GLOBALES LAYOUT & BASICS
+   ========================================================================== */
+body {
+    background-color: #ffffff;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+.page-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #0b1330;
+}
+
+/* ==========================================================================
+   MAIN INHALT (SEARCH & BUTTONS)
+   ========================================================================== */
+.search-box {
+    max-width: 300px;
+    width: 100%;
+}
+
+.search-box .input-group {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.search-box .input-group-text,
+.search-box .form-control {
+    background-color: #e2e8f0 !important; /* Grauer Hintergrund */
+    border: none !important;
+    color: #0b1330;
+    padding: 10px 14px;
+}
+
+.search-box .form-control::placeholder {
+    color: #94a3b8 !important;
+}
+
+/* "NEW EVENT" BUTTON */
+.btn-custom-blue,
+.btn-new-event {
+    background-color: #c8daff !important; /* Hellblau */
+    color: #112981 !important;           /* Wunsch-Schriftfarbe (Dunkelblau) */
+    font-weight: 700 !important;
+    border-radius: 8px !important;
+    padding: 12px 24px !important;
+    border: none !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    display: inline-flex;
+    align-items: center;
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.btn-custom-blue svg,
+.btn-new-event svg {
+    margin-right: 8px;
+}
+
+.btn-custom-blue:hover,
+.btn-new-event:hover {
+    background-color: #b3ccff !important;
+    color: #0b1330 !important;
+}
+
+/* Platzhalter-Text */
+.no-events-text {
+    color: #94a3b8;
+    font-size: 0.95rem;
+}

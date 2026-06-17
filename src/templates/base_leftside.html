@@ -1,0 +1,78 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EventFlow Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/nav2.css' %}">
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+
+<div class="container-fluid p-0">
+    <div class="row g-0 flex-nowrap">
+        
+        <aside class="col-auto col-md-3 col-xl-2 sidebar d-flex flex-column p-4 min-vh-100">
+            
+            <div class="profile-section mb-5 d-flex align-items-center">
+                <div class="profile-avatar-box d-flex align-items-center justify-content-center me-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M6 12.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5M3 8.062C3 6.76 4.235 5.765 5.53 5.886a26.6 26.6 0 0 0 4.94 0C11.765 5.765 13 6.76 13 8.062v1.157a.125.125 0 0 1-.125.125h-.053c-.427 0-.77.31-.876.712-.322 1.222-.508 2.3-.508 2.744 0 .707-.497 1.205-1.204 1.205H5.717c-.707 0-1.204-.498-1.204-1.205 0-.444-.186-1.522-.508-2.744a1 1 0 0 0-.876-.712h-.053A.125.125 0 0 1 3 9.219zm4.5-1.5a.5.5 0 1 0-1 0 .5.5 0 0 0 1 0m2.5.5a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1"/>
+                        <path d="M14 7.5a1 1 0 0 0-1-1h-.143c-.08-.432-.236-.851-.46-1.241L13 4.7a1 1 0 1 0-1.414-1.414l-.556.556C10.154 3.484 9.102 3 8 3s-2.154.484-3.03 1.342l-.556-.556A1 1 0 1 0 3 4.7l.556.559c-.224.39-.38.809-.46 1.241H3a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1v.72c0 .66.273 1.265.713 1.7A4.2 4.2 0 0 0 6.5 14h3a4.2 4.2 0 0 0 2.787-1.32c.44-.435.713-1.04.713-1.7V9.5a1 1 0 0 0 1-1zM4 7.5a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1z"/>
+                    </svg>
+                </div>
+                <span class="profile-username d-none d-md-inline">(your name)</span>
+            </div>
+
+            <nav class="nav flex-column gap-3 mb-4 w-100">
+                <a class="nav-link {% if request.resolver_match.url_name == 'index' %}active{% endif %}" href="{% url 'Basis:index' %}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="me-2" viewBox="0 0 16 16">
+                        <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z"/>
+                    </svg>
+                    <span class="d-none d-md-inline">Home</span>
+                </a>
+                
+                <a class="nav-link {% if request.resolver_match.url_name == 'veranstaltungen_your_events' %}active{% endif %}" href="{% url 'veranstaltungen:veranstaltungen_your_events' %}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="me-2" viewBox="0 0 16 16">
+                        <path d="M14 11.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 11.5a1.5 1.5 0 0 1 1.5-1.5h9a1.5 1.5 0 0 1 1.5 1.5M13.4 3.6a.5.5 0 0 1 .4.7l-2 4a.5.5 0 0 1-.4.3H4.6a.5.5 0 0 1-.4-.3l-2-4a.5.5 0 0 1 .4-.7h1.3a.5.5 0 0 1 .4.2L6 6.4l1.6-2.6a.5.5 0 0 1 .8 0L10 6.4l1.7-2.6a.5.5 0 0 1 .4-.2z"/>
+                    </svg>
+                    <span class="d-none d-md-inline">Your Events</span>
+                </a>
+                
+                <a class="nav-link" href="#">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="me-2" viewBox="0 0 16 16">
+                        <path d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1zm-7.978-1L7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.004-.014.002H7.022zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4m3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0M6.936 9.28a6 6 0 0 0-1.23-.247A7 7 0 0 0 5 9c-4 0-5 3-5 4q0 1 2 1h4.216A2.24 2.24 0 0 1 6 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816M4.5 7a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3M6 5.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
+                    </svg>
+                    <span class="d-none d-md-inline">Applications</span>
+                </a>
+                
+                <a class="nav-link" href="#">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="me-2" viewBox="0 0 16 16">
+                        <path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.86"/>
+                    </svg>
+                    <span class="d-none d-md-inline">Settings</span>
+                </a>
+            </nav>
+
+            <div class="mt-auto w-100">
+                <a class="nav-link logout-link d-flex align-items-center" href="#">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="me-2" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 1h8A1.5 1.5 0 0 1 16 2.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 11.5v-2a.5.5 0 0 1 1 0z"/><path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708z"/>
+                    </svg>
+                    <span class="d-none d-md-inline">Log out</span>
+                </a>
+            </div>
+        </aside>
+
+        <main class="col p-4 p-md-5 overflow-auto min-vh-100" style="background-color: #ffffff;">
+            {% block content %}{% endblock %}
+        </main>
+        
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
