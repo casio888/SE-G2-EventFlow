@@ -3,8 +3,18 @@ from django.test import TestCase
 from veranstaltungen.forms import VeranstaltungForm
 
 class VeranstaltungFormTests(TestCase):
+    """
+    Testet die Validierung des VeranstaltungFormulars.
+
+    Fokus:
+    - Validierung der Timeslot-Daten
+    - Fehlerfälle bei Zeitformat, Dauer und Kategorie
+    """
 
     def test_form_valid(self):
+        """
+        Testet, ob ein korrekt ausgefülltes Formular gültig ist.
+        """
         form = VeranstaltungForm(data={
             "titel": "Test Event",
             "beschreibung": "Beschreibung",
@@ -18,6 +28,10 @@ class VeranstaltungFormTests(TestCase):
         self.assertTrue(form.is_valid())
 
     def test_timeslot_start_after_end(self):
+        """
+        Testet, dass ein Timeslot ungültig ist,
+        wenn die Startzeit nach der Endzeit liegt.
+        """
         form = VeranstaltungForm(data={
             "titel": "Test",
             "beschreibung": "",
@@ -31,6 +45,10 @@ class VeranstaltungFormTests(TestCase):
         self.assertFalse(form.is_valid())
 
     def test_timeslot_missing_category(self):
+        """
+        Testet, dass ein Timeslot ungültig ist,
+        wenn die Kategorie fehlt.
+        """
         form = VeranstaltungForm(data={
             "titel": "Test",
             "beschreibung": "",
@@ -44,6 +62,9 @@ class VeranstaltungFormTests(TestCase):
         self.assertFalse(form.is_valid())
 
     def test_timeslot_invalid_duration(self):
+        """
+        Testet, dass eine negative Dauer abgelehnt wird.
+        """
         form = VeranstaltungForm(data={
             "titel": "Test",
             "beschreibung": "",
@@ -57,6 +78,10 @@ class VeranstaltungFormTests(TestCase):
         self.assertFalse(form.is_valid())
 
     def test_invalid_json(self):
+        """
+        Testet, dass ungültiges JSON im Timeslot-Feld
+        korrekt abgefangen wird.
+        """
         form = VeranstaltungForm(data={
             "titel": "Test",
             "beschreibung": "",

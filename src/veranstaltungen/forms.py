@@ -4,12 +4,16 @@ import json
 from datetime import datetime
 
 class VeranstaltungForm(forms.ModelForm):
+    """
+    Formular zur Erstellung und Bearbeitung von Veranstaltungen.
+
+    Enthält ein verstecktes JSON-Feld für Timeslots, die per JavaScript
+    dynamisch hinzugefügt werden.
+    """
     timeslots = forms.CharField(widget=forms.HiddenInput(), required=False)
 
     class Meta:
         model = Veranstaltung
-        # Falls du "uhrzeit" oder "catchphrase" als echte Model-Felder hast, 
-        # füge sie einfach hier in die Liste ein:
         fields = ["titel", "beschreibung", "ort", "start_datum", "end_datum"]
         
         widgets = {
@@ -24,7 +28,7 @@ class VeranstaltungForm(forms.ModelForm):
         "onblur": "if(!this.value)this.type='text'"
     }),
             
-    # HIER ERWEITERT: Beispiel-Platzhalter für deine Textfelder
+    
         "titel": forms.TextInput(attrs={"placeholder": "[Event Name]"}),
         "beschreibung": forms.Textarea(attrs={"placeholder": "[Catch Phrase / Beschreibung]", "rows": 3}),
         "ort": forms.TextInput(attrs={"placeholder": "Venue / Ort"}),
@@ -32,9 +36,16 @@ class VeranstaltungForm(forms.ModelForm):
 
     def clean_timeslots(self):
         """
-        Validiert die Timeslot-Daten aus dem versteckten JSON-Feld.
-        Prüft Zeitformat, Reihenfolge, Dauer und Kategorie.
-        Gibt eine Liste bereinigter Timeslot-Dictionaries zurück.
+        Validiert das Timeslot-JSON.
+
+        Prüft:
+        - Zeitformat
+        - Start < Ende
+        - Dauer > 0
+        - Kategorie vorhanden
+
+        Returns:
+            list[dict]: Bereinigte Timeslot-Daten
         """
         raw = self.cleaned_data["timeslots"]
         if not raw:
@@ -89,13 +100,15 @@ class VeranstaltungForm(forms.ModelForm):
 
     def save(self, commit=True):
         """
-        Speichert die Veranstaltung und erzeugt zugehörige Timeslot-Objekte.
+        Speichert die Veranstaltung und erzeugt zugehörige Timeslots.
+
+        Returns:
+            Veranstaltung: Gespeichertes Veranstaltungsobjekt
         """
         veranstaltung = super().save(commit)
 
         from .models import Timeslot
 
-        # Timeslots speichern
         slots = self.cleaned_data.get("timeslots", [])
         for slot in slots:
             Timeslot.objects.create(

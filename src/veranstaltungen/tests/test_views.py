@@ -4,14 +4,28 @@ from django.urls import reverse
 from veranstaltungen.models import Veranstaltung
 
 class VeranstaltungCreateViewTests(TestCase):
+    """
+    Testet die View zum Erstellen einer Veranstaltung.
+
+    Fokus:
+    - GET: Formular wird korrekt angezeigt
+    - POST: Veranstaltung wird gespeichert
+    """
 
     def test_get_form(self):
-        response = self.client.get(reverse("veranstaltung_erstellen"))
+        """
+        Testet, dass die Formularseite erreichbar ist
+        und den erwarteten Inhalt enthält.
+        """
+        response = self.client.get(reverse("veranstaltungen:veranstaltung_erstellen"))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Neue Veranstaltung erstellen")
 
     def test_post_creates_event(self):
-        response = self.client.post(reverse("veranstaltung_erstellen"), {
+        """
+        Testet, dass eine gültige POST-Anfrage eine Veranstaltung erzeugt.
+        """
+        response = self.client.post(reverse("veranstaltungen:veranstaltung_erstellen"), {
             "titel": "Test Event",
             "beschreibung": "Beschreibung",
             "ort": "Frankfurt",
@@ -22,9 +36,14 @@ class VeranstaltungCreateViewTests(TestCase):
             ])
         })
 
-        self.assertEqual(response.status_code, 302)  # redirect
+        # Redirect nach erfolgreichem Speichern
+        self.assertEqual(response.status_code, 302)
+
+        # Es wurde genau ein Event angelegt
         self.assertEqual(Veranstaltung.objects.count(), 1)
 
         event = Veranstaltung.objects.first()
         self.assertEqual(event.titel, "Test Event")
-        self.assertEqual(len(event.timeslots), 1)
+
+        # Timeslots wurden korrekt gespeichert
+        self.assertEqual(event.timeslots.count(), 1)
