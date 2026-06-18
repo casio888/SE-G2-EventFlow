@@ -1,8 +1,5 @@
-/* ==========================================================================
-   SIDEBAR STRUKTUR & FARBEN
-   ========================================================================== */
 .sidebar {
-    background-color: #0b1330 !important; /* Dunkelblau aus deinem Screenshot */
+    background-color: #0b1330 !important; 
     color: #ffffff;
     z-index: 1000;
 }
@@ -19,12 +16,9 @@
 .profile-username {
     font-weight: 600;
     font-size: 1.05rem;
-    color: rgba(255, 255, 255, 0.4); /* Abgedunkeltes Weiß/Grau */
+    color: rgba(255, 255, 255, 0.4); 
 }
 
-/* ==========================================================================
-   NAV LINK BUTTONS
-   ========================================================================== */
 /* Inaktive Buttons (Weiß mit dunkelblauer Schrift) */
 .sidebar .nav-link {
     background-color: #ffffff !important;
@@ -44,13 +38,10 @@
 
 /* AKTIVER BUTTON (Hellblau-Violett) */
 .sidebar .nav-link.active {
-    background-color: #c8daff !important; /* Hellblau aus deinem Screenshot */
+    background-color: #c8daff !important; 
     color: #0b1330 !important;
 }
 
-/* ==========================================================================
-   LOG OUT BUTTON
-   ========================================================================== */
 .sidebar .nav-link.logout-link {
     background-color: transparent !important;
     color: rgba(255, 255, 255, 0.4) !important;
@@ -63,17 +54,14 @@
     color: #ffffff !important;
 }
 
-/* ==========================================================================
-   KALENDER-EINGABE RADIKAL ERZWINGEN (Sowohl für Text- als auch Date-Zustand)
-   ========================================================================== */
-/* Greift sofort beim Laden (Text-Zustand) UND beim Anklicken (Date-Zustand) */
+
 input[placeholder="17.06.2026"],
 input[type="date"] {
-    font-size: 1.1rem !important;         /* Größere Schrift wie im Bild */
-    padding: 14px 20px !important;        /* Viel Platz im Inneren des Feldes */
-    color: #94a3b8 !important;            /* Schönes, dezentes Grau für die leere Maske */
-    border: 1px solid #c8daff !important; /* Hellblauer Rahmen wie bei den Buttons */
-    border-radius: 10px !important;       /* Perfekt abgerundet */
+    font-size: 1.1rem !important;        
+    padding: 14px 20px !important;        
+    color: #94a3b8 !important;            
+    border: 1px solid #c8daff !important; 
+    border-radius: 10px !important;      
     background-color: #ffffff !important;
     width: 100%;
     display: block;
@@ -83,9 +71,9 @@ input[type="date"] {
 input[placeholder="17.06.2026"]:focus,
 input[type="date"]:valid,
 input[type="date"]:focus {
-    color: #0b1330 !important;            /* Schrift wird dunkelblau */
-    border-color: #7294e7 !important;     /* Fokus-Rahmen wird intensiver blau */
-}
+    color: #0b1330 !important;           
+    border-color: #7294e7 !important;   
+}  
 
 /* Vergrößert das kleine Kalender-Icon (das man zum Öffnen anklickt) im Feld */
 input[type="date"]::-webkit-calendar-picker-indicator {

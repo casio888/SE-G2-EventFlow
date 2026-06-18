@@ -1,7 +1,3 @@
-/* ==========================================================================
-   REGISTRIERUNG KACHEL-STYLES (Exakt nach deinem Wireframe)
-   ========================================================================= */
-
 /* Zentriert die Kachel perfekt auf dem Bildschirm */
 .registration-wrapper {
     min-height: 80vh;
@@ -15,11 +11,11 @@
 /* Die weiße, abgerundete Formular-Maske */
 .registration-card {
     background-color: #ffffff;
-    border: 2px solid #c8daff !important; /* Hellblauer, dicker Rahmen */
-    border-radius: 35px !important;       /* Sehr runde Ecken aus dem Bild */
+    border: 2px solid #c8daff !important; 
+    border-radius: 35px !important;       
     box-shadow: 0 4px 20px rgba(11, 19, 48, 0.08);
     width: 100%;
-    max-width: 550px;                     /* Verhindert, dass die Kachel zu breit wird */
+    max-width: 550px;                    
     margin: 0 auto;
 }
 
@@ -31,14 +27,11 @@
     margin-bottom: 2rem;
 }
 
-/* ==========================================================================
-   DJANGO INPUT FELDER (Breite & Abstände erzwungen)
-   ========================================================================== */
 /* Zwingt die von {{ form.as_p }} generierten Absätze in ein sauberes Layout */
 .django-form-fields p {
     margin-bottom: 18px !important;
     display: flex;
-    flex-direction: column; /* Setzt das Label ÜBER das Eingabefeld wie im Wireframe */
+    flex-direction: column; 
 }
 
 /* Style für die Text-Labels (Firmenname, Land, etc.) */
@@ -53,17 +46,18 @@
 .django-form-fields input {
     width: 100% !important;
     font-size: 1.05rem !important;
-    padding: 12px 16px !important;        /* Schön viel Höhe für die Kästen */
-    border: 1px solid #cbd5e1 !important; /* Dezenter grauer Rahmen */
-    border-radius: 8px !important;        /* Leicht abgerundet */
+    padding: 12px 16px !important;       
+    border: 1px solid #cbd5e1 !important; 
+    border-radius: 8px !important;        
     background-color: #ffffff !important;
     color: #0b1330 !important;
     box-sizing: border-box !important;
 }
 
+/*Rahmen wenn angeklickt*/
 .django-form-fields input:focus {
     outline: none !important;
-    border-color: #436cf4 !important;    /* Rahmen wird beim Reinklicken blau */
+    border-color: #436cf4 !important;   
 }
 
 /* Der obere [E-Mail adresse] Info-Button */
@@ -71,7 +65,7 @@
     font-size: 0.85rem !important;
     color: #0b1330 !important;
     border: 1px solid #94a3b8 !important;
-    border-radius: 20px !important;       /* Pillen-Form */
+    border-radius: 20px !important;       
     padding: 6px 18px !important;
     background-color: #f1f5f9 !important;
     pointer-events: none;
@@ -79,21 +73,17 @@
 
 /* Der kleingedruckte AGB-Text */
 .registration-agb-text {
-    text-align: left !important; /* Text startet ganz links im Kasten */
+    text-align: left !important; 
     font-size: 0.6rem;
     line-height: 1.5;
     color: #64748b;
     margin-top: 25px;
-    
 }
 
-/* ==========================================================================
-   BUTTONS UNTEN
-   ========================================================================== */
 /* Der blaue "weiter"-Button */
 .btn-registration-submit {
     text-align: right;
-    background-color: #436cf4 !important; /* Das leuchtende Blau */
+    background-color: #436cf4 !important; 
     color: #ffffff !important;
     font-weight: 600 !important;
     padding: 10px 35px !important;
@@ -110,24 +100,12 @@
     display: none !important;
 }
 
-/* Zwingt die Links im AGB-Text, ein normales Wort im Satz zu sein */
-.registration-agb-text a {
-    display: inline !important;
-    white-space: normal !important;
-}
-
 /* Stylt die Validierungsfehler (wie die Telefon-Message) knallrot */
 .django-form-fields .errorlist {
-    list-style: none !important; /* Entfernt den hässlichen Aufzählungspunkt */
+    list-style: none !important; 
     padding: 0 !important;
     margin: 0 0 8px 0 !important;
-    color: #dc3545 !important;   /* Bootstrap-Rot */
+    color: #dc3545 !important;
     font-size: 0.85rem !important;
     font-weight: 600 !important;
-}
-
-/* Optional: Macht das Eingabefeld selbst rot, wenn ein Fehler vorliegt */
-.django-form-fields .errorlist + input {
-    border-color: #dc3545 !important;
-    background-color: #fff8f8 !important;
 }

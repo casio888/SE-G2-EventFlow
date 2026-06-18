@@ -12,7 +12,7 @@ body {
 
 /* --- HERO & NAVIGATION --- */
 .hero-section {
-    background-color: #0b1330; /* Dunkelblau aus dem Wireframe */
+    background-color: #0b1330; 
     color: white;
     padding: 20px 10%;
     text-align: center;
@@ -60,7 +60,7 @@ nav {
 }
 
 .btn-login {
-    background-color: #3b82f6; /* Passendes Blau für Login */
+    background-color: #3b82f6; 
     color: white;
 }
 
