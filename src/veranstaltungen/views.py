@@ -55,16 +55,7 @@ def veranstaltungen_your_events(request):
     return render(request, "veranstaltungen/your_events.html", {"events": events})
 
 def veranstaltung_bearbeiten(request, id):
-  """
-  liefert eine website um eine veranstaltung zu bearbeiten
-
-  Arguments:
-    request {} -- standard urlanfrage Objekt
-    id {int} -- id einer veranstaltung
-
-  Returns:
-    HttpResponse -- gerendertes HTML
-  """
+  
     event = get_object_or_404(Veranstaltung, pk=id)
     form = get_veranstaltung_form(request, event)
 
