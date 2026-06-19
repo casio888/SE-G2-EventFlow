@@ -18,12 +18,6 @@
         <form method="POST" action="{% url 'Authentifizierung:Registrierung' %}" class="django-form-fields text-start">
             {% csrf_token %}
             
-            <div class="mb-4 text-center">
-                <button type="button" class="btn btn-outline-dark btn-rounded-placeholder px-3 py-1">
-                    [E-Mail adresse]
-                </button>
-            </div>
-
             <div class="form-input-fields mb-4">
                 {{ form.as_p }}
             </div>
