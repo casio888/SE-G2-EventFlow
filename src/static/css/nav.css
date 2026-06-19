@@ -12,17 +12,16 @@ body {
 
 /* --- HERO & NAVIGATION --- */
 .hero-section {
-    background-color: #0b1330; /* Dunkelblau aus dem Wireframe */
+    background-color: #0b1330; 
     color: white;
     padding: 20px 10%;
     text-align: center;
 }
 
 nav {
-    display: flex;
-    justify-content: space-between;
+    display: flex !important;
+    justify-content: flex-start; /* put logo + links on the left */
     align-items: center;
-    margin-bottom: 60px;
 }
 
 .logo {
@@ -32,15 +31,31 @@ nav {
     color: white;
 }
 
+.nav-links {
+    position: static !important;
+    display: flex !important;
+    margin-left: 18px; /* space after the logo */
+    align-items: center;
+}
+
 .nav-links a {
     color: #ccc;
     text-decoration: none;
-    margin: 0 15px;
+    margin: 0 15px !important;    
     font-size: 0.9rem;
+    white-space: nowrap;          
+    transition: color 0.15s ease;
 }
 
 .nav-links a:hover {
     color: white;
+}
+
+.auth-buttons {
+    margin-left: auto; /* push auth buttons to the far right */
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .auth-buttons .btn {
@@ -49,7 +64,7 @@ nav {
     border: none;
     cursor: pointer;
     font-weight: bold;
-    margin-left: 10px;
+    margin-left: 0;
     text-decoration: none;
     display: inline-block;
 }
@@ -60,7 +75,7 @@ nav {
 }
 
 .btn-login {
-    background-color: #3b82f6; /* Passendes Blau für Login */
+    background-color: #3b82f6; 
     color: white;
 }
 
