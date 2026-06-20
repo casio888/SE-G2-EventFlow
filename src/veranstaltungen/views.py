@@ -52,3 +52,26 @@ def veranstaltungen_your_events(request):
     """
     events = Veranstaltung.objects.all()
     return render(request, "veranstaltungen/your_events.html", {"events": events})
+
+def veranstaltung_bearbeiten(request, id):
+    """
+    Bearbeitet eine bestehende Veranstaltung.
+
+    Arguments:
+        request (HttpRequest): HTTP-Request-Objekt
+        id (int): Primärschlüssel der Veranstaltung
+
+    Returns:
+        HttpResponse: Bearbeitungsseite der Veranstaltung oder Redirect
+    """
+    event = get_object_or_404(Veranstaltung, pk=id)
+
+    if request.method == "POST":
+        form = VeranstaltungForm(request.POST, instance=event)
+        if form.is_valid():
+            form.save()
+            return redirect("veranstaltungen:veranstaltung_detail", id=event.id)
+    else:
+        form = VeranstaltungForm(instance=event)
+
+    return render(request, "veranstaltungen/bearbeiten.html", {"form": form, "event": event})
