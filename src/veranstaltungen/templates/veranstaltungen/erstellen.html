@@ -1,14 +1,90 @@
-{% extends "base_topside.html" %}
+{% extends "base_leftside.html" %}
 {% load static %}
 
+{% block extra_head %}
+<script src="{% static 'js/timeslots.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+<link rel="stylesheet" href="{% static 'erstelle.css' %}">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+{% endblock %}
+
 {% block content %}
-<h1>Neue Veranstaltung erstellen</h1>
+<div class="container py-4">
+    
+    <div class="text-center position-relative mb-5">
+        <h2 class="fw-bold">Event anlegen</h2>
+    </div>
 
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
+    <form id="event-create-form" method="post">
+        {% csrf_token %}
+        {{ form.timeslots }}
+        
+        <div class="row g-5">
+            <div class="col-12 col-lg-7">
+                <h3 class="section-subtitle mb-4">Zeitslots</h3>
+                
+                <div class="mb-4 d-flex align-items-center">
+                    <select class="form-select venue-select me-2" name="venue">
+                        <option>Venue</option>
+                    </select>
+                    <button type="button" class="btn-plus-icon">＋</button>
+                </div>
+                
+                <div class="table-responsive">
+                    <table id="timeslot-table" class="table table-custom-grid align-middle text-center">
+                        <thead>
+                            <tr>
+                                <th>Start</th>
+                                <th>End</th>
+                                <th>Dauer</th>
+                                <th>Kategorie</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="timeslot-body">
+                            </tbody>
+                    </table>
+                </div>
+                
+                <button type="button" class="btn-plus-icon mt-2" onclick="addTimeslot()">＋</button>
+            </div>
+            
+            <div class="col-12 col-lg-5">
+                
+                <div class="image-upload-placeholder mb-4 d-flex align-items-center justify-content-center">
+                    <span>[Event Bild]</span>
+                </div>
+                
+                <div class="django-form-fields mb-4">
+                    {% for field in form.visible_fields %}
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold mb-1" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                            <div class="custom-input-wrapper">
+                                {{ field }}
+                            </div>
+                            {% if field.errors %}
+                                <div class="text-danger small">{{ field.errors }}</div>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </div>
+                
+                <div class="d-flex gap-3 mt-5">
+                    <a href="{% url 'veranstaltungen:veranstaltungen_your_events' %}" class="btn btn-secondary w-50 py-2.5 fw-bold" style="border-radius: 6px;">Abbrechen</a>
+                    <button type="submit" class="btn btn-submit-event w-50 py-2.5 fw-bold">Event anlegen</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
 
-    <button type="submit" class="btn btn-success">Speichern</button>
-    <a href="{% url 'veranstaltungen_liste' %}" class="btn btn-secondary">Abbrechen</a>
-</form>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        flatpickr("input[type='date']", {
+            dateFormat: "d.m.Y",
+            allowInput: true
+        });
+    });
+</script>
 {% endblock %}

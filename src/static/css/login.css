@@ -17,7 +17,7 @@ body {
 
 /* --- HEADER BANNER --- */
 header {
-    background-color: #0b1330; /* Exakt das Dunkelblau aus dem Screen 9 */
+    background-color: #0b1330; 
     color: white;
     padding: 30px 10%;
 }
@@ -34,8 +34,8 @@ main {
 
 .login-card {
     background: #ffffff;
-    border: 1px solid #cbd5e0; /* Subtiler grauer Rand wie im Screenshot */
-    border-radius: 40px; /* Sehr abgerundete Ecken laut Vorlage */
+    border: 1px solid #cbd5e0; 
+    border-radius: 40px; 
     padding: 50px 60px;
     width: 100%;
     max-width: 580px;
@@ -97,7 +97,7 @@ main {
 }
 
 .btn-submit {
-    background-color: #3b82f6; /* Das strahlende Blau aus dem Anmelden-Button */
+    background-color: #3b82f6; 
     color: white;
     border: none;
     padding: 12px 35px;
