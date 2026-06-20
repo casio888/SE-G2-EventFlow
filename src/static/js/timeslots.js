@@ -14,18 +14,27 @@ function addTimeslot(start="", ende="", dauer="", kategorie="") {
     tbody.appendChild(row);
 }
 
-document.querySelector("form").addEventListener("submit", function() {
-    const rows = document.querySelectorAll("#timeslot-body tr");
-    const data = [];
+document.addEventListener("DOMContentLoaded", function() {
+    const form = document.getElementById("event-create-form");
+    const timeslotsInput = document.getElementById("id_timeslots");
 
-    rows.forEach(row => {
-        data.push({
-            start: row.querySelector(".ts-start").value,
-            ende: row.querySelector(".ts-ende").value,
-            dauer: row.querySelector(".ts-dauer").value,
-            kategorie: row.querySelector(".ts-kategorie").value
+    if (!form || !timeslotsInput) {
+        return;
+    }
+
+    form.addEventListener("submit", function() {
+        const rows = document.querySelectorAll("#timeslot-body tr");
+        const data = [];
+
+        rows.forEach(row => {
+            data.push({
+                start: row.querySelector(".ts-start").value,
+                ende: row.querySelector(".ts-ende").value,
+                dauer: row.querySelector(".ts-dauer").value,
+                kategorie: row.querySelector(".ts-kategorie").value
+            });
         });
-    });
 
-    document.getElementById("id_timeslots").value = JSON.stringify(data);
+        timeslotsInput.value = JSON.stringify(data);
+    });
 });

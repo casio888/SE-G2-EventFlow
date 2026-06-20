@@ -11,6 +11,35 @@
 
 <hr>
 
+<h3>Timeslots</h3>
+
+{% if timeslots %}
+<table class="table">
+    <thead>
+        <tr>
+            <th>Start</th>
+            <th>Ende</th>
+            <th>Dauer (min)</th>
+            <th>Kategorie</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for ts in timeslots %}
+        <tr>
+            <td>{{ ts.start }}</td>
+            <td>{{ ts.ende }}</td>
+            <td>{{ ts.dauer }}</td>
+            <td>{{ ts.kategorie }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>Keine Timeslots vorhanden.</p>
+{% endif %}
+
+<hr>
+
 <h3>Bewerber</h3>
 
 <ul class="list-group">

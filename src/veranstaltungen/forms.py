@@ -113,8 +113,8 @@ class VeranstaltungForm(forms.ModelForm):
         for slot in slots:
             Timeslot.objects.create(
                 veranstaltung=veranstaltung,
-                start=slot["start"],
-                ende=slot["ende"],
+                start=datetime.strptime(slot["start"], "%H:%M").time(),
+                ende=datetime.strptime(slot["ende"], "%H:%M").time(),
                 dauer=slot["dauer"],
                 kategorie=slot["kategorie"],
             )

@@ -38,7 +38,7 @@ def veranstaltung_detail(request, id):
         HttpResponse: Detailseite der Veranstaltung
     """
     event = get_object_or_404(Veranstaltung, pk=id)
-    return render(request, "veranstaltungen/detail.html", {"event": event})
+    return render(request, "veranstaltungen/detail.html", {"event": event, "timeslots": event.timeslots.all(),})
 
 def veranstaltungen_your_events(request):
     """
