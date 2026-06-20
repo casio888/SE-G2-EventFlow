@@ -1,58 +1,123 @@
-{% extends "base_topside.html" %}
+{% extends "base_leftside.html" %}
 {% load static %}
 
+{% block extra_head %}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'erstelle.css' %}">
+{% endblock %}
+
 {% block content %}
-<h1>{{ event.titel }}</h1>
+<div class="container py-4">
+    
+    <div class="text-center position-relative mb-5">
+        <h2 class="fw-bold">{{ event.titel }}</h2>
+    </div>
 
-<p><strong>Ort:</strong> {{ event.ort }}</p>
-<p><strong>Start:</strong> {{ event.start_datum }}</p>
-<p><strong>Ende:</strong> {{ event.end_datum }}</p>
-<p><strong>Beschreibung:</strong> {{ event.beschreibung }}</p>
+    <div class="row g-5">
+        
+        <div class="col-12 col-lg-7">
+            
+            <div class="mb-5">
+                <h3 class="section-subtitle mb-3">Veranstaltungsort</h3>
+                <div class="d-inline-block bg-white border border-dark rounded px-4 py-2 fw-semibold small">
+                    📍 {{ event.ort }}
+                </div>
+            </div>
 
-<hr>
+            <div class="mb-5">
+                <h3 class="section-subtitle mb-4">Zeitslots</h3>
+                <div class="table-responsive">
+                    <table class="table table-custom-grid align-middle text-center">
+                        <thead>
+                            <tr>
+                                <th>Start</th>
+                                <th>Ende</th>
+                                <th>Dauer</th>
+                                <th>Kategorie</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if timeslots %}
+                                {% for ts in timeslots %}
+                                <tr>
+                                    <td>{{ ts.start }}</td>
+                                    <td class="text-muted">{{ ts.ende }}</td>
+                                    <td>{{ ts.dauer }} min</td>
+                                    <td>{{ ts.kategorie }}</td>
+                                </tr>
+                                {% endfor %}
+                            {% else %}
+                                <tr>
+                                    <td colspan="4" class="text-muted py-3">Keine Timeslots vorhanden.</td>
+                                </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
-<h3>Timeslots</h3>
+            <div>
+                <h3 class="section-subtitle mb-3">Bewerber</h3>
+                <div class="django-form-fields p-2" style="background-color: #fff; border: 1px solid #cbd5e1; border-radius: 6px;">
+                    <ul class="list-group list-group-flush m-0">
+                        {% for bewerber in event.bewerber %}
+                            <li class="list-group-item border-0 py-2 text-dark small fw-medium">👤 {{ bewerber.name }}</li>
+                        {% empty %}
+                            <li class="list-group-item border-0 py-2 text-muted small fst-italic">Noch keine Bewerber.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
 
-{% if timeslots %}
-<table class="table">
-    <thead>
-        <tr>
-            <th>Start</th>
-            <th>Ende</th>
-            <th>Dauer (min)</th>
-            <th>Kategorie</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for ts in timeslots %}
-        <tr>
-            <td>{{ ts.start }}</td>
-            <td>{{ ts.ende }}</td>
-            <td>{{ ts.dauer }}</td>
-            <td>{{ ts.kategorie }}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-{% else %}
-<p>Keine Timeslots vorhanden.</p>
-{% endif %}
+        </div>
+        
+        <div class="col-12 col-lg-5">
+            
+            <div class="image-upload-placeholder mb-4 d-flex align-items-center justify-content-center overflow-hidden position-relative">
+                {% if event.bild %}
+                    <img src="{{ event.bild.url }}" alt="{{ event.titel }}" class="w-100 h-100 object-fit-cover">
+                {% else %}
+                    <span>[Event Bild]</span>
+                {% endif %}
+            </div>
+            
+            <div class="django-form-fields mb-4">
+                
+                <div class="mb-4">
+                    <label class="form-label small fw-bold mb-1 text-muted">Beschreibung / Catch Phrase</label>
+                    <div class="bg-white border border-secondary-subtle px-3 py-2 rounded-2 text-dark" style="min-height: 90px; line-height: 1.5;">
+                        {{ event.beschreibung|default:"Keine Beschreibung hinterlegt." }}
+                    </div>
+                </div>
 
-<hr>
+                <div class="row g-3">
+                    <div class="col-6">
+                        <label class="form-label small fw-bold mb-1 text-muted">Startdatum</label>
+                        <div class="bg-white border border-secondary-subtle px-3 py-2 rounded-2 text-center small fw-semibold text-dark">
+                            {{ event.start_datum|date:"d.m.Y"|default:event.start_datum }}
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <label class="form-label small fw-bold mb-1 text-muted">Enddatum</label>
+                        <div class="bg-white border border-secondary-subtle px-3 py-2 rounded-2 text-center small fw-semibold text-dark">
+                            {{ event.end_datum|date:"d.m.Y"|default:event.end_datum }}
+                        </div>
+                    </div>
+                </div>
 
-<h3>Bewerber</h3>
+            </div>
+            
+            <div class="d-flex gap-3 mt-5">
+                <a href="{% url 'veranstaltungen:veranstaltungen_your_events' %}" class="btn btn-secondary w-50 py-2.5 fw-bold btn-custom-radius text-center">
+                    Zurück
+                </a>
+                <a href="{% url 'veranstaltungen:veranstaltung_bearbeiten' event.id %}" class="btn btn-submit-event w-50 py-2.5 fw-bold text-center d-flex align-items-center justify-content-center text-decoration-none">
+                    Bearbeiten
+                </a>
+            </div>
 
-<ul class="list-group">
-    {% for bewerber in event.bewerber %}
-        <li class="list-group-item">{{ bewerber.name }}</li>
-    {% empty %}
-        <li class="list-group-item">Noch keine Bewerber.</li>
-    {% endfor %}
-</ul>
-
-<hr>
-
-<a href="{% url 'veranstaltungen:veranstaltungen_your_events' %}" class="btn btn-secondary">
-    Zurück zur Übersicht
-</a>
+        </div>
+        
+    </div>
+</div>
 {% endblock %}
