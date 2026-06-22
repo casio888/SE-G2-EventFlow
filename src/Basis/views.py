@@ -12,12 +12,12 @@ def login_view(request):
             user.angemeldet = True
             user.save()
 
-            print("Login erfolgreich für:", user.email)
+            #print("Login erfolgreich für:", user.email)
 
             return redirect("Basis:index")
         else:
             
-            print("Ungültige Anmeldedaten für E-Mail:", request.POST.get("email"))
+            #print("Ungültige Anmeldedaten für E-Mail:", request.POST.get("email"))
 
-            return render(request, "login.html", {"error": "Ungültige Anmeldedaten."})
+            return render(request, "login.html", {"error": "E-Mail oder Passwort ungültig."})
     return render(request, "login.html")

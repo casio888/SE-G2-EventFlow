@@ -1,4 +1,5 @@
 from django import forms
+from django.core.exceptions import ValidationError
 
 from .models import User
 
@@ -8,6 +9,12 @@ class RegistrierungsForm(forms.ModelForm):
         widget=forms.PasswordInput(attrs={"placeholder": "Passwort", "maxlength": 100}),
         label="Passwort",
     )
+
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if email and User.objects.filter(email=email).exists():
+            raise ValidationError("Diese E-Mail-Adresse ist bereits registriert.")
+        return email
 
     class Meta:
         model = User
