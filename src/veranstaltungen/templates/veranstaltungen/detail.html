@@ -116,8 +116,13 @@
                 </a>
             </div>
 
-        </div>
-        
-    </div>
-</div>
+<a href="{% url 'veranstaltungen:veranstaltungen_your_events' %}" class="btn btn-secondary">
+
+<a href="{% url 'veranstaltungen:veranstaltung_bearbeiten' event.id%}" class="btn btn-primary">
+	Veranstaltung bearbeiten
+</a>
+
+<a href="{% url 'veranstaltungen:veranstaltungen_your_events' %}" class="btn btn-secondary">
+    Zurück zur Übersicht
+</a>
 {% endblock %}
