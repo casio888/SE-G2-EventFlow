@@ -98,6 +98,19 @@ class VeranstaltungForm(forms.ModelForm):
 
         return cleaned
 
+    def clean(self):
+        cleaned_data = super().clean()
+
+        start_datum = cleaned_data.get("start_datum")
+        end_datum = cleaned_data.get("end_datum")
+
+        if start_datum and end_datum and start_datum > end_datum:
+            raise forms.ValidationError({
+                "end_datum": "Das Enddatum muss am oder nach dem Startdatum liegen."
+            })
+
+        return cleaned_data
+
     def save(self, commit=True):
         """
         Speichert die Veranstaltung und erzeugt zugehörige Timeslots.
@@ -113,8 +126,8 @@ class VeranstaltungForm(forms.ModelForm):
         for slot in slots:
             Timeslot.objects.create(
                 veranstaltung=veranstaltung,
-                start=slot["start"],
-                ende=slot["ende"],
+                start=datetime.strptime(slot["start"], "%H:%M").time(),
+                ende=datetime.strptime(slot["ende"], "%H:%M").time(),
                 dauer=slot["dauer"],
                 kategorie=slot["kategorie"],
             )

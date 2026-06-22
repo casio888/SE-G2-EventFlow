@@ -91,3 +91,20 @@ class VeranstaltungFormTests(TestCase):
             "timeslots": "{kaputt"
         })
         self.assertFalse(form.is_valid())
+
+    def test_start_date_after_end_date(self):
+        """
+        Testet, dass das Startdatum nicht nach dem Enddatum liegen darf.
+        """
+        form = VeranstaltungForm(data={
+            "titel": "Test",
+            "beschreibung": "",
+            "ort": "Ort",
+            "start_datum": "2026-02-25",
+            "end_datum": "2026-02-24",
+            "timeslots": json.dumps([
+                {"start": "10:00", "ende": "12:00", "dauer": "120", "kategorie": "Workshop"}
+            ])
+        })
+        self.assertFalse(form.is_valid())
+        self.assertIn("end_datum", form.errors)

@@ -19,7 +19,7 @@ class VeranstaltungCreateViewTests(TestCase):
         """
         response = self.client.get(reverse("veranstaltungen:veranstaltung_erstellen"))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "Neue Veranstaltung erstellen")
+        self.assertContains(response, "Event anlegen")
 
     def test_post_creates_event(self):
         """

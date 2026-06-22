@@ -39,7 +39,7 @@ def veranstaltung_detail(request, id):
         HttpResponse: Detailseite der Veranstaltung
     """
     event = get_object_or_404(Veranstaltung, pk=id)
-    return render(request, "veranstaltungen/detail.html", {"event": event})
+    return render(request, "veranstaltungen/detail.html", {"event": event, "timeslots": event.timeslots.all(),})
 
 def veranstaltungen_your_events(request):
     """
@@ -55,14 +55,24 @@ def veranstaltungen_your_events(request):
     return render(request, "veranstaltungen/your_events.html", {"events": events})
 
 def veranstaltung_bearbeiten(request, id):
-  
+    """
+    Bearbeitet eine bestehende Veranstaltung.
+
+    Arguments:
+        request (HttpRequest): HTTP-Request-Objekt
+        id (int): Primärschlüssel der Veranstaltung
+
+    Returns:
+        HttpResponse: Bearbeitungsseite der Veranstaltung oder Redirect
+    """
     event = get_object_or_404(Veranstaltung, pk=id)
-    form = get_veranstaltung_form(request, event)
 
     if request.method == "POST":
-        save_veranstaltung_form(form)
+        form = VeranstaltungForm(request.POST, instance=event)
+        if form.is_valid():
+            form.save()
+            return redirect("veranstaltungen:veranstaltung_detail", id=event.id)
+    else:
+        form = VeranstaltungForm(instance=event)
 
-    return render(request, "veranstaltungen/bearbeiten.html", {
-            "form" : form,
-            "event": event
-        })
+    return render(request, "veranstaltungen/bearbeiten.html", {"form": form, "event": event})
