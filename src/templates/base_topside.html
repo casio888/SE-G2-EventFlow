@@ -15,13 +15,13 @@
         <nav>
             <a href="{% url 'Basis:index' %}" class="logo">EventFlow</a>
             <div class="nav-links">
-                <a href="#">Popular</a>
-                <a href="#">Your liked Events</a>
+                <a href="#">Beliebt</a>
+                <a href="#">Deine markierten Events</a>
                 <a href="{% url 'veranstaltungen:veranstaltungen_your_events' %}">Deine Events</a>
             </div>
             <div class="auth-buttons">
-                <a href="{% url 'Authentifizierung:Registrierung' %}" class="btn btn-signup">Sign up</a>
-                <a href="{% url 'Basis:login' %}" class="btn btn-login">Log in</a>
+                <a href="{% url 'Authentifizierung:Registrierung' %}" class="btn btn-signup">Registrieren</a>
+                <a href="{% url 'Basis:login' %}" class="btn btn-login">Login</a>
             </div>
         </nav>
         {% block extra_header %} {% endblock %}
@@ -33,16 +33,14 @@
     <footer>
         <div>
             <strong>EventFlow</strong><br>
-            Your favorite event manager<br>
-            Website since 202*<br><br>
-            <small>Miro 2026</small>
+            Dein persönlicher Event Manager<br>
+            <small>Team G2 2026</small>
         </div>
         <div class="footer-links">
-            <a href="#">Help</a>
+            <a href="#">Hilfe</a>
             <a href="#">FAQ</a>
-            <a href="#">Customer service</a>
-            <a href="#">How to guide</a>
-            <a href="#">Contact us</a>
+            <a href="#">Impressum</a>
+            <a href="#">Kontakt</a>
         </div>
     </footer>
     </body>
