@@ -5,15 +5,19 @@ include::../_includes/default-attributes.inc.adoc[]
 :version: 1.0
 
 == Über uns
-_Hier können Sie einen Teamnamen und ggf. ein Motto oder eine kurze Beschreibung hinzufügen, um die Identität Ihres Teams zu stärken._
+Wir sind ein Team von Studenten die mit diesem Projekt Erfahrung sammeln und die Konzepte des Semesters anwenden wollen.
 
 == Zweck
 
-*Was bauen wir, und warum?*
+____
+Für Veranstalter von Events mit Beiträgen, die den Überblick über Einreichungen und Planung verlieren, ist EventFlow eine zentrale Webplattform, die Beiträge, Status und Agenda übersichtlich an einem Ort verwaltet. Im Gegensatz zu E-Mail oder verstreuten Tools bietet unser Produkt einen klaren und effizienten Organisationsprozess.
+____
 
-_Hier die Produktvision und den Projektzweck in 2–3 Sätzen beschreiben._
+____
+Für Einreicher von Eventbeiträgen, die nicht wissen, wo und wie sie Beiträge einreichen und welchen Status diese haben, ist EventFlow eine zentrale Webplattform, die eine einfache Einreichung und transparente Statusverfolgung ermöglicht. Im Gegensatz zu unstrukturierten Kommunikationswegen bietet unser Produkt klare Prozesse und automatische Rückmeldungen.
+____
 
-Wir wollen ein Programm entwickeln, mit dem Veranstaltungen organisiert werden können. Dabei sollen Benutzer sowohl als Gäste, Gestalter sowie Organisatoren das Programm nutzen können und entsprechend auf andere Informationen zugriff haben.
+//Wir wollen ein Programm entwickeln, mit dem Veranstaltungen organisiert werden können. Dabei sollen Benutzer sowohl als Gäste, Gestalter sowie Organisatoren das Programm nutzen können und entsprechend auf andere Informationen zugriff haben.//
 //noch ausbaufähig//
 
 == Rollen
@@ -63,7 +67,7 @@ Wir wollen ein Programm entwickeln, mit dem Veranstaltungen organisiert werden k
 | Retrospektive
 | Am Ende eines Sprints. (Nach Review)
 | ca.1h (Wenn kürzer auch gut.)
-| Micha wollte erste übernehmen.
+| Abwechselnde Führung durch Developer und Teach Lead (Um Meetingleitung zu üben)
 
 | Backlog Refinement
 | Anfang-Mitte vom Sprint
@@ -94,7 +98,7 @@ Wir wollen ein Programm entwickeln, mit dem Veranstaltungen organisiert werden k
 | Discord
 
 | Asynchrone Abstimmung
-| [Keine Angaben gemacht!]
+| Discord Kanal
 |===
 
 == Arbeitsweise
@@ -103,20 +107,20 @@ Wir wollen ein Programm entwickeln, mit dem Veranstaltungen organisiert werden k
 _Eine User Story ist bereit für die Entwicklung, wenn:
 _
 
-// Hier können die Kriterien individuell angepasst werden, z. B.:
 * [ ] Die User Story ist klar formuliert und verständlich.
 * [ ] Die Akzeptanzkriterien sind klar und vollständig beschrieben.
 * [ ] Aufwandschätzung vorhanden.
-* [ ] Alle notwendigen Informationen, Mockups oder Anforderungen liegen vor.
+* [ ] Voraussetzungen von dem die User Story abhängt, sind abgeschlossen.
+* [ ] Mockups sind designed (wenn notwendig).
 * [ ] Die User Story wurde vom Product Owner priorisiert und für den Sprint vorgesehen.
 
 === Definition of Done (DoD)
 _Eine User Story gilt als fertig, wenn:_
 
-// Hier können die Kriterien individuell angepasst werden, z. B.:
 * [ ] Alle Akzeptanzkriterien der User Story erfüllt sind.
-* [ ] Der Code wurde getestet und funktioniert fehlerfrei.
-* [ ] Der Code wurde vom Tech Lead reviewed und erfolgreich in den main Branch gemergt.
+* [ ] Tests wurden für die neu programmierten Funktionen geschrieben.
+* [ ] Alle Tests laufen erfolgreich.
+* [ ] Der Code wurde reviewed und erfolgreich in den main Branch gemerged.
 * [ ] Der Product Owner hat die Story abgenommen
 
 === Code & Versionierung
