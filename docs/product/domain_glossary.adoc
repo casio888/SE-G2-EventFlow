@@ -33,23 +33,17 @@ Technische Implementierungsdetails gehören nicht hierher!
 
 | Einreichung
 | Durch einen Einreicher abgegeben, um bei einer Veranstaltung teil zu nehmen.
-| Bewerbung
+| Bewerbung, Beitrag
 
 | Gutachter
 | Person mit viel fachlichem Wissen. Darum liest sie Einreichungen und bewertet diese.
 | 
-
-| [Begriff]
-| [Präzise, fachliche Definition in 1–3 Sätzen]
-| [Synonyme oder Abgrenzungen zu ähnlichen Begriffen]
 |===
 
 
 == Domänenmodell
 
 === Diagramm
-
-//Fügen Sie hier ein Diagramm ein — entweder als eingebettetes PlantUML oder als exportiertes Bild.
 
 [plantuml, domain-model, svg]
 ....

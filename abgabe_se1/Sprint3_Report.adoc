@@ -1,0 +1,151 @@
+= Sprint-3-Report: Erstes Produktinkrement und agile Arbeitsweise
+
+// Bitte fügen Sie hier die Informationen zu Ihrem Team, Projekt, Datum und Repository ein.
+Team:: G2
+Projektname:: EventFlow
+Datum:: 28.06.2026
+Repository-Link:: https://github.com/casio888/SE-G2-EventFlow
+
+== 1. Sprintziel und nützlicher MVP-Ausschnitt
+
+[cols="1,3", options="header"]
+|===
+| Kriterium | Ihre Antwort
+
+| Sprintziel
+| Umsetzung von User Stories, welche Teil vom MVP sind. (Demo für Präsentation)
+
+| Ausgewählter MVP-Ausschnitt / Nutzerfluss
+| Anmelden und Erstellen und Bearbeiten von Events.
+
+| Zentrale Annahme oder Umsetzungsfrage
+| Die anmeldung ist die Grundlage für den Mehrbenutzerbetrieb. Ohne Events kann es keine Einreichungen geben, also wurde das erstellen und bearbeiten von Events priorisiert.
+|===
+
+== 2. Erwartete Praktiken in Sprint 3
+
+[cols="1,2,2,2", options="header"]
+|===
+| Praktik
+| Konkrete Anwendung in unserem Sprint
+| Nachweis / Artefakt (Link einfügen)
+| Nutzen, Erkenntnis oder Anpassung
+
+| MVP definieren
+| Wir haben alle User Stories identifiziert, welche zu unserem MVP gehören.
+| TODO Tag MVP an User Stories mit Link
+| Nachdem wir den Umfang des MVP definiert haben, konnten wir aus diesen User Stories diejenigen auswhählen, welche für die Demo am relevantesten waren. 
+
+| Code Reviews von abgearbeiteten Tasks
+| Wir haben Code Reviews mit dem Tech Lead gemacht, sobald alle Tasks zu einer User Story abgearbeitet waren.
+| https://github.com/casio888/SE-G2-EventFlow/pulls?q=[Pull Requests]
+| Reviews haben Verletzungen von Programmierparadigmen erkannt und behoben. Außerdem war dies der Ort an dem weniger erfahrene Entwickler Feedback und Tipps für Python/Django Programmierung bekommen haben.
+
+| Teilung von Tasks nach Kompetenzen
+| Wir haben im Team Entwickler mit starken Präferenzen für Front, bzw. Backend. Wir haben also alle Frontend Designs an einen entprechenden Entwickler gegeben.
+| Siehe Commmits von Minh in Github https://github.com/casio888/SE-G2-EventFlow/commits/main/[commits im Main-Branch] (Strg+F nach "Tomy Minh Ngoc Nguyen", wegen Schwierigkeit mit commits nur unter dem Namen, nicht unter dem Account von Minh sichtbar)
+| Wir spielen damit in die Stärken unserer Entwickler, aber machen uns auch Abhänig. z.B. war Minh dadurch im Kritischen Pfad, weil er für jede User Story (relativ) am Ende der Entwicklung noch das Design umsetzen musste.
+|===
+
+== 3. Wichtigste Lernergebnisse aus Sprint 3
+
+Beschreiben Sie 2–3 zentrale Erkenntnisse aus Sprint 3. Leitfragen:
+
+* Was hat Ihr Team über die Umsetzung eines nützlichen End-to-End-Inkrements gelernt?
+* Welche Annahme zum Nutzerfluss, zur Architektur, zum Design, zur Codebasis oder zur Teamarbeit wurde bestätigt, widerlegt oder präzisiert?
+* Welche Verifikations-, Review- oder Usability-Erkenntnis hatte den größten Einfluss auf Ihre weitere Planung?
+
+[cols="1,3", options="header"]
+|===
+| Kriterium | Ihre Antwort
+
+| Erkenntnis 1
+| Umgang mit git. Einschließlich ordentlicher (kleiner) Commits, rebasing, pull request stellen und Reviewen.
+
+| Erkenntnis 2
+| Kommunikation zwischen Entwicklern, die an der selben User Story arbeiten (in einem Branch)
+
+| Erkenntnis 3
+| Wir haben einen guten MVP Ausschnitt gewählt, die Demo in der Presentation ist gut angekommen und es war ein zusammenhängender User Flow.
+|===
+
+== 4. Änderungen am Inkrement, Backlog oder an Projektdokumentation
+
+Beschreiben Sie konkret anhand von drei Beispielen, was sich durch Implementierung, Review, Verifikation oder User-Flow-Check verändert hat.
+
+[cols="2,2,2", options="header"]
+|===
+| Ursprüngliche Annahme / geplanter Stand
+| Neue Erkenntnisse
+| Anpassung am Inkrement, Backlog, Code oder an der Dokumentation
+
+| Eigene Umsetung der Anmeldung
+| Django bietet authentifizierung
+| https://github.com/casio888/SE-G2-EventFlow/issues/101[Tech Story] im Product Backlog
+
+|
+|
+|
+
+|
+|
+|
+|===
+
+== 5. Produktinkrement, Verifikation und Umsetzungsqualität
+
+Beschreiben Sie kurz, welche Nachweise zeigen, dass Ihr Produktinkrement nützlich, integriert, überprüft und wartbar umgesetzt wurde. Leitfragen:
+
+* Wie zeigt sich, dass das Inkrement end-to-end lauffähig und für ein Nutzerziel nützlich ist?
+* Welche Akzeptanzkriterien wurden erfüllt und wie wurde dies überprüft?
+* Wie wurde die Definition of Done eingehalten?
+* Welche Erkenntnisse ergab der User-Flow- oder Usability-Check?
+
+[cols="1,3", options="header"]
+|===
+| Kriterium | Ihre Antwort
+
+| Umgesetzter End-to-End-Nutzerfluss
+| Anmeldung und Event-Erstellung.
+
+| Akzeptanzkriterien und Definition of Done
+| Wichtige Funktionalit der Website wurde bereitgestellt https://github.com/casio888/SE-G2-EventFlow/issues/5[Issue Event Anlegen] und https://github.com/casio888/SE-G2-EventFlow/issues/17[Issue für Anmeldung]
+
+| Akzeptanzorientierte Verifikation
+| Wurde diesmal wegen Zeitdruck von den Entwicklern selbst übernommen. Im nächsten Sprint werden wir versuchen bei fertigem Stand der entwicklung und vor Merge in den Main branch Feedback von Mitstudenten einzuholen. 
+
+| Code Review, Integration und main branch
+| Alle Tasks zu einer User Story wurden via Pull request gestellt udn vom Tech Lead reviewed. Nach Ausbesserungen um Code Qualitätsansprüche zu erreichen und Prüfung aller Akzeptanzkriterien wurde gemerged.
+
+| Wartbarkeitsverbesserung / Refactoring
+| In Code Reviews wurde auf korrekte Nutzung der Django kompartmentalisierung geachtet (forms.py = prensentation, utils.py = Geschäftslogik, models.py = ORM)
+
+| User-Flow- oder Usability-Check
+| Test durch die Product Ownerin.
+|===
+
+== 6. Nächste MVP-Schritte und Anpassung der Arbeitsweise
+
+Beschreiben Sie, was Ihr Team nach Sprint 3 beibehalten, ändern oder gezielt verbessern will. Leitfragen:
+
+* Welche Implementierungs-, Review- oder Koordinationsweise hat gut funktioniert?
+* Was hat Ihre Umsetzung, Integration, Verifikation oder Zusammenarbeit behindert?
+* Welcher nächste MVP-Schritt ist fachlich oder technisch am wichtigsten?
+* Welche offenen Produkt-, Technik- oder Qualitätsfragen sollten in der weiteren Projektarbeit aufgegriffen werden?
+
+[cols="1,3", options="header"]
+|===
+| Kriterium | Ihre Antwort
+
+| Beibehalten
+|
+
+| Ändern / verbessern
+|
+
+| Nächster MVP-Schritt
+|
+
+| Offene Fragen / Risiken für die weitere Projektarbeit
+|
+|===
