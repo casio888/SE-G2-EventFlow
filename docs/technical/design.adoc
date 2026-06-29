@@ -316,22 +316,46 @@ event ||--o{ submission : "hat Einreichungen"
 |===
 | Tabelle | Spalte | Beschreibung & Besonderheiten
 
-.4+| nutzer
-| id | UUID als Primärschlüssel; wird vom System generiert
-| email | Eindeutig; wird für Login und Benachrichtigungen verwendet
-| name | Anzeigename; kein Pflichtfeld nach DSGVO-Anforderung
-| erstellt_am | Automatisch gesetzt; nicht änderbar
+.11+| user
+| id | UUID Primärschlüssel; automatisch generiert
+| email | Eindeutig; Login‑Identifier
+| password | Gehasht per PBKDF2; Hashing erfolgt beim Speichern
+| firmenname | Name des Unternehmens
+| firmensitzLand | Land des Firmensitzes
+| firmensitzOrt | Ort des Firmensitzes
+| firmensitzStraße | Straße des Firmensitzes
+| firmensitzHausnummer | Hausnummer des Firmensitzes
+| telefon | Validiert per Regex; Format '+999999999'
+| fax | Optional; gleiche Validierung wie Telefon
+| angemeldet | Boolean; zeigt an, ob der User aktiv angemeldet ist
 
-.4+| buchung
-| id | UUID als Primärschlüssel
-| status | Enum-Werte: `AKTIV`, `STORNIERT`, `ABGELAUFEN`
-| beginn / ende | Beide Zeitpunkte inklusive; keine Überschneidung per DB-Constraint
-| nutzer_id / raum_id | Fremdschlüssel; kein Cascade Delete — Buchungen bleiben erhalten
+.7+| veranstaltung
+| id | UUID Primärschlüssel
+| titel | Titel der Veranstaltung; Pflichtfeld
+| beschreibung | Freitext; optional
+| start_datum | Startdatum der Veranstaltung
+| end_datum | Enddatum der Veranstaltung
+| ort | Veranstaltungsort
+| erstellt_am | Automatisch gesetzt; nicht veränderbar
 
-| [Weitere Tabelle]
-| [Spalte]
-| [Beschreibung]
+.6+| timeslot
+| id | UUID Primärschlüssel
+| veranstaltung_id | Fremdschlüssel auf veranstaltung.id; CASCADE
+| start | Startzeit des Timeslots
+| ende | Endzeit des Timeslots
+| dauer | Dauer in Minuten
+| kategorie | Kategorie des Timeslots (z. B. Vortrag, Pause)
+
+.5+| einreichung
+| id | UUID Primärschlüssel
+| veranstaltung_id | Fremdschlüssel auf veranstaltung.id; CASCADE
+| eingereicht | Boolean; zeigt an, ob die Einreichung final eingereicht wurde
+| beschreibung | Kurzbeschreibung der Einreichung
+| anforderungen | Detailbeschreibung / Anforderungen; Textfeld
+
+| [Weitere Tabelle] | [Spalte] | [Beschreibung]
 |===
+
 
 === Datenbankmigrationen
 
