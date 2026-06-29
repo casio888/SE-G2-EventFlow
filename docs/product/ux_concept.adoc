@@ -293,18 +293,18 @@ Wireframes und UI-Implementierungen._
 | Aspekt | Entscheidung & Begründung
 
 | Farbpalette
-| [Primärfarbe: Weiss; Akzent: Dunkles Navy-Blau #0b1330;
-  Begründung: Das Navy-Blau schien schlicht und vetraut auf der weissen Website]
+| Primärfarbe: Weiss; Akzent: Dunkles Navy-Blau #0b1330;
+  Begründung: Das Navy-Blau schien schlicht und vetraut auf der weissen Website
 
 | Typografie
-| [Fließtext: Roobert 16px; Überschriften: Roobert Bold;
-  Begründung: Perfekte Lesbarkeit bei vielen Details und Text, keine unnötige Schnörkellei]
+| Fließtext: Roobert 16px; Überschriften: Roobert Bold;
+  Begründung: Perfekte Lesbarkeit bei vielen Details und Text, keine unnötige Schnörkellei
 
 | Ikonografie
-| [Minimalistische Outline-Icons; konsistentes Icon-Set im gesamten Produkt für die bessere visualisierung]
+| Minimalistische Outline-Icons; konsistentes Icon-Set im gesamten Produkt für die bessere visualisierung
 
 | Bildsprache
-| [Noch statisch angelegte Patzhalter; Illustrationen im Kachel-Raster]
+| Noch statisch angelegte Patzhalter; Illustrationen im Kachel-Raster
 |===
 
 === Interaktionsprinzipien
