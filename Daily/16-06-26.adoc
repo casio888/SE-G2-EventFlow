@@ -9,7 +9,7 @@
 
 == Was noch zu tun ist
     - Branches aufräumen
-    - Akzeptanzkriterien (Können aus Issue)
+    - Akzeptanzkriterien (müssen in Beschreibung von User-Storys+ nach Erledigung bei Nataliia melden)
     - (Userstorrys in Tasks/Subissues und selber zuweisen)
     - Nur Dinge anzeigen, die noch stattfinden(Elias)
     - Alle schauen mal in technical/Enginiering-guidline

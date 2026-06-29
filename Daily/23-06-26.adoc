@@ -1,0 +1,16 @@
+= Daily Meeting 23.06.26
+
+
+== Was ist geschafft
+    - Unser MVP ist zu großen Teilen erledigt
+
+== Aufgaben 
+    - Einfach nochmal die docs durchgehen.
+    - Mal schauen, ob man noch was implementieren möchte
+ 
+
+
+== Ablauf
+    - Ablästern, über Vorträge 
+    - Termine geklärt
+    - Nochmal kleine Themen zu unserem Code.
