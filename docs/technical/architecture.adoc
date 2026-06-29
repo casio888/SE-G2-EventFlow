@@ -10,7 +10,7 @@ eingesetzt werden, wie das System in seine Umgebung eingebettet ist, und welche
 Architekturentscheidungen getroffen wurden. Der Fokus liegt auf dem *Warum* hinter
 technischen Entscheidungen._
 
-_Qualitätsziele und Einschränkungen sind im Produktkonzept als einziger Quelle definiert.
+_Qualitätsziele und Einschränkungen sind im Produktkonzept als einzige Quelle definiert.
 Dieses Dokument referenziert sie und dokumentiert ausschließlich die technischen
 Konsequenzen, die sich daraus ergeben._
 
@@ -49,30 +49,13 @@ Die interne Struktur des Systems ist im Designdokument beschrieben.
 
 *Externe Schnittstellen:*
 
+Aktuell keine.
+////
 [cols="1,1,2,1", options="header"]
 |===
 | Schnittstelle | Typ | Beschreibung | Protokoll / Format
-
-| [z. B. Hochschul-LDAP]
-| Externes System
-| Authentifizierung und Nutzerverwaltung über bestehende Hochschulinfrastruktur
-| LDAP / TLS
-
-| [z. B. SMTP-Server]
-| Externes System
-| Versand von Benachrichtigungs-E-Mails an Nutzende
-| SMTP / TLS
-
-| [z. B. Nutzer:in via Browser]
-| Menschlicher Akteur
-| Zugriff über Web-Oberfläche
-| HTTPS / REST
-
-| [Weitere Schnittstelle]
-| [Typ]
-| [Beschreibung]
-| [Protokoll]
 |===
+////
 
 === Laufzeitumgebungen (Container Diagramm)
 //Level 2 im C4-Modell
@@ -86,22 +69,33 @@ actor "Benutzer\n(Nutzt die Webanwendung)" as user
 package "EventFlow" {
     rectangle "Web-Server\n(Nginx: Reverse Proxy\nLiefert statische Dateien aus\nLeitet Requests weiter)" as nginx
     rectangle "Application Server\n(Gunicorn:\nFührt Django Code aus)" as gunicorn
-    rectangle "Web-Frontend\n(Vanilla JS/Bootstrap)" as Web
     rectangle "Backend-API\n(Django Application:\nPython/Django\nAnwendung)" as django
     database "Datenbank\n(PostgreSQL:\nPersistente Speicherung)" as postgres
   }
   user --> nginx : HTTPS
   nginx --> gunicorn : Proxy Pass
-  gunicorn --> Web: WSGI
-  Web --> django: API-Aufrufe
+  gunicorn --> django: WSGI
   django --> postgres : SQL
   @enduml
 ....
 
 === Verteilungsdiagramm (Deployment Diagramm)
 //Beschreibt die physischen Knoten (Rechner) des Systems und Komponenten, die in diesen Knoten ausgeführt werden. 
+[plantuml, "{diagramsdir}/system-context", svg]
+....
+@startuml
+skinparam linetype ortho
 
-TODO: iseproject-server hält docker container, dort je 1 container für PostreSQL, Nginx, Django, Gunicorn
+rectangle "HTW VM" {
+  rectangle "Docker" {
+    rectangle "Nginx"
+    rectangle "Gunicorn + Django"
+    rectangle "PostgreSQL"
+  }
+}
+@enduml
+....
+
 
 
 == Technologie-Stack
@@ -147,7 +141,7 @@ sind in <<Architekturentscheidungen>> dokumentiert._
 | 
 
 | Webserver
-| Nginx (reverseproxy) + gunicorn (WSGI)
+| Nginx (Reverse Proxy) + gunicorn (WSGI)
 | Bewährte Kombination für Django-Apps, gute Performance, genügend Konfigurationsanleitungen verfügbar
 | ADR-006
 
@@ -158,30 +152,21 @@ sind in <<Architekturentscheidungen>> dokumentiert._
 _Dieser Abschnitt dokumentiert, welche Qualitätsziele und Einschränkungen aus dem
 Produktkonzept direkte Auswirkungen auf Architekturentscheidungen haben._
 
-IMPORTANT: Qualitätsziele und Einschränkungen werden hier *nicht* neu definiert —
-sie sind im link:../product/product_concept.adoc[Produktkonzept] als einziger Quelle festgelegt.
-Dieser Abschnitt zeigt ausschließlich die technischen Konsequenzen, die sich aus
-diesen Anforderungen ergeben, und verweist auf die zugehörigen Entscheidungen.
-
 [cols="2,3,2", options="header"]
 |===
 | Anforderung (aus Produktkonzept) | Technische Konsequenz | Entscheidung
 
 | Performanceziel: Seitenladezeit < 200ms
-| Server-Side Rendering erforderlich; Optimierung von Database Queries; Eventuell lange Loads asynchron machen
+| Server-Side Rendering erforderlich; Reverseproxy cached statische Dateien. Optimierung von Database Queries; Eventuell lange Loads asynchron machen
 | ADR-002
 
 | Verfügbarkeit
-| Schneller und robuster Deployment-Prozess; Extra Server für Produktion.
+| Schneller und robuster Deployment-Prozess; Hochschulserver ausschließlich für Produktion. Docker Container um fehler im Deployment zu vermeiden.
 | ADR-005
 
 | Datensicherheit
-| Authentifizierung und Nutzeraccounts, welche nur eigene und offene Daten anzeigen.
+| Authentifizierung und Nutzeraccounts, welche nur eigene und offene Daten anzeigen. Wenig externe Abhänigkeiten einbauen.
 | ADR Authentifizierung steht aus
-
-| Barrierefreiheit
-| Nutzung von barrierefreien Layouts; Nutzung von Bootstrap Objekten, welche Barrierefreiheit unterstützen.
-| ADR-005
 
 |===
 
@@ -267,14 +252,12 @@ Das Team muss sich in die Datenbank hineinarbeiten, dafür ist es weitverbreitet
 
 === ADR-004: Frontend Framework
 
-
-
 [cols="1,3"]
 
 |===
 
 | *Status*
-| Vorgeschlagen
+| Akzeptiert
 
 | *Datum*
 | 19.05.2026
@@ -284,8 +267,8 @@ Das Team muss sich in die Datenbank hineinarbeiten, dafür ist es weitverbreitet
 
 | *Entscheidung*
 | Vorerst wird im Frontend Bootstrap genutzt. 
-Dadurch soll eine einfache und agile Umsetzung von Layout und UI gewährleistet werden. 
-Da Bootstrap schlicht ist, bleibt der Aufwand für das Frontend gering. 
+Dadurch soll eine einfache und agile Umsetzung von Layout und UI gewährleistet werden. +
+Da Bootstrap schlicht ist, bleibt der Aufwand für das Frontend gering. +
 Auch ist die Hürde des Erlernens für das Team niedrig. 
 
 | *Alternativen*
@@ -392,15 +375,11 @@ Punkte in Vergessenheit geraten._
 |===
 | Beschreibung | Begründung für Kompromiss | Backlog-Eintrag
 
-| [z. B. Keine Datenbankmigrationen mit Flyway — manuelle Skripte]
-| [z. B. Zeitdruck in Sprint 2; wird in Sprint 5 nachgeholt]
-| [z. B. TECH-42]
+| Manuelles erzeugen von HTML in JS skripten
+| Wenig Erfahrung mit JS und Zeitdruck in Sprint 3; wird in Sprint 4 nachgebessert.
+| https://github.com/casio888/SE-G2-EventFlow/issues/96[Issue 96]
 
-| [z. B. Fehlerbehandlung in API-Endpunkten unvollständig]
-| [z. B. MVP-Fokus; nur Hauptpfade abgedeckt]
-| [z. B. TECH-51]
-
-| [Weitere technische Schuld]
-| [Begründung]
-| [Ticket-Referenz oder "-"]
+| Fehlende automatisierte Code Dokumentation
+| Zeitdruck und Fehlende Tools für automatisierte Zusammenstellung von API Dokumentation
+| kein Issue
 |===
