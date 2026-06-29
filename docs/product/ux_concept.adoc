@@ -293,18 +293,18 @@ Wireframes und UI-Implementierungen._
 | Aspekt | Entscheidung & Begründung
 
 | Farbpalette
-| [z. B. Primärfarbe: Hochschulblau #003D6E; Akzent: #E87722;
-  Begründung: Corporate Identity der Hochschule]
+| Primärfarbe: Weiss; Akzent: Dunkles Navy-Blau #0b1330;
+  Begründung: Das Navy-Blau schien schlicht und vetraut auf der weissen Website
 
 | Typografie
-| [z. B. Fließtext: Inter 16px; Überschriften: Inter Bold;
-  Begründung: Hohe Lesbarkeit auf kleinen Bildschirmen]
+| Fließtext: Roobert 16px; Überschriften: Roobert Bold;
+  Begründung: Perfekte Lesbarkeit bei vielen Details und Text, keine unnötige Schnörkellei
 
 | Ikonografie
-| [z. B. Material Icons; konsistentes Icon-Set im gesamten Produkt]
+| Minimalistische Outline-Icons; konsistentes Icon-Set im gesamten Produkt für die bessere visualisierung
 
 | Bildsprache
-| [z. B. Keine Stock-Fotos; Illustrationen im Flat-Design-Stil]
+| Noch statisch angelegte Patzhalter; Illustrationen im Kachel-Raster
 |===
 
 === Interaktionsprinzipien
