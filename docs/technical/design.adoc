@@ -259,35 +259,53 @@ Dieses Dokument zeigt ausschließlich die technische Persistenzstruktur.
 skinparam monochrome true
 skinparam defaultFontSize 12
 
-entity "nutzer" as user {
+entity "user" as user {
   * id : UUID <<PK>>
   --
-  * email : VARCHAR(255) <<UNIQUE>>
-  * name : VARCHAR(100)
+  * email : VARCHAR(160) <<UNIQUE>>
+  * password : VARCHAR(100)
+  * firmenname : VARCHAR(200)
+  * firmensitzLand : VARCHAR(50)
+  * firmensitzOrt : VARCHAR(170)
+  * firmensitzStraße : VARCHAR(85)
+  * firmensitzHausnummer : INTEGER
+  * telefon : VARCHAR(15)
+  * fax : VARCHAR(15) <<NULLABLE>>
+  * angemeldet : BOOLEAN
+}
+
+entity "veranstaltung" as event {
+  * id : UUID <<PK>>
+  --
+  * titel : VARCHAR(200)
+  * beschreibung : TEXT
+  * start_datum : DATE
+  * end_datum : DATE
+  * ort : VARCHAR(200)
   * erstellt_am : TIMESTAMP
 }
 
-entity "raum" as room {
+entity "timeslot" as slot {
   * id : UUID <<PK>>
   --
-  * bezeichnung : VARCHAR(100)
-  * kapazitaet : INTEGER
-  * standort : VARCHAR(100)
+  * veranstaltung_id : UUID <<FK>>
+  * start : TIME
+  * ende : TIME
+  * dauer : INTEGER
+  * kategorie : VARCHAR(200)
 }
 
-entity "buchung" as booking {
+entity "einreichung" as submission {
   * id : UUID <<PK>>
   --
-  * nutzer_id : UUID <<FK>>
-  * raum_id : UUID <<FK>>
-  * beginn : TIMESTAMP
-  * ende : TIMESTAMP
-  * status : VARCHAR(20)
-  * erstellt_am : TIMESTAMP
+  * veranstaltung_id : UUID <<FK>>
+  * eingereicht : BOOLEAN
+  * beschreibung : VARCHAR(400)
+  * anforderungen : TEXT
 }
 
-user ||--o{ booking : "gibt auf"
-room ||--o{ booking : "ist Gegenstand von"
+event ||--o{ slot : "besteht aus"
+event ||--o{ submission : "hat Einreichungen"
 
 @enduml
 ....
