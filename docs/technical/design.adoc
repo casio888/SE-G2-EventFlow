@@ -259,35 +259,53 @@ Dieses Dokument zeigt ausschließlich die technische Persistenzstruktur.
 skinparam monochrome true
 skinparam defaultFontSize 12
 
-entity "nutzer" as user {
+entity "user" as user {
   * id : UUID <<PK>>
   --
-  * email : VARCHAR(255) <<UNIQUE>>
-  * name : VARCHAR(100)
+  * email : VARCHAR(160) <<UNIQUE>>
+  * password : VARCHAR(100)
+  * firmenname : VARCHAR(200)
+  * firmensitzLand : VARCHAR(50)
+  * firmensitzOrt : VARCHAR(170)
+  * firmensitzStraße : VARCHAR(85)
+  * firmensitzHausnummer : INTEGER
+  * telefon : VARCHAR(15)
+  * fax : VARCHAR(15) <<NULLABLE>>
+  * angemeldet : BOOLEAN
+}
+
+entity "veranstaltung" as event {
+  * id : UUID <<PK>>
+  --
+  * titel : VARCHAR(200)
+  * beschreibung : TEXT
+  * start_datum : DATE
+  * end_datum : DATE
+  * ort : VARCHAR(200)
   * erstellt_am : TIMESTAMP
 }
 
-entity "raum" as room {
+entity "timeslot" as slot {
   * id : UUID <<PK>>
   --
-  * bezeichnung : VARCHAR(100)
-  * kapazitaet : INTEGER
-  * standort : VARCHAR(100)
+  * veranstaltung_id : UUID <<FK>>
+  * start : TIME
+  * ende : TIME
+  * dauer : INTEGER
+  * kategorie : VARCHAR(200)
 }
 
-entity "buchung" as booking {
+entity "einreichung" as submission {
   * id : UUID <<PK>>
   --
-  * nutzer_id : UUID <<FK>>
-  * raum_id : UUID <<FK>>
-  * beginn : TIMESTAMP
-  * ende : TIMESTAMP
-  * status : VARCHAR(20)
-  * erstellt_am : TIMESTAMP
+  * veranstaltung_id : UUID <<FK>>
+  * eingereicht : BOOLEAN
+  * beschreibung : VARCHAR(400)
+  * anforderungen : TEXT
 }
 
-user ||--o{ booking : "gibt auf"
-room ||--o{ booking : "ist Gegenstand von"
+event ||--o{ slot : "besteht aus"
+event ||--o{ submission : "hat Einreichungen"
 
 @enduml
 ....
@@ -298,22 +316,46 @@ room ||--o{ booking : "ist Gegenstand von"
 |===
 | Tabelle | Spalte | Beschreibung & Besonderheiten
 
-.4+| nutzer
-| id | UUID als Primärschlüssel; wird vom System generiert
-| email | Eindeutig; wird für Login und Benachrichtigungen verwendet
-| name | Anzeigename; kein Pflichtfeld nach DSGVO-Anforderung
-| erstellt_am | Automatisch gesetzt; nicht änderbar
+.11+| user
+| id | UUID Primärschlüssel; automatisch generiert
+| email | Eindeutig; Login‑Identifier
+| password | Gehasht per PBKDF2; Hashing erfolgt beim Speichern
+| firmenname | Name des Unternehmens
+| firmensitzLand | Land des Firmensitzes
+| firmensitzOrt | Ort des Firmensitzes
+| firmensitzStraße | Straße des Firmensitzes
+| firmensitzHausnummer | Hausnummer des Firmensitzes
+| telefon | Validiert per Regex; Format '+999999999'
+| fax | Optional; gleiche Validierung wie Telefon
+| angemeldet | Boolean; zeigt an, ob der User aktiv angemeldet ist
 
-.4+| buchung
-| id | UUID als Primärschlüssel
-| status | Enum-Werte: `AKTIV`, `STORNIERT`, `ABGELAUFEN`
-| beginn / ende | Beide Zeitpunkte inklusive; keine Überschneidung per DB-Constraint
-| nutzer_id / raum_id | Fremdschlüssel; kein Cascade Delete — Buchungen bleiben erhalten
+.7+| veranstaltung
+| id | UUID Primärschlüssel
+| titel | Titel der Veranstaltung; Pflichtfeld
+| beschreibung | Freitext; optional
+| start_datum | Startdatum der Veranstaltung
+| end_datum | Enddatum der Veranstaltung
+| ort | Veranstaltungsort
+| erstellt_am | Automatisch gesetzt; nicht veränderbar
 
-| [Weitere Tabelle]
-| [Spalte]
-| [Beschreibung]
+.6+| timeslot
+| id | UUID Primärschlüssel
+| veranstaltung_id | Fremdschlüssel auf veranstaltung.id; CASCADE
+| start | Startzeit des Timeslots
+| ende | Endzeit des Timeslots
+| dauer | Dauer in Minuten
+| kategorie | Kategorie des Timeslots (z. B. Vortrag, Pause)
+
+.5+| einreichung
+| id | UUID Primärschlüssel
+| veranstaltung_id | Fremdschlüssel auf veranstaltung.id; CASCADE
+| eingereicht | Boolean; zeigt an, ob die Einreichung final eingereicht wurde
+| beschreibung | Kurzbeschreibung der Einreichung
+| anforderungen | Detailbeschreibung / Anforderungen; Textfeld
+
+| [Weitere Tabelle] | [Spalte] | [Beschreibung]
 |===
+
 
 === Datenbankmigrationen
 
