@@ -335,3 +335,9 @@ wird begründet, damit sie nicht aus Unwissenheit verletzt wird._
 | [Weiteres Prinzip]
 | [Beschreibung & Begründung]
 |===
+
+_Dieses Dokument wird kontinuierlich weiterentwickelt — insbesondere nach Nutzerinterviews,
+Usability-Tests oder wesentlichen Designentscheidungen. Individuelle Feature-Wireframes
+werden nicht hier, sondern direkt in den User Stories im Product Backlog gepflegt._
+
+_Der Zweck dieses Dokuments ist es, die wesentlichen Bedarfe und Funktionalitäten des Systems {project-system-name} überblicksartig zu beschreiben. Der Fokus liegt auf den Fähigkeiten, die von Stakeholdern und adressierten Nutzern benötigt werden, und der Begründung dieser Bedarfe. Die Details, wie das System {project-system-name} diese Bedarfe erfüllt, werden durch User Stories im Product Backlog sowie dem UX-Konzept beschrieben._

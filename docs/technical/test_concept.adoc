@@ -34,7 +34,7 @@ Unit-Tests prüfen einzelne Klassen oder Funktionen isoliert voneinander.
 | Alle Funktionen von Models. Alle Funktionen in utils.py, soowie save/clean Funktionen von Forms.
 
 | Werkzeug
-| unittest in den einzelnen Apps.
+| Django unittest in den einzelnen Apps (tests.py).
 
 | Mocking (Faken / Simulieren)
 | aktuell nicht vorhanden
@@ -108,7 +108,7 @@ Hier werden alle Tests aufgeführt, die nicht automatisiert werden können.
 | UI-Design, neue Features vor dem Sprint Review
 
 | Vorgehen
-| Exploratives Testen durch Teammitglied, das das Feature nicht implementiert hat
+| Exploratives Testen durch ein Teammitglied, welches das Feature nicht implementiert hat.
 
 | Dokumentation
 | Ergebnis in Pull Request als Kommentar
