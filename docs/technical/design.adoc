@@ -28,10 +28,10 @@ skinparam monochrome true
 skinparam defaultFontSize 13
 skinparam rectangleBorderThickness 1
 
-rectangle "Präsentationsschicht\n(Frontend / API-Controller)" as presentation
-rectangle "Anwendungsschicht\n(Services / Use Cases)" as application
-rectangle "Domänenschicht\n(Entitäten / Geschäftslogik)" as domain
-rectangle "Persistenzschicht\n(Repositories / Datenbank)" as persistence
+rectangle "Präsentationsschicht\n(Frontend / Templates + urls.py)" as presentation
+rectangle "Anwendungsschicht\n(Services / views.py)" as application
+rectangle "Domänenschicht\n(Geschäftslogik / utils.py)" as domain
+rectangle "Persistenzschicht\n(Datenbank / models.py)" as persistence
 
 presentation -down-> application : ruft auf
 application -down-> domain : verwendet
@@ -77,9 +77,13 @@ note right of persistence : Datenbankzugriff,\nMapping
 | Domänenschicht (Entitäten)
 |===
 
-NOTE: Die Domänenschicht darf *nicht* von Persistenz- oder Präsentationsschicht
-abhängen. Diese Regel ist der häufigste Architekturverstoss in Studentenprojekten
-und sollte in Code Reviews explizit geprüft werden.
+Anmerkung: In Django ist die Schichtenordnung etwas durschmischt durch die Scaffolding Struktur.
+
+Urls.py legt die URL-Pfade der Anwendung fest.+
+views.py hält die Controller Funktionen für die einzelnen URL Sichten, sowie die Verknüpfung mit Templates (Presentation). +
+models.py enthält die Entitätsklassen, welche vom ORM automatisch in die Datenbank gespiegelt werden.
+
+Eingabevalidierung findet durch clean/save Funktionen an Models (Objekten in der DB), bzw Forms in forms.py (für Eingabeformulare) statt. Hier ist also keine klare Trennung nach den Schichten in Dateien umgesetzt. Von diesem Django standard abzuweichen und eine eigene Codestruktur umzusetzen wäreunratsam, da so alle Vorteile der Community-Ressourcen weggeworfen werden.
 
 == Komponentenübersicht
 
@@ -91,6 +95,51 @@ zusammengehörige Einheit von Code mit einer klar definierten Aufgabe._
 
 //Beipielhaftes Komponentendiagramm, das die Hauptkomponenten und ihre Schnittstellen zeigt
 //Die tatsächlichen Komponenten müssen auf das konkrete Projekt zugeschnitten sein
+[plantuml]
+----
+' source: https://github.com/plantuml-stdlib/C4-PlantUML
+
+' C4 Model
+
+!include <c4/C4_Component.puml>
+
+LAYOUT_WITH_LEGEND()
+
+title Component Diagram – [Systemname]
+
+Container_Boundary(frontend, "Frontend") {
+  Component(templates, "Statische Templates", "Django Templates", "Navigation + Footer, Left und Top Varianten")
+  Component(static, "Statische Dateien", "CSS, JS", "Bootstrap, Main CSS")
+}
+
+Container_Boundary(backend, "Backend") {
+  Component(auth, "Auth", "Django App", "Login, Registrierung")
+  Component(basis, "Basis", "Django App", "Startseite, Impressum")
+  Component(veranstaltungen, "Veranstaltungen", "Django App", "Veranstaltungübersicht, Veranstaltung anlegen und bearbeiten")
+  Component(einreichung, "Einreichung", "Django App", "Einreichungsübersicht, Einreichung erstellen")
+}
+
+Container_Boundary(db_boundary, "Datenbank") {
+  ComponentDb(postgresql, "PostgreSQL", "Relationale DB", "Persistente Datenhaltung")
+}
+
+Component(orm, "Django ORM", "Django ORM", "Datenbankabstraktion")
+
+Rel_U(auth, templates, "rendert")
+Rel_U(basis, templates, "rendert")
+Rel_U(veranstaltungen, templates, "rendert")
+Rel_U(einreichung, templates, "rendert")
+
+Rel(templates, static, "bindet ein")
+
+Rel_D(auth, orm, "nutzt")
+Rel_D(basis, orm, "nutzt")
+Rel_D(veranstaltungen, orm, "nutzt")
+Rel_D(einreichung, orm, "nutzt")
+
+Rel_D(orm, postgresql, "liest / schreibt")
+----
+////
 [plantuml, component-diagram, svg]
 ....
 @startuml
@@ -136,36 +185,45 @@ Rel(notification_svc, ext, "sendet E-Mails über", "SMTP")
 
 @enduml
 ....
-
+////
 === Komponentenbeschreibung
 
 [cols="1,2,2", options="header"]
 |===
 | Komponente | Verantwortung | Schnittstellen
 
-| [z. B. Buchungs-Controller]
-| HTTP-Anfragen für Buchungsvorgänge entgegennehmen;
-  Eingaben validieren; Antworten zurückgeben
-| REST-API (eingehend); Buchungs-Service (ausgehend)
+| Statische Templates
+| Enthalten Navigation und Footer und werden von jedem App-Template included.
+  Einheitliche Struktur des Frontends
+| Statische Dateien
 
-| [z. B. Buchungs-Service]
-| Buchungslogik koordinieren; Verfügbarkeit prüfen;
-  Transaktionen verwalten; Benachrichtigungen auslösen
-| Buchungs-Repository; Benachrichtigungs-Service
+| Statische Dateien
+| Halten CSS und JS für Statische Templates.
+| keine
 
-| [z. B. Buchungs-Repository]
-| Buchungsdaten lesen und schreiben;
-  Datenbankabfragen kapseln
-| Datenbank (JPA / SQL)
+| Auth App
+| Anmeldung und Registrierung. Starten von Sessions.
+| Alle anderen Apps und Statische Templates, ORM
 
-| [z. B. Benachrichtigungs-Service]
-| E-Mail-Benachrichtigungen versenden;
-  Vorlagen verwalten
-| Externer SMTP-Dienst
+| Basis App
+| Halten von Views, welche in keine andere Kategorie fallen (Startseite, Impressum, FAQ)
+| Statische Templates, ORM
 
-| [Weitere Komponente]
-| [Verantwortung]
-| [Schnittstellen]
+| Veranstaltungen App
+| Alle Interaktionen mit Veranstaltungen (Detailansicht, Listen, Übersicht, Erstellen)
+| Statische Templates, ORM
+
+| Einreichungen App
+| Alle Interaktionen mit Einreichungen (Detailansicht, Listen, Übersicht, Erstellen)
+| Statische Templates, ORM
+
+| Django ORM
+| Integrierte Django Komponente. In jeder App werden Models erstellt, die durch das ORM in die DB gemappt werden.
+| Datenbank
+
+| Datenbank
+| PostgreSQL Datenbank für persistente Datenhaltung.
+| ORM
 |===
 
 ---
@@ -367,16 +425,17 @@ versioniert. So ist der Datenbankzustand jederzeit reproduzierbar._
 | Aspekt | Beschreibung
 
 | Werkzeug
-| [z. B. Flyway / Liquibase]
+| Django Migrations
 
 | Speicherort
-| [z. B. `src/main/resources/db/migration/`]
+| In jeder App im Ordner `migrations`
 
 | Namenskonvention
-| [z. B. `V001__initiales_schema.sql`, `V002__buchung_status_spalte.sql`]
+| Von Django automatisiert.
 
 | Regel
-| Bestehende Migrationsskripte werden *nie* verändert — nur neue hinzugefügt
+| Bestehende Migrationsskripte werden *nie* verändert — nur neue hinzugefügt. +
+In einem Produktinkrement erstellte Migrationen können von Tech Lead für ein Release zusammengefasst werden.
 |===
 
 == Eingesetzte Muster & Konventionen
@@ -391,24 +450,13 @@ Problem auf unterschiedliche Weise lösen._
 |===
 | Muster | Wo eingesetzt | Begründung
 
-| Repository Pattern
+| Django ORM
 | Persistenzschicht: alle Datenbankzugriffe
-| Datenbanklogik von Geschäftslogik trennen;
-  einfacher austauschbar und testbar
+| Alle Entitäten der DB werden als Modelle dargestellt und vom ORM in die Datenbank gemappt. Damit ist keine manuelle Anpassung der DB Struktur notwendig.
 
-| DTO (Data Transfer Object)
-| Schnittstelle zwischen Controller und Service
-| Interne Domänenobjekte nicht direkt exponieren;
-  API-Struktur unabhängig vom Datenbankmodell
-
-| Service Layer
-| Anwendungsschicht: alle Use Cases
-| Geschäftslogik zentralisieren;
-  Controller schlank halten
-
-| [Weiteres Muster]
-| [Wo eingesetzt]
-| [Begründung]
+| Trennen von Präsentations- und Anwendungsschicht 
+| In jedem views.py
+| Damit man die beiden Schichten nicht vermischt, muss im Code Review strikt beachtet werden, dass alle Filter, und andere Entscheidungs Treffenden Code-Teile in Funktionen in utils.py ausgelagert werden und in views.py nur gerufen werden.
 |===
 
 === Fehlerbehandlung
@@ -418,16 +466,14 @@ Problem auf unterschiedliche Weise lösen._
 | Aspekt | Konvention
 
 | Fachliche Fehler
-| Als eigene Exception-Klassen modellieren
-  (z. B. `RaumNichtVerfuegbarException`, `BuchungNichtGefundenException`)
+| Als eigene Exception-Klassen modellieren.
 
 | HTTP-Fehlercodes
 | 400 für Validierungsfehler; 404 für nicht gefundene Ressourcen;
   409 für Konflikte; 500 nur für unerwartete Systemfehler
 
 | Fehlermeldungen
-| Immer strukturiert zurückgeben:
-  `{ "fehler": "...", "details": "..." }` — kein Stack Trace an den Client
+| Werden in struktriert an das frontend zur anzeige gegeben. Kein Stacktrace im Client Browser. Zusätzlich in Django geloggt.
 
 | Logging
 | Fachliche Fehler als WARN; unerwartete Fehler als ERROR;
@@ -441,17 +487,14 @@ Problem auf unterschiedliche Weise lösen._
 | Aspekt | Konvention
 
 | URL-Struktur
-| Ressourcenorientiert im Plural: `/buchungen`, `/raeume`, `/nutzer`
+| Ressourcenorientiert im Plural: `/veranstaltungen`, `/einreichungen` +
+Verwenden von internen ID's in URL's, da wir über Session auth schützen und keine unprotected Zugriffe erlauben.
 
 | HTTP-Methoden
-| GET = lesen; POST = erstellen; PUT = ersetzen; PATCH = teilweise ändern;
-  DELETE = löschen
+| GET = lesen; POST = erstellen;
 
 | Antwortformat
-| JSON in allen Fällen; Datumsformat ISO 8601: `2024-06-01T09:00:00Z`
-
-| Versionierung
-| [z. B. URL-Präfix `/api/v1/` - Version nur erhöhen bei Breaking Changes]
+| HTTP in allen Fällen; Datumsformat ISO 8601: `2024-06-01T09:00:00Z`
 |===
 
 _Diagramme in diesem Dokument sollten den aktuellen Stand des Codes widerspiegeln.
