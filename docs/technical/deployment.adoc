@@ -36,27 +36,28 @@ keine andere.
 | Beliebig
 | Manuell (Docker Compose)
 
+////
 | CI
 | —
 | Automatische Qualitätsprüfung bei jedem Push
 | Alle Branches
 | Automatisch (GitHub Actions)
-
+////
+////
 | Staging
 | [z. B. https://staging.example.com]
 | Integrationstest; Abnahme durch Product Owner vor Release
 | `main`
 | Automatisch nach Merge in `main`
-
+////
 | Produktion
-| [z. B. https://example.com]
+| project04.informatik.htw-dresden.de/
 | Live-System für Endnutzer:innen
-| `main` (getaggt)
-| Manuell mit Freigabe
+| `main` (in zukunft getaggt)
+| Manuell durch Tech Lead
 |===
 
-NOTE: In der Hochschulumgebung entfällt oft eine separate Produktionsumgebung.
-In diesem Fall dient Staging gleichzeitig als Produktionsumgebung.
+NOTE: Es ist geplant zukünftig auf dem Hochschulserver ein Staging mit einzuabuen
 
 == Lokale Entwicklungsumgebung
 
@@ -77,14 +78,6 @@ Mal lokal zum Laufen bringen wollen.
 | ≥ 2.0
 | Wird mit Docker Desktop mitgeliefert
 
-| [z. B. Node.js]
-| [z. B. ≥ 20 LTS]
-| [z. B. https://nodejs.org — oder via `nvm`]
-
-| [z. B. Java JDK]
-| [z. B. ≥ 21]
-| [z. B. https://adoptium.net]
-
 | Git
 | Aktuell
 | https://git-scm.com
@@ -94,21 +87,54 @@ Mal lokal zum Laufen bringen wollen.
 
 [source,bash]
 ----
-# 1. Repository klonen
-git clone [Repository-URL]
-cd [projektname]
+# 1. ssh key erstellen für commits mit korrektem Account
+ssh-keygen -C "<name>" -f .ssh/seproject_ed25519 -t ed25519
 
-# 2. Umgebungsvariablen konfigurieren
-cp .env.example .env
-# .env mit einem Editor öffnen und ggf. anpassen
+# 2. ssh config für git anlegen
+tee -a .ssh/config <<'EOF'
 
-# 3. Alle Dienste starten
-docker compose up --build
+Host github.com
+  Hostname github.com
+  User git
+  IdentityFile ~/.ssh/seproject_ed25519
+  IdentitiesOnly yes
+EOF
 
-# 4. Prüfen, ob alles läuft
-# Frontend:  http://localhost:3000
-# Backend:   http://localhost:8080
-# API-Docs:  http://localhost:8080/swagger-ui
+# In github.com -> Einstellungen -> SSH und GPG Keys -> New SSH Key
+# Dort den Inhalt vom Public Key hinzufügen
+cat ~/.ssh/seproject_ed25519.pub
+
+# Testen (Erfolg steh in der Nachricht. Session wird immer direkt beendet)
+ssh github.com
+
+
+
+# 3. Repository klonen
+git clone git@github.com:casio888/SE-G2-EventFlow.git
+cd SE-G2-EventFlow/deployment
+
+# 4. Links anlegen
+ln -s -f docker-compose.yml.dev docker-compose.yml
+cp docker-compose.yml.dev.example docker-compose.yml.dev
+
+# 5. Anpassen der Pfad-Platzhalter <>, in dockerfile
+pwd
+vim docker-compose.yml.dev
+
+# 6. Umgebungsvariablen konfigurieren
+cp .env.django.example .env.django
+# 7. Anpassen von Variablen in Platzhaltern <>. Secret key kann beliebig gewählt werden. SQL Password muss mit postgres_db_password.txt übereinstimmen
+vim .env.django
+echo "<password>" > postgres_db_password.txt
+
+# 8. Docker container bauen (nur 1 mal zu Beginn oder bei Änderungen an Dockerfiles)
+docker compose build
+
+# 9. Docker Stack starten (-d startet container detached von der shell. Weniger für debugging geeignet.)
+docker compose up
+
+# 10. Prüfen, ob alles läuft
+# Frontend:  http://localhost:8000
 ----
 
 === System stoppen und aufräumen
@@ -116,10 +142,8 @@ docker compose up --build
 [source,bash]
 ----
 # Dienste stoppen (Daten bleiben erhalten)
+cd deployment
 docker compose down
-
-# Dienste stoppen und Volumes löschen (Datenbank wird geleert)
-docker compose down -v
 ----
 
 === Häufige Probleme beim lokalen Start
@@ -133,13 +157,10 @@ docker compose down -v
   `lsof -i :8080` (macOS/Linux) bzw. `netstat -ano` (Windows)
 
 | Datenbank-Container startet nicht
-| Volumes löschen und neu starten: `docker compose down -v && docker compose up`
+| Volumes löschen, inhalt leeren und neu starten: `docker compose down -v && suro rm -rf deployment/* && docker compose up`
 
-| Umgebungsvariablen fehlen
-| Prüfen ob `.env`-Datei vorhanden ist; Beispielwerte in `.env.example` ansehen
-
-| [Weiteres Problem]
-| [Lösung]
+| Django kann keine Verbindung zu PostgreSQL aufbauen
+| Prüfen ob `.env.django`-Datei vorhanden ist; 
 |===
 
 
@@ -154,70 +175,69 @@ existieren, wie sie konfiguriert werden, und wie sie zusammenarbeiten.
 |===
 | Service | Image | Zweck | Port (intern → extern)
 
-| [z. B. frontend]
-| [z. B. node:20-alpine (Build-Image)]
-| React-Anwendung — wird als statische Dateien gebaut und über nginx ausgeliefert
-| 80 → 3000
+| nginx
+| Dockerfile-nginx
+| Reverse Proxy für Produktivbetrieb. aktuell HTTP only
+| 80 → 80
 
-| [z. B. backend]
-| [z. B. eclipse-temurin:21-jre-alpine]
-| Spring Boot REST-API
-| 8080 → 8080
+| django
+| Dockerfile-django
+| Codebasis + wsgi (nur in Produktion)
+| 8000 (lokal), Interne Portweitergabe an nginx in Produktion
 
-| [z. B. db]
-| [z. B. postgres:15-alpine]
-| PostgreSQL-Datenbank
-| 5432 → 5432
-
-| [z. B. mailhog]
-| [z. B. mailhog/mailhog]
-| E-Mail-Testserver (nur lokal); fängt alle ausgehenden E-Mails ab
-| 1025 (SMTP), 8025 (UI) → 8025
+| PostgreSQL
+| postgres:18.4-alpine
+| PostgreSQL-Datenbank (Wird in dockerfile referenzoert. Upstream Image)
+| intern Port 5432, keine externe Portweiterleitung
 |===
 
 === Umgebungsvariablen
 
-Alle Konfiguration erfolgt über Umgebungsvariablen und *nicht* über feste Werte
-im Code. Eine vollständige Liste mit Beispielwerten befindet sich in `.env.example`.
+Alle Konfiguration erfolgt über Umgebungsvariablen und *nicht* über feste Werte im Code. Eine vollständige Liste mit Beispielwerten befindet sich in `.env.django.example`.
 
 [cols="1,1,2,1", options="header"]
 |===
 | Variable | Beispielwert | Beschreibung | Pflicht
 
-| `DATABASE_URL`
-| `jdbc:postgresql://db:5432/projektname`
-| Verbindungs-URL zur Datenbank
+| `DJANGO_DEBUG`
+| `0` oder `1`
+| DEbug Modus für Django. In Produktion ist 0 Pflicht. Lokal eignet sich 1 für ausführliche Debugging Messages
 | Ja
 
-| `DATABASE_USER`
-| `projektname`
-| Datenbankbenutzername
+| `DJANGO_SECRET_KEY`
+| `"SEist_toll"`
+| Django Secret Key, darf einen beliebigen Wert annehmen
 | Ja
 
-| `DATABASE_PASSWORD`
-| `[sicheres Passwort]`
-| Datenbankpasswort — nie im Repository speichern
+| `SQL_ENGINE`
+| `django.db.backends.postgresql`
+| Django Datenbank connector
 | Ja
 
-| `JWT_SECRET`
-| `[min. 32 Zeichen]`
-| Geheimnis für JWT-Token-Signierung
+| `SQL_DATABASE`
+| `db_eventflow`
+| Name der Datenbank in DB Container
 | Ja
 
-| `SMTP_HOST`
-| `mailhog` (lokal) / `smtp.example.com` (prod)
+| `SQL_USER`
+| `postgres_eventflow`
 | E-Mail-Serveradresse
 | Ja
 
-| `LOG_LEVEL`
-| `INFO`
-| Log-Level: DEBUG / INFO / WARN / ERROR
-| Nein (Standard: INFO)
+| `SQL_PASSWORD`
+| `12345`
+| Passwort niemals in git commiten. Auch für lokale Instanzen bitte sichere Passwörter verwenden.
+| Ja
 
-| [Weitere Variable]
-| [Beispielwert]
-| [Beschreibung]
-| [Ja / Nein]
+| `SQL_HOST`
+| `postgres`
+| Name des PostgreSQL docker containers
+| Ja
+
+| `SQL_PORT`
+| `5432`
+| Port des PostgreSQL (nur docker intern)
+| Ja
 |===
 
 IMPORTANT: Produktions-Secrets (Passwörter, API-Keys, JWT-Secrets) werden *nie*
@@ -231,6 +251,8 @@ als CI/CD-Secrets oder über einen Secret-Manager verwaltet.
 Die Pipeline automatisiert Qualitätsprüfung und Deployment. Sie stellt sicher,
 dass kein Code in `main` gelangt, der Tests bricht oder Qualitätsstandards verletzt.
 
+Noch nicht implementiert
+////
 === Pipeline-Schritte im Detail
 
 [cols="1,2,1,1", options="header"]
@@ -297,21 +319,19 @@ Kein manueller Eingriff erforderlich.
 . Staging-Umgebung zieht die neuen Images
 . Smoke Tests werden automatisch ausgeführt
 . Team wird bei Erfolg oder Fehler benachrichtigt
+////
 
 === Release und Deployment auf Produktion (manuell)
 
 [source,bash]
 ----
-# 1. Sicherstellen, dass main aktuell und stabil ist
-git checkout main
-git pull
+# 1. In Github einen Tag für den Main Branch erstellen. Tags nur auf Main!
+git checkout 1.0.0
 
-# 2. Release-Tag erstellen (Semantic Versioning)
-git tag v1.2.0
-git push --tags
+# 2. Deployment auf Produktion
+cd deployment
+docker compose up -d --build
 
-# 3. In GitHub Actions: Produktions-Deployment manuell freigeben
-# → GitHub → Actions → deploy.yml → "Run workflow" → Version bestätigen
 ----
 
 NOTE: Wir verwenden _Semantic Versioning_ mit dem Schema MAJOR.MINOR.PATCH: 
@@ -327,17 +347,11 @@ Nach jedem Deployment werden folgende Prüfungen ausgeführt:
 |===
 | Prüfung | Erwartetes Ergebnis
 
-| `GET /actuator/health` (Backend)
-| HTTP 200, Status `UP`
-
 | Startseite laden (Frontend)
-| HTTP 200, Ladezeit < 3 s
+| HTTP 200, Ladezeit < 1 s (F12->Network)
 
 | Login-Flow
 | Erfolgreicher Login mit Testnutzer möglich
-
-| [Kernfunktion prüfen]
-| [Erwartetes Ergebnis]
 |===
 
 == Rollback
@@ -363,8 +377,10 @@ Produktionsumgebung verursacht. Schnelles Handeln minimiert die Auswirkungen.
 # → GitHub → Actions → deploy.yml → Version des letzten stabilen Tags eingeben
 
 # Option B: Manuell das vorherige Image aktivieren
-docker compose pull [service]:[vorherige-version]
-docker compose up -d [service]
+cd deployment
+docker compose pull <vorherige Version>
+docker compose down
+docker compose up -d
 ----
 
 [start=4]
@@ -379,21 +395,11 @@ Fehler diagnostiziert werden können.
 
 === Health Checks
 
+Aktuell keine implementiert.
+
 [cols="1,2,1", options="header"]
 |===
 | Endpunkt | Beschreibung | Erwartet
-
-| `GET /actuator/health`
-| Gesamtstatus des Systems inkl. Datenbankverbindung
-| HTTP 200, `{"status": "UP"}`
-
-| `GET /actuator/info`
-| Version und Build-Informationen
-| HTTP 200
-
-| [Weiterer Endpunkt]
-| [Beschreibung]
-| [Erwartetes Ergebnis]
 |===
 
 === Logs
@@ -403,16 +409,13 @@ Fehler diagnostiziert werden können.
 | Aspekt | Beschreibung
 
 | Log-Format
-| Strukturiertes JSON-Logging; enthält Zeitstempel, Level, Service, Message
+| Default Django Logging
 
-| Log-Zugriff (lokal)
-| `docker compose logs -f [service]`
-
-| Log-Zugriff (Staging/Prod)
-| [z. B. `ssh user@server` → `journalctl -u [service]` oder Logging-Dashboard-URL]
+| Log-Zugriff (lokal/Prod)
+| `docker logs -f deployment-django-1`
 
 | Was geloggt wird
-| Alle Fehler (ERROR), Warnungen (WARN), wichtige Geschäftsereignisse (INFO)
+| Alle Fehler (ERROR), Warnungen (WARN)
 
 | Was *nicht* geloggt wird
 | Passwörter, Tokens, personenbezogene Daten (DSGVO-Anforderung)
