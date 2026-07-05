@@ -3,7 +3,7 @@
 // Bitte fügen Sie hier die Informationen zu Ihrem Team, Projekt, Datum und Repository ein.
 Team:: G2
 Projektname:: EventFlow
-Datum:: 28.06.2026
+Datum:: 06.07.2026
 Repository-Link:: https://github.com/casio888/SE-G2-EventFlow
 
 == 1. Sprintziel und nützlicher MVP-Ausschnitt
@@ -13,13 +13,13 @@ Repository-Link:: https://github.com/casio888/SE-G2-EventFlow
 | Kriterium | Ihre Antwort
 
 | Sprintziel
-| Umsetzung von User Stories, welche Teil vom MVP sind. (Demo für Präsentation)
+| "Veranstalter können Events erstellen, verwalten und veröffentlichen, sodass Einreicher alle verfügbaren Events auf der Startseite einsehen können.“
 
 | Ausgewählter MVP-Ausschnitt / Nutzerfluss
-| Anmelden und Erstellen und Bearbeiten von Events.
+| Anmeldung und Kontoerstellung sowie Erstellung und Bearbeitung von Events aus Sicht der Veranstalter.
 
 | Zentrale Annahme oder Umsetzungsfrage
-| Die anmeldung ist die Grundlage für den Mehrbenutzerbetrieb. Ohne Events kann es keine Einreichungen geben, also wurde das erstellen und bearbeiten von Events priorisiert.
+| Die Anmeldung ist die Grundlage für den Mehrbenutzerbetrieb. Ohne Events kann es keine Einreichungen geben, also wurde das Erstellen und Bearbeiten von Events priorisiert.
 |===
 
 == 2. Erwartete Praktiken in Sprint 3
@@ -148,8 +148,14 @@ Project Board konsequent nutzen +
 Klares Code-Review-System definieren
 
 | Nächster MVP-Schritt
-|
+|Behebung der nach dem Feedbackgespräch gefundenen Bugs +
+sowie Umsetzung der Kontoerstellung für Einreicher. +
+Außerdem sollen alle angelegten Events auf der Startseite +
+angezeigt werden und Einreicher sich für Events einschreiben können.
 
 | Offene Fragen / Risiken für die weitere Projektarbeit
-|
+| Ob Multi-User-Funktionalität für Firmenkonten benötigt wird, +
+also mehrere Rollen pro Account. Außerdem soll weiterhin +
+viel Feedback eingeholt werden, um sicherzustellen, +
+dass wir eine sinnvolle und nützliche Features entwickeln.
 |===
