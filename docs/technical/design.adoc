@@ -105,7 +105,7 @@ zusammengehörige Einheit von Code mit einer klar definierten Aufgabe._
 
 LAYOUT_WITH_LEGEND()
 
-title Component Diagram – [Systemname]
+title Component Diagram – {project-name}
 
 Container_Boundary(frontend, "Frontend") {
   Component(templates, "Statische Templates", "Django Templates", "Navigation + Footer, Left und Top Varianten")
@@ -234,6 +234,8 @@ Sequenzdiagramme zeigen, wie Komponenten bei typischen Abläufen zusammenarbeite
 Dokumentiert werden hier nur die wichtigsten und komplexesten Flüsse —
 nicht jede einfache CRUD-Operation.
 
+Noch keine Interaktionsflüsse modelliert.
+////
 === [Flussname, z. B. Raum buchen]
 
 _Beschreibe kurz, was dieser Ablauf zeigt und warum er dokumentiert wird._
@@ -297,7 +299,7 @@ NOTE: Flussnamen im Diagramm sollten identisch mit den Methodennamen im Code sei
 Das macht es einfacher, vom Diagramm zum Code zu navigieren und umgekehrt.
 
 ---
-
+////
 == Datenmodell
 
 _Dieser Abschnitt beschreibt die technische Datenbankstruktur: Tabellen, Spalten,

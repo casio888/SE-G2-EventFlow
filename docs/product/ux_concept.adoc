@@ -213,6 +213,8 @@ _Dieser Abschnitt beschreibt Abläufe, die mehrere Features oder Bereiche des Pr
 umfassen. Einzelne Feature-Wireframes werden in den jeweiligen User Stories gepflegt.
 Hier dokumentieren wir nur Flüsse auf Systemebene, z.B. mit UML-Aktivitätsdiagrammen._
 
+Bisher keine Modelliert.
+////
 === [Flussname, z. B. Onboarding-Flow]
 
 _Beschreibe kurz, was dieser Fluss abdeckt und welche Personas er betrifft._
@@ -279,7 +281,7 @@ stop
 
 @enduml
 ....
-
+////
 == Designsystem & Interaktionsprinzipien
 
 _Dieser Abschnitt dokumentiert systemweite Design- und Interaktionsentscheidungen,
@@ -325,15 +327,11 @@ wird begründet, damit sie nicht aus Unwissenheit verletzt wird._
   niemals nur eine leere Fläche. Reduziert Orientierungslosigkeit.
 
 | Fehlermeldungen sind verständlich und handlungsorientiert.
-| Fehlermeldungen nennen die Ursache in einfacher Sprache und schlagen einen
-  nächsten Schritt vor. Kein technischer Jargon für Endnutzer:innen.
+| Fehlermeldungen nennen die Ursache in einfacher Sprache, markieren die Fehlerhafte Stelle farblich.
 
-| Kernfunktionen sind mit einer Hand erreichbar.
-| Primäre Aktionen befinden sich im unteren Bildschirmbereich (Daumenzone).
-  Optimiert für einhändige Smartphone-Nutzung.
-
-| [Weiteres Prinzip]
-| [Beschreibung & Begründung]
+| Kernfunktionen sind im Header erreichbar.
+| Primäre Aktionen befinden sich im Header wieder
+  Optimiert für Laptop Nutzung.
 |===
 
 _Dieses Dokument wird kontinuierlich weiterentwickelt — insbesondere nach Nutzerinterviews,

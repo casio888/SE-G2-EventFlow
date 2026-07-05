@@ -39,7 +39,7 @@ ____
 | Michael Lisek, Nina Steyer, Paul Daniel Matyjaszczuk, Tomy Minh Ngoc Nguyen
 
 | Stakeholder (Hauptansprechpartner)
-| [Noch unbekannt]
+| Justin Rietschel, Juan Ramiro Groh Fili, Kajo Nareike
 |===
 
 
@@ -104,8 +104,7 @@ ____
 == Arbeitsweise
 
 === Definition of Ready (DoR)
-_Eine User Story ist bereit für die Entwicklung, wenn:
-_
+_Eine User Story ist bereit für die Entwicklung, wenn:_
 
 * [ ] Die User Story ist klar formuliert und verständlich.
 * [ ] Die Akzeptanzkriterien sind klar und vollständig beschrieben.
@@ -141,4 +140,4 @@ _Diese Vereinbarungen haben wir gemeinsam getroffen:_
 
 
 
-_Nächste Überprüfung: [Datum / Sprint] — Diese Charta wird regelmäßig in der Retrospektive aktualisiert._
+_Nächste Überprüfung: [Sprint 4] — Diese Charta wird regelmäßig in der Retrospektive aktualisiert._
