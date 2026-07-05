@@ -138,10 +138,14 @@ Beschreiben Sie, was Ihr Team nach Sprint 3 beibehalten, ändern oder gezielt ve
 | Kriterium | Ihre Antwort
 
 | Beibehalten
-|
+| Klare Aufgabenverteilung +
+Gegenseitige Unterstützung +
+Gute Teamkommunikation
 
 | Ändern / verbessern
-|
+| User Stories in Tasks unterteilen +
+Project Board konsequent nutzen +
+Klares Code-Review-System definieren
 
 | Nächster MVP-Schritt
 |
