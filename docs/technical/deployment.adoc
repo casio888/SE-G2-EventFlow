@@ -201,7 +201,7 @@ Alle Konfiguration erfolgt über Umgebungsvariablen und *nicht* über feste Wert
 
 | `DJANGO_DEBUG`
 | `0` oder `1`
-| DEbug Modus für Django. In Produktion ist 0 Pflicht. Lokal eignet sich 1 für ausführliche Debugging Messages
+| Debug Modus für Django. In Produktion ist 0 Pflicht. Lokal eignet sich 1 für ausführliche Debugging Messages
 | Ja
 
 | `DJANGO_SECRET_KEY`
