@@ -15,7 +15,7 @@ Dieses Dokument referenziert sie und dokumentiert ausschließlich die technische
 Konsequenzen, die sich daraus ergeben._
 
 _Detaillierte Beschreibungen der internen Softwarestruktur, z.B. Schichten, Komponenten,
-Datenmodell, Interaktionsflüsse, sind im link:design.adoc[Designdokument] (`design.adoc`)beschrieben._
+Datenmodell, Interaktionsflüsse, sind im link:design.adoc[Designdokument] (`design.adoc`) beschrieben._
 
 ---
 
@@ -34,8 +34,6 @@ title C4 – System Context: EventFlow
 actor "Benutzer\n(Nutzt die Webanwendung)" as user
 
 rectangle "EventFlow System" as EventFlow
-
-
 
 user --> EventFlow : nutzt
 
@@ -61,7 +59,7 @@ Aktuell keine.
 //Level 2 im C4-Modell
 Diese Sicht gibt an, welche Umgebungen für den Code vorgesehen sind, z.B. JVM, Node.js, DBMS, Browser, Android Runtime.
 
-[plantuml, "{diagramsdir}/system-context", svg]
+[plantuml, "{diagramsdir}/runtime-env", svg]
 ....
 @startuml
 title C4 – Container Diagram: EventFlow
@@ -81,7 +79,7 @@ package "EventFlow" {
 
 === Verteilungsdiagramm (Deployment Diagramm)
 //Beschreibt die physischen Knoten (Rechner) des Systems und Komponenten, die in diesen Knoten ausgeführt werden. 
-[plantuml, "{diagramsdir}/system-context", svg]
+[plantuml, "{diagramsdir}/distribution-diagram", svg]
 ....
 @startuml
 skinparam linetype ortho

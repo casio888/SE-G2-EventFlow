@@ -45,7 +45,7 @@ Technische Implementierungsdetails gehören nicht hierher!
 
 === Diagramm
 
-[plantuml, domain-model, svg]
+[plantuml, domainmodel, svg]
 ....
 @startuml
 
