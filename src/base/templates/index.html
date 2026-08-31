@@ -29,36 +29,13 @@
     <section>
         <h2>Beliebte Events</h2>
         <div class="popular-grid">
-            <div class="event-card card-large-1">
-                <span class="circle-indicator"></span>
-                [Event Name]
-                <span class="badge">Spain</span>
-            </div>
-            <div class="event-card">
-                <span class="circle-indicator"></span>
-                [Event Name]
-                <span class="badge">London</span>
-            </div>
-            <div class="event-card card-large-2">
-                <span class="circle-indicator"></span>
-                [Event Name]
-                <span class="badge">Croatia</span>
-            </div>
-            <div class="event-card">
-                <span class="circle-indicator"></span>
-                [Event Name]
-                <span class="badge">Bratislava</span>
-            </div>
-            <div class="event-card">
-                <span class="circle-indicator"></span>
-                [Event Name]
-                <span class="badge">Lisbon</span>
-            </div>
-            <div class="event-card">
-                <span class="circle-indicator"></span>
-                [Event Name]
-                <span class="badge">Copenhagen</span>
-            </div>
+            {% for event in event_list %} 
+                <div class="event-card {% if forloop.counter <= 2 %}card-large-{{ forloop.counter }}{% endif %}">
+                    <span class="circle-indicator"></span>
+                    {{ event.titel }}
+                    <span class="badge">{{ event.ort }}</span>
+                </div>
+            {% endfor %}
         </div>
     </section>
 
