@@ -7,6 +7,7 @@ from veranstaltungen.utils import get_six_elements
 #    return render(request, "index.html")
 
 
+
 def login_view(request):
     if request.method == "POST":
         user = User.objects.filter(email=request.POST.get("email")).first()
