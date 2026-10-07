@@ -1,0 +1,24 @@
+= Weekly Meeting 06.10.2026
+
+== Treffen und Ankommen
+
+==Besprechen von Feedback
+    - Epics, Userstorys und Tasks werden in Zukunft angepasst verwendet (Für alle)
+    - Sprintplaning View wird wieder eingefügt                          (Nataliia)
+        Jede Epic wird zu Story und dann in Tasks zerlegt
+    - Backlock überarbeiten und Anpassen                                (Nataliia, Jeder für sich)
+    - Glosar und Domänenmodell soll angepasst werden                    (Elias)
+    - Architekturschichten / C4 modell --> Prof Fragen                  (Micha+Nina)
+
+== Micha stellt Engineering-Guidelines vor, damit mehr drauf geachtet wird
+    - Was muss in welche Datei...
+    - Kommentare
+    - Was macht welcher Test 
+    - Wir schreiben für alle Funktionen einen kleinen Test. Die verändern sich mit der Zeit...
+    - Alle versuchen ihren Quellcode entsprechend anzupassen und fragen bei Bedarf Micha
+    - Code formatieren soll gleich sein (blackfürpython verwenden)
+    - Code wird auf Englisch geändert   (refactor)                      (Minh)
+
+Reviews und merges bleiben wie bisher (kommitmessages werden auch Englisch)
+
+Nataliia erstelllt Sprintplaning für diesen Sprint (Nächste Woche nicht da)
