@@ -28,16 +28,18 @@ _Der Systemkontext zeigt das System als Ganzes in seiner Umgebung: welche extern
 
 [plantuml, "{diagramsdir}/system-context", svg]
 ....
-@startuml
-title C4 – System Context: EventFlow
+!include <C4/C4_Context>
+title System Context: EventFlow
 
-actor "Benutzer\n(Nutzt die Webanwendung)" as user
+Person(einreicher, "Einreicher", "Beobachtet Events und reicht Vorschläge ein")
+Person(veranstalter, "Veranstalter", "Erstallt und Verwaltet Veranstaltungen")
 
-rectangle "EventFlow System" as EventFlow
+System(eventflow, "EventFlow", "Webanwendung zur Verwaltung von Events und Einreichungen")
 
-user --> EventFlow : nutzt
+Rel(einreicher, eventflow, "Bewirbt sich auf Veranstaltungen", "HTTPS")
+Rel(veranstalter, eventflow, "Verwaltet Veranstlatungen", "HTTPS")
 
-
+SHOW_LEGEND()
 @enduml
 
 ....
