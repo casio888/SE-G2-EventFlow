@@ -8,12 +8,12 @@
 
 {% block extra_header %}
 <div class="hero-content">
-    <h1>Join your event with [Website Name]</h1>
-    <p>1.203.367 events around the world are waiting for you!</p>
+    <h1>Join your event with [Website Name]<!--Kann mit Eventflow ausgetauscht werden.?--></h1>
+    <p>1.203.367 events around the world are waiting for you!</p> <!--Dynamisch anpassen-->
     
     <!-- Suchleiste -->
     <div class="search-container">
-        <input type="text" class="search-input" placeholder="Name, Category">
+        <input type="text" class="search-input" placeholder="Name, Category"><!--Funktion.?-->
         <span class="search-divider">|</span>
         <input type="text" class="search-input" placeholder="Destination">
         <button class="search-btn"></button>
@@ -27,38 +27,16 @@
     
     <!-- Sektion: Popular Events -->
     <section>
+  
         <h2>Popular events</h2>
         <div class="popular-grid">
-            <div class="event-card card-large-1">
-                <span class="circle-indicator"></span>
-                [Event Name]
-                <span class="badge">Spain</span>
-            </div>
-            <div class="event-card">
-                <span class="circle-indicator"></span>
-                [Event Name]
-                <span class="badge">London</span>
-            </div>
-            <div class="event-card card-large-2">
-                <span class="circle-indicator"></span>
-                [Event Name]
-                <span class="badge">Croatia</span>
-            </div>
-            <div class="event-card">
-                <span class="circle-indicator"></span>
-                [Event Name]
-                <span class="badge">Bratislava</span>
-            </div>
-            <div class="event-card">
-                <span class="circle-indicator"></span>
-                [Event Name]
-                <span class="badge">Lisbon</span>
-            </div>
-            <div class="event-card">
-                <span class="circle-indicator"></span>
-                [Event Name]
-                <span class="badge">Copenhagen</span>
-            </div>
+            {% for event in event_list %} 
+                <div class="event-card {% if forloop.counter <= 2 %}card-large-{{ forloop.counter }}{% endif %}">
+                    <span class="circle-indicator"></span>
+                    {{ event.titel }}
+                    <span class="badge">{{ event.ort }}</span>
+                </div>
+            {% endfor %}
         </div>
     </section>
 
