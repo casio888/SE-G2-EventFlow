@@ -1,0 +1,78 @@
+= Sprintplanning 13.10.26
+
+== Meeting anwesend Minh, Nina, Paul, Michi, Elias
+
+Start 15:30
+
+=== Was noch offen ist 
+    - C4 ist noch nicht fertig, Micha hat etwas gemacht, aber noch nicht alles. Mit Nina austauschen.
+    - Minh hat alles übersetzt und request gesendet (fertig)
+    - Paul soll autorisierung anschauen -> hat mit Micha bessprochen.
+    - Elias muss noch Pull request machen.
+    
+=== Was wir neu machen müssen
+    - Sprint 3 Feedback: 
+        - Zeiten in Europäische 24h Variante machen
+        Suchleiste (blauer Streifen)
+        Vergangene Events
+         Anmeldung: Stern marker für Pflichtfelder, kein Fax, Regionenauswahl?, Eingeloggt Status oben rechts (überall), Email+ PW ganz oben, Registrierung Rückbutton->Style anpassen
+         Bugs: Validierung der Daten, Startseite dunkler bereich größer machen, "Über 10 Events"... Anzahl dynamisch, 
+         Eventerstellung: Zeitslots in min, nicht gesamtzeit überschreiten, Zeitsloterstellung hakelig, Datumvalidierung... +button ohne FKT
+         Events nach Startdatum sortiert, für Übersichtlichkeit, (Kreis bei den Events, Herz...)
+
+        Minh macht alles Frontend davon...
+        Nina macht das mit dem erstellen der Events
+        Elias macht anpassungen auf der Startseite
+    
+    -Tasks aus den User-Storys 
+        Paul bekommt die Story #16 "Profil erstellen".
+        Paul will mal über den Code drüber schauen und sagen, was Sinnvoll ist und was nicht. + ob alles eingehalten wird.
+        Michi befasst sich mit githooks
+        Nina bekommt die Story #46 "Zeitslots für ein Event erstellen und bearbeiten"
+        Micha bekommt die Story #4 "Beim Event Einreichungen machen."
+        Elias bekommt die Story #44 "Übersicht der eingereichten Beiträge"
+
+        Es werden Tasks bearbeitet keine User-Storys!!!
+
+
+Pauls Fragen an Nataliia:
+Profilerstellung: Nur für den Einreicher? oder Einreicher und Veranstalter?
+                  Müssen Einreicher und Veranstalter wo anders hin geleitet werden? (Sichten blocken)
+                  Veranstalter einzig möglichkeit ein Event zu erstellen? (oder auch Einreicher)
+
+Ende 16:30
+
+=== Aufgaben daraus:
+        Elias: 
+            - Mit Minh klären, wie man die Startseite verbessert (lange Namen der Events)
+            - Pull Request zu bisherigem
+            - Story #44 Zerlegen in Tasks und bearbeiten
+
+        Micha: 
+            - Mit Nina über C4 Modell reden
+            - Story #4 Zerlegen in Tasks und bearbeiten
+
+        Michi:
+            - Befassen githooks und automatisierung.
+        
+        Minh: 
+            - Mit Elias die Startseite verbessern (lange Namen der Events)
+            - Frontend aus dem Feedback
+            - Bekommt von allen User-Storys die Frontend Tasks
+
+        Nataliia: 
+            - Ansprechpartner bei Fragen zum Produkt
+
+        Nina: 
+            - Überarbeiten der Eventerstellung
+            - Story #46 Zerlegen in Tasks und bearbeiten
+
+        Paul:
+            - Überarbeitet die Anmeldung nach Feedback
+            - Befasst sich mit der Anmeldung 
+            - Story #16 Zerlegen in Tasks und bearbeiten
+            - Will über Code drüber schauen, ob Vereinbarungen eingehalten und ob was überflüssig ist
+
+
+         
+
