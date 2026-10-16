@@ -12,25 +12,41 @@
         </a>
     </section>
 
-    <section name="Beschreibung">
-        Hier können sie eine Beschreibung eingeben.
-        <br>
-        <textarea name="Beschreibung" rows="10" cols="50">
-        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
-        </textarea>
-    </section>
-
-    <section name="Anforderungen">
-        Hier können sie Ihre Anforderungen an das Event vermerken.
-        <br>
-        <textarea name="Anforderungen" rows="10" cols="50">
-        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
-        </textarea>
-    </section>
-    
-
-    <section name="Anhang">
-        <button id="Anhang" onclick="Anhang()">Anhang</button>
-    </section>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        <p>
+            {{ form.duration_requested.label_tag }}
+            {{ form.duration_requested }}
+            <span id="timeslot-duration" aria-live="polite"></span>
+            {{ form.duration_requested.errors }}
+        </p>
+        <p>
+            {{ form.timeslot.label_tag }}
+            <select name="{{ form.timeslot.html_name }}" id="{{ form.timeslot.id_for_label }}" required>
+                <option value="">---------</option>
+                {% for timeslot in form.timeslot.field.queryset %}
+                    <option value="{{ timeslot.pk }}" 
+                            data-duration="{{ timeslot.dauer }}"
+                            <<! preserve selection of error -->
+                            {% if form.timeslot.value|stringformat:"s" == timeslot.pk|stringformat:"s" %}selected{% endif %}
+                    >{{ timeslot.str_form }}</option>
+                {% endfor %}
+            </select>
+            {{ form.timeslot.errors }}
+        </p>
+        <p>
+            {{ form.Beschreibung.label_tag }}
+            {{ form.Beschreibung }}
+            {{ form.Beschreibung.errors }}
+        </p>
+        <p>
+            {{ form.Anforderungen.label_tag }}
+            {{ form.Anforderungen }}
+            {{ form.Anforderungen.errors }}
+        </p>
+        <button type="submit">Einreichung absenden</button>
+    </form>
 </main>
+<script src="{% static 'js/bewerbung.js' %}"></script>
 {% endblock %}

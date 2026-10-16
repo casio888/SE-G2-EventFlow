@@ -47,3 +47,11 @@ class Timeslot(models.Model):
 
     def __str__(self):
         return f"{self.start} - {self.ende} ({self.kategorie})"
+
+    def str_form(self):
+        """Returns a string representation useful for List entries
+
+        Returns:
+            string: Datum Startzeit Endzeit im Format 'dd:mm HH:MM HH:MM'
+        """
+        return f"{self.day:%d.%m} {self.start:%H:%M} {self.ende:%H:%M}"
