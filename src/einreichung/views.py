@@ -5,9 +5,15 @@ from veranstaltungen.models import Veranstaltung
 from veranstaltungen.utils import get_event
 
 def event_list(request):
+<<<<<<< HEAD
     events = Veranstaltung.objects.all()
     context = {'events': events}
     return render(request,'einreichung/einreichung_list.html', context)
+=======
+    events=Veranstaltung.objects.all()
+    context={'events': events}
+    return render(request,'einreichung/einreichung_list.html',context)
+>>>>>>> 2ddd4b6 (refactor: renamed template for clearity going forward)
 
 def event_bewerbung(request, event_id):
     # TODO Once users are implemented, throw error when einreichung existiert
