@@ -20,6 +20,6 @@ from . import views
 
 urlpatterns = [
     path('',views.event_list,name='event_list'),
-    path('bewerben/',views.event_bewerbung,name='event_bewerbung'),
+    path('bewerben/<int:event_id>',views.event_bewerbung,name='event_bewerbung'),
 ]
 
