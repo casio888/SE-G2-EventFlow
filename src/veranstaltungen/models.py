@@ -25,6 +25,7 @@ class Veranstaltung(models.Model):
 class Timeslot(models.Model):
     """
     Einzelner Timeslot einer Veranstaltung.
+    Kann nicht Tagesübergreifed stattfinden (z.B. 23:00-1:00)
 
     Attributes:
         veranstaltung (FK): Zugehörige Veranstaltung
@@ -40,6 +41,7 @@ class Timeslot(models.Model):
     )
     start = models.TimeField()
     ende = models.TimeField()
+    day = models.DateField()
     dauer = models.PositiveIntegerField()
     kategorie = models.CharField(max_length=200)
 
