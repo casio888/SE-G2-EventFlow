@@ -5,7 +5,7 @@ from veranstaltungen.models import Veranstaltung
 def event_list(request):
     events=Veranstaltung.objects.all()
     context={'events': events}
-    return render(request,'einreichung/einreichung.html',context)
+    return render(request,'einreichung/einreichung_list.html',context)
 
 def event_bewerbung(request):
     event=Veranstaltung.objects.all() #hier muss geändert werden, auf das gewollte Event
