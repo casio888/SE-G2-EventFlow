@@ -1,51 +1,84 @@
-from django import forms
-from .models import Event
 import json
-from datetime import datetime
+from datetime import date, datetime
+
+from django import forms
+from django.utils import timezone
+
+from .models import Event
+
+
+# Preliminary business limit pending confirmation by the team.
+MAX_EVENT_YEARS_IN_FUTURE = 5
+
+
+def _add_calendar_years(value: date, years: int) -> date:
+    """Add calendar years to a date.
+
+    February 29 is mapped to February 28 when the target year is not
+    a leap year.
+
+    Arguments:
+        value {date} -- Date to adjust
+        years {int} -- Number of calendar years to add
+
+    Returns:
+        date -- Corresponding date in the target year
+    """
+    try:
+        return value.replace(year=value.year + years)
+    except ValueError:
+        return value.replace(year=value.year + years, day=28)
+
 
 class EventForm(forms.ModelForm):
-    """
-    Formular zur Erstellung und Bearbeitung von Veranstaltungen.
+    """Form for creating and editing events.
 
-    Enthält ein verstecktes JSON-Feld für Timeslots, die per JavaScript
-    dynamisch hinzugefügt werden.
+    Contains a hidden JSON field for timeslots that are added dynamically
+    with JavaScript.
     """
+
     timeslots = forms.CharField(widget=forms.HiddenInput(), required=False)
 
     class Meta:
         model = Event
         fields = ["title", "description", "location", "start_date", "end_date"]
-        
+
         widgets = {
-        "start_date": forms.DateInput(attrs={
-        "placeholder": "17.06.2026", 
-        "onfocus": "(this.type='date')", 
-        "onblur": "if(!this.value)this.type='text'"
-    }),
-    "end_date": forms.DateInput(attrs={
-        "placeholder": "17.06.2026", 
-        "onfocus": "(this.type='date')", 
-        "onblur": "if(!this.value)this.type='text'"
-    }),
-            
-    
-        "title": forms.TextInput(attrs={"placeholder": "[Event Name]"}),
-        "description": forms.Textarea(attrs={"placeholder": "[Catch Phrase / Beschreibung]", "rows": 3}),
-        "location": forms.TextInput(attrs={"placeholder": "Venue / Ort"}),
+            "start_date": forms.DateInput(
+                attrs={
+                    "placeholder": "17.06.2026",
+                    "onfocus": "(this.type='date')",
+                    "onblur": "if(!this.value)this.type='text'",
+                }
+            ),
+            "end_date": forms.DateInput(
+                attrs={
+                    "placeholder": "17.06.2026",
+                    "onfocus": "(this.type='date')",
+                    "onblur": "if(!this.value)this.type='text'",
+                }
+            ),
+            "title": forms.TextInput(attrs={"placeholder": "[Event Name]"}),
+            "description": forms.Textarea(
+                attrs={
+                    "placeholder": "[Catch Phrase / Beschreibung]",
+                    "rows": 3,
+                }
+            ),
+            "location": forms.TextInput(attrs={"placeholder": "Venue / Ort"}),
         }
 
     def clean_timeslots(self):
-        """
-        Validiert das Timeslot-JSON.
+        """Validate and normalize the timeslot JSON.
 
-        Prüft:
-        - Zeitformat
-        - Start < Ende
-        - Dauer > 0
-        - Kategorie vorhanden
+        Checks:
+        - Time format
+        - Start < end
+        - Duration > 0
+        - Category is present
 
         Returns:
-            list[dict]: Bereinigte Timeslot-Daten
+            list[dict]: Cleaned timeslot data
         """
         raw = self.cleaned_data["timeslots"]
         if not raw:
@@ -89,12 +122,14 @@ class EventForm(forms.ModelForm):
             if not category:
                 raise forms.ValidationError("Kategorie darf nicht leer sein.")
 
-            cleaned.append({
-                "start": start,
-                "end": end,
-                "duration": duration_int,
-                "category": category
-            })
+            cleaned.append(
+                {
+                    "start": start,
+                    "end": end,
+                    "duration": duration_int,
+                    "category": category,
+                }
+            )
 
         return cleaned
 
@@ -103,20 +138,50 @@ class EventForm(forms.ModelForm):
 
         start_date = cleaned_data.get("start_date")
         end_date = cleaned_data.get("end_date")
+        today = timezone.localdate()
+        latest_date = _add_calendar_years(today, MAX_EVENT_YEARS_IN_FUTURE)
+
+        existing_start_date = None
+        if self.instance.pk:
+            existing_start_date = self.instance.start_date
+
+        unchanged_past_start_date = (
+            start_date is not None
+            and start_date == existing_start_date
+            and start_date < today
+        )
+
+        if start_date and start_date < today and not unchanged_past_start_date:
+            self.add_error(
+                "start_date",
+                "Das Startdatum darf nicht in der Vergangenheit liegen.",
+            )
+
+        if start_date and start_date > latest_date:
+            self.add_error(
+                "start_date",
+                "Das Startdatum darf höchstens fünf Kalenderjahre in der Zukunft liegen.",
+            )
+
+        if end_date and end_date > latest_date:
+            self.add_error(
+                "end_date",
+                "Das Enddatum darf höchstens fünf Kalenderjahre in der Zukunft liegen.",
+            )
 
         if start_date and end_date and start_date > end_date:
-            raise forms.ValidationError({
-                "end_date": "Das Enddatum muss am oder nach dem Startdatum liegen."
-            })
+            self.add_error(
+                "end_date",
+                "Das Enddatum muss am oder nach dem Startdatum liegen.",
+            )
 
         return cleaned_data
 
     def save(self, commit=True):
-        """
-        Speichert die Veranstaltung und erzeugt zugehörige Timeslots.
+        """Save the event and create its associated timeslots.
 
         Returns:
-            Event: Gespeichertes Veranstaltungsobjekt
+            Event: Saved event instance
         """
         event = super().save(commit)
 
