@@ -42,6 +42,22 @@ ____
 | Justin Rietschel, Juan Ramiro Groh Fili, Kajo Nareike
 |===
 
+[cols="1,2", options="header"]
+|===
+| Review Bereich | Personen
+
+| Frontend
+| Nataliia Tsurkan, Elias Lange
+
+
+| Backend
+| Tomy Minh Ngoc Nguyen, Paul Matyjaszczuk, Nina Steyer, Michael Müller
+
+
+| Docs
+| Nataliia Tsurkan, Micha Müller
+|===
+
 
 == Meetings
 
