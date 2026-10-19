@@ -25,11 +25,14 @@ Wir wollen ein Programm entwickeln, mit dem Veranstaltungen organisiert werden k
 | Product Owner
 | Nataliia Tsurkan
 
+
 | Scrum Master
 | Elias Lange
 
+
 | Tech Lead
 | Michael Müller
+
 
 | Entwickler:innen
 | Michael Lisek, Nina Steyer, Paul Daniel Matyjaszczuk, Tomy Minh Ngoc Nguyen
@@ -38,6 +41,21 @@ Wir wollen ein Programm entwickeln, mit dem Veranstaltungen organisiert werden k
 | [Noch unbekannt]
 |===
 
+[cols="1,2", options="header"]
+|===
+| Review Bereich | Personen
+
+| Frontend
+| Nataliia Tsurkan, Elias Lange
+
+
+| Backend
+| Tomy Minh Ngoc Nguyen, Paul Matyjaszczuk, Nina Steyer, Michael Müller
+
+
+| Docs
+| Nataliia Tsurkan, Micha Müller
+|===
 
 == Meetings
 

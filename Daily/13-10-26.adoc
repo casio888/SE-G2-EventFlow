@@ -1,78 +1,101 @@
-= Sprintplanning 13.10.26
+= Sprintplanung 13.10.2026
 
-== Meeting anwesend Minh, Nina, Paul, Michi, Elias
+== Allgemeine Informationen
 
-Start 15:30
+[cols="1,3"]
+|===
+|Datum |13.10.2026
+|Beginn |15:30 Uhr
+|Ende |16:30 Uhr
+|Anwesend |Minh, Nina, Paul, Michi, Elias
+|===
 
-=== Was noch offen ist 
-    - C4 ist noch nicht fertig, Micha hat etwas gemacht, aber noch nicht alles. Mit Nina austauschen.
-    - Minh hat alles übersetzt und request gesendet (fertig)
-    - Paul soll autorisierung anschauen -> hat mit Micha bessprochen.
-    - Elias muss noch Pull request machen.
-    
-=== Was wir neu machen müssen
-    - Sprint 3 Feedback: 
-        - Zeiten in Europäische 24h Variante machen
-        Suchleiste (blauer Streifen)
-        Vergangene Events
-         Anmeldung: Stern marker für Pflichtfelder, kein Fax, Regionenauswahl?, Eingeloggt Status oben rechts (überall), Email+ PW ganz oben, Registrierung Rückbutton->Style anpassen
-         Bugs: Validierung der Daten, Startseite dunkler bereich größer machen, "Über 10 Events"... Anzahl dynamisch, 
-         Eventerstellung: Zeitslots in min, nicht gesamtzeit überschreiten, Zeitsloterstellung hakelig, Datumvalidierung... +button ohne FKT
-         Events nach Startdatum sortiert, für Übersichtlichkeit, (Kreis bei den Events, Herz...)
+== Offene Aufgaben aus dem vorherigen Sprint
 
-        Minh macht alles Frontend davon...
-        Nina macht das mit dem erstellen der Events
-        Elias macht anpassungen auf der Startseite
-    
-    -Tasks aus den User-Storys 
-        Paul bekommt die Story #16 "Profil erstellen".
-        Paul will mal über den Code drüber schauen und sagen, was Sinnvoll ist und was nicht. + ob alles eingehalten wird.
-        Michi befasst sich mit githooks
-        Nina bekommt die Story #46 "Zeitslots für ein Event erstellen und bearbeiten"
-        Micha bekommt die Story #4 "Beim Event Einreichungen machen."
-        Elias bekommt die Story #44 "Übersicht der eingereichten Beiträge"
+* *C4-Modell:* Micha hat bereits Teile bearbeitet, die Aufgabe istjedoch noch nicht abgeschlossen. Eine Abstimmung mit Nina isterforderlich.
+* *Übersetzungen:* Minh hat alle Übersetzungen abgeschlossen undden Request gesendet. (Erledigt)
+* *Autorisierung:* Paul soll sich mit der Autorisierung befassen.Eine Besprechung mit Micha hat bereits stattgefunden.
+* *Pull Request:* Elias muss noch einen Pull Request erstellen.
 
-        Es werden Tasks bearbeitet keine User-Storys!!!
+== Neue Aufgaben und Anforderungen
 
+=== Feedback aus Sprint 3
 
-Pauls Fragen an Nataliia:
-Profilerstellung: Nur für den Einreicher? oder Einreicher und Veranstalter?
-                  Müssen Einreicher und Veranstalter wo anders hin geleitet werden? (Sichten blocken)
-                  Veranstalter einzig möglichkeit ein Event zu erstellen? (oder auch Einreicher)
+Die folgenden Anpassungen wurden auf Grundlage des Feedbacks ausSprint 3 festgelegt.
 
-Ende 16:30
+==== Allgemeine Benutzeroberfläche
 
-=== Aufgaben daraus:
-        Elias: 
-            - Mit Minh klären, wie man die Startseite verbessert (lange Namen der Events)
-            - Pull Request zu bisherigem
-            - Story #44 Zerlegen in Tasks und bearbeiten
+* Zeitangaben sollen im europäischen 24-Stunden-Format dargestelltwerden.
+* Die Suchleiste soll als blauer Streifen gestaltet werden.
+* Vergangene Events sollen berücksichtigt werden.
+* Der eingeloggte Status soll auf allen Seiten oben rechtsangezeigt werden.
+* Der dunkle Bereich auf der Startseite soll vergrößert werden.
+* Die Anzeige von mehr als zehn Events soll dynamisch an dietatsächliche Anzahl angepasst werden.
+* Events sollen nach ihrem Startdatum sortiert werden.
+* Die Darstellung der Events soll hinsichtlich derÜbersichtlichkeit verbessert werden. Dabei sollen auch Kreise undHerzen bei den Events berücksichtigt werden.==== Anmeldung und Registrierung* Pflichtfelder sollen durch Sternchen (*) gekennzeichnet werden* Das Faxfeld soll entfernt werden* Die Notwendigkeit einer Auswahl für Regionen soll geprüft werden* E-Mail-Adresse und Passwort sollen im Formular ganz oben stehen* Der Zurück-Button bei der Registrierung soll stilistisangepasst werden* Die Validierung der eingegebenen Daten soll überprüft uverbessert werden.==== Eventerstellung* Zeitslots sollen in Minuten angegeben werden* Die Gesamtzeit der Zeitslots darf die verfügbare Gesamtzeit dEvents nicht überschreiten* Die Erstellung von Zeitslots soll benutzerfreundlicher gestaltwerden* Die Datumsvalidierung soll überprüft und verbessert werden* Die Funktion des Plus-Buttons soll überprüft und gegebenenfalkorrigiert werden.==== Zuständigkeiten für das Sprint-3-Feedback* *Minh:* Umsetzung der Frontend-Anpassungen aus dem Feedback* *Nina:* Überarbeitung der Eventerstellung* *Elias:* Anpassungen an der Startseite.
+=== Aufgaben aus den User Stories
+Die folgenden User Stories werden auf die Teammitglieder verteilt:
+[cols="1,2,3"]|===|Story |Zuständig |Aufgabe
+|#16|Paul|Profil erstellen
+|#46|Nina|Zeitslots für ein Event erstellen und bearbeiten
+|#4|Micha|Einreichungen für ein Event vornehmen
+|#44|Elias|Übersicht der eingereichten Beiträge|===
+Zusätzliche Aufgaben:
 
-        Micha: 
-            - Mit Nina über C4 Modell reden
-            - Story #4 Zerlegen in Tasks und bearbeiten
+* *Paul* verschafft sich einen Überblick über den bestehendenCode. Er prüft, welche Teile sinnvoll sind, welche gegebenenfallsüberflüssig sind und ob die vereinbarten Vorgaben eingehaltenwerden.
+* *Michi* beschäftigt sich mit Git Hooks und der Automatisierung.
 
-        Michi:
-            - Befassen githooks und automatisierung.
-        
-        Minh: 
-            - Mit Elias die Startseite verbessern (lange Namen der Events)
-            - Frontend aus dem Feedback
-            - Bekommt von allen User-Storys die Frontend Tasks
+IMPORTANT: Es werden einzelne Tasks aus den User Storiesbearbeitet und nicht die User Stories als Ganzes.
 
-        Nataliia: 
-            - Ansprechpartner bei Fragen zum Produkt
+=== Offene Fragen an Nataliia
 
-        Nina: 
-            - Überarbeiten der Eventerstellung
-            - Story #46 Zerlegen in Tasks und bearbeiten
+Paul möchte folgende Fragen zur Profilerstellung mit Nataliiaklären:
 
-        Paul:
-            - Überarbeitet die Anmeldung nach Feedback
-            - Befasst sich mit der Anmeldung 
-            - Story #16 Zerlegen in Tasks und bearbeiten
-            - Will über Code drüber schauen, ob Vereinbarungen eingehalten und ob was überflüssig ist
+. Ist die Profilerstellung ausschließlich für Einreichervorgesehen oder auch für Veranstalter?
+. Müssen Einreicher und Veranstalter auf unterschiedliche Seitenweitergeleitet werden? Müssen bestimmte Ansichten oder Funktionenfür einzelne Rollen eingeschränkt werden?
+. Sind Veranstalter die einzigen Benutzer, die Events erstellendürfen, oder können auch Einreicher Events erstellen?
 
+Nataliia ist die Ansprechpartnerin für Fragen zum Produkt.
 
-         
+== Aufgabenübersicht
+
+=== Elias
+* Mit Minh abstimmen, wie die Startseite verbessert werden kann,insbesondere im Umgang mit langen Eventnamen.
+* Einen Pull Request zu den bisherigen Änderungen erstellen.
+* User Story #44 in einzelne Tasks zerlegen und diese bearbeiten.
+
+=== Micha
+
+* Mit Nina über das C4-Modell sprechen.
+* User Story #4 in einzelne Tasks zerlegen und diese bearbeiten.
+
+=== Michi
+
+* Sich mit Git Hooks und Automatisierung befassen.
+
+=== Minh
+
+* Mit Elias die Verbesserungen an der Startseite abstimmen,insbesondere im Hinblick auf lange Eventnamen.
+* Die Frontend-Anpassungen aus dem Sprint-3-Feedback umsetzen.
+* Die Frontend-Tasks aus allen User Stories übernehmen.
+
+=== Nataliia
+
+* Als Ansprechpartnerin für Fragen zum Produkt zur Verfügungstehen.
+
+=== Nina
+
+* Die Eventerstellung überarbeiten.
+* User Story #46 in einzelne Tasks zerlegen und diese bearbeiten.
+
+=== Paul
+
+* Die Anmeldung entsprechend dem Sprint-3-Feedback überarbeiten.
+* Sich mit der Anmeldung und den damit verbundenen Anpassungenbefassen.
+* User Story #16 in einzelne Tasks zerlegen und diese bearbeiten.
+* Den bestehenden Code überprüfen, um sicherzustellen, dass dievereinbarten Vorgaben eingehalten werden und keine unnötigenBestandteile vorhanden sind.
+
+== Ende des Meetings
+
+    Das Meeting endete um 16:30 Uhr.
 
