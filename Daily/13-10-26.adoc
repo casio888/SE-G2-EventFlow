@@ -1,0 +1,101 @@
+= Sprintplanung 13.10.2026
+
+== Allgemeine Informationen
+
+[cols="1,3"]
+|===
+|Datum |13.10.2026
+|Beginn |15:30 Uhr
+|Ende |16:30 Uhr
+|Anwesend |Minh, Nina, Paul, Michi, Elias
+|===
+
+== Offene Aufgaben aus dem vorherigen Sprint
+
+* *C4-Modell:* Micha hat bereits Teile bearbeitet, die Aufgabe istjedoch noch nicht abgeschlossen. Eine Abstimmung mit Nina isterforderlich.
+* *Übersetzungen:* Minh hat alle Übersetzungen abgeschlossen undden Request gesendet. (Erledigt)
+* *Autorisierung:* Paul soll sich mit der Autorisierung befassen.Eine Besprechung mit Micha hat bereits stattgefunden.
+* *Pull Request:* Elias muss noch einen Pull Request erstellen.
+
+== Neue Aufgaben und Anforderungen
+
+=== Feedback aus Sprint 3
+
+Die folgenden Anpassungen wurden auf Grundlage des Feedbacks ausSprint 3 festgelegt.
+
+==== Allgemeine Benutzeroberfläche
+
+* Zeitangaben sollen im europäischen 24-Stunden-Format dargestelltwerden.
+* Die Suchleiste soll als blauer Streifen gestaltet werden.
+* Vergangene Events sollen berücksichtigt werden.
+* Der eingeloggte Status soll auf allen Seiten oben rechtsangezeigt werden.
+* Der dunkle Bereich auf der Startseite soll vergrößert werden.
+* Die Anzeige von mehr als zehn Events soll dynamisch an dietatsächliche Anzahl angepasst werden.
+* Events sollen nach ihrem Startdatum sortiert werden.
+* Die Darstellung der Events soll hinsichtlich derÜbersichtlichkeit verbessert werden. Dabei sollen auch Kreise undHerzen bei den Events berücksichtigt werden.==== Anmeldung und Registrierung* Pflichtfelder sollen durch Sternchen (*) gekennzeichnet werden* Das Faxfeld soll entfernt werden* Die Notwendigkeit einer Auswahl für Regionen soll geprüft werden* E-Mail-Adresse und Passwort sollen im Formular ganz oben stehen* Der Zurück-Button bei der Registrierung soll stilistisangepasst werden* Die Validierung der eingegebenen Daten soll überprüft uverbessert werden.==== Eventerstellung* Zeitslots sollen in Minuten angegeben werden* Die Gesamtzeit der Zeitslots darf die verfügbare Gesamtzeit dEvents nicht überschreiten* Die Erstellung von Zeitslots soll benutzerfreundlicher gestaltwerden* Die Datumsvalidierung soll überprüft und verbessert werden* Die Funktion des Plus-Buttons soll überprüft und gegebenenfalkorrigiert werden.==== Zuständigkeiten für das Sprint-3-Feedback* *Minh:* Umsetzung der Frontend-Anpassungen aus dem Feedback* *Nina:* Überarbeitung der Eventerstellung* *Elias:* Anpassungen an der Startseite.
+=== Aufgaben aus den User Stories
+Die folgenden User Stories werden auf die Teammitglieder verteilt:
+[cols="1,2,3"]|===|Story |Zuständig |Aufgabe
+|#16|Paul|Profil erstellen
+|#46|Nina|Zeitslots für ein Event erstellen und bearbeiten
+|#4|Micha|Einreichungen für ein Event vornehmen
+|#44|Elias|Übersicht der eingereichten Beiträge|===
+Zusätzliche Aufgaben:
+
+* *Paul* verschafft sich einen Überblick über den bestehendenCode. Er prüft, welche Teile sinnvoll sind, welche gegebenenfallsüberflüssig sind und ob die vereinbarten Vorgaben eingehaltenwerden.
+* *Michi* beschäftigt sich mit Git Hooks und der Automatisierung.
+
+IMPORTANT: Es werden einzelne Tasks aus den User Storiesbearbeitet und nicht die User Stories als Ganzes.
+
+=== Offene Fragen an Nataliia
+
+Paul möchte folgende Fragen zur Profilerstellung mit Nataliiaklären:
+
+. Ist die Profilerstellung ausschließlich für Einreichervorgesehen oder auch für Veranstalter?
+. Müssen Einreicher und Veranstalter auf unterschiedliche Seitenweitergeleitet werden? Müssen bestimmte Ansichten oder Funktionenfür einzelne Rollen eingeschränkt werden?
+. Sind Veranstalter die einzigen Benutzer, die Events erstellendürfen, oder können auch Einreicher Events erstellen?
+
+Nataliia ist die Ansprechpartnerin für Fragen zum Produkt.
+
+== Aufgabenübersicht
+
+=== Elias
+* Mit Minh abstimmen, wie die Startseite verbessert werden kann,insbesondere im Umgang mit langen Eventnamen.
+* Einen Pull Request zu den bisherigen Änderungen erstellen.
+* User Story #44 in einzelne Tasks zerlegen und diese bearbeiten.
+
+=== Micha
+
+* Mit Nina über das C4-Modell sprechen.
+* User Story #4 in einzelne Tasks zerlegen und diese bearbeiten.
+
+=== Michi
+
+* Sich mit Git Hooks und Automatisierung befassen.
+
+=== Minh
+
+* Mit Elias die Verbesserungen an der Startseite abstimmen,insbesondere im Hinblick auf lange Eventnamen.
+* Die Frontend-Anpassungen aus dem Sprint-3-Feedback umsetzen.
+* Die Frontend-Tasks aus allen User Stories übernehmen.
+
+=== Nataliia
+
+* Als Ansprechpartnerin für Fragen zum Produkt zur Verfügungstehen.
+
+=== Nina
+
+* Die Eventerstellung überarbeiten.
+* User Story #46 in einzelne Tasks zerlegen und diese bearbeiten.
+
+=== Paul
+
+* Die Anmeldung entsprechend dem Sprint-3-Feedback überarbeiten.
+* Sich mit der Anmeldung und den damit verbundenen Anpassungenbefassen.
+* User Story #16 in einzelne Tasks zerlegen und diese bearbeiten.
+* Den bestehenden Code überprüfen, um sicherzustellen, dass dievereinbarten Vorgaben eingehalten werden und keine unnötigenBestandteile vorhanden sind.
+
+== Ende des Meetings
+
+    Das Meeting endete um 16:30 Uhr.
+
