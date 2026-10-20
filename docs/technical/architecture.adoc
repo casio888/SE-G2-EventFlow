@@ -29,15 +29,18 @@ _Der Systemkontext zeigt das System als Ganzes in seiner Umgebung: welche extern
 [plantuml, "{diagramsdir}/system-context", svg]
 ....
 @startuml
-title C4 – System Context: EventFlow
+!include <C4/C4_Context>
+title System Context: EventFlow
 
-actor "Benutzer\n(Nutzt die Webanwendung)" as user
+Person(einreicher, "Einreicher", "Beobachtet Events und reicht Vorschläge ein")
+Person(veranstalter, "Veranstalter", "Erstallt und Verwaltet Veranstaltungen")
 
-rectangle "EventFlow System" as EventFlow
+System(eventflow, "EventFlow", "Webanwendung zur Verwaltung von Events und Einreichungen")
 
-user --> EventFlow : nutzt
+Rel(einreicher, eventflow, "Bewirbt sich auf Veranstaltungen", "HTTPS")
+Rel(veranstalter, eventflow, "Verwaltet Veranstlatungen", "HTTPS")
 
-
+SHOW_LEGEND()
 @enduml
 
 ....
@@ -62,19 +65,23 @@ Diese Sicht gibt an, welche Umgebungen für den Code vorgesehen sind, z.B. JVM, 
 [plantuml, "{diagramsdir}/runtime-env", svg]
 ....
 @startuml
-title C4 – Container Diagram: EventFlow
-actor "Benutzer\n(Nutzt die Webanwendung)" as user
-package "EventFlow" {
-    rectangle "Web-Server\n(Nginx: Reverse Proxy\nLiefert statische Dateien aus\nLeitet Requests weiter)" as nginx
-    rectangle "Application Server\n(Gunicorn:\nFührt Django Code aus)" as gunicorn
-    rectangle "Backend-API\n(Django Application:\nPython/Django\nAnwendung)" as django
-    database "Datenbank\n(PostgreSQL:\nPersistente Speicherung)" as postgres
-  }
-  user --> nginx : HTTPS
-  nginx --> gunicorn : Proxy Pass
-  gunicorn --> django: WSGI
-  django --> postgres : SQL
-  @enduml
+!include <C4/C4_Container>
+title Container Diagram: EventFlow
+
+Person(einreicher, "Einreicher", "Beobachtet Events und reicht Vorschläge ein")
+Person(veranstalter, "Veranstalter", "Erstellt und Verwaltet Events")
+
+System_Boundary(ef, "EventFlow") {
+    Container(web, "Web-Anwendung", "Python, Django, Gunicorn", "Stellt Frontend & Backend für Eventmanagement bereit")
+    ContainerDb(db, "Datenbank", "PostgreSQL", "Speichert Events, Einreichungen und Benutzer")
+}
+
+Rel(einreicher, web, "Bewirbt sich", "HTTPS")
+Rel(veranstalter, web, "Verwaltet Veranstaltungen", "HTTPS")
+Rel(web, db, "Liest und schreibt Daten", "Django ORM")
+
+SHOW_LEGEND()
+@enduml
 ....
 
 === Verteilungsdiagramm (Deployment Diagramm)
