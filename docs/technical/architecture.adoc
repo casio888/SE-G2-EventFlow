@@ -28,6 +28,7 @@ _Der Systemkontext zeigt das System als Ganzes in seiner Umgebung: welche extern
 
 [plantuml, "{diagramsdir}/system-context", svg]
 ....
+@startuml
 !include <C4/C4_Context>
 title System Context: EventFlow
 
