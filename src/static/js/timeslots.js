@@ -1,13 +1,13 @@
 
-function addTimeslot(start="", ende="", dauer="", kategorie="") {
+function addTimeslot(start="", end="", duration="", category="") {
     const tbody = document.getElementById("timeslot-body");
     const row = document.createElement("tr");
 
     row.innerHTML = `
         <td><input type="time" class="ts-start" value="${start}"></td>
-        <td><input type="time" class="ts-ende" value="${ende}"></td>
-        <td><input type="number" class="ts-dauer" value="${dauer}" min="0"></td>
-        <td><input type="text" class="ts-kategorie" value="${kategorie}"></td>
+        <td><input type="time" class="ts-end" value="${end}"></td>
+        <td><input type="number" class="ts-duration" value="${duration}" min="0"></td>
+        <td><input type="text" class="ts-category" value="${category}"></td>
         <td><button type="button" onclick="this.parentElement.parentElement.remove()">–</button></td>
     `;
 
@@ -29,9 +29,9 @@ document.addEventListener("DOMContentLoaded", function() {
         rows.forEach(row => {
             data.push({
                 start: row.querySelector(".ts-start").value,
-                ende: row.querySelector(".ts-ende").value,
-                dauer: row.querySelector(".ts-dauer").value,
-                kategorie: row.querySelector(".ts-kategorie").value
+                end: row.querySelector(".ts-end").value,
+                duration: row.querySelector(".ts-duration").value,
+                category: row.querySelector(".ts-category").value
             });
         });
 

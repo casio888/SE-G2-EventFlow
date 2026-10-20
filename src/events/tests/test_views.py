@@ -1,9 +1,9 @@
 import json
 from django.test import TestCase
 from django.urls import reverse
-from events.models import Veranstaltung
+from events.models import Event
 
-class VeranstaltungCreateViewTests(TestCase):
+class EventCreateViewTests(TestCase):
     """
     Testet die View zum Erstellen einer Veranstaltung.
 
@@ -17,7 +17,7 @@ class VeranstaltungCreateViewTests(TestCase):
         Testet, dass die Formularseite erreichbar ist
         und den erwarteten Inhalt enthält.
         """
-        response = self.client.get(reverse("events:veranstaltung_create"))
+        response = self.client.get(reverse("events:event_create"))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Event anlegen")
 
@@ -25,14 +25,14 @@ class VeranstaltungCreateViewTests(TestCase):
         """
         Testet, dass eine gültige POST-Anfrage eine Veranstaltung erzeugt.
         """
-        response = self.client.post(reverse("events:veranstaltung_create"), {
-            "titel": "Test Event",
-            "beschreibung": "Beschreibung",
-            "ort": "Frankfurt",
-            "start_datum": "2026-02-23",
-            "end_datum": "2026-02-24",
+        response = self.client.post(reverse("events:event_create"), {
+            "title": "Test Event",
+            "description": "Beschreibung",
+            "location": "Frankfurt",
+            "start_date": "2026-02-23",
+            "end_date": "2026-02-24",
             "timeslots": json.dumps([
-                {"start": "10:00", "ende": "12:00", "dauer": "120", "kategorie": "Workshop"}
+                {"start": "10:00", "end": "12:00", "duration": "120", "category": "Workshop"}
             ])
         })
 
@@ -40,10 +40,10 @@ class VeranstaltungCreateViewTests(TestCase):
         self.assertEqual(response.status_code, 302)
 
         # Es wurde genau ein Event angelegt
-        self.assertEqual(Veranstaltung.objects.count(), 1)
+        self.assertEqual(Event.objects.count(), 1)
 
-        event = Veranstaltung.objects.first()
-        self.assertEqual(event.titel, "Test Event")
+        event = Event.objects.first()
+        self.assertEqual(event.title, "Test Event")
 
         # Timeslots wurden korrekt gespeichert
         self.assertEqual(event.timeslots.count(), 1)

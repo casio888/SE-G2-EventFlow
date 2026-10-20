@@ -1,8 +1,8 @@
 import json
 from django.test import TestCase
-from events.forms import VeranstaltungForm
+from events.forms import EventForm
 
-class VeranstaltungFormTests(TestCase):
+class EventFormTests(TestCase):
     """
     Testet die Validierung des VeranstaltungFormulars.
 
@@ -15,14 +15,14 @@ class VeranstaltungFormTests(TestCase):
         """
         Testet, ob ein korrekt ausgefülltes Formular gültig ist.
         """
-        form = VeranstaltungForm(data={
-            "titel": "Test Event",
-            "beschreibung": "Beschreibung",
-            "ort": "Frankfurt",
-            "start_datum": "2026-02-23",
-            "end_datum": "2026-02-24",
+        form = EventForm(data={
+            "title": "Test Event",
+            "description": "Beschreibung",
+            "location": "Frankfurt",
+            "start_date": "2026-02-23",
+            "end_date": "2026-02-24",
             "timeslots": json.dumps([
-                {"start": "10:00", "ende": "12:00", "dauer": "120", "kategorie": "Workshop"}
+                {"start": "10:00", "end": "12:00", "duration": "120", "category": "Workshop"}
             ])
         })
         self.assertTrue(form.is_valid())
@@ -32,14 +32,14 @@ class VeranstaltungFormTests(TestCase):
         Testet, dass ein Timeslot ungültig ist,
         wenn die Startzeit nach der Endzeit liegt.
         """
-        form = VeranstaltungForm(data={
-            "titel": "Test",
-            "beschreibung": "",
-            "ort": "Ort",
-            "start_datum": "2026-02-23",
-            "end_datum": "2026-02-24",
+        form = EventForm(data={
+            "title": "Test",
+            "description": "",
+            "location": "Ort",
+            "start_date": "2026-02-23",
+            "end_date": "2026-02-24",
             "timeslots": json.dumps([
-                {"start": "14:00", "ende": "12:00", "dauer": "120", "kategorie": "Workshop"}
+                {"start": "14:00", "end": "12:00", "duration": "120", "category": "Workshop"}
             ])
         })
         self.assertFalse(form.is_valid())
@@ -49,14 +49,14 @@ class VeranstaltungFormTests(TestCase):
         Testet, dass ein Timeslot ungültig ist,
         wenn die Kategorie fehlt.
         """
-        form = VeranstaltungForm(data={
-            "titel": "Test",
-            "beschreibung": "",
-            "ort": "Ort",
-            "start_datum": "2026-02-23",
-            "end_datum": "2026-02-24",
+        form = EventForm(data={
+            "title": "Test",
+            "description": "",
+            "location": "Ort",
+            "start_date": "2026-02-23",
+            "end_date": "2026-02-24",
             "timeslots": json.dumps([
-                {"start": "10:00", "ende": "12:00", "dauer": "120", "kategorie": ""}
+                {"start": "10:00", "end": "12:00", "duration": "120", "category": ""}
             ])
         })
         self.assertFalse(form.is_valid())
@@ -65,14 +65,14 @@ class VeranstaltungFormTests(TestCase):
         """
         Testet, dass eine negative Dauer abgelehnt wird.
         """
-        form = VeranstaltungForm(data={
-            "titel": "Test",
-            "beschreibung": "",
-            "ort": "Ort",
-            "start_datum": "2026-02-23",
-            "end_datum": "2026-02-24",
+        form = EventForm(data={
+            "title": "Test",
+            "description": "",
+            "location": "Ort",
+            "start_date": "2026-02-23",
+            "end_date": "2026-02-24",
             "timeslots": json.dumps([
-                {"start": "10:00", "ende": "12:00", "dauer": "-5", "kategorie": "Workshop"}
+                {"start": "10:00", "end": "12:00", "duration": "-5", "category": "Workshop"}
             ])
         })
         self.assertFalse(form.is_valid())
@@ -82,12 +82,12 @@ class VeranstaltungFormTests(TestCase):
         Testet, dass ungültiges JSON im Timeslot-Feld
         korrekt abgefangen wird.
         """
-        form = VeranstaltungForm(data={
-            "titel": "Test",
-            "beschreibung": "",
-            "ort": "Ort",
-            "start_datum": "2026-02-23",
-            "end_datum": "2026-02-24",
+        form = EventForm(data={
+            "title": "Test",
+            "description": "",
+            "location": "Ort",
+            "start_date": "2026-02-23",
+            "end_date": "2026-02-24",
             "timeslots": "{kaputt"
         })
         self.assertFalse(form.is_valid())
@@ -96,15 +96,15 @@ class VeranstaltungFormTests(TestCase):
         """
         Testet, dass das Startdatum nicht nach dem Enddatum liegen darf.
         """
-        form = VeranstaltungForm(data={
-            "titel": "Test",
-            "beschreibung": "",
-            "ort": "Ort",
-            "start_datum": "2026-02-25",
-            "end_datum": "2026-02-24",
+        form = EventForm(data={
+            "title": "Test",
+            "description": "",
+            "location": "Ort",
+            "start_date": "2026-02-25",
+            "end_date": "2026-02-24",
             "timeslots": json.dumps([
-                {"start": "10:00", "ende": "12:00", "dauer": "120", "kategorie": "Workshop"}
+                {"start": "10:00", "end": "12:00", "duration": "120", "category": "Workshop"}
             ])
         })
         self.assertFalse(form.is_valid())
-        self.assertIn("end_datum", form.errors)
+        self.assertIn("end_date", form.errors)

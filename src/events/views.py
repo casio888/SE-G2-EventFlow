@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Veranstaltung
-from .forms import VeranstaltungForm
-from .utils import get_veranstaltung_form, save_veranstaltung_form
+from .models import Event
+from .forms import EventForm
+from .utils import get_event_form, save_event_form
 
-def veranstaltung_create(request):
+def event_create(request):
     """
     Erstellt eine neue Veranstaltung.
 
@@ -17,17 +17,17 @@ def veranstaltung_create(request):
         HttpResponse: Rendered HTML-Seite oder Redirect
     """
     if request.method == "POST":
-        form = VeranstaltungForm(request.POST)
+        form = EventForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect("events:events_your_events")
     else:
-        form = VeranstaltungForm()
+        form = EventForm()
 
     return render(request, "events/create.html", {"form": form})
 
 
-def veranstaltung_detail(request, id):
+def event_detail(request, id):
     """
     Zeigt die Detailansicht einer Veranstaltung.
 
@@ -38,7 +38,7 @@ def veranstaltung_detail(request, id):
     Returns:
         HttpResponse: Detailseite der Veranstaltung
     """
-    event = get_object_or_404(Veranstaltung, pk=id)
+    event = get_object_or_404(Event, pk=id)
     return render(request, "events/detail.html", {"event": event, "timeslots": event.timeslots.all(),})
 
 def events_your_events(request):
@@ -51,10 +51,10 @@ def events_your_events(request):
     Returns:
         HttpResponse: Event-Übersichtsseite
     """
-    events = Veranstaltung.objects.all()
+    events = Event.objects.all()
     return render(request, "events/your_events.html", {"events": events})
 
-def veranstaltung_edit(request, id):
+def event_edit(request, id):
     """
     Bearbeitet eine bestehende Veranstaltung.
 
@@ -65,14 +65,14 @@ def veranstaltung_edit(request, id):
     Returns:
         HttpResponse: Bearbeitungsseite der Veranstaltung oder Redirect
     """
-    event = get_object_or_404(Veranstaltung, pk=id)
+    event = get_object_or_404(Event, pk=id)
 
     if request.method == "POST":
-        form = VeranstaltungForm(request.POST, instance=event)
+        form = EventForm(request.POST, instance=event)
         if form.is_valid():
             form.save()
-            return redirect("events:veranstaltung_detail", id=event.id)
+            return redirect("events:event_detail", id=event.id)
     else:
-        form = VeranstaltungForm(instance=event)
+        form = EventForm(instance=event)
 
     return render(request, "events/edit.html", {"form": form, "event": event})

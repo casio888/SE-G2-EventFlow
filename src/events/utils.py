@@ -1,12 +1,12 @@
-from .forms import VeranstaltungForm
+from .forms import EventForm
 
-def get_veranstaltung_form(request, event=None):
+def get_event_form(request, event=None):
     if request.method == "POST":
-        return VeranstaltungForm(request.POST, instance=event)
+        return EventForm(request.POST, instance=event)
     
-    return VeranstaltungForm(instance=event)
+    return EventForm(instance=event)
 
-def save_veranstaltung_form(form):
+def save_event_form(form):
     if form.is_valid():
         return form.save()
 

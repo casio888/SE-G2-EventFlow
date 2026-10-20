@@ -1,9 +1,9 @@
 from django import forms
-from .models import Veranstaltung
+from .models import Event
 import json
 from datetime import datetime
 
-class VeranstaltungForm(forms.ModelForm):
+class EventForm(forms.ModelForm):
     """
     Formular zur Erstellung und Bearbeitung von Veranstaltungen.
 
@@ -13,25 +13,25 @@ class VeranstaltungForm(forms.ModelForm):
     timeslots = forms.CharField(widget=forms.HiddenInput(), required=False)
 
     class Meta:
-        model = Veranstaltung
-        fields = ["titel", "beschreibung", "ort", "start_datum", "end_datum"]
+        model = Event
+        fields = ["title", "description", "location", "start_date", "end_date"]
         
         widgets = {
-        "start_datum": forms.DateInput(attrs={
+        "start_date": forms.DateInput(attrs={
         "placeholder": "17.06.2026", 
         "onfocus": "(this.type='date')", 
         "onblur": "if(!this.value)this.type='text'"
     }),
-    "end_datum": forms.DateInput(attrs={
+    "end_date": forms.DateInput(attrs={
         "placeholder": "17.06.2026", 
         "onfocus": "(this.type='date')", 
         "onblur": "if(!this.value)this.type='text'"
     }),
             
     
-        "titel": forms.TextInput(attrs={"placeholder": "[Event Name]"}),
-        "beschreibung": forms.Textarea(attrs={"placeholder": "[Catch Phrase / Beschreibung]", "rows": 3}),
-        "ort": forms.TextInput(attrs={"placeholder": "Venue / Ort"}),
+        "title": forms.TextInput(attrs={"placeholder": "[Event Name]"}),
+        "description": forms.Textarea(attrs={"placeholder": "[Catch Phrase / Beschreibung]", "rows": 3}),
+        "location": forms.TextInput(attrs={"placeholder": "Venue / Ort"}),
         }
 
     def clean_timeslots(self):
@@ -60,40 +60,40 @@ class VeranstaltungForm(forms.ModelForm):
 
         for slot in data:
             start = slot.get("start")
-            ende = slot.get("ende")
-            dauer = slot.get("dauer")
-            kategorie = slot.get("kategorie")
+            end = slot.get("end")
+            duration = slot.get("duration")
+            category = slot.get("category")
 
-            if not start or not ende:
+            if not start or not end:
                 raise forms.ValidationError("Start und Ende müssen ausgefüllt sein.")
 
             try:
                 t_start = datetime.strptime(start, "%H:%M")
-                t_ende = datetime.strptime(ende, "%H:%M")
+                t_end = datetime.strptime(end, "%H:%M")
             except ValueError:
                 raise forms.ValidationError("Ungültiges Zeitformat. Bitte HH:MM verwenden.")
 
-            if t_start >= t_ende:
+            if t_start >= t_end:
                 raise forms.ValidationError("Startzeit muss vor der Endzeit liegen.")
 
-            if dauer:
+            if duration:
                 try:
-                    dauer_int = int(dauer)
-                    if dauer_int <= 0:
+                    duration_int = int(duration)
+                    if duration_int <= 0:
                         raise forms.ValidationError("Dauer muss größer als 0 sein.")
                 except ValueError:
                     raise forms.ValidationError("Dauer muss eine Zahl sein.")
             else:
-                dauer_int = int((t_ende - t_start).seconds / 60)
+                duration_int = int((t_end - t_start).seconds / 60)
 
-            if not kategorie:
+            if not category:
                 raise forms.ValidationError("Kategorie darf nicht leer sein.")
 
             cleaned.append({
                 "start": start,
-                "ende": ende,
-                "dauer": dauer_int,
-                "kategorie": kategorie
+                "end": end,
+                "duration": duration_int,
+                "category": category
             })
 
         return cleaned
@@ -101,12 +101,12 @@ class VeranstaltungForm(forms.ModelForm):
     def clean(self):
         cleaned_data = super().clean()
 
-        start_datum = cleaned_data.get("start_datum")
-        end_datum = cleaned_data.get("end_datum")
+        start_date = cleaned_data.get("start_date")
+        end_date = cleaned_data.get("end_date")
 
-        if start_datum and end_datum and start_datum > end_datum:
+        if start_date and end_date and start_date > end_date:
             raise forms.ValidationError({
-                "end_datum": "Das Enddatum muss am oder nach dem Startdatum liegen."
+                "end_date": "Das Enddatum muss am oder nach dem Startdatum liegen."
             })
 
         return cleaned_data
@@ -116,20 +116,20 @@ class VeranstaltungForm(forms.ModelForm):
         Speichert die Veranstaltung und erzeugt zugehörige Timeslots.
 
         Returns:
-            Veranstaltung: Gespeichertes Veranstaltungsobjekt
+            Event: Gespeichertes Veranstaltungsobjekt
         """
-        veranstaltung = super().save(commit)
+        event = super().save(commit)
 
         from .models import Timeslot
 
         slots = self.cleaned_data.get("timeslots", [])
         for slot in slots:
             Timeslot.objects.create(
-                veranstaltung=veranstaltung,
+                event=event,
                 start=datetime.strptime(slot["start"], "%H:%M").time(),
-                ende=datetime.strptime(slot["ende"], "%H:%M").time(),
-                dauer=slot["dauer"],
-                kategorie=slot["kategorie"],
+                end=datetime.strptime(slot["end"], "%H:%M").time(),
+                duration=slot["duration"],
+                category=slot["category"],
             )
 
-        return veranstaltung
+        return event

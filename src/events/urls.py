@@ -4,8 +4,8 @@ from . import views
 app_name = 'events'
 
 urlpatterns = [
-    path("create/", views.veranstaltung_create, name="veranstaltung_create"),
-    path("<int:id>/", views.veranstaltung_detail, name="veranstaltung_detail"),
-    path("your-events/", views.events_your_events, name="events_your_events"), 
-    path("<int:id>/edit/", views.veranstaltung_edit, name="veranstaltung_edit"),
+    path("erstellen/", views.event_create, name="event_create"),
+    path("<int:id>/", views.event_detail, name="event_detail"),
+    path("deine-events/", views.events_your_events, name="events_your_events"), 
+    path("<int:id>/bearbeiten/", views.event_edit, name="event_edit"),
 ]

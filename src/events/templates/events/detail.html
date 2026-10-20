@@ -10,7 +10,7 @@
 <div class="container py-4">
     
     <div class="text-center position-relative mb-5">
-        <h2 class="fw-bold">{{ event.titel }}</h2>
+        <h2 class="fw-bold">{{ event.title }}</h2>
     </div>
 
     <div class="row g-5">
@@ -20,7 +20,7 @@
             <div class="mb-5">
                 <h3 class="section-subtitle mb-3">Veranstaltungsort</h3>
                 <div class="d-inline-block bg-white border border-dark rounded px-4 py-2 fw-semibold small">
-                    📍 {{ event.ort }}
+                    📍 {{ event.location }}
                 </div>
             </div>
 
@@ -41,9 +41,9 @@
                                 {% for ts in timeslots %}
                                 <tr>
                                     <td>{{ ts.start }}</td>
-                                    <td class="text-muted">{{ ts.ende }}</td>
-                                    <td>{{ ts.dauer }} min</td>
-                                    <td>{{ ts.kategorie }}</td>
+                                    <td class="text-muted">{{ ts.end }}</td>
+                                    <td>{{ ts.duration }} min</td>
+                                    <td>{{ ts.category }}</td>
                                 </tr>
                                 {% endfor %}
                             {% else %}
@@ -75,7 +75,7 @@
             
             <div class="image-upload-placeholder mb-4 d-flex align-items-center justify-content-center overflow-hidden position-relative">
                 {% if event.bild %}
-                    <img src="{{ event.bild.url }}" alt="{{ event.titel }}" class="w-100 h-100 object-fit-cover">
+                    <img src="{{ event.bild.url }}" alt="{{ event.title }}" class="w-100 h-100 object-fit-cover">
                 {% else %}
                     <span>[Event Bild]</span>
                 {% endif %}
@@ -86,7 +86,7 @@
                 <div class="mb-4">
                     <label class="form-label small fw-bold mb-1 text-muted">Beschreibung / Catch Phrase</label>
                     <div class="bg-white border border-secondary-subtle px-3 py-2 rounded-2 text-dark" style="min-height: 90px; line-height: 1.5;">
-                        {{ event.beschreibung|default:"Keine Beschreibung hinterlegt." }}
+                        {{ event.description|default:"Keine Beschreibung hinterlegt." }}
                     </div>
                 </div>
 
@@ -94,13 +94,13 @@
                     <div class="col-6">
                         <label class="form-label small fw-bold mb-1 text-muted">Startdatum</label>
                         <div class="bg-white border border-secondary-subtle px-3 py-2 rounded-2 text-center small fw-semibold text-dark">
-                            {{ event.start_datum|date:"d.m.Y"|default:event.start_datum }}
+                            {{ event.start_date|date:"d.m.Y"|default:event.start_date }}
                         </div>
                     </div>
                     <div class="col-6">
                         <label class="form-label small fw-bold mb-1 text-muted">Enddatum</label>
                         <div class="bg-white border border-secondary-subtle px-3 py-2 rounded-2 text-center small fw-semibold text-dark">
-                            {{ event.end_datum|date:"d.m.Y"|default:event.end_datum }}
+                            {{ event.end_date|date:"d.m.Y"|default:event.end_date }}
                         </div>
                     </div>
                 </div>
@@ -111,15 +111,15 @@
                 <a href="{% url 'events:events_your_events' %}" class="btn btn-secondary w-50 py-2.5 fw-bold btn-custom-radius text-center">
                     Zurück
                 </a>
-                <a href="{% url 'events:veranstaltung_edit' event.id %}" class="btn btn-submit-event w-50 py-2.5 fw-bold text-center d-flex align-items-center justify-content-center text-decoration-none">
+                <a href="{% url 'events:event_edit' event.id %}" class="btn btn-submit-event w-50 py-2.5 fw-bold text-center d-flex align-items-center justify-content-center text-decoration-none">
                     Bearbeiten
                 </a>
             </div>
 
 <a href="{% url 'events:events_your_events' %}" class="btn btn-secondary">
 
-<a href="{% url 'events:veranstaltung_edit' event.id%}" class="btn btn-primary">
-	Veranstaltung edit
+<a href="{% url 'events:event_edit' event.id%}" class="btn btn-primary">
+	Veranstaltung bearbeiten
 </a>
 
 <a href="{% url 'events:events_your_events' %}" class="btn btn-secondary">

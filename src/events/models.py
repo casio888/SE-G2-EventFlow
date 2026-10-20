@@ -1,47 +1,47 @@
 from django.db import models
 
-class Veranstaltung(models.Model):
+class Event(models.Model):
     """
     Repräsentiert eine Veranstaltung im System.
 
     Attributes:
-        titel (str): Titel der Veranstaltung
-        beschreibung (str): Beschreibung / Catchphrase
-        start_datum (date): Startdatum
-        end_datum (date): Enddatum
-        ort (str): Veranstaltungsort
-        erstellt_am (datetime): Automatisch gesetztes Erstellungsdatum
+        title (str): Titel der Veranstaltung
+        description (str): Beschreibung / Catchphrase
+        start_date (date): Startdatum
+        end_date (date): Enddatum
+        location (str): Veranstaltungsort
+        created_at (datetime): Automatisch gesetztes Erstellungsdatum
     """
-    titel = models.CharField(max_length=200)
-    beschreibung = models.TextField(blank=True)
-    start_datum = models.DateField()
-    end_datum = models.DateField()
-    ort = models.CharField(max_length=200) 
-    erstellt_am = models.DateTimeField(auto_now_add=True)
+    title = models.CharField(max_length=200)
+    description = models.TextField(blank=True)
+    start_date = models.DateField()
+    end_date = models.DateField()
+    location = models.CharField(max_length=200) 
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.titel
+        return self.title
 
 class Timeslot(models.Model):
     """
     Einzelner Timeslot einer Veranstaltung.
 
     Attributes:
-        veranstaltung (FK): Zugehörige Veranstaltung
+        event (FK): Zugehörige Veranstaltung
         start (time): Startzeit
-        ende (time): Endzeit
-        dauer (int): Dauer in Minuten
-        kategorie (str): Kategorie des Timeslots
+        end (time): Endzeit
+        duration (int): Dauer in Minuten
+        category (str): Kategorie des Timeslots
     """
-    veranstaltung = models.ForeignKey(
-        Veranstaltung,
+    event = models.ForeignKey(
+        Event,
         on_delete=models.CASCADE,
         related_name="timeslots"
     )
     start = models.TimeField()
-    ende = models.TimeField()
-    dauer = models.PositiveIntegerField()
-    kategorie = models.CharField(max_length=200)
+    end = models.TimeField()
+    duration = models.PositiveIntegerField()
+    category = models.CharField(max_length=200)
 
     def __str__(self):
-        return f"{self.start} - {self.ende} ({self.kategorie})"
+        return f"{self.start} - {self.end} ({self.category})"

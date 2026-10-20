@@ -22,7 +22,7 @@
 </div>
 
 <div class="action-bar mb-4">
-    <a class="btn btn-new-event" href="{% url 'events:veranstaltung_create' %}">
+    <a class="btn btn-new-event" href="{% url 'events:event_create' %}">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
             <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3z"/>
         </svg>
@@ -36,13 +36,13 @@
         {% if events %}
             {% for event in events %}
                 <div class="event-card p-3 border rounded shadow-sm" style="width: 260px;">
-                    <h5 class="mb-1">{{ event.titel }}</h5>
-                    <p class="text-muted mb-1">{{ event.ort }}</p>
+                    <h5 class="mb-1">{{ event.title }}</h5>
+                    <p class="text-muted mb-1">{{ event.location }}</p>
                     <p class="small mb-2">
-                        {{ event.start_datum }} – {{ event.end_datum }}
+                        {{ event.start_date }} – {{ event.end_date }}
                     </p>
 
-                    <a href="{% url 'events:veranstaltung_detail' event.id %}"
+                    <a href="{% url 'events:event_detail' event.id %}"
                        class="btn btn-outline-primary btn-sm">
                         Details ansehen
                     </a>
