@@ -50,7 +50,7 @@ main {
     margin-bottom: 40px;
 }
 
-/* --- FORMULARELEMENTE --- */
+/* --- FORM ELEMENTS --- */
 .form-group {
     margin-bottom: 20px;
     text-align: left;
@@ -75,7 +75,7 @@ main {
     border-color: #3b82f6;
 }
 
-/* --- FOOTER IN DER CARD --- */
+/* --- FOOTER IN THE CARD --- */
 .card-footer {
     display: flex;
     justify-content: space-between;
