@@ -123,13 +123,17 @@ class EventForm(forms.ModelForm):
         from .models import Timeslot
 
         slots = self.cleaned_data.get("timeslots", [])
+        startday = self.cleaned_data.get("start_datum")
         for slot in slots:
+            print("Creating timeslot!")
             Timeslot.objects.create(
                 event=event,
                 start=datetime.strptime(slot["start"], "%H:%M").time(),
                 end=datetime.strptime(slot["end"], "%H:%M").time(),
+                day=startday,
                 duration=slot["duration"],
                 category=slot["category"],
             )
+            print("Created Timeslot.")
 
         return event

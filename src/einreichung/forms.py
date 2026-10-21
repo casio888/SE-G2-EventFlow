@@ -33,4 +33,6 @@ class EinreichungForm(forms.ModelForm):
             if duration > timeslot.dauer:
                 raise forms.ValidationError({"duration": "Die Dauer darf nicht größer als der Zeitslot sein."})
 
+        self.instance.eingereicht = True
+        self.instance.fk_timeslot = timeslot
         return cleaned_data
