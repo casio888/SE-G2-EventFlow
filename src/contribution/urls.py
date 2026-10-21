@@ -20,10 +20,6 @@ from . import views
 
 urlpatterns = [
     path('',views.event_list,name='event_list'),
-<<<<<<< HEAD:src/contribution/urls.py
-    path('bewerben/',views.event_application,name='event_application'),
-=======
-    path('bewerben/<int:event_id>',views.event_bewerbung,name='event_bewerbung'),
->>>>>>> 2230622 (wip: preparation for event application):src/einreichung/urls.py
+    path('bewerben/<int:event_id>',views.event_application,name='event_application'),
 ]
 

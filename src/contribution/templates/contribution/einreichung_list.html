@@ -15,17 +15,17 @@
             <!-- |Marker | Name | Zeit | Ort | Kathegorien als Kopf-->
             <thead>
                 <tr>
-                    <th data-column="Marker">Marker</th>
-                    <th data-column="Name">Name</th>
+                    <th data-column="Name">Titel</th>
                     <th data-column="startzeit">Beginn</th>
-                    <th data-column="endzeit">Ende</th>
                     <th data-column="Ort">Ort</th>
+                    <th data-column="apply"></th>
                     <!--<th data-column="Kategorien">Kategorien</th>-->
                 </tr>
             </thead>
             <tbody id="tableBody">
-                {% for events in events %}
+                {% for event in events %}
                 <tr>
+<<<<<<< HEAD:src/contribution/templates/contribution/einreichung_list.html
                 <td>{{event.marker}}</td>
                 <td>{{event.title}}</td>
                 <td>{{event.start_date}}</td>
@@ -33,6 +33,15 @@
                 <td>{{event.location}}</td>
                 <!--<td>{{event.kategorien}}</td>-->
                     </tr>
+=======
+                    <td>{{event.title}}</td>
+                    <td>{{event.start_datum}}</td>
+                    <td>{{event.ort}}</td>
+                    <td><a href="{% url 'event_bewerbung' event_id=event.pk %}" class="btn btn-secondary">
+                        <button>Bewerden</button>
+                    </a></td>
+                </tr>
+>>>>>>> 7b072b4 (wip: event application):src/einreichung/templates/einreichung/einreichung_list.html
                     {%empty%}
                 <tr>
                     <td colspan="5">Keine Events gefunden</td>
@@ -41,11 +50,14 @@
             </tbody>
         </table>
     </section>
+<<<<<<< HEAD:src/contribution/templates/contribution/einreichung_list.html
     <section name="Auswahl">
         <a href="{% url 'event_application' %}" class="btn btn-secondary">
             <button>Auf Event Bewerden</button>
         </a>
         
     </section>
+=======
+>>>>>>> 7b072b4 (wip: event application):src/einreichung/templates/einreichung/einreichung_list.html
 </main>
 {% endblock %}

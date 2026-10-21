@@ -135,6 +135,19 @@ class EventForm(forms.ModelForm):
 
         return cleaned_data
 
+    def save(self, organizer=None, commit=True,):
+        event = super().save(commit=False)
+
+        if organizer is not None:
+            event.event_owner = organizer
+        elif event.event_owner_id is None:
+            raise ValueError("An organizer is required to save an event.")
+
+        if commit:
+            event.save()
+
+        return event
+
 
 TimeslotFormSet = inlineformset_factory(
     Event,
