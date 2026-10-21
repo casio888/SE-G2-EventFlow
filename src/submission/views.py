@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Einreichung
+from .models import Submission
 from events.models import Event
 
 def event_list(request):
