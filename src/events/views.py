@@ -42,7 +42,7 @@ def event_create(request):
 
         if form_is_valid and formset_is_valid:
             with transaction.atomic():
-                event = form.save()
+                event = form.save(organizer=organizer)
                 timeslot_formset.instance = event
                 timeslot_formset.save()
             return redirect("events:events_your_events")
@@ -124,7 +124,7 @@ def event_edit(request, id):
 
         if form_is_valid and formset_is_valid:
             with transaction.atomic():
-                form.save()
+                form.save(organizer=organizer)
                 timeslot_formset.save()
             return redirect("events:event_detail", id=event.id)
 

@@ -7,7 +7,7 @@ from veranstaltungen.utils import get_event
 def event_list(request):
     events = Veranstaltung.objects.all()
     context = {'events': events}
-    return render(request,'einreichung/einreichung_list.html',context)
+    return render(request,'einreichung/einreichung_list.html', context)
 
 def event_bewerbung(request, event_id):
     # TODO Once users are implemented, throw error when einreichung existiert
