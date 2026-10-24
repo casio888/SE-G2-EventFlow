@@ -15,24 +15,23 @@
             <!-- |Marker | Name | Zeit | Ort | Kathegorien als Kopf-->
             <thead>
                 <tr>
-                    <th data-column="Marker">Marker</th>
-                    <th data-column="Name">Name</th>
-                    <th data-column="startzeit">Beginn</th>
-                    <th data-column="endzeit">Ende</th>
-                    <th data-column="Ort">Ort</th>
+                    <th data-column="title">Titel</th>
+                    <th data-column="starttime">Beginn</th>
+                    <th data-column="location">Ort</th>
+                    <th data-column="apply"></th>
                     <!--<th data-column="Kategorien">Kategorien</th>-->
                 </tr>
             </thead>
             <tbody id="tableBody">
-                {% for events in events %}
+                {% for event in events %}
                 <tr>
-                <td>{{event.marker}}</td>
-                <td>{{event.title}}</td>
-                <td>{{event.start_date}}</td>
-                <td>{{event.end_date}}</td>
-                <td>{{event.location}}</td>
-                <!--<td>{{event.kategorien}}</td>-->
-                    </tr>
+                    <td>{{event.title}}</td>
+                    <td>{{event.start_datum}}</td>
+                    <td>{{event.ort}}</td>
+                    <td><a href="{% url 'event_bewerbung' event_id=event.pk %}" class="btn btn-secondary">
+                        <button>Bewerden</button>
+                    </a></td>
+                </tr>
                     {%empty%}
                 <tr>
                     <td colspan="5">Keine Events gefunden</td>
@@ -40,12 +39,6 @@
                 {%endfor%}
             </tbody>
         </table>
-    </section>
-    <section name="Auswahl">
-        <a href="{% url 'event_application' %}" class="btn btn-secondary">
-            <button>Auf Event Bewerden</button>
-        </a>
-        
     </section>
 </main>
 {% endblock %}

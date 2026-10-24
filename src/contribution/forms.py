@@ -1,7 +1,7 @@
 from django import forms
 
 from .models import Contribution
-from evnet.utils import get_event
+from events.utils import get_event
 
 class ContributionForm(forms.ModelForm):
     """
