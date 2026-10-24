@@ -20,9 +20,9 @@ def get_event(event_id):
     Returns:
         Event: Returns the corresponding Event, or None if input was wrong or id is not found
     """
-    if (type(event_id) != type(int)):
+    if (type(event_id) is not int):
         return None
     try: 
-        return Event.objects.get(event_id=event_id)
+        return Event.objects.get(pk=event_id)
     except:
         return None
