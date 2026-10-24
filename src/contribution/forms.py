@@ -5,7 +5,7 @@ from events.utils import get_event
 
 class ContributionForm(forms.ModelForm):
     """
-    Form to create applications to events (event timeslots)
+    Form to create applications to events
     """
     class Meta:
         model = Contribution
