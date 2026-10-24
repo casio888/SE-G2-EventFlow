@@ -28,7 +28,7 @@
                     <td>{{event.title}}</td>
                     <td>{{event.start_datum}}</td>
                     <td>{{event.ort}}</td>
-                    <td><a href="{% url 'event_bewerbung' event_id=event.pk %}" class="btn btn-secondary">
+                    <td><a href="{% url 'event_application' event_id=event.pk %}" class="btn btn-secondary">
                         <button>Bewerden</button>
                     </a></td>
                 </tr>
