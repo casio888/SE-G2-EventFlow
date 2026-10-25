@@ -15,37 +15,37 @@ class EventForm(forms.ModelForm):
     class Meta:
         model = Event
         fields = ["title", "description", "location", "start_date", "end_date"]
-        
+
         widgets = {
         "start_date": forms.DateInput(attrs={
-        "placeholder": "17.06.2026", 
-        "onfocus": "(this.type='date')", 
+        "placeholder": "17.06.2026",
+        "onfocus": "(this.type='date')",
         "onblur": "if(!this.value)this.type='text'"
     }),
     "end_date": forms.DateInput(attrs={
-        "placeholder": "17.06.2026", 
-        "onfocus": "(this.type='date')", 
+        "placeholder": "17.06.2026",
+        "onfocus": "(this.type='date')",
         "onblur": "if(!this.value)this.type='text'"
     }),
-            
-    
+
+
         "title": forms.TextInput(attrs={"placeholder": "[Event Name]"}),
         "description": forms.Textarea(attrs={"placeholder": "[Catch Phrase / Beschreibung]", "rows": 3}),
         "location": forms.TextInput(attrs={"placeholder": "Venue / Ort"}),
         }
 
     def clean_timeslots(self):
-        """
-        Validiert das Timeslot-JSON.
+        """Validate and normalize the submitted timeslot JSON.
 
-        Prüft:
-        - Zeitformat
-        - Start < Ende
-        - Dauer > 0
-        - Kategorie vorhanden
+        Checks:
+        - JSON contains a list of objects
+        - Start and end use a valid time format
+        - Start is earlier than end
+        - Duration is positive and fits within the available time
+        - Category contains non-whitespace characters
 
         Returns:
-            list[dict]: Bereinigte Timeslot-Daten
+            list[dict]: Cleaned timeslot data
         """
         raw = self.cleaned_data["timeslots"]
         if not raw:
@@ -56,9 +56,19 @@ class EventForm(forms.ModelForm):
         except json.JSONDecodeError:
             raise forms.ValidationError("Timeslots konnten nicht verarbeitet werden.")
 
+        if not isinstance(data, list):
+            raise forms.ValidationError(
+                "Timeslots konnten nicht verarbeitet werden."
+            )
+
         cleaned = []
 
         for slot in data:
+            if not isinstance(slot, dict):
+                raise forms.ValidationError(
+                    "Timeslots konnten nicht verarbeitet werden."
+                )
+
             start = slot.get("start")
             end = slot.get("end")
             duration = slot.get("duration")
@@ -66,6 +76,11 @@ class EventForm(forms.ModelForm):
 
             if not start or not end:
                 raise forms.ValidationError("Start und Ende müssen ausgefüllt sein.")
+
+            if not isinstance(start, str) or not isinstance(end, str):
+                raise forms.ValidationError(
+                    "Ungültiges Zeitformat. Bitte HH:MM verwenden."
+                )
 
             try:
                 t_start = datetime.strptime(start, "%H:%M")
@@ -76,7 +91,12 @@ class EventForm(forms.ModelForm):
             if t_start >= t_end:
                 raise forms.ValidationError("Startzeit muss vor der Endzeit liegen.")
 
-            if duration:
+            available_minutes = int((t_end - t_start).total_seconds() / 60)
+
+            if duration is not None and duration != "":
+                if isinstance(duration, bool) or not isinstance(duration, (int, str)):
+                    raise forms.ValidationError("Dauer muss eine Zahl sein.")
+
                 try:
                     duration_int = int(duration)
                     if duration_int <= 0:
@@ -84,9 +104,14 @@ class EventForm(forms.ModelForm):
                 except ValueError:
                     raise forms.ValidationError("Dauer muss eine Zahl sein.")
             else:
-                duration_int = int((t_end - t_start).seconds / 60)
+                duration_int = available_minutes
 
-            if not category:
+            if duration_int > available_minutes:
+                raise forms.ValidationError(
+                    "Dauer darf den Zeitraum zwischen Start und Ende nicht überschreiten."
+                )
+
+            if not isinstance(category, str) or not category.strip():
                 raise forms.ValidationError("Kategorie darf nicht leer sein.")
 
             cleaned.append({
