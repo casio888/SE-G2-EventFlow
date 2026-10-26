@@ -19,23 +19,23 @@ Technische Implementierungsdetails gehören nicht hierher!
 |===
 | Begriff / Abkürzung | Definition | Synonyme / Abgrenzungen
 
-| Veranstalter
+| Veranstalter/ Organizer
 | Eine Person, die eine Zeitlich und Örtlich abgegrenzte Sache Organisiert. (Veranstaltung)
 | 
 
-| Veranstaltung
+| Veranstaltung/ Event
 | Eine Zeitlich und Örtlich Begrenze Aktion, auf der Leute Auftreten.
 | Event
 
-| Einreicher
+| Einreicher/ Contributer
 | Eine Person, die etwas zu einem Event beiträgt.
 | Act, Artist, 
 
-| Einreichung
+| Einreichung/ Contribution
 | Durch einen Einreicher abgegeben, um bei einer Veranstaltung teil zu nehmen.
 | Bewerbung, Beitrag
 
-| Gutachter
+| Gutachter/ Expert
 | Person mit viel fachlichem Wissen. Darum liest sie Einreichungen und bewertet diese.
 | 
 |===
@@ -55,59 +55,59 @@ class Account {
   Name
 }
 
-class Veranstalter {
+class Organizer {
 }
 
-class Einreicher {
-Kategorien
+class Contributer {
+  Categories
 }
 
 class Event {
   Name
-  Beschreibung
-  Datum
-  Ort
-  Kategorien
+  Description
+  Date
+  Place
+  Categories
 }
 
-class Zeitslot {
-  Startzeit
-  Endzeit
+class Timeslot {
+  starttime
+  endtime
   Flexibel
 }
 
-class Einreichung {
+class Contribution {
   Titel
-  Beschreibung
-  Kategorie
-  Status
+  Description
+  Categorie
+  State
 }
 
-class EinreichungsTemplate {
+class Contribution-Template {
   Titel
-  Beschreibung
-  Kategorie
+  Description
+  Categorie
 }
 
 
 ' Account – Rollen
-Account "1" -- "0..1" Einreicher : besitzt
-Account "1" -- "0..1" Veranstalter : besitzt
+Account "1" -- "0..1" Contributer : besitzt
+Account "1" -- "0..1" Organizer : besitzt
 
-' Veranstalter – Event
-Veranstalter "1" *-- "0..*" Event : erstellt
+' Organizer – Event
+Organizer "1" *-- "0..*" Event : erstellt
 
-' Event – Zeitslot
-Event "1" *-- "1..*" Zeitslot : besitzt
+' Event – Timeslot
+Event "1" *-- "1..*" Timeslot : besitzt
 
-' Event – Einreichung
-Event "1" o-- "0..*" Einreichung : erhält
+' Event – Contribution
+Event "1" o-- "0..*" Contribution : erhält
 
-' Einreicher – Einreichung
-Einreicher "1" *-- "0..*" Einreichung : reicht ein
+' Contributer – Contribution
+Contributer "1" *-- "0..*" Contribution : reicht ein
 
-' Einreicher – Template
-Einreicher "1" *-- "0..*" EinreichungsTemplate : besitzt
+' Contributer – Template
+Contributer "1" *-- "0..*" Contribution-Template : besitzt
 
 @enduml
 ....
@@ -124,22 +124,22 @@ Kurze Erläuterung zu den im Modell enthaltenen Entitäten.
 | Account
 | Enthält generelle Eigenschaften von Nutzern
 
-| Veranstalter
+| Organizer
 | Erstellt und verwaltet Events
 
-| Einreicher
+| Contributer
 | Reicht Einreichungen bei Events ein.
 
-| Einreichungs-Template
+| Contribution-Template
 | Vorlage für neue Einreichungen mit selbstgewählten Eisntellungen
 
-| Einreichung
+| Contribution
 | Informationen zu einem Beitrag, welche einem Event zugeordnet sind
 
 | Events
 | Informationen zu einer Veranstaltung
 
-| Zeitslots
+| Timeslots
 | Zeitlicher Rahmen für Beiträge eines Events
 
 |===
@@ -153,45 +153,45 @@ Beschreibung der wichtigsten Beziehungen zwischen den Entitäten, sofern diese b
 | Von | Zu | Kardinalität | Bedeutung
 
 | Account
-| Veranstalter
+| Organizer
 | 1 zu 0..1
 | Ein Account kann keinem oder einem Veranstalter zugeordnet sein.
 
 | Account
-| Einreicher
+| Contributer
 | 1 zu 0..1
 | Ein Account kann keinem oder einem Einreicher zugeordnet sein.
 
 | Account
-| Veranstalter/Einreicher
+| Organizer/Contributer
 | 1 zu 1..2
 | Ein Account muss mindestens einem Veranstalter oder einem Einreicher zugeordnet sein und maximal je einem Veransalter und einem Einreicher.
 
-| Einreicher 
-| Einreichungs-Template
+| Contributer 
+| Contribution-Template
 | 1 zu 0..*
 | Ein Einreichungstemplate gehört zu genau einem Einreicher. Ein Einreicher kann beliebig viele Einreichungs-Templates besitzen.
 
-| Einreicher
-| Einreichung
+| Contributer
+| Contribution
 | 1 zu 0..*
 | Eine Einreichung wird von genau einem Einreicher getätigt. Ein Einreicher kann beliebig viele Einreichungen machen.
 
 
-| Veranstalter
+| Organizer
 | Event
 | 1 zu 0..*
 | Ein Event wird von einem Veranstalter erstellt. Ein Veranstalter kann beliebig viele Events erstellen.
 
 
 | Event
-| Einreichung
+| Contribution
 | 1 zu 0..*
 | Eine Einreichung gehört zu einem Event. Ein Event kann beliebig viele Einreichungen erhalten.
 
 
 | Event
-| Zeitslot
+| Timeslot
 | 1 zu 1..*
 | Ein Zeitslot gehört zu einem Event. Ein Event benötigt mindestens ein Zeitslot.
 
