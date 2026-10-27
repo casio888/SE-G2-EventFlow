@@ -132,3 +132,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_DIRS = [BASE_DIR / 'static']
+
+# business limit
+MAX_EVENT_YEARS_IN_FUTURE = 5
