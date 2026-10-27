@@ -1,0 +1,29 @@
+= Daily Meeting <Datum>
+Anwesende: Elias, Micha, Minh, Nataliia, Nina
+
+== Was ist geschafft
+    * Paul hat nix neues
+    * Micha hat das Bewerben auf Events so gut wie fertig
+    * Nina ist am Bugfix (fast fertig), dann ihre Tasks
+    * Elias Hat die Aussage von Anke eingebracht und wir wollen entsprechend eine Liste noch machen. 
+
+== Aufgaben 
+    * Paul erledigt seine Tasks 
+    * Jeder Macht an seinen Tasks weiter
+ 
+== Termine
+    * Mittwoch 04.11.26 18:00Uhr Retro von Minh
+    * Freitag 06.11.26 um 11:00-12:00
+    * Freitag 06.11.26 16:00 mit Ringel
+
+== Ablauf
+* Start: 15:30
+* 10min ankommen.
+* Es wurde kommuniziert, wie der aktuelle Stand ist.
+* Es gibt keine Unklarheiten, für die aktuellen Aufgaben. 
+* Klären eines Termins mit Feedbackgebern
+* Klären wann treffen mit Ringel
+* Ende um 13:00 (schneller, als Gedacht)
+
+== Notitzen
+    * Nataliia und Minh sind nächste Woche Online dabei
