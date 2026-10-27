@@ -93,6 +93,10 @@ class EventForm(forms.ModelForm):
 
         start_date = cleaned_data.get("start_date")
         end_date = cleaned_data.get("end_date")
+
+        if start_date is None and end_date is None:
+            return cleaned_data
+
         today = timezone.localdate()
         latest_date = _add_calendar_years(
             today, settings.MAX_EVENT_YEARS_IN_FUTURE

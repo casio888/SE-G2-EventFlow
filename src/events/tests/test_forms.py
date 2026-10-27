@@ -1,26 +1,17 @@
 import json
-from datetime import date
+from calendar import isleap
+from datetime import date, timedelta
 from unittest.mock import patch
 
 from django.test import TestCase
+from django.utils import timezone
 
 from events.forms import EventForm
 from events.models import Event
 
 
-FIXED_TODAY = date(2026, 10, 17)
-
-
 class EventFormTests(TestCase):
     """Test event and timeslot form validation."""
-
-    def setUp(self):
-        self.localdate_patcher = patch(
-            "events.forms.timezone.localdate",
-            return_value=FIXED_TODAY,
-        )
-        self.localdate_patcher.start()
-        self.addCleanup(self.localdate_patcher.stop)
 
     @staticmethod
     def form_data(**overrides) -> dict:
