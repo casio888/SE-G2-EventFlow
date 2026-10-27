@@ -1,33 +1,12 @@
 import json
-from datetime import date, datetime
+from datetime import datetime
 
 from django import forms
+from django.conf import settings
 from django.utils import timezone
 
 from .models import Event
-
-
-# Preliminary business limit pending confirmation by the team.
-MAX_EVENT_YEARS_IN_FUTURE = 5
-
-
-def _add_calendar_years(value: date, years: int) -> date:
-    """Add calendar years to a date.
-
-    February 29 is mapped to February 28 when the target year is not
-    a leap year.
-
-    Arguments:
-        value {date} -- Date to adjust
-        years {int} -- Number of calendar years to add
-
-    Returns:
-        date -- Corresponding date in the target year
-    """
-    try:
-        return value.replace(year=value.year + years)
-    except ValueError:
-        return value.replace(year=value.year + years, day=28)
+from .utils import _add_calendar_years
 
 
 class EventForm(forms.ModelForm):
@@ -138,38 +117,46 @@ class EventForm(forms.ModelForm):
 
         start_date = cleaned_data.get("start_date")
         end_date = cleaned_data.get("end_date")
+
+        if start_date is None and end_date is None:
+            return cleaned_data
+
         today = timezone.localdate()
-        latest_date = _add_calendar_years(today, MAX_EVENT_YEARS_IN_FUTURE)
-
-        existing_start_date = None
-        if self.instance.pk:
-            existing_start_date = self.instance.start_date
-
-        unchanged_past_start_date = (
-            start_date is not None
-            and start_date == existing_start_date
-            and start_date < today
+        latest_date = _add_calendar_years(
+            today, settings.MAX_EVENT_YEARS_IN_FUTURE
         )
 
-        if start_date and start_date < today and not unchanged_past_start_date:
-            self.add_error(
-                "start_date",
-                "Das Startdatum darf nicht in der Vergangenheit liegen.",
+        if start_date is not None:
+            existing_start_date = None
+            if self.instance.pk:
+                existing_start_date = self.instance.start_date
+
+            unchanged_past_start_date = (
+                start_date == existing_start_date and start_date < today
             )
 
-        if start_date and start_date > latest_date:
-            self.add_error(
-                "start_date",
-                "Das Startdatum darf höchstens fünf Kalenderjahre in der Zukunft liegen.",
-            )
+            if start_date < today and not unchanged_past_start_date:
+                self.add_error(
+                    "start_date",
+                    "Das Startdatum darf nicht in der Vergangenheit liegen.",
+                )
 
-        if end_date and end_date > latest_date:
+            if start_date > latest_date:
+                self.add_error(
+                    "start_date",
+                    "Das Startdatum darf höchstens fünf Kalenderjahre in der Zukunft liegen.",
+                )
+
+        if end_date is not None and end_date > latest_date:
             self.add_error(
                 "end_date",
                 "Das Enddatum darf höchstens fünf Kalenderjahre in der Zukunft liegen.",
             )
 
-        if start_date and end_date and start_date > end_date:
+        if start_date is None or end_date is None:
+            return cleaned_data
+
+        if start_date > end_date:
             self.add_error(
                 "end_date",
                 "Das Enddatum muss am oder nach dem Startdatum liegen.",

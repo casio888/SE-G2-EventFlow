@@ -1,36 +1,28 @@
 import json
-from datetime import date
+from calendar import isleap
+from datetime import date, timedelta
 from unittest.mock import patch
 
 from django.test import TestCase
+from django.utils import timezone
 
 from events.forms import EventForm
 from events.models import Event
 
 
-FIXED_TODAY = date(2026, 10, 17)
-
-
 class EventFormTests(TestCase):
     """Test event and timeslot form validation."""
-
-    def setUp(self):
-        self.localdate_patcher = patch(
-            "events.forms.timezone.localdate",
-            return_value=FIXED_TODAY,
-        )
-        self.localdate_patcher.start()
-        self.addCleanup(self.localdate_patcher.stop)
 
     @staticmethod
     def form_data(**overrides) -> dict:
         """Create valid form data for a test case."""
+        today = timezone.localdate()
         data = {
             "title": "Test Event",
             "description": "Description",
             "location": "Frankfurt",
-            "start_date": "2026-10-18",
-            "end_date": "2026-10-19",
+            "start_date": (today + timedelta(days=1)).isoformat(),
+            "end_date": (today + timedelta(days=2)).isoformat(),
             "timeslots": json.dumps(
                 [
                     {
@@ -53,10 +45,10 @@ class EventFormTests(TestCase):
 
     def test_single_day_event_is_valid(self):
         """Accept an event that starts and ends on the same day."""
+        event_date = (timezone.localdate() + timedelta(days=1)).isoformat()
         form = EventForm(
             data=self.form_data(
-                start_date="2026-10-17",
-                end_date="2026-10-17",
+                end_date=event_date,
             )
         )
 
@@ -66,8 +58,7 @@ class EventFormTests(TestCase):
         """Reject a new event whose start date is in the past."""
         form = EventForm(
             data=self.form_data(
-                start_date="2026-10-16",
-                end_date="2026-10-18",
+                start_date=(timezone.localdate() - timedelta(days=1)).isoformat(),
             )
         )
 
@@ -76,26 +67,34 @@ class EventFormTests(TestCase):
 
     def test_five_calendar_year_limit_including_leap_day(self):
         """Enforce the inclusive five-year limit from February 29."""
+        current_year = timezone.localdate().year
+        leap_year = next(
+            year for year in range(current_year, current_year + 8) if isleap(year)
+        )
+        leap_day = date(leap_year, 2, 29)
+        latest_date = date(leap_year + 5, 2, 28)
+        date_after_limit = latest_date + timedelta(days=1)
+
         with patch(
             "events.forms.timezone.localdate",
-            return_value=date(2028, 2, 29),
+            return_value=leap_day,
         ):
             form_at_limit = EventForm(
                 data=self.form_data(
-                    start_date="2033-02-28",
-                    end_date="2033-02-28",
+                    start_date=latest_date.isoformat(),
+                    end_date=latest_date.isoformat(),
                 )
             )
             form_after_limit = EventForm(
                 data=self.form_data(
-                    start_date="2033-02-28",
-                    end_date="2033-03-01",
+                    start_date=latest_date.isoformat(),
+                    end_date=date_after_limit.isoformat(),
                 )
             )
             form_with_late_start = EventForm(
                 data=self.form_data(
-                    start_date="2033-03-01",
-                    end_date="2033-03-01",
+                    start_date=date_after_limit.isoformat(),
+                    end_date=date_after_limit.isoformat(),
                 )
             )
 
@@ -107,25 +106,27 @@ class EventFormTests(TestCase):
 
     def test_existing_past_start_date_may_remain_unchanged(self):
         """Allow an existing past start date only when it is unchanged."""
+        today = timezone.localdate()
+        existing_start_date = today - timedelta(days=2)
+        existing_end_date = today - timedelta(days=1)
         event = Event.objects.create(
             title="Existing Event",
             description="Description",
             location="Frankfurt",
-            start_date=date(2026, 10, 15),
-            end_date=date(2026, 10, 16),
+            start_date=existing_start_date,
+            end_date=existing_end_date,
         )
         form = EventForm(
             instance=event,
             data=self.form_data(
-                start_date="2026-10-15",
-                end_date="2026-10-16",
+                start_date=existing_start_date.isoformat(),
+                end_date=existing_end_date.isoformat(),
             ),
         )
         form_with_changed_start = EventForm(
             instance=event,
             data=self.form_data(
-                start_date="2026-10-14",
-                end_date="2026-10-16",
+                start_date=(existing_start_date - timedelta(days=1)).isoformat(),
             ),
         )
 
@@ -151,6 +152,7 @@ class EventFormTests(TestCase):
         )
 
         self.assertFalse(form.is_valid())
+        self.assertIn("timeslots", form.errors)
 
     def test_timeslot_missing_category(self):
         """Reject a timeslot without a category."""
@@ -170,6 +172,7 @@ class EventFormTests(TestCase):
         )
 
         self.assertFalse(form.is_valid())
+        self.assertIn("timeslots", form.errors)
 
     def test_timeslot_invalid_duration(self):
         """Reject a timeslot with a negative duration."""
@@ -189,19 +192,29 @@ class EventFormTests(TestCase):
         )
 
         self.assertFalse(form.is_valid())
+        self.assertIn("timeslots", form.errors)
 
     def test_invalid_json(self):
         """Reject malformed JSON in the timeslot field."""
         form = EventForm(data=self.form_data(timeslots="{broken"))
 
         self.assertFalse(form.is_valid())
+        self.assertIn("timeslots", form.errors)
+
+    def test_missing_required_date_fields_are_invalid(self):
+        """Reject missing required dates and attach errors to their fields."""
+        for field_name in ("start_date", "end_date"):
+            with self.subTest(field=field_name):
+                form = EventForm(data=self.form_data(**{field_name: ""}))
+
+                self.assertFalse(form.is_valid())
+                self.assertIn(field_name, form.errors)
 
     def test_start_date_after_end_date(self):
         """Reject an end date before the start date."""
         form = EventForm(
             data=self.form_data(
-                start_date="2026-10-19",
-                end_date="2026-10-18",
+                end_date=timezone.localdate().isoformat(),
             )
         )
 
