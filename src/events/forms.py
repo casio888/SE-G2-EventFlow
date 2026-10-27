@@ -117,25 +117,19 @@ class EventForm(forms.ModelForm):
 
         start_date = cleaned_data.get("start_date")
         end_date = cleaned_data.get("end_date")
-
-        if start_date is None and end_date is None:
-            return cleaned_data
-
         today = timezone.localdate()
         latest_date = _add_calendar_years(
             today, settings.MAX_EVENT_YEARS_IN_FUTURE
         )
 
-        if start_date is not None:
-            existing_start_date = None
-            if self.instance.pk:
-                existing_start_date = self.instance.start_date
-
-            unchanged_past_start_date = (
-                start_date == existing_start_date and start_date < today
+        # Validate the start date.
+        if start_date:
+            start_date_unchanged = (
+                self.instance.pk
+                and start_date == self.instance.start_date
             )
 
-            if start_date < today and not unchanged_past_start_date:
+            if start_date < today and not start_date_unchanged:
                 self.add_error(
                     "start_date",
                     "Das Startdatum darf nicht in der Vergangenheit liegen.",
@@ -147,20 +141,21 @@ class EventForm(forms.ModelForm):
                     "Das Startdatum darf höchstens fünf Kalenderjahre in der Zukunft liegen.",
                 )
 
-        if end_date is not None and end_date > latest_date:
-            self.add_error(
-                "end_date",
-                "Das Enddatum darf höchstens fünf Kalenderjahre in der Zukunft liegen.",
-            )
+        # Validate the end date.
+        if end_date:
+            if end_date > latest_date:
+                self.add_error(
+                    "end_date",
+                    "Das Enddatum darf höchstens fünf Kalenderjahre in der Zukunft liegen.",
+                )
 
-        if start_date is None or end_date is None:
-            return cleaned_data
-
-        if start_date > end_date:
-            self.add_error(
-                "end_date",
-                "Das Enddatum muss am oder nach dem Startdatum liegen.",
-            )
+        # Validate the date order.
+        if start_date and end_date:
+            if start_date > end_date:
+                self.add_error(
+                    "end_date",
+                    "Das Enddatum muss am oder nach dem Startdatum liegen.",
+                )
 
         return cleaned_data
 
