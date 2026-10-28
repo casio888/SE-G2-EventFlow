@@ -23,10 +23,6 @@ Die Organisation von Veranstaltungen mit Beiträgen ist oft unübersichtlich, we
 
 == Produktvision
 
-_Die Produktvision beschreibt in einem oder wenigen Sätzen den angestrebten Zielzustand.
-Sie ist inspirierend, prägnant und stabil — sie sollte sich über die gesamte Projektlaufzeit
-nicht wesentlich verändern._
-
 === Visions-Statement
 
 ____
@@ -49,10 +45,6 @@ Im Gegensatz zu unstrukturierten Kommunikationswegen
 bietet unser Produkt klare Prozesse und automatische Rückmeldungen.
 ____
 
-//Beispiel: Für Studierende der HTWD, die zu wenig Zeit in der Mittagspause zum Essen haben, ist Flying Burger ein  Lieferdient für Burger, der per Drohne liefert. Anders als landgestützte Lieferdienste kann unser Produkt durchs Fenster direkt in den Hörsaal liefern.
-
-NOTE: Das Visions-Statement kann im Team mit der „Elevator Pitch"-Methode oder dem „Future Press Release"-Format erarbeitet werden.
-
 === Zielbild
 _Mit EventFlow läuft die Organisation von Eventbeiträgen zentral und übersichtlich über eine einzige Plattform. Veranstalter behalten jederzeit den Überblick über Einreichungen, Status und Planung, während Einreicher klar sehen, wo und wie sie Beiträge einreichen können. Der gesamte Prozess ist transparent, strukturiert und deutlich schneller, da Kommunikation und Entscheidungen direkt im System stattfinden. Dadurch wird der organisatorische Aufwand reduziert und die Zusammenarbeit für alle Beteiligten spürbar verbessert._
 
@@ -67,13 +59,13 @@ _Wer sind die Zielgruppen, und wie positioniert sich das Produkt im Vergleich zu
 | Zielgruppe | Beschreibung
 
 | Veranstalter
-| Personen oder Teams, die ein Event planen, Beiträge koordinieren und über Annahme oder Ablehnung entscheiden
+| Personen oder Teams, die ein Event planen, Beiträge koordinieren und über Annahme oder Ablehnung entscheiden.
 
 | Einreicher
-| Personen, die Beiträge wie Vorträge oder Workshops für ein Event einreichen
+| Personen, die Beiträge wie Vorträge oder Workshops für ein Event einreichen.
 
 | evtl. Gutachter
-| Personen, die eingereichte Beiträge bewerten und eine Empfehlung für die Entscheidung abgeben
+| Personen, die eingereichte Beiträge bewerten und eine Empfehlung für die Entscheidung abgeben.
 |===
 
 NOTE: Ausführliche Beschreibungen der Nutzenden — Personas, Nutzungskontext,
@@ -221,10 +213,6 @@ organisatorische, rechtliche oder zeitliche Vorgaben._
 | Projektlaufzeit
 | Das Produkt muss innerhalb eines Semesters (ca. 4 Monate) lieferbar sein.
 | Zeitlich
-
-| [Einschränkung]
-| [Beschreibung]
-| [Technisch / Rechtlich / Organisatorisch / Zeitlich]
 |===
 
 
@@ -238,6 +226,9 @@ organisatorische, rechtliche oder zeitliche Vorgaben._
 | 10.05.2026
 | Nach dem Meeting am 05.05.2026
 
+| 1.1
+| 28.06.2026
+| Clean Up für Sprint 3
 |===
 
 ---

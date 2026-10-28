@@ -1,0 +1,51 @@
+= Sprint-3-Feedback
+
+
+== Datum
+
+05.07.2026
+
+== Feedback
+
+=== Allgemein
+* Zeiten in deutscher 24h Variante
+* Suchleiste hat einen blauen Streifen was man entfernen soll
+* Vergangene Events nicht anzeigen
+
+=== Anmeldungsformular
+* Sterne/ Marker für Pflichtfelder (PW, EMail)
+* Fax Feld nicht nötig
+* Reihenvolge anpassen: Email + Passwort zuerst und dann alle andere Meta Daten
+* Eingeloggt Status anzeigen einheitlich links unten, oder oben rechts (zweiteres Bevorzugt)
+* Country Picker
+* Registrierung "zurück" Button Style anpassen
+
+=== Bugs
+* Validierung der eingegebenen Daten
+* Überprüfung auf realistische Daten/Zeiträume (Events die zb im Jahr 2070 liegen)
+
+=== Startseite
+* Dunkler Bereich des Headers größer
+* "Über 10 Events erwarten dich in Deutschland" - "10" ist dynamisch? Falls nicht - dynamisch machen
+* Angelegte Events sollten angezeigt werden
+
+=== Eventerstellung
+* Zeitslotangaben: "in min" + darf nicht Gesamtzeit überschreiten können
+* Zeitslotserstellung noch unverständlich und holprig
+* Vanues Validierung fehlt
+* Zeitslotserstellung - Datum Validierung (Enddatum vor Startdatum möglich)
+* "+" Button bei Zeitslotserslettung hat keine richtige Funktionalität
+
+=== Eventsübersicht
+* Events sollen nach nach Startdatum sortiert sein weil sonst verliert man den Überblick
+
+=== Offene Fragen
+* Welche Funktionalität haben die weissen Kreise oben links bei Event Logos?
+
+== Nächste Schritte
+
+* Bugs beheben.
+* Verbesserungsvorschläge umsetzen.
+* Einreicherübersicht implementieren.
+* TODO: Templates nochmal vereinheitlichen (Minh)
+* TODO: User Stories anpassen

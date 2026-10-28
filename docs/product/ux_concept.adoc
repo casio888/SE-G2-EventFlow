@@ -197,13 +197,13 @@ _Was könnte die Akzeptanz oder Nutzung des Produkts beeinträchtigen?_
 | Algorithmen und Sortierungen so gestalten, dass auch kleine Events sichtbar bleiben (z. B. durch "Neu in deiner Nähe" statt nur nach Größe).
 
 | Technische Angriffe (SQL-Injection, XSS, DDOS-Attacken laut Board)
-| Einsatz moderner Sicherheits-Frameworks, regelmäßige Validierung von Nutzereingaben und serverseitige Sicherheits-Updates.
+| Einsatz defensive Programming, sorgfältige Validierung von Nutzereingaben und serverseitige Lagerung von sensiblen Daten.
 
 | Missbrauch für moralisch verwerfliche Events
 | Einführung von Meldefunktionen (Report-Button) und klare Community-Richtlinien, um unangebrachte Inhalte schnell entfernen zu können.
 
 | Ausschluss von Menschen mit Beeinträchtigungen
-| Barrierefreies Design (Accessibility) konsequent umsetzen
+| Barrierefreies Design (Accessibility) konsequent umsetzen.
 
 |===
 
@@ -213,6 +213,8 @@ _Dieser Abschnitt beschreibt Abläufe, die mehrere Features oder Bereiche des Pr
 umfassen. Einzelne Feature-Wireframes werden in den jeweiligen User Stories gepflegt.
 Hier dokumentieren wir nur Flüsse auf Systemebene, z.B. mit UML-Aktivitätsdiagrammen._
 
+Bisher keine Modelliert.
+////
 === [Flussname, z. B. Onboarding-Flow]
 
 _Beschreibe kurz, was dieser Fluss abdeckt und welche Personas er betrifft._
@@ -279,7 +281,7 @@ stop
 
 @enduml
 ....
-
+////
 == Designsystem & Interaktionsprinzipien
 
 _Dieser Abschnitt dokumentiert systemweite Design- und Interaktionsentscheidungen,
@@ -293,18 +295,18 @@ Wireframes und UI-Implementierungen._
 | Aspekt | Entscheidung & Begründung
 
 | Farbpalette
-| [z. B. Primärfarbe: Hochschulblau #003D6E; Akzent: #E87722;
-  Begründung: Corporate Identity der Hochschule]
+| Primärfarbe: Weiss; Akzent: Dunkles Navy-Blau #0b1330;
+  Begründung: Das Navy-Blau schien schlicht und vetraut auf der weissen Website
 
 | Typografie
-| [z. B. Fließtext: Inter 16px; Überschriften: Inter Bold;
-  Begründung: Hohe Lesbarkeit auf kleinen Bildschirmen]
+| Fließtext: Roobert 16px; Überschriften: Roobert Bold;
+  Begründung: Perfekte Lesbarkeit bei vielen Details und Text, keine unnötige Schnörkellei
 
 | Ikonografie
-| [z. B. Material Icons; konsistentes Icon-Set im gesamten Produkt]
+| Minimalistische Outline-Icons; konsistentes Icon-Set im gesamten Produkt für die bessere visualisierung
 
 | Bildsprache
-| [z. B. Keine Stock-Fotos; Illustrationen im Flat-Design-Stil]
+| Noch statisch angelegte Patzhalter; Illustrationen im Kachel-Raster
 |===
 
 === Interaktionsprinzipien
@@ -325,39 +327,12 @@ wird begründet, damit sie nicht aus Unwissenheit verletzt wird._
   niemals nur eine leere Fläche. Reduziert Orientierungslosigkeit.
 
 | Fehlermeldungen sind verständlich und handlungsorientiert.
-| Fehlermeldungen nennen die Ursache in einfacher Sprache und schlagen einen
-  nächsten Schritt vor. Kein technischer Jargon für Endnutzer:innen.
+| Fehlermeldungen nennen die Ursache in einfacher Sprache, markieren die Fehlerhafte Stelle farblich.
 
-| Kernfunktionen sind mit einer Hand erreichbar.
-| Primäre Aktionen befinden sich im unteren Bildschirmbereich (Daumenzone).
-  Optimiert für einhändige Smartphone-Nutzung.
-
-| [Weiteres Prinzip]
-| [Beschreibung & Begründung]
+| Kernfunktionen sind im Header erreichbar.
+| Primäre Aktionen befinden sich im Header wieder
+  Optimiert für Laptop Nutzung.
 |===
-
-=== Barrierefreiheit
-
-[cols="1,3", options="header"]
-|===
-| Aspekt | Anforderung
-
-| Kontrastverhältnis
-| Mindestens WCAG 2.1 Level AA (Kontrast ≥ 4,5:1 für Fließtext)
-
-| Tastaturnavigation
-| Alle Kernfunktionen sind per Tastatur bedienbar
-
-| Screenreader
-| Alle interaktiven Elemente haben sinnvolle ARIA-Labels
-
-| Schriftgröße
-| Keine Schrift unter 14px; Nutzer:innen können Systemschriftgröße nutzen
-
-| [Weiterer Aspekt]
-| [Anforderung]
-|===
-
 
 _Dieses Dokument wird kontinuierlich weiterentwickelt — insbesondere nach Nutzerinterviews,
 Usability-Tests oder wesentlichen Designentscheidungen. Individuelle Feature-Wireframes
