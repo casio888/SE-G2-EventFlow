@@ -1,51 +1,148 @@
 from django import forms
 from django.core.exceptions import ValidationError
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
 
-from .models import User
+from .models import CustomUserContributer, CustomUserOrganizer, Adress, telefon_validator
 
 
-class RegistrationForm(forms.ModelForm):
-    password = forms.CharField(
-        widget=forms.PasswordInput(attrs={"placeholder": "Passwort", "maxlength": 100}),
-        label="Passwort",
-    )
+class UserOrganizerRegestrationForm(UserCreationForm):
+    """Form for registering an organizer representing a company or association."""
 
-    def clean_email(self):
-        email = self.cleaned_data.get('email')
-        if email and User.objects.filter(email=email).exists():
-            raise ValidationError("Diese E-Mail-Adresse ist bereits registriert.")
-        return email
+    # Validate the telephone number using the shared telephone validator.
+    telephone = forms.CharField(max_length=15, validators=[telefon_validator],)
+
+    # Collect an optional fax number and validate it if provided.
+    fax = forms.CharField(max_length=15, validators=[telefon_validator],required=False,)
+
+    # Collect the address details of the organization.
+    country = forms.CharField(max_length=50)
+    city = forms.CharField(max_length=170)
+    street = forms.CharField(max_length=85)
+    houseNbr = forms.IntegerField()
 
     class Meta:
+        """Define the Django user model and the fields included in the form."""
+
         model = User
         fields = [
-            "firmenname",
-            "firmensitzLand",
-            "firmensitzOrt",
-            "firmensitzStraße",
-            "firmensitzHausnummer",
+            "username",
             "email",
-            "password",
-            "telefon",
+            "telephone",
             "fax",
+            "country",
+            "city",
+            "street",
+            "houseNbr",
+            "password1",
+            "password2",
         ]
-        labels = {
-            "firmenname": "Firmenname",
-            "firmensitzLand": "Land",
-            "firmensitzOrt": "Stadt",
-            "firmensitzStraße": "Straße",
-            "firmensitzHausnummer": "Hausnummer",
-            "email": "E-Mail",
-            "telefon": "Telefonnummer",
-            "fax": "Fax",
-        }
-        widgets = {
-            "firmenname": forms.TextInput(attrs={"placeholder": "Firmenname", "maxlength": 200}),
-            "firmensitzLand": forms.TextInput(attrs={"placeholder": "Land", "maxlength": 50}),
-            "firmensitzOrt": forms.TextInput(attrs={"placeholder": "Stadt", "maxlength": 170}),
-            "firmensitzStraße": forms.TextInput(attrs={"placeholder": "Straße", "maxlength": 85}),
-            "firmensitzHausnummer": forms.NumberInput(attrs={"placeholder": "Hausnummer", "min": 1}),
-            "email": forms.EmailInput(attrs={"placeholder": "E-Mail", "maxlength": 160}),
-            "telefon": forms.TextInput(attrs={"placeholder": "Telefonnummer", "maxlength": 15}),
-            "fax": forms.TextInput(attrs={"placeholder": "Fax", "maxlength": 15}),
-        }
+
+    def save(self, commit=True):
+        """Save the user, address, and organizer profile.
+
+        Args:
+            commit (bool): Whether to save the user and related objects
+                to the database.
+
+        Returns:
+            User: The created or prepared Django user.
+        """
+
+        # Prepare the user object without immediately saving it to the database.
+        user = super().save(commit=False)
+
+        if commit:
+            # Save the user before creating objects that reference it.
+            user.save()
+
+            # Create a separate address record for the organization.
+            adress, _ = Adress.objects.get_or_create(
+                country=self.cleaned_data["country"],
+                city=self.cleaned_data["city"],
+                street=self.cleaned_data["street"],
+                houseNbr=self.cleaned_data["houseNbr"],
+            )
+
+            # Link the user and address to the organizer profile.
+            CustomUserOrganizer.objects.create(
+                user=user,
+                adress=adress,
+                telephone=self.cleaned_data["telephone"],
+                fax=self.cleaned_data["fax"]
+            )
+
+        # Return the user, whether saved or not.
+        return user
+
+
+class UserContributerRegestrationForm(UserCreationForm):
+    """Form for registering a contributor with contact and address details."""
+
+    # Validate the telephone number using the shared telephone validator.
+    telephone = forms.CharField(max_length=15, validators=[telefon_validator],)
+
+    # Collect an optional fax number and validate it if provided.
+    fax = forms.CharField(max_length=15, validators=[telefon_validator],required=False,)
+
+    # Collect the contributor's address details.
+    country = forms.CharField(max_length=50)
+    city = forms.CharField(max_length=170)
+    street = forms.CharField(max_length=85)
+    houseNbr = forms.IntegerField()
+
+    class Meta:
+        """Define the Django user model and the fields included in the form."""
+
+        model = User
+        fields = [
+            "username",
+            "first_name",
+            "last_name",
+            "email",
+            "telephone",
+            "fax",
+            "country",
+            "city",
+            "street",
+            "houseNbr",
+            "password1",
+            "password2",
+        ]
+
+    def save(self, commit=True):
+        """Save the user, address, and contributor profile.
+
+        Args:
+            commit (bool): Whether to save the user and related objects
+                to the database.
+
+        Returns:
+            User: The created or prepared Django user.
+        """
+
+        # Prepare the user object without immediately saving it to the database.
+        user = super().save(commit=False)
+
+        if commit:
+            # Save the user before creating objects that reference it.
+            user.save()
+
+            # Create a separate address record for the contributor.
+            adress, _ = Adress.objects.get_or_create(
+                country=self.cleaned_data["country"],
+                city=self.cleaned_data["city"],
+                street=self.cleaned_data["street"],
+                houseNbr=self.cleaned_data["houseNbr"],
+            )
+
+            # Link the user and address to the contributor profile.
+            CustomUserContributer.objects.create(
+                user=user,
+                adress=adress,
+                telephone=self.cleaned_data["telephone"],
+                fax=self.cleaned_data["fax"]
+            )
+
+        # Return the user, whether saved or not.
+        return user
