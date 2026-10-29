@@ -1,0 +1,48 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EventFlow</title>
+    <link rel="stylesheet" href="{% static 'css/nav.css' %}">
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    <!-- Hero Bereich inklusive Navigation -->
+    <header class="hero-section">
+        <nav>
+            <a href="{% url 'base:index' %}" class="logo">EventFlow</a>
+            <div class="nav-links">
+                <a href="#">Beliebt</a>
+                <a href="#">Deine favorisierten Events</a>
+                <a href="{% url 'events:events_your_events' %}">Deine Events</a>
+            </div>
+            <div class="auth-buttons">
+                <a href="{% url 'base:logout' %}" class="btn btn-signup">logout</a>
+            </div>
+        </nav>
+        {% block extra_header %} {% endblock %}
+    </header>
+
+    {% block content %}{% endblock %}
+
+    <!-- Footer -->
+    <footer>
+        <div>
+            <strong>EventFlow</strong><br>
+            Dein bevorzugter Event-Manager<br>
+            Website seit 202*<br><br>
+            <small>Miro 2026</small>
+        </div>
+        <div class="footer-links">
+            <a href="#">Hilfe</a>
+            <a href="#">FAQ</a>
+            <a href="#">Kundendienst</a>
+            <a href="#">Anleitung</a>
+            <a href="#">Kontakt</a>
+        </div>
+    </footer>
+    </body>
+</html>
