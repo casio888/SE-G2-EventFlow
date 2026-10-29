@@ -1,22 +1,59 @@
-import json
-from datetime import datetime
+from datetime import date, datetime
 
 from django import forms
 from django.conf import settings
+from django.forms import inlineformset_factory
 from django.utils import timezone
 
-from .models import Event
+from .models import Event, Timeslot
 from .utils import _add_calendar_years
 
 
+class TimeslotForm(forms.ModelForm):
+    """Create or update a timeslot for an existing event."""
+
+    class Meta:
+        model = Timeslot
+        fields = ["category", "start", "end"]
+        labels = {
+            "category": "Kategorie",
+            "start": "Startzeit",
+            "end": "Endzeit",
+        }
+        error_messages = {
+            "category": {"required": "Kategorie darf nicht leer sein."},
+            "start": {"required": "Startzeit muss ausgefüllt sein."},
+            "end": {"required": "Endzeit muss ausgefüllt sein."},
+        }
+
+    def clean(self):
+        """Ensure that the timeslot ends after it starts."""
+        cleaned_data = super().clean()
+        start = cleaned_data.get("start")
+        end = cleaned_data.get("end")
+
+        if start and end and start >= end:
+            self.add_error("end", "Startzeit muss vor der Endzeit liegen.")
+
+        return cleaned_data
+
+    def save(self, commit=True):
+        """Save the timeslot with a duration matching its time range."""
+        timeslot = super().save(commit=False)
+        start_datetime = datetime.combine(date.min, timeslot.start)
+        end_datetime = datetime.combine(date.min, timeslot.end)
+        timeslot.duration = int(
+            (end_datetime - start_datetime).total_seconds() / 60
+        )
+
+        if commit:
+            timeslot.save()
+
+        return timeslot
+
+
 class EventForm(forms.ModelForm):
-    """Form for creating and editing events.
-
-    Contains a hidden JSON field for timeslots that are added dynamically
-    with JavaScript.
-    """
-
-    timeslots = forms.CharField(widget=forms.HiddenInput(), required=False)
+    """Form for creating and editing events."""
 
     class Meta:
         model = Event
@@ -44,97 +81,8 @@ class EventForm(forms.ModelForm):
                     "rows": 3,
                 }
             ),
-            "location": forms.TextInput(attrs={"placeholder": "Venue / Ort"}),
+            "location": forms.TextInput(attrs={"placeholder": "Ort"}),
         }
-
-    def clean_timeslots(self):
-        """Validate and normalize the submitted timeslot JSON.
-
-        Checks:
-        - JSON contains a list of objects
-        - Start and end use a valid time format
-        - Start is earlier than end
-        - Duration is positive and fits within the available time
-        - Category contains non-whitespace characters
-
-        Returns:
-            list[dict]: Cleaned timeslot data
-        """
-        raw = self.cleaned_data["timeslots"]
-        if not raw:
-            return []
-
-        try:
-            data = json.loads(raw)
-        except json.JSONDecodeError:
-            raise forms.ValidationError("Timeslots konnten nicht verarbeitet werden.")
-
-        if not isinstance(data, list):
-            raise forms.ValidationError(
-                "Timeslots konnten nicht verarbeitet werden."
-            )
-
-        cleaned = []
-
-        for slot in data:
-            if not isinstance(slot, dict):
-                raise forms.ValidationError(
-                    "Timeslots konnten nicht verarbeitet werden."
-                )
-
-            start = slot.get("start")
-            end = slot.get("end")
-            duration = slot.get("duration")
-            category = slot.get("category")
-
-            if not start or not end:
-                raise forms.ValidationError("Start und Ende müssen ausgefüllt sein.")
-
-            if not isinstance(start, str) or not isinstance(end, str):
-                raise forms.ValidationError(
-                    "Ungültiges Zeitformat. Bitte HH:MM verwenden."
-                )
-
-            try:
-                t_start = datetime.strptime(start, "%H:%M")
-                t_end = datetime.strptime(end, "%H:%M")
-            except ValueError:
-                raise forms.ValidationError("Ungültiges Zeitformat. Bitte HH:MM verwenden.")
-
-            if t_start >= t_end:
-                raise forms.ValidationError("Startzeit muss vor der Endzeit liegen.")
-
-            available_minutes = int((t_end - t_start).total_seconds() / 60)
-
-            if duration is not None and duration != "":
-                if isinstance(duration, bool) or not isinstance(duration, (int, str)):
-                    raise forms.ValidationError("Dauer muss eine Zahl sein.")
-
-                try:
-                    duration_int = int(duration)
-                    if duration_int <= 0:
-                        raise forms.ValidationError("Dauer muss größer als 0 sein.")
-                except ValueError:
-                    raise forms.ValidationError("Dauer muss eine Zahl sein.")
-            else:
-                duration_int = available_minutes
-
-            if duration_int > available_minutes:
-                raise forms.ValidationError(
-                    "Dauer darf den Zeitraum zwischen Start und Ende nicht überschreiten."
-                )
-
-            if not isinstance(category, str) or not category.strip():
-                raise forms.ValidationError("Kategorie darf nicht leer sein.")
-
-            cleaned.append({
-                "start": start,
-                "end": end,
-                "duration": duration_int,
-                "category": category
-            })
-
-        return cleaned
 
     def clean(self):
         cleaned_data = super().clean()
@@ -183,24 +131,11 @@ class EventForm(forms.ModelForm):
 
         return cleaned_data
 
-    def save(self, commit=True):
-        """Save the event and create its associated timeslots.
 
-        Returns:
-            Event: Saved event instance
-        """
-        event = super().save(commit)
-
-        from .models import Timeslot
-
-        slots = self.cleaned_data.get("timeslots", [])
-        for slot in slots:
-            Timeslot.objects.create(
-                event=event,
-                start=datetime.strptime(slot["start"], "%H:%M").time(),
-                end=datetime.strptime(slot["end"], "%H:%M").time(),
-                duration=slot["duration"],
-                category=slot["category"],
-            )
-
-        return event
+TimeslotFormSet = inlineformset_factory(
+    Event,
+    Timeslot,
+    form=TimeslotForm,
+    extra=0,
+    can_delete=False,
+)

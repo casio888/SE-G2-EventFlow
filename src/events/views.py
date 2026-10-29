@@ -1,30 +1,47 @@
+from django.db import transaction
 from django.shortcuts import render, redirect, get_object_or_404
+
+from .forms import EventForm, TimeslotFormSet
 from .models import Event
-from .forms import EventForm
-from .utils import get_event_form, save_event_form
+
 
 def event_create(request):
-    """
-    Erstellt eine neue Veranstaltung.
+    """Create an event and its optional timeslots.
 
-    Bei GET wird ein leeres Formular angezeigt.
-    Bei POST wird das Formular validiert und gespeichert.
+    GET displays an empty event form and timeslot formset. POST validates
+    and saves both together.
 
     Arguments:
-        request (HttpRequest): HTTP-Request-Objekt
+        request (HttpRequest): Incoming HTTP request
 
     Returns:
-        HttpResponse: Rendered HTML-Seite oder Redirect
+        HttpResponse: Rendered page or redirect
     """
-    if request.method == "POST":
-        form = EventForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect("events:events_your_events")
-    else:
-        form = EventForm()
+    event = Event()
+    form_data = request.POST if request.method == "POST" else None
+    form = EventForm(form_data, instance=event)
+    timeslot_formset = TimeslotFormSet(
+        form_data,
+        instance=event,
+        prefix="timeslots",
+    )
 
-    return render(request, "events/create.html", {"form": form})
+    if request.method == "POST":
+        form_is_valid = form.is_valid()
+        formset_is_valid = timeslot_formset.is_valid()
+
+        if form_is_valid and formset_is_valid:
+            with transaction.atomic():
+                event = form.save()
+                timeslot_formset.instance = event
+                timeslot_formset.save()
+            return redirect("events:events_your_events")
+
+    return render(
+        request,
+        "events/create.html",
+        {"form": form, "timeslot_formset": timeslot_formset},
+    )
 
 
 def event_detail(request, id):
@@ -39,7 +56,13 @@ def event_detail(request, id):
         HttpResponse: Detailseite der Veranstaltung
     """
     event = get_object_or_404(Event, pk=id)
-    return render(request, "events/detail.html", {"event": event, "timeslots": event.timeslots.all(),})
+    timeslots = event.timeslots.order_by("start")
+    return render(
+        request,
+        "events/detail.html",
+        {"event": event, "timeslots": timeslots},
+    )
+
 
 def events_your_events(request):
     """
@@ -54,25 +77,44 @@ def events_your_events(request):
     events = Event.objects.all()
     return render(request, "events/your_events.html", {"events": events})
 
+
 def event_edit(request, id):
-    """
-    Bearbeitet eine bestehende Veranstaltung.
+    """Update an event and its submitted timeslots together.
 
     Arguments:
-        request (HttpRequest): HTTP-Request-Objekt
-        id (int): Primärschlüssel der Veranstaltung
+        request (HttpRequest): Incoming HTTP request
+        id (int): Event primary key
 
     Returns:
-        HttpResponse: Bearbeitungsseite der Veranstaltung oder Redirect
+        HttpResponse: Rendered edit page or redirect
     """
     event = get_object_or_404(Event, pk=id)
 
-    if request.method == "POST":
-        form = EventForm(request.POST, instance=event)
-        if form.is_valid():
-            form.save()
-            return redirect("events:event_detail", id=event.id)
-    else:
-        form = EventForm(instance=event)
+    form_data = request.POST if request.method == "POST" else None
+    form = EventForm(form_data, instance=event)
+    timeslot_formset = TimeslotFormSet(
+        form_data,
+        instance=event,
+        prefix="timeslots",
+        queryset=event.timeslots.order_by("start"),
+    )
 
-    return render(request, "events/edit.html", {"form": form, "event": event})
+    if request.method == "POST":
+        form_is_valid = form.is_valid()
+        formset_is_valid = timeslot_formset.is_valid()
+
+        if form_is_valid and formset_is_valid:
+            with transaction.atomic():
+                form.save()
+                timeslot_formset.save()
+            return redirect("events:event_detail", id=event.id)
+
+    return render(
+        request,
+        "events/edit.html",
+        {
+            "form": form,
+            "event": event,
+            "timeslot_formset": timeslot_formset,
+        },
+    )

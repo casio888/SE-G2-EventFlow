@@ -1,17 +1,16 @@
-import json
 from calendar import isleap
-from datetime import date, timedelta
+from datetime import date, time, timedelta
 from unittest.mock import patch
 
 from django.test import TestCase
 from django.utils import timezone
 
-from events.forms import EventForm
-from events.models import Event
+from events.forms import EventForm, TimeslotForm, TimeslotFormSet
+from events.models import Event, Timeslot
 
 
 class EventFormTests(TestCase):
-    """Test event and timeslot form validation."""
+    """Test event form validation."""
 
     @staticmethod
     def form_data(**overrides) -> dict:
@@ -23,189 +22,9 @@ class EventFormTests(TestCase):
             "location": "Frankfurt",
             "start_date": (today + timedelta(days=1)).isoformat(),
             "end_date": (today + timedelta(days=2)).isoformat(),
-            "timeslots": json.dumps(
-                [
-                    {
-                        "start": "10:00",
-                        "end": "12:00",
-                        "duration": "120",
-                        "category": "Workshop",
-                    }
-                ]
-            ),
         }
         data.update(overrides)
         return data
-
-
-
-    @staticmethod
-    def timeslot(**overrides) -> dict:
-        """Create valid timeslot data for a test case."""
-        data = {
-            "start": "10:00",
-            "end": "12:00",
-            "duration": "120",
-            "category": "Workshop",
-        }
-        data.update(overrides)
-        return data
-
-
-    def test_editing_event_validates_and_saves_valid_timeslot(self):
-        """Validate and save a valid timeslot while editing an event."""
-        start_date = timezone.localdate() + timedelta(days=1)
-        end_date = start_date + timedelta(days=1)
-        event = Event.objects.create(
-            title="Existing Event",
-            description="Description",
-            location="Frankfurt",
-            start_date=start_date,
-            end_date=end_date,
-        )
-        form = EventForm(
-            instance=event,
-            data=self.form_data(
-                start_date=start_date.isoformat(),
-                end_date=end_date.isoformat(),
-            ),
-        )
-
-        self.assertTrue(form.is_valid())
-        saved_event = form.save()
-        self.assertEqual(saved_event.pk, event.pk)
-        self.assertEqual(saved_event.timeslots.count(), 1)
-
-
-    def test_timeslot_json_must_contain_a_list_of_objects(self):
-        """Reject valid JSON with an unsupported structure."""
-        invalid_structures = [None, {}, "timeslot", [None], ["timeslot"]]
-
-        for structure in invalid_structures:
-            with self.subTest(structure=structure):
-                form = EventForm(
-                    data=self.form_data(timeslots=json.dumps(structure))
-                )
-
-                self.assertFalse(form.is_valid())
-                self.assertIn("timeslots", form.errors)
-
-
-    def test_timeslot_start_and_end_must_be_present_and_valid(self):
-        """Reject missing, malformed, and non-string time values."""
-        timeslot_without_start = self.timeslot()
-        timeslot_without_start.pop("start")
-        timeslot_without_end = self.timeslot()
-        timeslot_without_end.pop("end")
-        invalid_timeslots = [
-            timeslot_without_start,
-            timeslot_without_end,
-            self.timeslot(start=""),
-            self.timeslot(end=""),
-            self.timeslot(start="25:00"),
-            self.timeslot(end="not-a-time"),
-            self.timeslot(start=10),
-            self.timeslot(end=[12, 0]),
-        ]
-
-        for timeslot in invalid_timeslots:
-            with self.subTest(timeslot=timeslot):
-                form = EventForm(
-                    data=self.form_data(timeslots=json.dumps([timeslot]))
-                )
-
-                self.assertFalse(form.is_valid())
-                self.assertIn("timeslots", form.errors)
-
-
-    def test_timeslot_start_must_be_before_end(self):
-        """Reject timeslots that start at or after their end time."""
-        for start, end in [("14:00", "12:00"), ("12:00", "12:00")]:
-            with self.subTest(start=start, end=end):
-                form = EventForm(
-                    data=self.form_data(
-                        timeslots=json.dumps(
-                            [self.timeslot(start=start, end=end)]
-                        )
-                    )
-                )
-
-                self.assertFalse(form.is_valid())
-                self.assertIn("timeslots", form.errors)
-
-
-    def test_explicit_duration_must_be_a_positive_integer(self):
-        """Reject non-integer, zero, and negative explicit durations."""
-        invalid_durations = ["-5", "0", 0, "invalid", 30.5, False]
-
-        for duration in invalid_durations:
-            with self.subTest(duration=duration):
-                form = EventForm(
-                    data=self.form_data(
-                        timeslots=json.dumps(
-                            [self.timeslot(duration=duration)]
-                        )
-                    )
-                )
-
-                self.assertFalse(form.is_valid())
-                self.assertIn("timeslots", form.errors)
-
-
-    def test_duration_may_equal_but_not_exceed_available_time(self):
-        """Accept the duration boundary and reject longer durations."""
-        form_at_limit = EventForm(
-            data=self.form_data(
-                timeslots=json.dumps([self.timeslot(duration=120)])
-            )
-        )
-        form_above_limit = EventForm(
-            data=self.form_data(
-                timeslots=json.dumps([self.timeslot(duration="121")])
-            )
-        )
-
-        self.assertTrue(form_at_limit.is_valid())
-        self.assertFalse(form_above_limit.is_valid())
-        self.assertIn("timeslots", form_above_limit.errors)
-
-
-    def test_missing_or_empty_duration_is_calculated_automatically(self):
-        """Calculate the full available duration when none is supplied."""
-        timeslot_without_duration = self.timeslot()
-        timeslot_without_duration.pop("duration")
-
-        for timeslot in [timeslot_without_duration, self.timeslot(duration="")]:
-            with self.subTest(timeslot=timeslot):
-                form = EventForm(
-                    data=self.form_data(timeslots=json.dumps([timeslot]))
-                )
-
-                self.assertTrue(form.is_valid())
-                self.assertEqual(form.cleaned_data["timeslots"][0]["duration"], 120)
-
-
-    def test_timeslot_category_must_contain_non_whitespace_characters(self):
-        """Reject missing, blank, whitespace-only, and non-string categories."""
-        timeslot_without_category = self.timeslot()
-        timeslot_without_category.pop("category")
-        invalid_timeslots = [
-            timeslot_without_category,
-            self.timeslot(category=None),
-            self.timeslot(category=""),
-            self.timeslot(category="   "),
-            self.timeslot(category=123),
-        ]
-
-        for timeslot in invalid_timeslots:
-            with self.subTest(timeslot=timeslot):
-                form = EventForm(
-                    data=self.form_data(timeslots=json.dumps([timeslot]))
-                )
-
-                self.assertFalse(form.is_valid())
-                self.assertIn("timeslots", form.errors)
-
 
     def test_form_valid(self):
         """Accept a correctly completed multi-day event form."""
@@ -304,73 +123,6 @@ class EventFormTests(TestCase):
         self.assertFalse(form_with_changed_start.is_valid())
         self.assertIn("start_date", form_with_changed_start.errors)
 
-    def test_timeslot_start_after_end(self):
-        """Reject a timeslot whose start time is after its end time."""
-        form = EventForm(
-            data=self.form_data(
-                timeslots=json.dumps(
-                    [
-                        {
-                            "start": "14:00",
-                            "end": "12:00",
-                            "duration": "120",
-                            "category": "Workshop",
-                        }
-                    ]
-                )
-            )
-        )
-
-        self.assertFalse(form.is_valid())
-        self.assertIn("timeslots", form.errors)
-
-    def test_timeslot_missing_category(self):
-        """Reject a timeslot without a category."""
-        form = EventForm(
-            data=self.form_data(
-                timeslots=json.dumps(
-                    [
-                        {
-                            "start": "10:00",
-                            "end": "12:00",
-                            "duration": "120",
-                            "category": "",
-                        }
-                    ]
-                )
-            )
-        )
-
-        self.assertFalse(form.is_valid())
-        self.assertIn("timeslots", form.errors)
-
-    def test_timeslot_invalid_duration(self):
-        """Reject a timeslot with a negative duration."""
-        form = EventForm(
-            data=self.form_data(
-                timeslots=json.dumps(
-                    [
-                        {
-                            "start": "10:00",
-                            "end": "12:00",
-                            "duration": "-5",
-                            "category": "Workshop",
-                        }
-                    ]
-                )
-            )
-        )
-
-        self.assertFalse(form.is_valid())
-        self.assertIn("timeslots", form.errors)
-
-    def test_invalid_json(self):
-        """Reject malformed JSON in the timeslot field."""
-        form = EventForm(data=self.form_data(timeslots="{broken"))
-
-        self.assertFalse(form.is_valid())
-        self.assertIn("timeslots", form.errors)
-
     def test_missing_required_date_fields_are_invalid(self):
         """Reject missing required dates and attach errors to their fields."""
         for field_name in ("start_date", "end_date"):
@@ -390,3 +142,125 @@ class EventFormTests(TestCase):
 
         self.assertFalse(form.is_valid())
         self.assertIn("end_date", form.errors)
+
+
+class TimeslotFormTests(TestCase):
+    """Test creating and updating individual timeslots."""
+
+    def setUp(self):
+        event_date = timezone.localdate() + timedelta(days=1)
+        self.event = Event.objects.create(
+            title="Managed Event",
+            description="Description",
+            location="Frankfurt",
+            start_date=event_date,
+            end_date=event_date,
+        )
+
+    @staticmethod
+    def form_data(**overrides) -> dict:
+        """Create valid individual timeslot form data."""
+        data = {
+            "category": "Workshop",
+            "start": "09:00",
+            "end": "10:30",
+        }
+        data.update(overrides)
+        return data
+
+    def test_form_creates_timeslot_with_calculated_duration(self):
+        """Create a valid timeslot and calculate its duration."""
+        form = TimeslotForm(data=self.form_data())
+
+        self.assertTrue(form.is_valid())
+        timeslot = form.save(commit=False)
+        timeslot.event = self.event
+        timeslot.save()
+
+        self.assertEqual(timeslot.duration, 90)
+        self.assertEqual(timeslot.category, "Workshop")
+
+    def test_form_rejects_end_not_later_than_start(self):
+        """Reject equal or decreasing times and attach the error to end."""
+        for end in ("09:00", "08:59"):
+            with self.subTest(end=end):
+                form = TimeslotForm(data=self.form_data(end=end))
+
+                self.assertFalse(form.is_valid())
+                self.assertIn("end", form.errors)
+
+    def test_form_rejects_missing_or_invalid_times(self):
+        """Reject missing and malformed start and end values."""
+        invalid_values = [
+            ("start", ""),
+            ("end", ""),
+            ("start", "25:00"),
+            ("end", "not-a-time"),
+        ]
+
+        for field_name, value in invalid_values:
+            with self.subTest(field=field_name, value=value):
+                form = TimeslotForm(
+                    data=self.form_data(**{field_name: value})
+                )
+
+                self.assertFalse(form.is_valid())
+                self.assertIn(field_name, form.errors)
+
+    def test_form_rejects_blank_category(self):
+        """Reject an empty or whitespace-only category."""
+        for category in ("", "   "):
+            with self.subTest(category=category):
+                form = TimeslotForm(data=self.form_data(category=category))
+
+                self.assertFalse(form.is_valid())
+                self.assertIn("category", form.errors)
+
+    def test_submitted_duration_is_ignored_and_recalculated(self):
+        """Derive duration from validated times instead of submitted data."""
+        form = TimeslotForm(
+            data=self.form_data(duration="999"),
+        )
+
+        self.assertTrue(form.is_valid())
+        timeslot = form.save(commit=False)
+
+        self.assertEqual(timeslot.duration, 90)
+
+    def test_form_updates_category_and_times(self):
+        """Update editable fields and recalculate the duration."""
+        timeslot = Timeslot.objects.create(
+            event=self.event,
+            start=time(9, 0),
+            end=time(10, 0),
+            duration=60,
+            category="Workshop",
+        )
+        form = TimeslotForm(
+            instance=timeslot,
+            data=self.form_data(
+                category="Panel",
+                start="11:00",
+                end="12:45",
+            ),
+        )
+
+        self.assertTrue(form.is_valid())
+        updated_timeslot = form.save()
+
+        self.assertEqual(updated_timeslot.start, time(11, 0))
+        self.assertEqual(updated_timeslot.end, time(12, 45))
+        self.assertEqual(updated_timeslot.duration, 105)
+        self.assertEqual(updated_timeslot.category, "Panel")
+
+
+class TimeslotFormSetTests(TestCase):
+    """Test the structural validation of event timeslot formsets."""
+
+    def test_formset_requires_valid_management_data(self):
+        """Reject malformed formset submissions without raising an exception."""
+        event = Event()
+        formset = TimeslotFormSet(data={}, instance=event, prefix="timeslots")
+
+        self.assertFalse(formset.is_valid())
+        self.assertTrue(formset.non_form_errors())

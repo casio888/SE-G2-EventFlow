@@ -23,15 +23,14 @@ class Event(models.Model):
         return self.title
 
 class Timeslot(models.Model):
-    """
-    Einzelner Timeslot einer Veranstaltung.
+    """A scheduled timeslot belonging to an event.
 
     Attributes:
-        event (FK): Zugehörige Veranstaltung
-        start (time): Startzeit
-        end (time): Endzeit
-        duration (int): Dauer in Minuten
-        category (str): Kategorie des Timeslots
+        event (FK): Event containing the timeslot
+        start (time): Start time
+        end (time): End time
+        duration (int): Duration in minutes
+        category (str): Timeslot category
     """
     event = models.ForeignKey(
         Event,
