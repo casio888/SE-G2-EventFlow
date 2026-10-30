@@ -9,7 +9,8 @@ from .forms import (
 
 
 def organizer_registration_view(request: HttpRequest) -> HttpResponse:
-    """Register a new organizer.
+    """
+    Register a new organizer.
 
     Processes the organizer registration form and creates an organizer
     account if the submitted data is valid. Redirects to the login page
@@ -42,7 +43,8 @@ def organizer_registration_view(request: HttpRequest) -> HttpResponse:
 
 
 def contributer_registration_view(request: HttpRequest) -> HttpResponse:
-    """Register a new contributor.
+    """
+    Register a new contributor.
 
     Processes the contributor registration form and creates a contributor
     account if the submitted data is valid. Redirects to the login page
