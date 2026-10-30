@@ -19,10 +19,18 @@
                 <a href="#">Deine favorisierten Events</a>
                 <a href="{% url 'events:events_your_events' %}">Deine Events</a>
             </div>
-            <div class="auth-buttons">
-                <a href="{% url 'authentication:OrganizerRegistration' %}" class="btn btn-signup">Registrieren</a>
-                <a href="{% url 'base:login' %}" class="btn btn-login">Anmelden</a>
-            </div>
+
+            {% if user.is_authenticated %}
+                <div class="auth-buttons">
+                    <a href="{% url 'base:logout' %}" class="btn btn-signup">logout</a>
+                </div>
+            {% else %}
+                <div class="auth-buttons">
+                    <a href="{% url 'authentication:OrganizerRegistration' %}" class="btn btn-signup">Registrieren</a>
+                    <a href="{% url 'base:login' %}" class="btn btn-login">Anmelden</a>
+                </div>
+            {% endif %}
+                
         </nav>
         {% block extra_header %} {% endblock %}
     </header>
