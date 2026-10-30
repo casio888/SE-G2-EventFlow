@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User,Group
 from django.contrib.auth.forms import UserCreationForm
 
 from .models import CustomUserContributer, CustomUserOrganizer, Adress, telefon_validator
@@ -55,6 +55,10 @@ class UserOrganizerRegestrationForm(UserCreationForm):
         if commit:
             # Save the user before creating objects that reference it.
             user.save()
+
+            # creates and assignes the User Group Organizer
+            organizerGroup, _ = Group.objects.get_or_create(name="Organizer")
+            user.groups.add(organizerGroup)
 
             # Create a separate address record for the organization.
             adress, _ = Adress.objects.get_or_create(
@@ -128,6 +132,10 @@ class UserContributerRegestrationForm(UserCreationForm):
         if commit:
             # Save the user before creating objects that reference it.
             user.save()
+
+            # creates and assignes the User Group Organizer
+            contributerGroup, _ = Group.objects.get_or_create(name="Contributer")
+            user.groups.add(contributerGroup)
 
             # Create a separate address record for the contributor.
             adress, _ = Adress.objects.get_or_create(
