@@ -11,7 +11,8 @@ telefon_validator = RegexValidator(
 
 
 class Adress(models.Model):
-    """Represent an address.
+    """
+    Represent an address.
 
     Addresses are stored in a separate model so that the same address
     can be referenced by multiple user profiles.
@@ -29,7 +30,8 @@ class Adress(models.Model):
     houseNbr = models.IntegerField()
 
     def __str__(self) -> str:
-        """Return the address as a readable string.
+        """
+        Return the address as a readable string.
 
         Returns:
             str: Lan    d, Stadt, Straße und Hausnummer.
@@ -38,7 +40,8 @@ class Adress(models.Model):
 
 
 class CustomUserOrganizer(models.Model):
-    """Represent a user with the organizer role.
+    """
+    Represent a user with the organizer role.
 
     Each user can have at most one organizer profile.
     Each address can be assigned to multiple organizer.
@@ -64,7 +67,8 @@ class CustomUserOrganizer(models.Model):
     fax = models.CharField(max_length=15,validators=[telefon_validator],blank=True,null=True,)
 
     def __str__(self) -> str:
-        """Return a readable representation of the organizer.
+        """
+        Return a readable representation of the organizer.
 
         Returns:
             str: Benutzer, Adresse, Telefonnummer und Faxnummer.
@@ -73,7 +77,8 @@ class CustomUserOrganizer(models.Model):
 
 
 class CustomUserContributer(models.Model):
-    """Represent a user with the contributor role.
+    """
+    Represent a user with the contributor role.
 
     Each user can have at most one contributor profile.
     Multiple contributors can share the same address.
@@ -99,7 +104,8 @@ class CustomUserContributer(models.Model):
     fax = models.CharField(max_length=15,validators=[telefon_validator],blank=True,null=True,)
 
     def __str__(self) -> str:
-        """Return a readable representation of the contributor.
+        """
+        Return a readable representation of the contributor.
 
         Returns:
             str: Benutzer, Adresse, Telefonnummer und Faxnummer.

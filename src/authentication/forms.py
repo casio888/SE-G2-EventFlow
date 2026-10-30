@@ -1,5 +1,4 @@
 from django import forms
-from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 
@@ -39,7 +38,8 @@ class UserOrganizerRegestrationForm(UserCreationForm):
         ]
 
     def save(self, commit=True):
-        """Save the user, address, and organizer profile.
+        """
+        Save the user, address, and organizer profile.
 
         Args:
             commit (bool): Whether to save the user and related objects
@@ -111,7 +111,8 @@ class UserContributerRegestrationForm(UserCreationForm):
         ]
 
     def save(self, commit=True):
-        """Save the user, address, and contributor profile.
+        """
+        Save the user, address, and contributor profile.
 
         Args:
             commit (bool): Whether to save the user and related objects

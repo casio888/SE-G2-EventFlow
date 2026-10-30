@@ -5,10 +5,8 @@ from django.shortcuts import redirect, render
 
 
 def index(request: HttpRequest) -> HttpResponse:
-    """Display the appropriate index page.
-
-    Displays the authenticated index page if the user is logged in.
-    Otherwise, displays the public index page.
+    """
+    displays the public index page.
 
     Arguments:
         request (HttpRequest): The HTTP request.
@@ -16,16 +14,13 @@ def index(request: HttpRequest) -> HttpResponse:
     Returns:
         HttpResponse: The rendered index page.
     """
-    if request.user.is_authenticated:
-        username = request.user.username
-        return render(request, "index_authenticated.html", {"username": username})
-    else:
-        username = None
-        return render(request, "index.html", {"username": username})
+
+    return render(request, "index.html",)
 
 
 def login_view(request: HttpRequest) -> HttpResponse:
-    """Authenticate a user and log them in.
+    """
+    Authenticate a user and log them in.
 
     Retrieves the user by email, authenticates the submitted password,
     and logs the user in if the credentials are valid.
@@ -55,7 +50,8 @@ def login_view(request: HttpRequest) -> HttpResponse:
 
 
 def logout_view(request: HttpRequest) -> HttpResponse:
-    """Log out the current user.
+    """
+    Log out the current user.
 
     Ends the user's authenticated session and redirects to the index page.
 
