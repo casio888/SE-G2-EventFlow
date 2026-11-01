@@ -20,6 +20,10 @@ class TimeslotForm(forms.ModelForm):
             "start": "Startzeit",
             "end": "Endzeit",
         }
+        widgets = {
+            "start": forms.TimeInput(attrs={"type": "time"}, format="%H:%M"),
+            "end": forms.TimeInput(attrs={"type": "time"}, format="%H:%M"),
+        }
         error_messages = {
             "category": {"required": "Kategorie darf nicht leer sein."},
             "start": {"required": "Startzeit muss ausgefüllt sein."},
