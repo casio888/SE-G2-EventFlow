@@ -1,42 +1,48 @@
 {% extends "base_topside.html" %}
 {% load static %}
 
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/application.css' %}">
+{% endblock %}
+
 {% block content %}
-<main>
-    <section name="search">
-        <input type="text" value="Name" id="name"> 
-        <button id="looking_for">Suchen</button>
-    </section>
+<main class="ap-page">
+    <div class="ap-list-head">
+        <div>
+            <h1>Auf ein Event bewerben</h1>
+            <p class="ap-intro">Such dir ein Event aus und reiche deinen Beitrag ein.</p>
+        </div>
+        <section name="search" class="ap-search">
+            <input type="text" placeholder="Eventname" aria-label="Eventname" id="name">
+            <button id="looking_for">Suchen</button>
+        </section>
+    </div>
 
     <section name="table">
-    
-        <table id="table" >
-            <!--Tabelle wird automatisch gefüllt. Wenn dann muss nur der Kopf vorhanden sein.-->
-            <!-- |Marker | Name | Zeit | Ort | Kathegorien als Kopf-->
+        <table id="table" class="ap-table">
             <thead>
                 <tr>
-                    <th data-column="title">Titel</th>
                     <th data-column="starttime">Beginn</th>
+                    <th data-column="title">Titel</th>
                     <th data-column="location">Ort</th>
                     <th data-column="apply"></th>
-                    <!--<th data-column="Kategorien">Kategorien</th>-->
                 </tr>
             </thead>
             <tbody id="tableBody">
                 {% for event in events %}
                 <tr>
-                    <td>{{event.title}}</td>
-                    <td>{{event.start_datum}}</td>
-                    <td>{{event.ort}}</td>
-                    <td><a href="{% url 'event_application' event_id=event.pk %}" class="btn btn-secondary">
-                        <button>Bewerden</button>
-                    </a></td>
+                    <td class="ap-date">{{ event.start_date|date:"d.m." }}<small>{{ event.start_date|date:"Y" }}</small></td>
+                    <td class="ap-event-title">{{ event.title }}</td>
+                    <td class="ap-location">{{ event.location }}</td>
+                    <td class="ap-action">
+                        <a href="{% url 'event_application' event_id=event.pk %}" class="ap-button">Bewerben</a>
+                    </td>
                 </tr>
-                    {%empty%}
+                {% empty %}
                 <tr>
-                    <td colspan="5">Keine Events gefunden</td>
+                    <td colspan="4" class="ap-empty">Gerade gibt es keine Events, auf die du dich bewerben kannst.</td>
                 </tr>
-                {%endfor%}
+                {% endfor %}
             </tbody>
         </table>
     </section>
