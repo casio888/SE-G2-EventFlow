@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from .models import Contribution
 from .forms import ContributionForm
 from events.models import Event
