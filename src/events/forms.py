@@ -15,7 +15,15 @@ class EventForm(forms.ModelForm):
     class Meta:
         model = Event
         fields = ["title", "description", "location", "start_date", "end_date"]
-        
+
+        labels = {
+            "title": "Titel",
+            "description": "Beschreibung",
+            "location": "Ort",
+            "start_date": "Startdatum",
+            "end_date": "Enddatum",
+        }
+
         widgets = {
         "start_date": forms.DateInput(attrs={
         "placeholder": "17.06.2026", 
@@ -31,7 +39,7 @@ class EventForm(forms.ModelForm):
     
         "title": forms.TextInput(attrs={"placeholder": "[Event Name]"}),
         "description": forms.Textarea(attrs={"placeholder": "[Catch Phrase / Beschreibung]", "rows": 3}),
-        "location": forms.TextInput(attrs={"placeholder": "Venue / Ort"}),
+        "location": forms.TextInput(attrs={"placeholder": "Ort"}),
         }
 
     def clean_timeslots(self):
