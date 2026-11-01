@@ -14,7 +14,8 @@ class ContributionForm(forms.ModelForm):
     def __init__(self, *args, event_id, **kwargs):
         super().__init__(*args, **kwargs)
         event = get_event(event_id)
-        self.instance.fk = event
+        self.instance.fk_event = event
+        self.instance.accepted = False
 
     def clean(self):
         cleaned_data = super().clean()
@@ -22,9 +23,8 @@ class ContributionForm(forms.ModelForm):
 
         if duration is not None:
             if duration <= 0:
-                raise  forms.ValidationError({"duration": "Die Dauer muss größer 0 Minuten sein."})
-        else:
-            raise forms.ValidationError({"duration": "Es muss eine dauer angegeben werden."})
+                raise  forms.ValidationError({"duration_requested": "Die Dauer muss größer 0 Minuten sein."})
+        elif not self.has_error("duration_requested"):
+            raise forms.ValidationError({"duration_requested": "Es muss eine Dauer angegeben werden."})
 
-        self.instance.eingereicht = True
         return cleaned_data
