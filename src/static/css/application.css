@@ -1,0 +1,463 @@
+/* Styling für die Bewerbung auf Events (Event-Liste und Bewerbungsformular) */
+
+:root {
+    --ap-navy: #0b1330;
+    --ap-periwinkle: #c8daff;
+    --ap-blue: #3b82f6;
+    --ap-blue-dark: #2563eb;
+    --ap-focus: #7294e7;
+    --ap-line: #dbe3f1;
+    --ap-muted: #5b6780;
+    --ap-page: #f8fafc;
+    --ap-error: #b42318;
+}
+
+body {
+    background-color: var(--ap-page);
+    color: var(--ap-navy);
+}
+
+.ap-page {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 48px 32px 72px;
+}
+
+.ap-page h1 {
+    margin: 0 0 8px;
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--ap-navy);
+}
+
+.ap-intro {
+    margin: 0;
+    color: var(--ap-muted);
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.ap-page a:focus-visible,
+.ap-page button:focus-visible,
+.ap-page input:focus-visible,
+.ap-page textarea:focus-visible {
+    outline: 3px solid var(--ap-focus);
+    outline-offset: 2px;
+}
+
+/* --- Buttons --- */
+.ap-button {
+    display: inline-block;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    background-color: var(--ap-blue-dark);
+    color: #ffffff;
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+}
+
+.ap-button:hover {
+    background-color: var(--ap-navy);
+    color: #ffffff;
+}
+
+/* --- Event-Liste --- */
+.ap-list-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 32px;
+}
+
+.ap-search {
+    display: flex;
+    gap: 8px;
+    flex: 0 1 380px;
+}
+
+.ap-search input {
+    flex: 1;
+    min-width: 0;
+    padding: 10px 14px;
+    border: 1px solid var(--ap-line);
+    border-radius: 8px;
+    background-color: #ffffff;
+    color: var(--ap-navy);
+    font-size: 0.95rem;
+}
+
+.ap-search button {
+    padding: 10px 18px;
+    border: 1px solid var(--ap-navy);
+    border-radius: 8px;
+    background-color: transparent;
+    color: var(--ap-navy);
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.ap-search button:hover {
+    background-color: var(--ap-navy);
+    color: #ffffff;
+}
+
+.ap-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-top: 2px solid var(--ap-navy);
+}
+
+.ap-table th {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--ap-line);
+    color: var(--ap-muted);
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-align: left;
+}
+
+.ap-table td {
+    padding: 18px 16px;
+    border-bottom: 1px solid var(--ap-line);
+    vertical-align: middle;
+}
+
+.ap-table tbody tr:hover td {
+    background-color: #eef3ff;
+}
+
+.ap-date {
+    font-size: 1.25rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.ap-date small {
+    display: block;
+    color: var(--ap-muted);
+    font-size: 0.8rem;
+    font-weight: 400;
+}
+
+.ap-event-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+}
+
+.ap-location {
+    color: var(--ap-muted);
+}
+
+.ap-action {
+    text-align: right;
+}
+
+.ap-empty {
+    padding: 48px 16px;
+    color: var(--ap-muted);
+    text-align: center;
+}
+
+/* --- Bewerbungsformular --- */
+.ap-apply {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: #ffffff;
+}
+
+.ap-apply-form {
+    padding: 24px 48px 56px;
+    border-right: 1px solid var(--ap-line);
+}
+
+.ap-apply-event {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    padding: 24px 48px 40px;
+}
+
+.ap-back {
+    display: inline-flex;
+    margin-bottom: 20px;
+    color: var(--ap-navy);
+}
+
+.ap-back:hover {
+    color: var(--ap-blue-dark);
+}
+
+.ap-apply h1 {
+    margin-bottom: 24px;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--ap-navy);
+}
+
+.ap-apply-form h2 {
+    margin: 32px 0 14px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--ap-navy);
+}
+
+.ap-field {
+    margin-bottom: 18px;
+}
+
+.ap-field label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.ap-field input,
+.ap-field select,
+.ap-field textarea {
+    display: block;
+    width: 100%;
+    padding: 11px 14px;
+    border: 1px solid var(--ap-line);
+    border-radius: 6px;
+    background-color: #ffffff;
+    color: var(--ap-navy);
+    font-size: 0.95rem;
+}
+
+.ap-field textarea {
+    height: 110px;
+    line-height: 1.5;
+    resize: vertical;
+}
+
+.ap-field input:focus,
+.ap-field select:focus,
+.ap-field textarea:focus {
+    border-color: var(--ap-focus);
+}
+
+.ap-apply a:focus-visible,
+.ap-apply button:focus-visible,
+.ap-apply input:focus-visible,
+.ap-apply select:focus-visible,
+.ap-apply textarea:focus-visible {
+    outline: 3px solid var(--ap-focus);
+    outline-offset: 2px;
+}
+
+.ap-apply .errorlist {
+    margin-top: 6px;
+    color: var(--ap-error);
+    font-size: 0.9rem;
+    list-style: none;
+}
+
+.ap-event-card {
+    padding: 12px 20px 24px;
+    border: 1px solid var(--ap-line);
+    border-radius: 6px;
+    font-size: 0.9rem;
+}
+
+.ap-event-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 2 / 1;
+    margin-bottom: 24px;
+    border: 2px solid var(--ap-navy);
+    border-radius: 2px;
+    background-color: var(--ap-periwinkle);
+    color: var(--ap-navy);
+    font-size: 1.4rem;
+}
+
+.ap-event-card h2 {
+    margin-bottom: 4px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--ap-navy);
+    overflow-wrap: anywhere;
+}
+
+.ap-event-location {
+    margin-bottom: 20px;
+    color: var(--ap-muted);
+}
+
+.ap-event-dates {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    justify-content: start;
+    column-gap: 40px;
+    row-gap: 8px;
+    margin-bottom: 20px;
+}
+
+.ap-event-subhead {
+    margin-top: 20px;
+}
+
+.ap-event-amenities,
+.ap-rules-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 20px;
+    list-style: none;
+}
+
+.ap-event-catering {
+    margin-top: 8px;
+    font-weight: 700;
+}
+
+.ap-event-payment {
+    border-collapse: collapse;
+}
+
+.ap-event-payment th {
+    padding: 3px 40px 3px 0;
+    font-weight: 400;
+    text-align: left;
+}
+
+.ap-event-payment td {
+    padding: 3px 0;
+}
+
+.ap-payment-muted {
+    color: var(--ap-muted);
+}
+
+.ap-payment-total th,
+.ap-payment-total td {
+    padding-top: 8px;
+    font-weight: 700;
+}
+
+.ap-rules {
+    margin-top: 40px;
+    font-size: 0.9rem;
+}
+
+.ap-rules-times {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.ap-rules-label {
+    display: block;
+    margin-bottom: 4px;
+    color: var(--ap-muted);
+}
+
+.ap-rules h3 {
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+    font-weight: 400;
+}
+
+.ap-event-dates div {
+    display: flex;
+    gap: 12px;
+}
+
+.ap-event-dates dt {
+    min-width: 64px;
+    font-weight: 700;
+}
+
+.ap-event-card h3 {
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--ap-navy);
+}
+
+.ap-event-description {
+    min-height: 100px;
+    padding: 14px;
+    border: 1px solid #9aa5b8;
+    border-radius: 4px;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+.ap-submit {
+    width: 100%;
+    margin-top: auto;
+    padding: 12px 20px;
+    border-radius: 4px;
+}
+
+/* --- Kleine Bildschirme --- */
+@media (max-width: 860px) {
+    .ap-page {
+        padding: 32px 16px 56px;
+    }
+
+    .ap-apply {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .ap-apply-form {
+        padding: 24px 16px 8px;
+        border-right: none;
+    }
+
+    .ap-apply-event {
+        padding: 16px 16px 40px;
+    }
+}
+
+@media (max-width: 640px) {
+    .ap-page h1 {
+        font-size: 1.6rem;
+    }
+
+    .ap-search {
+        flex-basis: 100%;
+    }
+
+    .ap-table thead {
+        display: none;
+    }
+
+    .ap-table tr {
+        display: block;
+        padding: 16px 0;
+        border-bottom: 1px solid var(--ap-line);
+    }
+
+    .ap-table td {
+        display: block;
+        padding: 2px 0;
+        border-bottom: none;
+    }
+
+    .ap-table td.ap-action {
+        margin-top: 12px;
+        text-align: left;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ap-button {
+        transition: none;
+    }
+}
