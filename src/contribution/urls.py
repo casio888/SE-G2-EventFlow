@@ -21,5 +21,6 @@ from . import views
 urlpatterns = [
     path('',views.event_list,name='event_list'),
     path('bewerben/',views.event_application,name='event_application'),
+    path('events/<int:event_id>/contributions/', views.event_contributions, name='event_contributions')
 ]
 
