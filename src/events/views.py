@@ -3,6 +3,10 @@ from .models import Event
 from .forms import EventForm
 from .utils import get_event_form, save_event_form
 
+from authentication.decorators import check_required_Group, check_if_user_authneticated
+
+@check_if_user_authneticated()
+@check_required_Group("Organizer")
 def event_create(request):
     """
     Erstellt eine neue Veranstaltung.
@@ -26,7 +30,7 @@ def event_create(request):
 
     return render(request, "events/create.html", {"form": form})
 
-
+@check_if_user_authneticated()
 def event_detail(request, id):
     """
     Zeigt die Detailansicht einer Veranstaltung.
@@ -41,6 +45,7 @@ def event_detail(request, id):
     event = get_object_or_404(Event, pk=id)
     return render(request, "events/detail.html", {"event": event, "timeslots": event.timeslots.all(),})
 
+@check_if_user_authneticated()
 def events_your_events(request):
     """
     Zeigt alle Veranstaltungen in der modernen Übersicht.
@@ -54,6 +59,7 @@ def events_your_events(request):
     events = Event.objects.all()
     return render(request, "events/your_events.html", {"events": events})
 
+@check_if_user_authneticated()
 def event_edit(request, id):
     """
     Bearbeitet eine bestehende Veranstaltung.
