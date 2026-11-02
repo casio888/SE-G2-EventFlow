@@ -67,6 +67,10 @@ class CustomUserOrganizer(User):
         verbose_name = "Organizer"
         verbose_name_plural = "Organizers"
 
+    class Meta:
+        verbose_name = "Organizer"
+        verbose_name_plural = "Organizers"
+
     def __str__(self) -> str:
         """
         Return a readable representation of the organizer.
