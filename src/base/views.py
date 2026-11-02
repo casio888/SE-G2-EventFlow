@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
-from Authentifizierung.models import User
-from veranstaltungen.utils import get_six_elements
+from authentication.models import User
+from events.utils import get_six_elements
 
 
 #def index(request):
@@ -9,6 +9,8 @@ from veranstaltungen.utils import get_six_elements
 
 
 def login_view(request):
+    # Description: Gives a site for the Login.
+    # On this sitre the user can log into his acount or create a new one. 
     if request.method == "POST":
         user = User.objects.filter(email=request.POST.get("email")).first()
         if user and user.check_password(request.POST.get("password")):
@@ -26,8 +28,8 @@ def login_view(request):
     return render(request, "login.html")
 
 def index(request):
-    # Description: Holt sich die ersten sechs Elemente aus der Liste an Events. 
-    # Liestet diese auf und stellt diese auf der Indexseite dar.
+    # Description: Get six events out of the DB and lists them onto the indexs.
+    # Gives a list of the nearest events to the viewer.
      
     event_list= get_six_elements()
 
