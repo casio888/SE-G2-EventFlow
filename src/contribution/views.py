@@ -14,8 +14,15 @@ def event_application(request):
     return render(request,'contribution/application.html',context)
 # Create your views here.
 
-def table_of_contributions(request):
-    # get the contributions of an Event and make list of it. List will be shown to organizer
-    contributions=get_contributions_for_Event()
-    context={'contribution':contributions}
-    return render(request,'contribution/tableofcontributions.html',context)
+def event_contributions(request,event_id):
+    #function wich gives a site with the contributions for the chosen Event. (View for Organizer)
+    contribution_list=get_contributions_of_event(event_id)
+    event= Event.objects.get(pk=event_id)
+    # checks if contributions does exist
+    if contribution_list.exists():
+        contributions ['contribution']= contribution_list
+    else:
+        contributions ['message']="Keine Einreichungen vorhanden."
+
+    return render(request,'contribution/contributionlist.html',event,contributions)
+# Create your views here.
