@@ -2,6 +2,7 @@ from django import forms
 from .models import Event
 import json
 from datetime import datetime
+from .models import Timeslot
 
 class EventForm(forms.ModelForm):
     """
@@ -111,16 +112,20 @@ class EventForm(forms.ModelForm):
 
         return cleaned_data
 
-    def save(self, commit=True):
+    def save(self,organizer=None,commit=True):
         """
         Speichert die Veranstaltung und erzeugt zugehörige Timeslots.
 
         Returns:
             Event: Gespeichertes Veranstaltungsobjekt
         """
-        event = super().save(commit)
+        event = super().save(commit=False)
 
-        from .models import Timeslot
+        if organizer is not None:
+            event.event_owner = organizer
+
+        if commit:
+            event.save()
 
         slots = self.cleaned_data.get("timeslots", [])
         for slot in slots:
