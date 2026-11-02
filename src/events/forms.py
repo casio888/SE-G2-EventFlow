@@ -1,10 +1,8 @@
 import json
 from datetime import datetime
-
 from django import forms
 from django.conf import settings
 from django.utils import timezone
-
 from .models import Event
 from .utils import _add_calendar_years
 
