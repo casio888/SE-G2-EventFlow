@@ -3,6 +3,7 @@ from .models import Event
 from .forms import EventForm
 from .utils import get_event_form, save_event_form
 
+from authentication.models import CustomUserOrganizer
 from authentication.decorators import check_required_Group, check_if_user_authneticated
 
 @check_if_user_authneticated()
@@ -23,7 +24,7 @@ def event_create(request):
     if request.method == "POST":
         form = EventForm(request.POST)
         if form.is_valid():
-            form.save()
+            form.save(organizer=request.user.customuserorganizer)
             return redirect("events:events_your_events")
     else:
         form = EventForm()
@@ -56,7 +57,8 @@ def events_your_events(request):
     Returns:
         HttpResponse: Event-Übersichtsseite
     """
-    events = Event.objects.all()
+    events = Event.objects.filter(event_owner__user=request.user)
+
     return render(request, "events/your_events.html", {"events": events})
 
 @check_if_user_authneticated()
