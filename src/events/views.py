@@ -53,7 +53,6 @@ def event_create(request):
         {"form": form, "timeslot_formset": timeslot_formset},
     )
 
-
 @check_if_user_authneticated()
 def event_detail(request, id):
     """Display an event and its timeslots.
