@@ -46,7 +46,7 @@ def get_six_elements():
     .order_by('start_date')[:6]
 )  # get max 6 elements of Events and make list
     empty_event = {
-        'titel': 'Demo',
+        'title': 'Demo',
         'description': 'Es fehlen Events',
         'start_date': None,
         'end_date': None,
