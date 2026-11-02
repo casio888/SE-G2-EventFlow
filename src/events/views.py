@@ -3,11 +3,12 @@ from .models import Event
 from .forms import EventForm
 from .utils import get_event_form, save_event_form
 
-from authentication.models import CustomUserOrganizer
-from authentication.decorators import check_required_Group, check_if_user_authneticated
+from authentication.models import CustomUserContributer, CustomUserOrganizer
+from authentication.decorators import AccountType
+from authentication.decorators import check_if_organizer_or_contributer, check_if_user_authneticated
 
 @check_if_user_authneticated()
-@check_required_Group("Organizer")
+@check_if_organizer_or_contributer(AccountType.ORGANIZER)
 def event_create(request):
     """
     Erstellt eine neue Veranstaltung.
@@ -24,7 +25,9 @@ def event_create(request):
     if request.method == "POST":
         form = EventForm(request.POST)
         if form.is_valid():
-            form.save(organizer=request.user.customuserorganizer)
+            organizer=CustomUserOrganizer.objects.get(pk=request.user.pk)
+
+            form.save(organizer)
             return redirect("events:events_your_events")
     else:
         form = EventForm()
@@ -57,7 +60,12 @@ def events_your_events(request):
     Returns:
         HttpResponse: Event-Übersichtsseite
     """
-    events = Event.objects.filter(event_owner__user=request.user)
+    if CustomUserOrganizer.objects.filter(pk=request.user.pk).exists():
+        event_owner=CustomUserOrganizer.objects.get(pk=request.user.pk)
+        events = Event.objects.filter(event_owner=event_owner)
+
+    elif CustomUserContributer.objects.filter(pk=request.user.pk).exists():
+        events = Event.objects.filter(contributors__pk=request.user.pk)
 
     return render(request, "events/your_events.html", {"events": events})
 
