@@ -32,8 +32,8 @@
             {% for event in event_list %} 
                 <div class="event-card {% if forloop.counter <= 2 %}card-large-{{ forloop.counter }}{% endif %}">
                     <span class="circle-indicator"></span>
-                    {{ event.titel }}
-                    <span class="badge">{{ event.ort }}</span>
+                    {{ event.title }}
+                    <span class="badge">{{ event.location }}</span>
                 </div>
             {% endfor %}
         </div>
