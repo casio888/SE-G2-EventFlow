@@ -41,6 +41,7 @@ def save_event_form(form):
 
 def get_six_elements():
     # get the six nearests events out of the DB. If there arent enouth it would be filled up with a demonstator
+    # If wanted change here to also get Events from the same date. And can be modified for other uses 
     event_list=list(Event.objects
     .filter(start_date__gt=timezone.now())
     .order_by('start_date')[:6]
