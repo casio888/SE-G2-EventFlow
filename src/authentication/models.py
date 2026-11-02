@@ -10,7 +10,7 @@ telefon_validator = RegexValidator(
 )
 
 
-class Adress(models.Model):
+class Address(models.Model):
     """
     Represent an address.
 
@@ -39,26 +39,23 @@ class Adress(models.Model):
         return f"{self.country}, {self.city}, {self.street}, {self.houseNbr}"
 
 
-class CustomUserOrganizer(models.Model):
-    """
-    Represent a user with the organizer role.
+class CustomUserOrganizer(User):
 
-    Each user can have at most one organizer profile.
-    Each address can be assigned to multiple organizer.
+    """
+    Represents an organizer account in the system.
+
+    Extends Django's built-in User model with additional contact
+    information and an associated address.
 
     Attributes:
-        user (User): Zugehöriger Django-Benutzer.
-        adress (Adress): Adresse des Organizers.
-        telefone (str): Telefonnummer des Organizers.
-        fax (str | None): Optionale Faxnummer des Organizers.
+        address (Address): Address associated with the organizer.
+        telephone (str): Telephone number of the organizer.
+        fax (str | None): Optional fax number of the organizer.
     """
 
-    # Connect the organizer profile to a Django user.
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-
     # Connect the organizer to an address.
-    # One address can belong to multiple organizers
-    adress = models.ForeignKey(Adress, on_delete=models.PROTECT)
+    # One address can belong to multiple organizers.
+    address = models.ForeignKey(Address, on_delete=models.PROTECT)
 
     # Store the organizer's telephone number.
     telephone = models.CharField(max_length=15,validators=[telefon_validator],)
@@ -66,48 +63,55 @@ class CustomUserOrganizer(models.Model):
     # Store an optional fax number.
     fax = models.CharField(max_length=15,validators=[telefon_validator],blank=True,null=True,)
 
+    class Meta:
+        verbose_name = "Organizer"
+        verbose_name_plural = "Organizers"
+
     def __str__(self) -> str:
         """
         Return a readable representation of the organizer.
 
         Returns:
-            str: Benutzer, Adresse, Telefonnummer und Faxnummer.
+            str: Username of the organizer.
         """
-        return f"{self.user}"
+        
+        return f"{self.username}"
 
 
-class CustomUserContributer(models.Model):
+class CustomUserContributer(User):
+
     """
-    Represent a user with the contributor role.
+    Represents a contributor account in the system.
 
-    Each user can have at most one contributor profile.
-    Multiple contributors can share the same address.
+    Extends Django's built-in User model with additional contact
+    information and an associated address.
 
     Attributes:
-        user (User): Zugehöriger Django-Benutzer.
-        adress (Adress): Adresse des Contributors.
-        telefone (str): Telefonnummer des Contributors.
-        fax (str | None): Optionale Faxnummer des Contributors.
+        address (Address): Address associated with the contributor.
+        telephone (str): Telephone number of the contributor.
+        fax (str | None): Optional fax number of the contributor.
     """
 
-    # Connect the contributor profile to a Django user.
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-
     # Connect the contributor to an address.
-    # Multiple contributors can reference the same address.
-    adress = models.ForeignKey(Adress, on_delete=models.PROTECT)
+    # One address can belong to multiple contributors.
+    address = models.ForeignKey(Address, on_delete=models.PROTECT)
 
     # Store the contributor's telephone number.
     telephone = models.CharField(max_length=15,validators=[telefon_validator],)
 
     # Store an optional fax number.
     fax = models.CharField(max_length=15,validators=[telefon_validator],blank=True,null=True,)
+    class Meta:
+        verbose_name = "Contributor"
+        verbose_name_plural = "Contributors"
 
     def __str__(self) -> str:
         """
         Return a readable representation of the contributor.
 
         Returns:
-            str: Benutzer, Adresse, Telefonnummer und Faxnummer.
+            str: Username of the contributor.
         """
-        return f"{self.user}"
+        
+        return f"{self.username}"
+    
