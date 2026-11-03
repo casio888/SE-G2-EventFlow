@@ -20,8 +20,6 @@ class Event(models.Model):
 
     event_owner = models.ForeignKey(CustomUserOrganizer,on_delete=models.CASCADE)
 
-    contributors = models.ManyToManyField(CustomUserContributer,blank=True,related_name="applied_events")
-
     title = models.CharField(max_length=200)
     description = models.TextField(blank=True)
     start_date = models.DateField()
