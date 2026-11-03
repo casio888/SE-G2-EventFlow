@@ -50,6 +50,7 @@ def event_detail(request, id):
     return render(request, "events/detail.html", {"event": event, "timeslots": event.timeslots.all(),})
 
 @check_if_user_authneticated()
+@check_if_organizer_or_contributer(AccountType.ORGANIZER)
 def events_your_events(request):
     """
     Zeigt alle Veranstaltungen in der modernen Übersicht.
