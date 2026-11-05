@@ -3,7 +3,7 @@ from django.contrib.auth.models import User,Group
 from django.contrib.auth.forms import UserCreationForm
 from django.db import transaction
 
-from .models import CustomUserContributer, CustomUserOrganizer, Address, telefon_validator
+from .models import CustomUserContributer, CustomUserOrganizer, Address, telephone_validator
 
 
 class UserOrganizerRegestrationForm(UserCreationForm):
@@ -24,10 +24,10 @@ class UserOrganizerRegestrationForm(UserCreationForm):
     """
 
     # Validate the telephone number using the shared telephone validator.
-    telephone = forms.CharField(max_length=15, validators=[telefon_validator],)
+    telephone = forms.CharField(max_length=15, validators=[telephone_validator],)
 
     # Collect an optional fax number and validate it if provided.
-    fax = forms.CharField(max_length=15, validators=[telefon_validator],required=False,)
+    fax = forms.CharField(max_length=15, validators=[telephone_validator],required=False,)
 
     # Collect the address details of the organization.
     country = forms.CharField(max_length=50)
@@ -104,10 +104,10 @@ class UserContributerRegestrationForm(UserCreationForm):
     """
 
     # Validate the telephone number using the shared telephone validator.
-    telephone = forms.CharField(max_length=15, validators=[telefon_validator],)
+    telephone = forms.CharField(max_length=15, validators=[telephone_validator],)
 
     # Collect an optional fax number and validate it if provided.
-    fax = forms.CharField(max_length=15, validators=[telefon_validator],required=False,)
+    fax = forms.CharField(max_length=15, validators=[telephone_validator],required=False,)
 
     # Collect the address details of the organization.
     country = forms.CharField(max_length=50)

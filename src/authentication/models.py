@@ -4,7 +4,7 @@ from django.db import models
 
 
 # Validator for telephone numbers.
-telefon_validator = RegexValidator(
+telephone_validator = RegexValidator(
     regex=r"^\+?[0-9]{9,15}$",
     message="Bitte gib eine gültige Telefonnummer mit 9 bis 15 Ziffern ein.",
 )
@@ -58,10 +58,10 @@ class CustomUserOrganizer(User):
     address = models.ForeignKey(Address, on_delete=models.PROTECT)
 
     # Store the organizer's telephone number.
-    telephone = models.CharField(max_length=15,validators=[telefon_validator],)
+    telephone = models.CharField(max_length=15,validators=[telephone_validator],)
 
     # Store an optional fax number.
-    fax = models.CharField(max_length=15,validators=[telefon_validator],blank=True,null=True,)
+    fax = models.CharField(max_length=15,validators=[telephone_validator],blank=True,null=True,)
 
     class Meta:
         verbose_name = "Organizer"
@@ -97,10 +97,10 @@ class CustomUserContributer(User):
     address = models.ForeignKey(Address, on_delete=models.PROTECT)
 
     # Store the contributor's telephone number.
-    telephone = models.CharField(max_length=15,validators=[telefon_validator],)
+    telephone = models.CharField(max_length=15,validators=[telephone_validator],)
 
     # Store an optional fax number.
-    fax = models.CharField(max_length=15,validators=[telefon_validator],blank=True,null=True,)
+    fax = models.CharField(max_length=15,validators=[telephone_validator],blank=True,null=True,)
     class Meta:
         verbose_name = "Contributor"
         verbose_name_plural = "Contributors"
