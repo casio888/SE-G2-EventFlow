@@ -141,5 +141,5 @@ TimeslotFormSet = inlineformset_factory(
     Timeslot,
     form=TimeslotForm,
     extra=0,
-    can_delete=False,
+    can_delete=True,
 )

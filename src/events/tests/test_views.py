@@ -267,6 +267,137 @@ class EventEditViewTests(TestCase):
             [60, 30, 75],
         )
 
+    def test_deleting_one_timeslot_preserves_event_and_other_timeslots(self):
+        """Delete only the existing timeslot explicitly marked for deletion."""
+        remaining_timeslot = Timeslot.objects.create(
+            event=self.event,
+            category="Panel",
+            start=time(11, 0),
+            end=time(12, 0),
+            duration=60,
+        )
+
+        response = self.client.post(
+            self.edit_url(),
+            combined_form_data(
+                [
+                    {
+                        "id": str(self.timeslot.pk),
+                        "category": "Workshop",
+                        "start": "09:00",
+                        "end": "10:00",
+                        "DELETE": "on",
+                    },
+                    {
+                        "id": str(remaining_timeslot.pk),
+                        "category": "Panel",
+                        "start": "11:00",
+                        "end": "12:00",
+                    },
+                ],
+                initial_forms=2,
+            ),
+        )
+
+        self.assertRedirects(
+            response,
+            reverse("events:event_detail", args=[self.event.pk]),
+        )
+        self.assertTrue(Event.objects.filter(pk=self.event.pk).exists())
+        self.assertFalse(Timeslot.objects.filter(pk=self.timeslot.pk).exists())
+        self.assertTrue(
+            Timeslot.objects.filter(pk=remaining_timeslot.pk).exists()
+        )
+
+    def test_deleting_multiple_timeslots_preserves_unmarked_timeslot(self):
+        """Delete multiple marked timeslots and preserve the unmarked one."""
+        second_timeslot = Timeslot.objects.create(
+            event=self.event,
+            category="Talk",
+            start=time(11, 0),
+            end=time(12, 0),
+            duration=60,
+        )
+        remaining_timeslot = Timeslot.objects.create(
+            event=self.event,
+            category="Panel",
+            start=time(13, 0),
+            end=time(14, 0),
+            duration=60,
+        )
+
+        response = self.client.post(
+            self.edit_url(),
+            combined_form_data(
+                [
+                    {
+                        "id": str(self.timeslot.pk),
+                        "category": "Workshop",
+                        "start": "09:00",
+                        "end": "10:00",
+                        "DELETE": "on",
+                    },
+                    {
+                        "id": str(second_timeslot.pk),
+                        "category": "Talk",
+                        "start": "11:00",
+                        "end": "12:00",
+                        "DELETE": "on",
+                    },
+                    {
+                        "id": str(remaining_timeslot.pk),
+                        "category": "Panel",
+                        "start": "13:00",
+                        "end": "14:00",
+                    },
+                ],
+                initial_forms=3,
+            ),
+        )
+
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(
+            list(self.event.timeslots.values_list("pk", flat=True)),
+            [remaining_timeslot.pk],
+        )
+
+    def test_existing_timeslots_without_delete_are_preserved(self):
+        """Preserve every submitted timeslot that has no delete marker."""
+        second_timeslot = Timeslot.objects.create(
+            event=self.event,
+            category="Panel",
+            start=time(11, 0),
+            end=time(12, 0),
+            duration=60,
+        )
+
+        response = self.client.post(
+            self.edit_url(),
+            combined_form_data(
+                [
+                    {
+                        "id": str(self.timeslot.pk),
+                        "category": "Workshop",
+                        "start": "09:00",
+                        "end": "10:00",
+                    },
+                    {
+                        "id": str(second_timeslot.pk),
+                        "category": "Panel",
+                        "start": "11:00",
+                        "end": "12:00",
+                    },
+                ],
+                initial_forms=2,
+            ),
+        )
+
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(
+            set(self.event.timeslots.values_list("pk", flat=True)),
+            {self.timeslot.pk, second_timeslot.pk},
+        )
+
     def test_omitted_timeslots_are_preserved(self):
         """Do not treat omission from a submission as deletion."""
         omitted_timeslot = Timeslot.objects.create(
@@ -372,6 +503,50 @@ class EventEditViewTests(TestCase):
         self.timeslot.refresh_from_db()
         self.assertEqual(self.timeslot.category, "Workshop")
         self.assertEqual(self.timeslot.start, time(9, 0))
+
+    def test_invalid_event_prevents_requested_deletion(self):
+        """Preserve a marked timeslot when the event form is invalid."""
+        response = self.client.post(
+            self.edit_url(),
+            combined_form_data(
+                [
+                    {
+                        "id": str(self.timeslot.pk),
+                        "category": "Workshop",
+                        "start": "09:00",
+                        "end": "10:00",
+                        "DELETE": "on",
+                    }
+                ],
+                initial_forms=1,
+                title="",
+            ),
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertIn("title", response.context["form"].errors)
+        self.assertTrue(Timeslot.objects.filter(pk=self.timeslot.pk).exists())
+
+    def test_deleted_timeslot_ignores_its_invalid_time_fields(self):
+        """Use Django's standard behavior for invalid deleted forms."""
+        response = self.client.post(
+            self.edit_url(),
+            combined_form_data(
+                [
+                    {
+                        "id": str(self.timeslot.pk),
+                        "category": "Workshop",
+                        "start": "invalid",
+                        "end": "",
+                        "DELETE": "on",
+                    }
+                ],
+                initial_forms=1,
+            ),
+        )
+
+        self.assertEqual(response.status_code, 302)
+        self.assertFalse(Timeslot.objects.filter(pk=self.timeslot.pk).exists())
 
     def test_invalid_timeslot_prevents_event_update(self):
         """Leave the event unchanged when a timeslot form is invalid."""
