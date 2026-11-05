@@ -1,0 +1,27 @@
+= Daily Meeting <Datum>
+Anwesende: Elias, Micha, Michi, Nina, Paul
+
+== Was ist geschafft
+
+* Nina hat ihren Teil nahezu fertig (ist fertig)
+* Michi hat sich mit Git-hooks befasst. 
+* Paul hat die Rollen fertig
+
+== Aufgaben 
+
+ * Micha, Paul, müssen noch weiterarbeiten, Tests schreiben und dann Pull-request
+ * Michi will sein Wissen in ein ADR verfassen
+ * Paul gibt Anleitung für den Einbau der Rollen 
+
+
+
+
+== Ablauf
+Start: 12:35
+
+* Wir reden übder die aktuellen schwierigkeiten der einzelnen Personen
+* Probleme wurden gelöst
+
+
+
+Ende: 13:15
