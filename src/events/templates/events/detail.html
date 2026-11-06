@@ -58,6 +58,9 @@
 
             <div>
                 <h3 class="section-subtitle mb-3">Bewerber</h3>
+                <a href="{% url 'event_contributions' event_id=event.id %}" class="btn btn-submit-event w-50 py-2.5 fw-bold text-center d-flex align-items-center justify-content-center text-decoration-none">
+                    Beiträge ansehen
+                </a>
                 <div class="django-form-fields p-2" style="background-color: #fff; border: 1px solid #cbd5e1; border-radius: 6px;">
                     <ul class="list-group list-group-flush m-0">
                         {% for bewerber in event.bewerber %}

@@ -1,11 +1,13 @@
 from django.db import models
 from events.models import Event
+from authentication.models import 
 
-class Contribution():
-    event=models.ForeignKey(Event, on_delete=models.CASCADE) 
+class Contribution(models.Model):
+    event=models.ForeignKey(Event, on_delete=models.CASCADE)
+    contributer=models.ForeighKey(...,on_delete=models.CASCADE)
     submitted=models.BooleanField()
-    description=models.CharField(max_length="400")
-    requirements=models.TextField(max_length="400")
+    description=models.CharField(max_length=400)
+    requirements=models.TextField(max_length=400)
     def __str__(self):
-        return self.id
+        return self.
 # Create your models here.
