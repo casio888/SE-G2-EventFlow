@@ -1,52 +1,61 @@
-from django import forms
-from .models import Event
 import json
 from datetime import datetime
-from .models import Timeslot
+from django import forms
+from django.conf import settings
+from django.utils import timezone
+from .models import Event, Timeslot
+from .utils import _add_calendar_years
+
 
 class EventForm(forms.ModelForm):
-    """
-    Formular zur Erstellung und Bearbeitung von Veranstaltungen.
+    """Form for creating and editing events.
 
-    Enthält ein verstecktes JSON-Feld für Timeslots, die per JavaScript
-    dynamisch hinzugefügt werden.
+    Contains a hidden JSON field for timeslots that are added dynamically
+    with JavaScript.
     """
+
     timeslots = forms.CharField(widget=forms.HiddenInput(), required=False)
 
     class Meta:
         model = Event
         fields = ["title", "description", "location", "start_date", "end_date"]
-        
+
         widgets = {
-        "start_date": forms.DateInput(attrs={
-        "placeholder": "17.06.2026", 
-        "onfocus": "(this.type='date')", 
-        "onblur": "if(!this.value)this.type='text'"
-    }),
-    "end_date": forms.DateInput(attrs={
-        "placeholder": "17.06.2026", 
-        "onfocus": "(this.type='date')", 
-        "onblur": "if(!this.value)this.type='text'"
-    }),
-            
-    
-        "title": forms.TextInput(attrs={"placeholder": "[Event Name]"}),
-        "description": forms.Textarea(attrs={"placeholder": "[Catch Phrase / Beschreibung]", "rows": 3}),
-        "location": forms.TextInput(attrs={"placeholder": "Venue / Ort"}),
+            "start_date": forms.DateInput(
+                attrs={
+                    "placeholder": "17.06.2026",
+                    "onfocus": "(this.type='date')",
+                    "onblur": "if(!this.value)this.type='text'",
+                }
+            ),
+            "end_date": forms.DateInput(
+                attrs={
+                    "placeholder": "17.06.2026",
+                    "onfocus": "(this.type='date')",
+                    "onblur": "if(!this.value)this.type='text'",
+                }
+            ),
+            "title": forms.TextInput(attrs={"placeholder": "[Event Name]"}),
+            "description": forms.Textarea(
+                attrs={
+                    "placeholder": "[Catch Phrase / Beschreibung]",
+                    "rows": 3,
+                }
+            ),
+            "location": forms.TextInput(attrs={"placeholder": "Venue / Ort"}),
         }
 
     def clean_timeslots(self):
-        """
-        Validiert das Timeslot-JSON.
+        """Validate and normalize the timeslot JSON.
 
-        Prüft:
-        - Zeitformat
-        - Start < Ende
-        - Dauer > 0
-        - Kategorie vorhanden
+        Checks:
+        - Time format
+        - Start < end
+        - Duration > 0
+        - Category is present
 
         Returns:
-            list[dict]: Bereinigte Timeslot-Daten
+            list[dict]: Cleaned timeslot data
         """
         raw = self.cleaned_data["timeslots"]
         if not raw:
@@ -90,12 +99,14 @@ class EventForm(forms.ModelForm):
             if not category:
                 raise forms.ValidationError("Kategorie darf nicht leer sein.")
 
-            cleaned.append({
-                "start": start,
-                "end": end,
-                "duration": duration_int,
-                "category": category
-            })
+            cleaned.append(
+                {
+                    "start": start,
+                    "end": end,
+                    "duration": duration_int,
+                    "category": category,
+                }
+            )
 
         return cleaned
 
@@ -104,20 +115,53 @@ class EventForm(forms.ModelForm):
 
         start_date = cleaned_data.get("start_date")
         end_date = cleaned_data.get("end_date")
+        today = timezone.localdate()
+        latest_date = _add_calendar_years(
+            today, settings.MAX_EVENT_YEARS_IN_FUTURE
+        )
 
-        if start_date and end_date and start_date > end_date:
-            raise forms.ValidationError({
-                "end_date": "Das Enddatum muss am oder nach dem Startdatum liegen."
-            })
+        # Validate the start date.
+        if start_date:
+            start_date_unchanged = (
+                self.instance.pk
+                and start_date == self.instance.start_date
+            )
+
+            if start_date < today and not start_date_unchanged:
+                self.add_error(
+                    "start_date",
+                    "Das Startdatum darf nicht in der Vergangenheit liegen.",
+                )
+
+            if start_date > latest_date:
+                self.add_error(
+                    "start_date",
+                    "Das Startdatum darf höchstens fünf Kalenderjahre in der Zukunft liegen.",
+                )
+
+        # Validate the end date.
+        if end_date:
+            if end_date > latest_date:
+                self.add_error(
+                    "end_date",
+                    "Das Enddatum darf höchstens fünf Kalenderjahre in der Zukunft liegen.",
+                )
+
+        # Validate the date order.
+        if start_date and end_date:
+            if start_date > end_date:
+                self.add_error(
+                    "end_date",
+                    "Das Enddatum muss am oder nach dem Startdatum liegen.",
+                )
 
         return cleaned_data
 
-    def save(self,organizer=None,commit=True):
-        """
-        Speichert die Veranstaltung und erzeugt zugehörige Timeslots.
+    def save(self, commit=True):
+        """Save the event and create its associated timeslots.
 
         Returns:
-            Event: Gespeichertes Veranstaltungsobjekt
+            Event: Saved event instance
         """
         event = super().save(commit=False)
 

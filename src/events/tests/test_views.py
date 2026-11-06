@@ -1,49 +1,76 @@
 import json
+from datetime import timedelta
+
 from django.test import TestCase
 from django.urls import reverse
+from django.utils import timezone
+
 from events.models import Event
 
-class EventCreateViewTests(TestCase):
-    """
-    Testet die View zum Erstellen einer Veranstaltung.
 
-    Fokus:
-    - GET: Formular wird korrekt angezeigt
-    - POST: Veranstaltung wird gespeichert
-    """
+class EventCreateViewTests(TestCase):
+    """Test the event creation view."""
+
+    @staticmethod
+    def form_data(**overrides) -> dict:
+        """Create valid event form data for a view test."""
+        event_date = (timezone.localdate() + timedelta(days=1)).isoformat()
+        data = {
+            "title": "Test Event",
+            "description": "Beschreibung",
+            "location": "Frankfurt",
+            "start_date": event_date,
+            "end_date": event_date,
+            "timeslots": json.dumps(
+                [
+                    {
+                        "start": "10:00",
+                        "end": "12:00",
+                        "duration": "120",
+                        "category": "Workshop",
+                    }
+                ]
+            ),
+        }
+        data.update(overrides)
+        return data
 
     def test_get_form(self):
-        """
-        Testet, dass die Formularseite erreichbar ist
-        und den erwarteten Inhalt enthält.
-        """
+        """Display the event form with the expected content."""
         response = self.client.get(reverse("events:event_create"))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Event anlegen")
 
     def test_post_creates_event(self):
-        """
-        Testet, dass eine gültige POST-Anfrage eine Veranstaltung erzeugt.
-        """
-        response = self.client.post(reverse("events:event_create"), {
-            "title": "Test Event",
-            "description": "Beschreibung",
-            "location": "Frankfurt",
-            "start_date": "2026-02-23",
-            "end_date": "2026-02-24",
-            "timeslots": json.dumps([
-                {"start": "10:00", "end": "12:00", "duration": "120", "category": "Workshop"}
-            ])
-        })
+        """Create an event from a valid POST request."""
+        response = self.client.post(
+            reverse("events:event_create"),
+            self.form_data(),
+        )
 
-        # Redirect nach erfolgreichem Speichern
+        # Redirect after saving successfully
         self.assertEqual(response.status_code, 302)
 
-        # Es wurde genau ein Event angelegt
+        # Exactly one event was created
         self.assertEqual(Event.objects.count(), 1)
 
         event = Event.objects.first()
         self.assertEqual(event.title, "Test Event")
 
-        # Timeslots wurden korrekt gespeichert
+        # The timeslot was saved correctly
         self.assertEqual(event.timeslots.count(), 1)
+
+    def test_post_rejects_past_start_date(self):
+        """Reject an event whose start date is in the past."""
+        response = self.client.post(
+            reverse("events:event_create"),
+            self.form_data(
+                start_date=(
+                    timezone.localdate() - timedelta(days=1)
+                ).isoformat(),
+            ),
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(Event.objects.count(), 0)
+        self.assertIn("start_date", response.context["form"].errors)

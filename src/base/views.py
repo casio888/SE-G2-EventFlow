@@ -2,6 +2,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect, render
+from events.utils import get_six_elements
 
 
 def index(request: HttpRequest) -> HttpResponse:
@@ -14,8 +15,9 @@ def index(request: HttpRequest) -> HttpResponse:
     Returns:
         HttpResponse: The rendered index page.
     """
+    event_list= get_six_elements()
 
-    return render(request, "index.html",)
+    return render(request, "index.html", {'event_list':event_list})
 
 
 def login_view(request: HttpRequest) -> HttpResponse:
