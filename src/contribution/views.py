@@ -8,7 +8,7 @@ from authentication.decorators import (
 from authentication.models import CustomUserContributer, CustomUserOrganizer
 from .forms import ContributionForm
 from .models import Contribution
-from .utils import get_contributions_for_Event
+from .utils import get_contributions_for_event
 from events.models import Event
 from base.utils import redirect_to_referrer
 
@@ -66,16 +66,14 @@ def event_application(request, event_id):
 
 def event_contributions(request,event_id):
     #function wich gives a site with the contributions for the chosen Event. (View for Organizer)
-    try:
-        event= Event.objects.get(pk=event_id)
-    except Event.DoesNotExist:
-        return render(request, 'error.html',{'message':'Event konnte nicht gefunden werden'})
-    contribution_list=get_contributions_of_event(event_id)
+    event= get_object_or_404(Event, pk=event_id)
+    contribution_list=get_contributions_for_event(event_id)
     # checks if contributions does exist
+    context={"event":event}
     if contribution_list.exists():
-        contributions ['contribution']= contribution_list
+        context ['contributions']= contribution_list
     else:
-        contributions ['message']="Keine Einreichungen vorhanden."
+        context ['message']="Keine Einreichungen vorhanden."
 
-    return render(request,'contribution/contributionlist.html',event,contributions)
+    return render(request,'contribution/contributionlist.html',context)
 # Create your views here.
