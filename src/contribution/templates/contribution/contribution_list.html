@@ -1,0 +1,40 @@
+{% extends "base_topside.html" %}
+{% load static %}
+
+{% block content %}
+<main>
+    <section name="Event">
+       <!--Hier soll stehen, welches Event gerade angezeigt wird.-->
+    </section>
+
+    <section name="table">
+    
+        <table id="table" >
+            <!--Tabelle wird automatisch gefüllt. Wenn dann muss nur der Kopf vorhanden sein.-->
+            <!-- |Marker | Name | Zeit | Ort | Kathegorien als Kopf-->
+            <thead>
+                <tr>
+                    <th data-column="Marker">Marker</th>
+                    <th data-column="Username">Name</th>
+                    <!--<th data-column="Kategorien">Kategorien</th>-->
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+                {% for contribution in contribution_list %}
+                <tr>
+                <td>{{Contribution.submitted}}</td>
+                <td>{{Contribution.username}}</td>
+                <!--<td>{{event.kategorien}}</td>-->
+                    </tr>
+                    {%empty%}
+                <tr>
+                    <td colspan="5">Keine Bewerber gefunden</td>
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+    </section>
+        
+    </section>
+</main>
+{% endblock %}
