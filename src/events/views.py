@@ -1,10 +1,19 @@
 from django.db import transaction
 from django.shortcuts import render, redirect, get_object_or_404
 
+from authentication.decorators import (
+    AccountType,
+    check_if_organizer_or_contributer,
+    check_if_user_authneticated,
+)
+from authentication.models import CustomUserContributer, CustomUserOrganizer
+
 from .forms import EventForm, TimeslotFormSet
 from .models import Event
 
 
+@check_if_user_authneticated()
+@check_if_organizer_or_contributer(AccountType.ORGANIZER)
 def event_create(request):
     """Create an event and its optional timeslots.
 
@@ -17,7 +26,8 @@ def event_create(request):
     Returns:
         HttpResponse: Rendered page or redirect
     """
-    event = Event()
+    organizer = get_object_or_404(CustomUserOrganizer, pk=request.user.pk)
+    event = Event(event_owner=organizer)
     form_data = request.POST if request.method == "POST" else None
     form = EventForm(form_data, instance=event)
     timeslot_formset = TimeslotFormSet(
@@ -44,16 +54,16 @@ def event_create(request):
     )
 
 
+@check_if_user_authneticated()
 def event_detail(request, id):
-    """
-    Zeigt die Detailansicht einer Veranstaltung.
+    """Display an event and its timeslots.
 
     Arguments:
-        request (HttpRequest): HTTP-Request-Objekt
-        id (int): Primärschlüssel der Veranstaltung
+        request (HttpRequest): Incoming HTTP request
+        id (int): Event primary key
 
     Returns:
-        HttpResponse: Detailseite der Veranstaltung
+        HttpResponse: Rendered event detail page
     """
     event = get_object_or_404(Event, pk=id)
     timeslots = event.timeslots.order_by("start")
@@ -64,20 +74,28 @@ def event_detail(request, id):
     )
 
 
+@check_if_user_authneticated()
+@check_if_organizer_or_contributer(AccountType.ORGANIZER)
 def events_your_events(request):
-    """
-    Zeigt alle Veranstaltungen in der modernen Übersicht.
+    """Display events associated with the authenticated account.
 
     Arguments:
-        request (HttpRequest): HTTP-Request-Objekt
+        request (HttpRequest): Incoming HTTP request
 
     Returns:
-        HttpResponse: Event-Übersichtsseite
+        HttpResponse: Rendered event overview
     """
-    events = Event.objects.all()
+    if CustomUserOrganizer.objects.filter(pk=request.user.pk).exists():
+        event_owner = CustomUserOrganizer.objects.get(pk=request.user.pk)
+        events = Event.objects.filter(event_owner=event_owner)
+    elif CustomUserContributer.objects.filter(pk=request.user.pk).exists():
+        events = Event.objects.filter(contributors__pk=request.user.pk)
+
     return render(request, "events/your_events.html", {"events": events})
 
 
+@check_if_user_authneticated()
+@check_if_organizer_or_contributer(AccountType.ORGANIZER)
 def event_edit(request, id):
     """Update an event and its submitted timeslots together.
 
@@ -88,7 +106,8 @@ def event_edit(request, id):
     Returns:
         HttpResponse: Rendered edit page or redirect
     """
-    event = get_object_or_404(Event, pk=id)
+    organizer = get_object_or_404(CustomUserOrganizer, pk=request.user.pk)
+    event = get_object_or_404(Event, pk=id, event_owner=organizer)
 
     form_data = request.POST if request.method == "POST" else None
     form = EventForm(form_data, instance=event)

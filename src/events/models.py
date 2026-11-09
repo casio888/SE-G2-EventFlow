@@ -1,10 +1,15 @@
 from django.db import models
 
+from authentication.models import CustomUserContributer, CustomUserOrganizer
+
 class Event(models.Model):
     """
     Repräsentiert eine Veranstaltung im System.
 
     Attributes:
+        event_owner (CustomUserOrganizer): ForeignKey for linking creator of the Event to Event
+        contributors (CustomUserContributer): List of Contributers that applied for the Event
+
         title (str): Titel der Veranstaltung
         description (str): Beschreibung / Catchphrase
         start_date (date): Startdatum
@@ -12,6 +17,9 @@ class Event(models.Model):
         location (str): Veranstaltungsort
         created_at (datetime): Automatisch gesetztes Erstellungsdatum
     """
+
+    event_owner = models.ForeignKey(CustomUserOrganizer,on_delete=models.CASCADE)
+
     title = models.CharField(max_length=200)
     description = models.TextField(blank=True)
     start_date = models.DateField()

@@ -5,12 +5,32 @@ from unittest.mock import patch
 from django.test import TestCase
 from django.utils import timezone
 
+from authentication.models import Address, CustomUserOrganizer
 from events.forms import EventForm, TimeslotForm, TimeslotFormSet
 from events.models import Event, Timeslot
 
 
+def create_organizer(username="organizer") -> CustomUserOrganizer:
+    """Create an organizer for event form tests."""
+    address = Address.objects.create(
+        country="Germany",
+        city="Dresden",
+        street="Test Street",
+        houseNbr=1,
+    )
+    return CustomUserOrganizer.objects.create_user(
+        username=username,
+        password="test-password",
+        address=address,
+        telephone="+491701234567",
+    )
+
+
 class EventFormTests(TestCase):
     """Test event form validation."""
+
+    def setUp(self):
+        self.organizer = create_organizer()
 
     @staticmethod
     def form_data(**overrides) -> dict:
@@ -99,6 +119,7 @@ class EventFormTests(TestCase):
         existing_start_date = today - timedelta(days=2)
         existing_end_date = today - timedelta(days=1)
         event = Event.objects.create(
+            event_owner=self.organizer,
             title="Existing Event",
             description="Description",
             location="Frankfurt",
@@ -148,8 +169,10 @@ class TimeslotFormTests(TestCase):
     """Test creating and updating individual timeslots."""
 
     def setUp(self):
+        self.organizer = create_organizer()
         event_date = timezone.localdate() + timedelta(days=1)
         self.event = Event.objects.create(
+            event_owner=self.organizer,
             title="Managed Event",
             description="Description",
             location="Frankfurt",

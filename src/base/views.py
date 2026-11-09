@@ -1,41 +1,67 @@
-from django.shortcuts import render,redirect
-from authentication.models import User
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
+from django.http import HttpRequest, HttpResponse
+from django.shortcuts import redirect, render
 from events.utils import get_six_elements
 
 
-#def index(request):
-#    return render(request, "index.html")
+def index(request: HttpRequest) -> HttpResponse:
+    """
+    displays the public index page.
 
+    Arguments:
+        request (HttpRequest): The HTTP request.
 
-
-def login_view(request):
-    # Description: Gives a site for the Login.
-    # On this sitre the user can log into his acount or create a new one. 
-    if request.method == "POST":
-        user = User.objects.filter(email=request.POST.get("email")).first()
-        if user and user.check_password(request.POST.get("password")):
-            user.angemeldet = True
-            user.save()
-
-            #print("Login erfolgreich für:", user.email)
-
-            return redirect("base:index")
-        else:
-            
-            #print("Ungültige Anmeldedaten für E-Mail:", request.POST.get("email"))
-
-            return render(request, "login.html", {"error": "E-Mail oder Passwort ungültig."})
-    return render(request, "login.html")
-
-def index(request):
-    # Description: Get six events out of the DB and lists them onto the indexs.
-    # Gives a list of the nearest events to the viewer.
-     
+    Returns:
+        HttpResponse: The rendered index page.
+    """
     event_list= get_six_elements()
 
-    #print(f"DEBUG:event_list Länge={len(event_list)}")
-    #print(f"DEBUG:Erstes Event ={event_list[0]}")         
+    return render(request, "index.html", {'event_list':event_list})
 
-    return render(request, "index.html",{'event_list':event_list})
-# Veranstaltungen aufbauen Variante in veranstaltungen nachschauen
-# Wenn nicht alle 6 Elemente füllbar, was dann?
+
+def login_view(request: HttpRequest) -> HttpResponse:
+    """
+    Authenticate a user and log them in.
+
+    Retrieves the user by email, authenticates the submitted password,
+    and logs the user in if the credentials are valid.
+
+    Arguments:
+        request (HttpRequest): The HTTP request containing the login data.
+
+    Returns:
+        HttpResponse: A redirect to the index page after successful login,
+            or the rendered login page with an error message.
+    """
+    if request.method == "POST":
+        user_obj = User.objects.filter(email=request.POST.get("email")).first()
+        password = request.POST.get("password")
+
+        if user_obj:
+            user = authenticate(request, username=user_obj.username, password=password)
+
+            if user:
+                login(request, user)
+
+                return redirect("base:index")
+
+        return render(request, "login.html", {"error": "E-Mail oder Passwort ungültig."})
+
+    return render(request, "login.html")
+
+
+def logout_view(request: HttpRequest) -> HttpResponse:
+    """
+    Log out the current user.
+
+    Ends the user's authenticated session and redirects to the index page.
+
+    Arguments:
+        request (HttpRequest): The HTTP request.
+
+    Returns:
+        HttpResponse: A redirect to the index page.
+    """
+    logout(request)
+    return redirect("base:index")

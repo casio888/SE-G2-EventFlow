@@ -6,7 +6,42 @@ from django.test import TestCase
 from django.urls import reverse
 from django.utils import timezone
 
+from authentication.models import (
+    Address,
+    CustomUserContributer,
+    CustomUserOrganizer,
+)
 from events.models import Event, Timeslot
+
+
+def create_address() -> Address:
+    """Create an address for an authenticated test account."""
+    return Address.objects.create(
+        country="Germany",
+        city="Dresden",
+        street="Test Street",
+        houseNbr=1,
+    )
+
+
+def create_organizer(username="organizer") -> CustomUserOrganizer:
+    """Create an organizer account for a view test."""
+    return CustomUserOrganizer.objects.create_user(
+        username=username,
+        password="test-password",
+        address=create_address(),
+        telephone="+491701234567",
+    )
+
+
+def create_contributor(username="contributor") -> CustomUserContributer:
+    """Create a contributor account for a view test."""
+    return CustomUserContributer.objects.create_user(
+        username=username,
+        password="test-password",
+        address=create_address(),
+        telephone="+491701234568",
+    )
 
 
 def event_form_data(**overrides) -> dict:
@@ -50,6 +85,10 @@ def combined_form_data(slots=None, initial_forms=0, **event_overrides) -> dict:
 class EventCreateViewTests(TestCase):
     """Test combined event and timeslot creation."""
 
+    def setUp(self):
+        self.organizer = create_organizer()
+        self.client.force_login(self.organizer)
+
     def test_get_returns_event_form_and_timeslot_formset(self):
         """Provide both forms required by the combined create page."""
         response = self.client.get(reverse("events:event_create"))
@@ -70,6 +109,7 @@ class EventCreateViewTests(TestCase):
         self.assertRedirects(response, reverse("events:events_your_events"))
         event = Event.objects.get()
         self.assertEqual(event.title, "Test Event")
+        self.assertEqual(event.event_owner, self.organizer)
         self.assertEqual(event.timeslots.count(), 0)
 
     def test_post_creates_event_with_multiple_timeslots(self):
@@ -136,6 +176,27 @@ class EventCreateViewTests(TestCase):
         self.assertEqual(Timeslot.objects.count(), 0)
         self.assertIn("end", response.context["timeslot_formset"].forms[0].errors)
 
+    def test_unauthenticated_user_cannot_create_event(self):
+        """Redirect an unauthenticated event creator to the login page."""
+        self.client.logout()
+
+        response = self.client.get(reverse("events:event_create"))
+
+        self.assertRedirects(response, reverse("base:login"))
+
+    def test_contributor_cannot_create_event(self):
+        """Redirect a contributor who attempts to create an event."""
+        contributor = create_contributor()
+        self.client.force_login(contributor)
+
+        response = self.client.post(
+            reverse("events:event_create"),
+            combined_form_data(),
+        )
+
+        self.assertRedirects(response, reverse("base:index"))
+        self.assertEqual(Event.objects.count(), 0)
+
     def test_database_error_rolls_back_event_and_timeslots(self):
         """Roll back the event if saving a related timeslot fails."""
         data = combined_form_data(
@@ -157,8 +218,11 @@ class EventEditViewTests(TestCase):
     """Test combined updates to events and their timeslots."""
 
     def setUp(self):
+        self.organizer = create_organizer()
+        self.client.force_login(self.organizer)
         event_date = timezone.localdate() + timedelta(days=1)
         self.event = Event.objects.create(
+            event_owner=self.organizer,
             title="Existing Event",
             description="Original description",
             location="Frankfurt",
@@ -436,6 +500,7 @@ class EventEditViewTests(TestCase):
     def test_timeslot_id_from_another_event_cannot_modify_foreign_timeslot(self):
         """Keep a foreign timeslot unchanged when its ID is submitted."""
         other_event = Event.objects.create(
+            event_owner=self.organizer,
             title="Other Event",
             description="Description",
             location="Dresden",
@@ -479,6 +544,33 @@ class EventEditViewTests(TestCase):
         self.assertEqual(foreign_timeslot.start, time(14, 0))
         self.assertEqual(foreign_timeslot.end, time(15, 0))
         self.assertEqual(foreign_timeslot.duration, 60)
+
+    def test_organizer_cannot_edit_another_organizers_event(self):
+        """Return 404 when an organizer requests another owner's event."""
+        other_organizer = create_organizer("other-organizer")
+        other_event = Event.objects.create(
+            event_owner=other_organizer,
+            title="Other Organizer Event",
+            description="Description",
+            location="Dresden",
+            start_date=self.event.start_date,
+            end_date=self.event.end_date,
+        )
+
+        response = self.client.get(
+            reverse("events:event_edit", args=[other_event.pk])
+        )
+
+        self.assertEqual(response.status_code, 404)
+
+    def test_contributor_cannot_edit_event(self):
+        """Redirect a contributor who attempts to edit an event."""
+        contributor = create_contributor()
+        self.client.force_login(contributor)
+
+        response = self.client.get(self.edit_url())
+
+        self.assertRedirects(response, reverse("base:index"))
 
     def test_invalid_event_prevents_timeslot_update(self):
         """Leave timeslots unchanged when the event form is invalid."""
@@ -578,8 +670,11 @@ class EventDetailViewTests(TestCase):
     """Test event detail retrieval."""
 
     def setUp(self):
+        self.organizer = create_organizer()
+        self.client.force_login(self.organizer)
         event_date = timezone.localdate() + timedelta(days=1)
         self.event = Event.objects.create(
+            event_owner=self.organizer,
             title="Managed Event",
             description="Description",
             location="Frankfurt",
@@ -612,6 +707,7 @@ class EventDetailViewTests(TestCase):
             end=time(9, 0),
         )
         other_event = Event.objects.create(
+            event_owner=self.organizer,
             title="Other Event",
             description="Description",
             location="Dresden",

@@ -1,35 +1,117 @@
-from django.db import models
+from django.contrib.auth.models import User
 from django.core.validators import RegexValidator
-from django.contrib.auth.hashers import check_password, identify_hasher, make_password
+from django.db import models
 
-telefon_validator = RegexValidator(
-    regex=r'^\+?1?\d{9,15}$',
-    message="Die Telefonnummer muss im Format '+999999999' sein und zwischen 9 und 15 Ziffern enthalten." #minh wenn du das nicht formatiert bekommst lösch das einfach
+
+# Validator for telephone numbers.
+telephone_validator = RegexValidator(
+    regex=r"^\+?[0-9]{9,15}$",
+    message="Bitte gib eine gültige Telefonnummer mit 9 bis 15 Ziffern ein.",
 )
 
-class User(models.Model):
-    email=models.EmailField(max_length=160, unique=True)
-    password=models.CharField(max_length = 100)
 
-    firmenname=models.CharField(max_length=200)
+class Address(models.Model):
+    """
+    Represent an address.
 
-    firmensitzLand=models.CharField(max_length=50)
-    firmensitzOrt=models.CharField(max_length=170)
-    firmensitzStraße=models.CharField(max_length=85)
-    firmensitzHausnummer=models.IntegerField()
+    Addresses are stored in a separate model so that the same address
+    can be referenced by multiple user profiles.
 
-    telefon=models.CharField(max_length = 15, validators=[telefon_validator])
-    fax=models.CharField(max_length = 15, validators=[telefon_validator], blank=True, null=True)
+    Attributes:
+        country (str): Land der Adresse.
+        city (str): Stadt der Adresse.
+        street (str): Straße der Adresse.
+        houseNbr (int): Hausnummer der Adresse.
+    """
 
-    angemeldet = models.BooleanField(default=False)
+    country = models.CharField(max_length=50)
+    city = models.CharField(max_length=170)
+    street = models.CharField(max_length=85)
+    houseNbr = models.IntegerField()
 
-    def save(self, *args, **kwargs):
-        if self.password and not self.password.startswith("pbkdf2_"):
-            self.password = make_password(self.password)
-        super().save(*args, **kwargs)
+    def __str__(self) -> str:
+        """
+        Return the address as a readable string.
 
-    def check_password(self, raw_password):
-        return check_password(raw_password, self.password)
+        Returns:
+            str: Lan    d, Stadt, Straße und Hausnummer.
+        """
+        return f"{self.country}, {self.city}, {self.street}, {self.houseNbr}"
 
-    def __str__(self):
-        return self.email
+
+class CustomUserOrganizer(User):
+
+    """
+    Represents an organizer account in the system.
+
+    Extends Django's built-in User model with additional contact
+    information and an associated address.
+
+    Attributes:
+        address (Address): Address associated with the organizer.
+        telephone (str): Telephone number of the organizer.
+        fax (str | None): Optional fax number of the organizer.
+    """
+
+    # Connect the organizer to an address.
+    # One address can belong to multiple organizers.
+    address = models.ForeignKey(Address, on_delete=models.PROTECT)
+
+    # Store the organizer's telephone number.
+    telephone = models.CharField(max_length=15,validators=[telephone_validator],)
+
+    # Store an optional fax number.
+    fax = models.CharField(max_length=15,validators=[telephone_validator],blank=True,null=True,)
+
+    class Meta:
+        verbose_name = "Organizer"
+        verbose_name_plural = "Organizers"
+
+    def __str__(self) -> str:
+        """
+        Return a readable representation of the organizer.
+
+        Returns:
+            str: Username of the organizer.
+        """
+        
+        return f"{self.username}"
+
+
+class CustomUserContributer(User):
+
+    """
+    Represents a contributor account in the system.
+
+    Extends Django's built-in User model with additional contact
+    information and an associated address.
+
+    Attributes:
+        address (Address): Address associated with the contributor.
+        telephone (str): Telephone number of the contributor.
+        fax (str | None): Optional fax number of the contributor.
+    """
+
+    # Connect the contributor to an address.
+    # One address can belong to multiple contributors.
+    address = models.ForeignKey(Address, on_delete=models.PROTECT)
+
+    # Store the contributor's telephone number.
+    telephone = models.CharField(max_length=15,validators=[telephone_validator],)
+
+    # Store an optional fax number.
+    fax = models.CharField(max_length=15,validators=[telephone_validator],blank=True,null=True,)
+    class Meta:
+        verbose_name = "Contributor"
+        verbose_name_plural = "Contributors"
+
+    def __str__(self) -> str:
+        """
+        Return a readable representation of the contributor.
+
+        Returns:
+            str: Username of the contributor.
+        """
+        
+        return f"{self.username}"
+    
