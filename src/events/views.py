@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Event
 from .forms import EventForm
 from .utils import get_event_form, save_event_form
+from contribution.utils import get_contributions_for_event
 
 from authentication.models import CustomUserContributer, CustomUserOrganizer
 from authentication.decorators import AccountType
@@ -83,7 +84,7 @@ def event_edit(request, id):
         HttpResponse: Bearbeitungsseite der Veranstaltung oder Redirect
     """
     event = get_object_or_404(Event, pk=id)
-
+    contribution_list=get_contributions_for_event(id)
     if request.method == "POST":
         form = EventForm(request.POST, instance=event)
         if form.is_valid():
@@ -92,4 +93,4 @@ def event_edit(request, id):
     else:
         form = EventForm(instance=event)
 
-    return render(request, "events/edit.html", {"form": form, "event": event})
+    return render(request, "events/edit.html", {"form": form, "event": event, "contribution_list":contribution_list})

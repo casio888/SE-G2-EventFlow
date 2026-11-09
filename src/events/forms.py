@@ -157,7 +157,7 @@ class EventForm(forms.ModelForm):
 
         return cleaned_data
 
-    def save(self, commit=True):
+    def save(self,organizer , commit=True):
         """Save the event and create its associated timeslots.
 
         Returns:

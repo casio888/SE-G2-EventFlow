@@ -25,5 +25,5 @@ def event_contributions(request,event_id):
     else:
         context ['message']="Keine Einreichungen vorhanden."
 
-    return render(request,'contribution/contributionlist.html',context)
+    return render(request,'contribution/contribution_list.html',context)
 # Create your views here.
