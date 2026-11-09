@@ -1,0 +1,69 @@
+<main class="registration-wrapper">
+    <div class="registration-card">
+        <h1 id="registerLabel" class="registration-title">Registrieren</h1>
+
+        <nav class="role-switch" aria-label="Kontoart">
+            <a href="{% url 'authentication:OrganizerRegistration' %}" class="role-option{% if role == 'organizer' %} is-active{% endif %}"{% if role == 'organizer' %} aria-current="page"{% endif %}>Veranstalter</a>
+            <a href="{% url 'authentication:ContributerRegistration' %}" class="role-option{% if role == 'contributor' %} is-active{% endif %}"{% if role == 'contributor' %} aria-current="page"{% endif %}>Einreicher</a>
+        </nav>
+
+        <p class="role-hint">
+            {% if role == 'organizer' %}
+                Du planst Events und vergibst Zeitslots.
+            {% else %}
+                Du bewirbst dich mit Beiträgen auf Events.
+            {% endif %}
+        </p>
+
+        <form method="POST" action="{{ request.path }}" class="registration-form">
+            {% csrf_token %}
+
+            {% if form.non_field_errors %}
+                <div class="reg-alert" role="alert">{{ form.non_field_errors }}</div>
+            {% endif %}
+
+            <fieldset class="reg-section">
+                <legend>Konto</legend>
+                <div class="reg-grid">
+                    {% include "authentication/_registration_field.html" with field=form.username label="Benutzername" hint="Buchstaben, Ziffern und @ . + - _" wide=True %}
+                    {% if role == 'contributor' %}
+                        {% include "authentication/_registration_field.html" with field=form.first_name label="Vorname" %}
+                        {% include "authentication/_registration_field.html" with field=form.last_name label="Nachname" %}
+                    {% endif %}
+                    {% include "authentication/_registration_field.html" with field=form.email label="E-Mail-Adresse" wide=True %}
+                </div>
+            </fieldset>
+
+            <fieldset class="reg-section">
+                <legend>Kontakt</legend>
+                <div class="reg-grid">
+                    {% include "authentication/_registration_field.html" with field=form.telephone label="Telefon" hint="9 bis 15 Ziffern, z. B. +491701234567" %}
+                    {% include "authentication/_registration_field.html" with field=form.fax label="Fax" optional=True %}
+                </div>
+            </fieldset>
+
+            <fieldset class="reg-section">
+                <legend>Adresse</legend>
+                <div class="reg-grid reg-grid-address">
+                    {% include "authentication/_registration_field.html" with field=form.street label="Straße" %}
+                    {% include "authentication/_registration_field.html" with field=form.houseNbr label="Hausnummer" %}
+                    {% include "authentication/_registration_field.html" with field=form.city label="Stadt" %}
+                    {% include "authentication/_registration_field.html" with field=form.country label="Land" %}
+                </div>
+            </fieldset>
+
+            <fieldset class="reg-section">
+                <legend>Passwort</legend>
+                <div class="reg-grid">
+                    {% include "authentication/_registration_field.html" with field=form.password1 label="Passwort" hint="Mindestens 8 Zeichen, nicht nur Ziffern." %}
+                    {% include "authentication/_registration_field.html" with field=form.password2 label="Passwort wiederholen" %}
+                </div>
+            </fieldset>
+
+            <div class="reg-footer">
+                <a href="{% url 'base:login' %}" class="reg-login-link">Du hast schon einen Account? Anmelden</a>
+                <button type="submit" id="submittButton" class="btn-registration-submit">Registrieren</button>
+            </div>
+        </form>
+    </div>
+</main>
