@@ -15,7 +15,22 @@ def event_application(request):
 # Create your views here.
 
 def event_contributions(request,event_id):
-    #function wich gives a site with the contributions for the chosen Event. (View for Organizer)
+    """
+    Display the contributions submitted for an event.
+
+    Retrieves the event by its ID and loads all related contributions.
+    If contributions exist, they are passed to the template. Otherwise,
+    a message indicating that no submissions are available is shown.
+    This view is intended for organizers.
+
+    Arguments:
+        request (HttpRequest): The HTTP request object.
+        event_id (int): The primary key of the event.
+
+    Returns:
+        HttpResponse: The rendered contribution list page containing the
+            event, its contributions or an informational message.
+    """
     event= get_object_or_404(Event, pk=event_id)
     contribution_list=get_contributions_for_event(event_id)
     # checks if contributions does exist
