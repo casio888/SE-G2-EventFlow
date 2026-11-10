@@ -1,0 +1,43 @@
+= Daily Meeting 10.11.2026
+Anwesend: Elias, Micha, Michi, Minh, Nataliia, Nina
+
+== Was ist geschafft
+    * Ninas braucht Button, dann Pull request
+    * Michas will pull-request machen (theoretisch fertig)
+    * Pauls muss fix machen. FKT fertig
+    * Minh macht Ninas Button und Elias Frontend
+    * Elias fehlt Frontend und tests
+
+== Aufgaben 
+    * Nataliia macht Vorbereitungen für Sprintplaning
+    * Pull Requests
+    * Elias schreibt Tests
+    * Minh baut Frontends
+    * Paul macht seine Fixes
+
+
+== Ablauf
+Start 12:30
+
+=== Fragen klären: 
+    * Selbe Mail für Contributer und Organizer: Geht nicht.
+
+=== Auswertung von Fachaustausch
+    * Modelle können so lassen
+    * Django darf verwendet werden, solange wir uns bewusst... (Sind wir. Siehe ADR's)
+    * Doch ein User mit Flag (Aber geht beides)
+    * Mal nen Interface & Controller austesten.
+    * Ankes Anmerkung, zu der vermischung im Vortrag.
+    * Rechtschreibfehler 
+
+    * Nächster Fachaustausch: Tests... (Michi und Elias)
+
+=== Michas Vortrag:
+    * Migrationfiles machen immer Stress... (Insbesondere bei Mergen und co.)
+    * Werden ab sofort rausgelöscht. 
+    * Geht in Gitignore. Damit es nicht mehr passieren kann.
+
+Ende: 13:15
+
+Ab nächste Woche Raum in der Bibo buchen? 
+Einstimmig angenommen Elias soll mal schauen
