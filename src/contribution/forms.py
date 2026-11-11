@@ -30,7 +30,7 @@ class ContributionForm(forms.ModelForm):
         return cleaned_data
 
     def save(self, contributor=None, commit=True):
-        contribution = super.save(commit=False)
+        contribution = super().save(commit=False)
         if contributor is not None:
             contribution.fk_contributor = contributor
         else:
