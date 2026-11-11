@@ -17,4 +17,4 @@ class Contribution(models.Model):
     requirements = models.TextField(max_length=400)
 
     def __str__(self):
-        return "{self.id}: {fk_contributor.last_name} ({fk_contributor.id}) on Event: {fk_event.id}"
+        return f"{self.id}: User {self.fk_contributor.last_name} ({self.fk_contributor.id}) on Event: {self.fk_event.id}"
