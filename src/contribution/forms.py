@@ -23,8 +23,20 @@ class ContributionForm(forms.ModelForm):
 
         if duration is not None:
             if duration <= 0:
-                raise  forms.ValidationError({"duration_requested": "Die Dauer muss größer 0 Minuten sein."})
+                raise forms.ValidationError({"duration_requested": "Die Dauer muss größer 0 Minuten sein."})
         elif not self.has_error("duration_requested"):
             raise forms.ValidationError({"duration_requested": "Es muss eine Dauer angegeben werden."})
 
         return cleaned_data
+
+    def save(self, contributor=None, commit=True):
+        contribution = super.save(commit=False)
+        if contributor is not None:
+            contribution.fk_contributor = contributor
+        else:
+            raise ValueError("Der Nutzeraccount muss ein Einreicher sein um sich auf Events zu bewerben.")
+
+        if commit:
+            contribution.save()
+
+        return contribution

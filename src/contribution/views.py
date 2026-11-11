@@ -37,17 +37,23 @@ def event_application(request, event_id):
     Returns:
         <HTML>: Rendered Website
     """
-    organizer = get_object_or_404(CustomUserContributer, pk=request.user.pk)
+    contributor = get_object_or_404(CustomUserContributer, pk=request.user.pk)
 
     if request.method == "POST":
         form = ContributionForm(event_id=event_id, data=request.POST)
         if form.is_valid():
-            form.save(organizer)
+            try:
+                form.save(contributor)
+            except ValueError:
+                form.add_error(None,"Einreicher muss existieren")
+                pass # TODO Show error Message
+            # TODO show success message
+            # TODO redirect to contribution overview page instead of index
             return redirect("base:index")
     else:
         form = ContributionForm(event_id=event_id)
-        if contribution_exists(event_id, organizer):
-            return redirect("base:index")
+        # TODO if contribution exists, redirect to calling page and show message of error
+
     event = get_event(event_id)
     context = {'event': event, 'form': form}
     return render(request,'contribution/application.html',context)
