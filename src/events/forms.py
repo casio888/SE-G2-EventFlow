@@ -135,7 +135,7 @@ class EventForm(forms.ModelForm):
 
         return cleaned_data
 
-    def save(self, organizer=None, commit=True,):
+    def save(self, organizer=None, commit=True):
         event = super().save(commit=False)
 
         if organizer is not None:
