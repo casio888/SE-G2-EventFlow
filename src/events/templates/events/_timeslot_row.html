@@ -1,0 +1,24 @@
+<tr class="timeslot-row">
+    <td>
+        {% for hidden in timeslot_form.hidden_fields %}{{ hidden }}{% endfor %}
+        <label class="visually-hidden" for="{{ timeslot_form.start.id_for_label }}">Start</label>
+        {{ timeslot_form.start }}
+        {% if timeslot_form.start.errors %}<div class="text-danger small mt-1">{{ timeslot_form.start.errors }}</div>{% endif %}
+    </td>
+    <td>
+        <label class="visually-hidden" for="{{ timeslot_form.end.id_for_label }}">Ende</label>
+        {{ timeslot_form.end }}
+        {% if timeslot_form.end.errors %}<div class="text-danger small mt-1">{{ timeslot_form.end.errors }}</div>{% endif %}
+    </td>
+    <td class="timeslot-duration text-nowrap">–</td>
+    <td>
+        <label class="visually-hidden" for="{{ timeslot_form.category.id_for_label }}">Kategorie</label>
+        {{ timeslot_form.category }}
+        {% if timeslot_form.category.errors %}<div class="text-danger small mt-1">{{ timeslot_form.category.errors }}</div>{% endif %}
+    </td>
+    <td>
+        {% if not timeslot_form.instance.pk %}
+        <button type="button" class="btn-plus-icon timeslot-remove" aria-label="Zeitslot entfernen">–</button>
+        {% endif %}
+    </td>
+</tr>

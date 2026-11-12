@@ -2,7 +2,7 @@ from enum import Enum
 from functools import wraps
 from django.shortcuts import redirect
 
-from .models import CustomUserOrganizer
+from .models import CustomUserOrganizer, CustomUserContributer
 
 class AccountType(Enum):
     ORGANIZER = "organizer"
@@ -36,7 +36,7 @@ def check_if_organizer_or_contributer(Account_Type):
                 return view_function(request, *args, **kwargs)
             
             elif Account_Type == AccountType.CONTRIBUTOR:
-                if not CustomUserOrganizer.objects.filter(pk = request.user.pk).exists():
+                if not CustomUserContributer.objects.filter(pk = request.user.pk).exists():
                     return redirect("base:index")
             
                 return view_function(request, *args, **kwargs)

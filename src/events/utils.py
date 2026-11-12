@@ -1,7 +1,9 @@
 from datetime import date
-#from .forms import EventForm
 from events.models import Event
 from django.utils import timezone
+
+from events.models import Event
+
 
 def _add_calendar_years(value: date, years: int) -> date:
     """Add calendar years to a date.
@@ -35,13 +37,12 @@ def save_event_form(form):
     #checks if the Event which should be saved has a correct form
     if form.is_valid():
         return form.save()
-
     return None
 
 
 def get_six_elements():
     # get the six nearests events out of the DB. If there arent enouth it would be filled up with a demonstator
-    # If wanted change here to also get Events from the same date. And can be modified for other uses 
+    # If wanted change here to also get Events from the same date. And can be modified for other uses
     event_list=list(Event.objects
     .filter(start_date__gt=timezone.now())
     .order_by('start_date')[:6]
@@ -53,8 +54,23 @@ def get_six_elements():
         'end_date': None,
         'location': 'Hinterkleinsiestdenicht',
         }
-    
+
     while len(event_list)< 6:
         event_list.append(empty_event)
 
     return event_list
+def get_event(event_id):
+    """Sanitize event request, because event_id is user supplied.
+
+    Args:
+        event_id (int): ID of a valid event 
+
+    Returns:
+        Event: Returns the corresponding Event, or None if input was wrong or id is not found
+    """
+    if (type(event_id) is not int):
+        return None
+    try: 
+        return Event.objects.get(pk=event_id)
+    except:
+        return None

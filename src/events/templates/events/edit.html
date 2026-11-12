@@ -18,8 +18,6 @@
 
     <form method="post" enctype="multipart/form-data" id="event-form">
         {% csrf_token %}
-        
-        {{ form.timeslots }}
 
         <div class="row g-5">
             
@@ -31,27 +29,7 @@
                     <button type="button" class="btn-plus-icon ms-2">＋</button>
                 </div>
                 
-                <div class="table-responsive">
-                    <table id="timeslot-table" class="table table-custom-grid align-middle text-center">
-                        <thead>
-                            <tr>
-                                <th>Start</th>
-                                <th>End</th>
-                                <th>Dauer</th>
-                                <th>Kategorie</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody id="timeslot-body">
-                            </tbody>
-                    </table>
-                </div>
-                
-                <button type="button" class="btn-plus-icon mt-2" onclick="addTimeslot()">＋</button>
-                
-                {% if form.timeslots.errors %}
-                    <div class="text-danger small mt-2">{{ form.timeslots.errors }}</div>
-                {% endif %}
+                {% include "events/_timeslot_formset.html" %}
             </div>
             
             <div class="col-12 col-lg-5">
