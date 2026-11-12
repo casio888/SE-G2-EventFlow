@@ -36,7 +36,6 @@ def check_if_organizer_or_contributer(Account_Type):
                 return view_function(request, *args, **kwargs)
             
             elif Account_Type == AccountType.CONTRIBUTOR:
-                print(f"Uid: {request.user.pk}")
                 if not CustomUserContributer.objects.filter(pk = request.user.pk).exists():
                     return redirect("base:index")
             
