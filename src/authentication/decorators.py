@@ -31,7 +31,6 @@ def check_if_organizer_or_contributer(Account_Type):
 
             if Account_Type == AccountType.ORGANIZER:
                 if not CustomUserOrganizer.objects.filter(pk = request.user.pk).exists():
-                    print("User was not of AccountType Organizer")
                     return redirect("base:index")
             
                 return view_function(request, *args, **kwargs)
@@ -39,7 +38,6 @@ def check_if_organizer_or_contributer(Account_Type):
             elif Account_Type == AccountType.CONTRIBUTOR:
                 print(f"Uid: {request.user.pk}")
                 if not CustomUserContributer.objects.filter(pk = request.user.pk).exists():
-                    print("User was not of AccountType Contributor")
                     return redirect("base:index")
             
                 return view_function(request, *args, **kwargs)
