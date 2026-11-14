@@ -18,6 +18,8 @@ from django.contrib import admin
 from django.urls import path
 from . import views
 
+#app_name = 'contribution'
+
 urlpatterns = [
     path('',views.event_list,name='event_list'),
     path('bewerben/',views.event_application,name='event_application'),
