@@ -7,7 +7,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
     const prefix = body.dataset.prefix;
     const totalForms = document.getElementById(`id_${prefix}-TOTAL_FORMS`);
-    const initialForms = Number(document.getElementById(`id_${prefix}-INITIAL_FORMS`).value);
     const emptyRow = document.getElementById("timeslot-empty-row");
     const addButton = document.getElementById("timeslot-add");
     const indexPattern = new RegExp(`${prefix}-\\d+-`);
@@ -30,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function() {
         rows.forEach(function(row, index) {
             const replacement = `${prefix}-${index}-`;
 
-            row.querySelectorAll("input").forEach(function(input) {
+            row.querySelectorAll("input, select").forEach(function(input) {
                 input.name = input.name.replace(indexPattern, replacement);
                 input.id = input.id.replace(indexPattern, replacement);
             });
@@ -59,8 +58,18 @@ document.addEventListener("DOMContentLoaded", function() {
     body.addEventListener("click", function(event) {
         const removeButton = event.target.closest(".timeslot-remove");
 
-        if (removeButton && body.querySelectorAll(".timeslot-row").length > initialForms) {
-            removeButton.closest(".timeslot-row").remove();
+        if (!removeButton) {
+            return;
+        }
+
+        const row = removeButton.closest(".timeslot-row");
+        const idInput = row.querySelector("input[name$='-id']");
+
+        if (idInput && idInput.value) {
+            row.querySelector("input[name$='-DELETE']").checked = true;
+            row.hidden = true;
+        } else {
+            row.remove();
             reindexRows();
         }
     });
