@@ -3,7 +3,7 @@ from datetime import datetime
 from django import forms
 from django.conf import settings
 from django.utils import timezone
-from .models import Event, Timeslot
+from .models import Event
 from .utils import _add_calendar_years
 
 
@@ -157,7 +157,7 @@ class EventForm(forms.ModelForm):
 
         return cleaned_data
 
-    def save(self, commit=True):
+    def save(self,organizer , commit=True):
         """Save the event and create its associated timeslots.
 
         Returns:
