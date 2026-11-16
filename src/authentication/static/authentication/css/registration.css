@@ -1,111 +1,214 @@
-/* Zentriert die Kachel perfekt auf dem Bildschirm */
 .registration-wrapper {
-    min-height: 80vh;
     display: flex;
-    align-items: center;
     justify-content: center;
-    padding: 40px 10px;
+    padding: 56px 20px 72px;
     background-color: #ffffff;
 }
 
-/* Die weiße, abgerundete Formular-Maske */
 .registration-card {
-    background-color: #ffffff;
-    border: 2px solid #c8daff !important; 
-    border-radius: 35px !important;       
-    box-shadow: 0 4px 20px rgba(11, 19, 48, 0.08);
     width: 100%;
-    max-width: 550px;                    
-    margin: 0 auto;
+    max-width: 680px;
+    background-color: #ffffff;
+    border: 1px solid #cbd5e0;
+    border-radius: 40px;
+    padding: 48px 56px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
-/* Der Titel "Registrieren" */
 .registration-title {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: #0b1330;
-    margin-bottom: 2rem;
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: #2d3748;
+    text-align: center;
+    margin-bottom: 28px;
 }
 
-/* Zwingt die von {{ form.as_p }} generierten Absätze in ein sauberes Layout */
-.django-form-fields p {
-    margin-bottom: 18px !important;
+.role-switch {
     display: flex;
-    flex-direction: column; 
+    gap: 4px;
+    padding: 4px;
+    background-color: #f1f5f9;
+    border-radius: 10px;
 }
 
-/* Style für die Text-Labels (Firmenname, Land, etc.) */
-.django-form-fields label {
-    font-weight: 600;
-    color: #0b1330;
-    margin-bottom: 6px;
+.role-option {
+    flex: 1;
+    padding: 10px 12px;
+    border-radius: 7px;
+    text-align: center;
     font-size: 0.95rem;
-}
-
-/* Style für die echten Input-Eingabekästen */
-.django-form-fields input {
-    width: 100% !important;
-    font-size: 1.05rem !important;
-    padding: 12px 16px !important;       
-    border: 1px solid #cbd5e1 !important; 
-    border-radius: 8px !important;        
-    background-color: #ffffff !important;
-    color: #0b1330 !important;
-    box-sizing: border-box !important;
-}
-
-/*Rahmen wenn angeklickt*/
-.django-form-fields input:focus {
-    outline: none !important;
-    border-color: #436cf4 !important;   
-}
-
-/* Der obere [E-Mail adresse] Info-Button */
-.btn-rounded-placeholder {
-    font-size: 0.85rem !important;
-    color: #0b1330 !important;
-    border: 1px solid #94a3b8 !important;
-    border-radius: 20px !important;       
-    padding: 6px 18px !important;
-    background-color: #f1f5f9 !important;
-    pointer-events: none;
-}
-
-/* Der kleingedruckte AGB-Text */
-.registration-agb-text {
-    text-align: left !important; 
-    font-size: 0.6rem;
-    line-height: 1.5;
+    font-weight: bold;
     color: #64748b;
-    margin-top: 25px;
+    text-decoration: none;
+    transition: background-color 0.15s ease, color 0.15s ease;
 }
 
-/* Der blaue "weiter"-Button */
+.role-option:hover {
+    color: #0b1330;
+}
+
+.role-option.is-active {
+    background-color: #ffffff;
+    color: #0b1330;
+    box-shadow: 0 1px 3px rgba(11, 19, 48, 0.12);
+}
+
+.role-hint {
+    margin: 12px 0 8px;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #64748b;
+}
+
+.reg-section {
+    border: none;
+    border-top: 1px solid #e2e8f0;
+    padding-top: 20px;
+    margin-top: 24px;
+}
+
+.reg-section legend {
+    padding-right: 12px;
+    font-size: 1.05rem;
+    font-weight: bold;
+    color: #0b1330;
+}
+
+.reg-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px 20px;
+    margin-top: 8px;
+}
+
+.reg-grid-address {
+    grid-template-columns: 3fr 1fr;
+}
+
+.reg-field {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.reg-field-wide {
+    grid-column: 1 / -1;
+}
+
+.reg-field label {
+    margin-bottom: 6px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: #2d3748;
+}
+
+.reg-optional {
+    font-weight: normal;
+    color: #94a3b8;
+}
+
+.reg-field input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #cbd5e0;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    color: #0b1330;
+    background-color: #ffffff;
+    outline: none;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.reg-field input:focus {
+    border-color: #436cf4;
+    box-shadow: 0 0 0 3px rgba(67, 108, 244, 0.15);
+}
+
+.reg-hint {
+    margin-top: 6px;
+    font-size: 0.78rem;
+    color: #94a3b8;
+}
+
+.reg-field.has-error input {
+    border-color: #dc3545;
+}
+
+.reg-field .errorlist,
+.reg-alert .errorlist {
+    list-style: none;
+    margin-top: 6px;
+    font-size: 0.8rem;
+    color: #dc3545;
+}
+
+.reg-alert {
+    margin-top: 20px;
+    padding: 12px 16px;
+    border: 1px solid #f5c2c7;
+    border-radius: 8px;
+    background-color: #fdf2f3;
+}
+
+.reg-alert .errorlist {
+    margin-top: 0;
+}
+
+.reg-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    margin-top: 36px;
+}
+
+.reg-login-link {
+    font-size: 0.85rem;
+    color: #436cf4;
+    text-decoration: none;
+}
+
+.reg-login-link:hover {
+    text-decoration: underline;
+}
+
 .btn-registration-submit {
-    text-align: right;
-    background-color: #436cf4 !important; 
-    color: #ffffff !important;
-    font-weight: 600 !important;
-    padding: 10px 35px !important;
-    border-radius: 8px !important;
-    border: none !important;
+    padding: 12px 36px;
+    border: none;
+    border-radius: 6px;
+    background-color: #436cf4;
+    color: #ffffff;
+    font-size: 0.95rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
 }
 
 .btn-registration-submit:hover {
-    background-color: #2b52d4 !important;
+    background-color: #2b52d4;
 }
 
-/* Blendet die schwarzen Beschriftungen über den Eingabefeldern komplett aus, von forms.py */
-.django-form-fields label {
-    display: none !important;
+@media (max-width: 600px) {
+    .registration-card {
+        padding: 32px 22px;
+        border-radius: 24px;
+    }
+
+    .reg-grid,
+    .reg-grid-address {
+        grid-template-columns: 1fr;
+    }
+
+    .reg-footer {
+        flex-direction: column-reverse;
+        align-items: stretch;
+        text-align: center;
+    }
 }
 
-/* Stylt die Validierungsfehler (wie die Telefon-Message) knallrot */
-.django-form-fields .errorlist {
-    list-style: none !important; 
-    padding: 0 !important;
-    margin: 0 0 8px 0 !important;
-    color: #dc3545 !important;
-    font-size: 0.85rem !important;
-    font-weight: 600 !important;
+.btn-registration-submit:focus-visible,
+.role-option:focus-visible,
+.reg-login-link:focus-visible {
+    outline: 2px solid #436cf4;
+    outline-offset: 2px;
 }

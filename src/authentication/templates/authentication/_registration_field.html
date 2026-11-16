@@ -1,0 +1,6 @@
+<div class="reg-field{% if wide %} reg-field-wide{% endif %}{% if field.errors %} has-error{% endif %}">
+    <label for="{{ field.id_for_label }}">{{ label }}{% if optional %} <span class="reg-optional">(optional)</span>{% endif %}</label>
+    {{ field }}
+    {% if hint %}<small class="reg-hint">{{ hint }}</small>{% endif %}
+    {% if field.errors %}{{ field.errors }}{% endif %}
+</div>
