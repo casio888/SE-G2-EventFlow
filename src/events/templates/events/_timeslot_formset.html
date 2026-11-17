@@ -1,0 +1,30 @@
+{{ timeslot_formset.management_form }}
+
+<div class="table-responsive">
+    <table id="timeslot-table" class="table table-custom-grid align-middle text-center">
+        <thead>
+            <tr>
+                <th>Start</th>
+                <th>Ende</th>
+                <th>Dauer</th>
+                <th>Kategorie</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody id="timeslot-body" data-prefix="{{ timeslot_formset.prefix }}">
+            {% for timeslot_form in timeslot_formset %}
+                {% include "events/_timeslot_row.html" %}
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<template id="timeslot-empty-row">
+    {% include "events/_timeslot_row.html" with timeslot_form=timeslot_formset.empty_form %}
+</template>
+
+<button type="button" id="timeslot-add" class="btn-plus-icon mt-2" aria-label="Zeitslot hinzufügen">＋</button>
+
+{% if timeslot_formset.non_form_errors %}
+    <div class="text-danger small mt-2">{{ timeslot_formset.non_form_errors }}</div>
+{% endif %}

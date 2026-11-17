@@ -18,8 +18,7 @@
 
     <form id="event-create-form" method="post">
         {% csrf_token %}
-        {{ form.timeslots }}
-        
+
         <div class="row g-5">
             <div class="col-12 col-lg-7">
                 <h3 class="section-subtitle mb-4">Zeitslots</h3>
@@ -31,23 +30,7 @@
                     <button type="button" class="btn-plus-icon">＋</button>
                 </div>
                 
-                <div class="table-responsive">
-                    <table id="timeslot-table" class="table table-custom-grid align-middle text-center">
-                        <thead>
-                            <tr>
-                                <th>Start</th>
-                                <th>End</th>
-                                <th>Dauer</th>
-                                <th>Kategorie</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody id="timeslot-body">
-                            </tbody>
-                    </table>
-                </div>
-                
-                <button type="button" class="btn-plus-icon mt-2" onclick="addTimeslot()">＋</button>
+                {% include "events/_timeslot_formset.html" %}
             </div>
             
             <div class="col-12 col-lg-5">
