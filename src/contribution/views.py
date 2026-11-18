@@ -38,6 +38,7 @@ def event_application(request, event_id):
         <HTML>: Rendered Website
     """
     contributor = get_object_or_404(CustomUserContributer, pk=request.user.pk)
+    event = get_object_or_404(Event, pk=event_id)
 
     if request.method == "POST":
         form = ContributionForm(event_id=event_id, data=request.POST)
@@ -54,6 +55,5 @@ def event_application(request, event_id):
         form = ContributionForm(event_id=event_id)
         # TODO if contribution exists, redirect to calling page and show message of error
 
-    event = get_event(event_id)
     context = {'event': event, 'form': form}
     return render(request,'contribution/application.html',context)

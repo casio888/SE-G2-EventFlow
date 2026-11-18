@@ -59,18 +59,3 @@ def get_six_elements():
         event_list.append(empty_event)
 
     return event_list
-def get_event(event_id):
-    """Sanitize event request, because event_id is user supplied.
-
-    Args:
-        event_id (int): ID of a valid event 
-
-    Returns:
-        Event: Returns the corresponding Event, or None if input was wrong or id is not found
-    """
-    if (type(event_id) is not int):
-        return None
-    try: 
-        return Event.objects.get(pk=event_id)
-    except:
-        return None
