@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from authentication.models import Address, CustomUserOrganizer
+from authentication.models import Address, CustomUserContributer, CustomUserOrganizer
 from contribution.forms import ContributionForm
 from contribution.models import Contribution
 from events.models import Event
@@ -30,6 +30,11 @@ class ContributionFormTests(TestCase):
             end_date="2026-11-10",
             location="Dresden",
         )
+        self.contributor = CustomUserContributer.objects.create_user(
+            username="Test Contributor",
+            address=address,
+            telephone="0123456789",
+        )
 
     @staticmethod
     def form_data(**overrides) -> dict:
@@ -50,7 +55,7 @@ class ContributionFormTests(TestCase):
         )
 
         self.assertTrue(form.is_valid(), form.errors)
-        contribution = form.save()
+        contribution = form.save(contributor=self.contributor)
 
         self.assertEqual(Contribution.objects.count(), 1)
         self.assertEqual(contribution.fk_event, self.event)
