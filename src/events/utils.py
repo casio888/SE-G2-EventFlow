@@ -25,12 +25,31 @@ def _add_calendar_years(value: date, years: int) -> date:
 
 
 def get_six_elements():
-    # get the six nearests events out of the DB. If there arent enouth it would be filled up with a demonstator
-    # If wanted change here to also get Events from the same date. And can be modified for other uses
-    event_list=list(Event.objects
-    .filter(start_date__gt=timezone.now())
-    .order_by('start_date')[:6]
-)  # get max 6 elements of Events and make list
+    """Get the six nearest upcoming events from the database.
+
+    Retrieves up to six events with a start date in the future,
+    ordered by their start date (earliest first).
+
+    If fewer than six events are available, the remaining entries
+    are filled with demonstration events to ensure a fixed list size.
+
+    Returns:
+        list[dict] -- List containing exactly six events.
+                      Each event contains title, description,
+                      start_date, end_date and location.
+    """
+    event_list = list(
+        Event.objects
+        .filter(start_date__gt=timezone.now().date())
+        .order_by('start_date')
+        .values(
+            'title',
+            'description',
+            'start_date',
+            'end_date',
+            'location'
+        )[:6]
+    )  # get max 6 elements of Events and make list
     empty_event = {
         'title': 'Demo',
         'description': 'Es fehlen Events',
@@ -40,6 +59,6 @@ def get_six_elements():
         }
 
     while len(event_list)< 6:
-        event_list.append(empty_event)
+        event_list.append(empty_event.copy())
 
     return event_list

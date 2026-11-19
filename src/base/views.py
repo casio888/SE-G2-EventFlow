@@ -16,7 +16,6 @@ def index(request: HttpRequest) -> HttpResponse:
         HttpResponse: The rendered index page.
     """
     event_list= get_six_elements()
-
     return render(request, "index.html", {'event_list':event_list})
 
 
