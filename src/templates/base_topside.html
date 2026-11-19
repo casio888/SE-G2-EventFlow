@@ -35,6 +35,14 @@
         {% block extra_header %} {% endblock %}
     </header>
 
+    {% if messages %}
+        <div class="messages" aria-live="polite">
+            {% for message in messages %}
+                <p class="{{ message.tags }}">{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+
     {% block content %}{% endblock %}
 
     <!-- Footer -->

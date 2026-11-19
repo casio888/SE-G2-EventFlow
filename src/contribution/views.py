@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.shortcuts import redirect, render, get_object_or_404
 from authentication.decorators import (
     AccountType,
@@ -8,7 +9,7 @@ from authentication.models import CustomUserContributer, CustomUserOrganizer
 from .forms import ContributionForm
 from .models import Contribution
 from events.models import Event
-from events.utils import get_event
+from base.utils import redirect_to_referrer
 
 def event_list(request):
     """Shows a List of all Events and Buttons to start submitting a contribution
@@ -40,8 +41,13 @@ def event_application(request, event_id):
     contributor = get_object_or_404(CustomUserContributer, pk=request.user.pk)
     event = get_object_or_404(Event, pk=event_id)
 
+    if Contribution.objects.filter(fk_event__pk=event.pk, fk_contributor__pk=contributor.pk).exists():
+        print("Doppelt!")
+        messages.error(request, "Du hast dich bereits für dieses Event beworben.")
+        return redirect_to_referrer(request, "event_list")
+
     if request.method == "POST":
-        form = ContributionForm(event_id=event_id, data=request.POST)
+        form = ContributionForm(event=event, data=request.POST)
         if form.is_valid():
             try:
                 form.save(contributor)
@@ -53,7 +59,6 @@ def event_application(request, event_id):
             return redirect("base:index")
     else:
         form = ContributionForm(event_id=event_id)
-        # TODO if contribution exists, redirect to calling page and show message of error
 
     context = {'event': event, 'form': form}
     return render(request,'contribution/application.html',context)

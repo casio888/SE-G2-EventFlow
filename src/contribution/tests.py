@@ -1,5 +1,7 @@
-from django.test import TestCase
+from django.test import RequestFactory, TestCase
+from django.urls import reverse
 
+from base.utils import redirect_to_referrer
 from authentication.models import Address, CustomUserContributer, CustomUserOrganizer
 from contribution.forms import ContributionForm
 from contribution.models import Contribution
@@ -50,7 +52,7 @@ class ContributionFormTests(TestCase):
     def test_form_valid(self):
         """Accept and save a contribution with valid entries."""
         form = ContributionForm(
-            event_id=self.event.pk,
+            event=self.event,
             data=self.form_data(),
         )
 
@@ -67,7 +69,7 @@ class ContributionFormTests(TestCase):
     def test_zero_duration_is_invalid(self):
         """Reject a contribution with no requested duration."""
         form = ContributionForm(
-            event_id=self.event.pk,
+            event=self.event,
             data=self.form_data(duration_requested="0"),
         )
 
@@ -77,7 +79,7 @@ class ContributionFormTests(TestCase):
     def test_negative_duration_is_invalid(self):
         """Reject a negative requested duration."""
         form = ContributionForm(
-            event_id=self.event.pk,
+            event=self.event,
             data=self.form_data(duration_requested="-5"),
         )
 
@@ -87,7 +89,7 @@ class ContributionFormTests(TestCase):
     def test_non_numeric_duration_is_invalid(self):
         """Reject a duration that cannot be converted to an integer."""
         form = ContributionForm(
-            event_id=self.event.pk,
+            event=self.event,
             data=self.form_data(duration_requested="forty-five"),
         )
 
@@ -100,9 +102,52 @@ class ContributionFormTests(TestCase):
         for field_name in ("duration_requested", "description", "requirements"):
             with self.subTest(field=field_name):
                 form = ContributionForm(
-                    event_id=self.event.pk,
+                    event=self.event,
                     data=self.form_data(**{field_name: ""}),
                 )
 
                 self.assertFalse(form.is_valid())
                 self.assertIn(field_name, form.errors)
+
+    def test_error_on_duplicate_contribution(self):
+        Contribution.objects.create(
+            fk_event=self.event,
+            fk_contributor=self.contributor,
+            accepted=False,
+            duration_requested=45,
+            description="Existing contribution",
+            requirements="Nothing",
+        )
+        self.client.force_login(self.contributor)
+        application_url = reverse(
+            "event_application",
+            kwargs={"event_id": self.event.pk},
+        )
+
+        response = self.client.post(
+            application_url,
+            self.form_data(),
+            HTTP_REFERER=application_url,
+        )
+
+        self.assertRedirects(
+            response,
+            reverse("event_list"),
+            fetch_redirect_response=False,
+        )
+        landing_page = self.client.get(response.url)
+        self.assertTrue(
+            any(
+                "error" in message.tags.split()
+                for message in landing_page.context["messages"]
+            ),
+            "Expected an error message on the referrer page.",
+        )
+        self.assertEqual(Contribution.objects.count(), 1)
+
+    def test_referrer_redirect_uses_generic_fallback_target(self):
+        request = RequestFactory().get("/current-page/", HTTP_REFERER="/current-page/")
+
+        response = redirect_to_referrer(request, "/fallback-page/")
+
+        self.assertEqual(response.url, "/fallback-page/")

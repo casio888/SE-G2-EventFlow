@@ -1,7 +1,6 @@
 from django import forms
 
 from .models import Contribution
-from events.utils import get_event
 
 class ContributionForm(forms.ModelForm):
     """
@@ -11,9 +10,8 @@ class ContributionForm(forms.ModelForm):
         model = Contribution
         fields = ["duration_requested", "description", "requirements"]
 
-    def __init__(self, *args, event_id, **kwargs):
+    def __init__(self, *args, event, **kwargs):
         super().__init__(*args, **kwargs)
-        event = get_event(event_id)
         self.instance.fk_event = event
         self.instance.accepted = False
 
