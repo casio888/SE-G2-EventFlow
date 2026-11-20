@@ -42,7 +42,6 @@ def event_application(request, event_id):
     event = get_object_or_404(Event, pk=event_id)
 
     if Contribution.objects.filter(fk_event__pk=event.pk, fk_contributor__pk=contributor.pk).exists():
-        print("Doppelt!")
         messages.error(request, "Du hast dich bereits für dieses Event beworben.")
         return redirect_to_referrer(request, "event_list")
 
@@ -58,7 +57,7 @@ def event_application(request, event_id):
             # TODO redirect to contribution overview page instead of index
             return redirect("base:index")
     else:
-        form = ContributionForm(event_id=event_id)
+        form = ContributionForm(event=event)
 
     context = {'event': event, 'form': form}
     return render(request,'contribution/application.html',context)
