@@ -1,0 +1,15 @@
+[tool.black]
+# line length for automtic brakes
+line-length = 88
+
+# Python-Version for EventFlow-Container
+target-version = ["py314"]
+
+# Black-Version
+required-version = "26.10.1"
+
+# Final commas can force a multi-line display
+skip-magic-trailing-comma = false
+
+# Standardizes string quotation marks
+skip-string-normalization = false
