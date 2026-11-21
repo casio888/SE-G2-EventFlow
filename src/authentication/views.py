@@ -1,6 +1,8 @@
 from django.db import IntegrityError
 from django.shortcuts import redirect, render
 from django.http import HttpRequest, HttpResponse
+from django.contrib.auth.models import User
+
 
 from .forms import (
     UserContributerRegestrationForm,
@@ -25,6 +27,14 @@ def organizer_registration_view(request: HttpRequest) -> HttpResponse:
     """
     if request.method == "POST":
         form = UserOrganizerRegestrationForm(request.POST)
+        email = request.POST.get("email")
+
+        if User.objects.filter(email=email).exists():
+            form.add_error(
+                            "email",
+                            "Email bereits in verwendung",
+                        )
+            return render(request,"authentication/contributer_registration.html",{"form": form},)
 
         if form.is_valid():
             try:
@@ -59,6 +69,14 @@ def contributer_registration_view(request: HttpRequest) -> HttpResponse:
     """
     if request.method == "POST":
         form = UserContributerRegestrationForm(request.POST)
+        email = request.POST.get("email")
+
+        if User.objects.filter(email=email).exists():
+            form.add_error(
+                            "email",
+                            "Email bereits in verwendung",
+                        )
+            return render(request,"authentication/contributer_registration.html",{"form": form},)
 
         if form.is_valid():
             try:
