@@ -51,11 +51,12 @@ class ContributionTestMixin:
             location="Dresden",
         )
 
-    def create_contribution(self, event, submitted=False, description="Beschreibung"):
+    def create_contribution(self, event, accepted=False, description="Beschreibung"):
         return Contribution.objects.create(
-            event=event,
-            contributer=self.user,
-            submitted=submitted,
+            fk_event=event,
+            fk_contributor=self.user,
+            accepted=accepted,
+            duration_requested=1,
             description=description,
             requirements="Anforderungen",
         )
@@ -64,10 +65,10 @@ class ContributionTestMixin:
 class ContributionModelTests(ContributionTestMixin, TestCase):
 
     def test_contribution_safe(self):
-        contribution = self.create_contribution(self.event, submitted=True)
-        self.assertEqual(contribution.event, self.event)
-        self.assertEqual(contribution.contributer, self.user)
-        self.assertTrue(contribution.submitted)
+        contribution = self.create_contribution(self.event, accepted=True)
+        self.assertEqual(contribution.fk_event, self.event)
+        self.assertEqual(contribution.fk_contributor, self.user)
+        self.assertTrue(contribution.accepted)
         self.assertEqual(Contribution.objects.count(), 1)
 
     def test_remove_event(self):

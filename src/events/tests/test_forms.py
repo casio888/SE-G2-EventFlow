@@ -1,17 +1,36 @@
 import json
 from calendar import isleap
-from datetime import date, timedelta
+from datetime import date, time, timedelta
 from unittest.mock import patch
 
 from django.test import TestCase
 from django.utils import timezone
 
-from events.forms import EventForm
-from events.models import Event
+from authentication.models import Address, CustomUserOrganizer
+from events.forms import EventForm, TimeslotForm, TimeslotFormSet
+from events.models import Event, Timeslot
 
+
+def create_organizer(username="organizer") -> CustomUserOrganizer:
+    """Create an organizer for event form tests."""
+    address = Address.objects.create(
+        country="Germany",
+        city="Dresden",
+        street="Test Street",
+        houseNbr=1,
+    )
+    return CustomUserOrganizer.objects.create_user(
+        username=username,
+        password="test-password",
+        address=address,
+        telephone="+491701234567",
+    )
 
 class EventFormTests(TestCase):
     """Test event and timeslot form validation."""
+
+    def setUp(self):
+        self.organizer = create_organizer()
 
     @staticmethod
     def form_data(**overrides) -> dict:
