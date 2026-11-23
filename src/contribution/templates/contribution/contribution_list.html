@@ -16,21 +16,19 @@
                 <tr>
                     <th data-column="Marker">Marker</th>
                     <th data-column="Username">Name</th>
-                    <!--<th data-column="Kategorien">Kategorien</th>-->
                 </tr>
             </thead>
             <tbody id="tableBody">
-                {% for contribution in contribution_list %}
+                {% for contribution in contributions %}
                 <tr>
-                <td>{{Contribution.submitted}}</td>
-                <td>{{Contribution.username}}</td>
-                <!--<td>{{event.kategorien}}</td>-->
-                    </tr>
-                    {%empty%}
+                    <td>{{ contribution.accepted }}</td>
+                    <td>{{ contribution.fk_contributor.username }}</td>
+                </tr>
+                {%empty%}
                 <tr>
                     <td colspan="5">Keine Bewerber gefunden</td>
                 </tr>
-                {%endfor%}
+                {% endfor %}
             </tbody>
         </table>
     </section>

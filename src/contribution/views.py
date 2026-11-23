@@ -64,7 +64,7 @@ def event_application(request, event_id):
     return render(request,'contribution/application.html',context)
 
 
-def event_contributions(request,event_id):
+def event_contributions(request, event_id):
     """
     Display the contributions submitted for an event.
 
@@ -81,14 +81,14 @@ def event_contributions(request,event_id):
         HttpResponse: The rendered contribution list page containing the
             event, its contributions or an informational message.
     """
-    event= get_object_or_404(Event, pk=event_id)
-    contribution_list=get_contributions_for_event(event_id)
+    event = get_object_or_404(Event, pk=event_id)
+    contribution_list = get_contributions_for_event(event_id)
     # checks if contributions does exist
     context={"event":event}
     if contribution_list.exists():
-        context ['contributions']= contribution_list
+        context['contributions']= contribution_list # TODO check if this works with the template formatting on empty/unset
     else:
-        context ['message']="Keine Einreichungen vorhanden."
+        context['contributions']= []
 
     return render(request,'contribution/contribution_list.html',context)
 # Create your views here.
