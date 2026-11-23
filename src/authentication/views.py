@@ -34,7 +34,7 @@ def organizer_registration_view(request: HttpRequest) -> HttpResponse:
                             "email",
                             "Email bereits in verwendung",
                         )
-            return render(request,"authentication/contributer_registration.html",{"form": form},)
+            return render(request,"authentication/organizer_registration.html",{"form": form},)
 
         if form.is_valid():
             try:
