@@ -39,7 +39,11 @@ def organizer_registration_view(request: HttpRequest) -> HttpResponse:
     else:
         form = UserOrganizerRegestrationForm()
 
-    return render(request,"authentication/organizer_registration.html",{"form": form},)
+    return render(
+        request,
+        "authentication/organizer_registration.html",
+        {"form": form},
+    )
 
 
 def contributer_registration_view(request: HttpRequest) -> HttpResponse:
@@ -73,4 +77,8 @@ def contributer_registration_view(request: HttpRequest) -> HttpResponse:
     else:
         form = UserContributerRegestrationForm()
 
-    return render(request,"authentication/contributer_registration.html",{"form": form},)
+    return render(
+        request,
+        "authentication/contributer_registration.html",
+        {"form": form},
+    )

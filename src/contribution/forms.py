@@ -2,10 +2,12 @@ from django import forms
 
 from .models import Contribution
 
+
 class ContributionForm(forms.ModelForm):
     """
     Form to create applications to events
     """
+
     class Meta:
         model = Contribution
         fields = ["duration_requested", "description", "requirements"]
@@ -21,9 +23,13 @@ class ContributionForm(forms.ModelForm):
 
         if duration is not None:
             if duration <= 0:
-                raise forms.ValidationError({"duration_requested": "Die Dauer muss größer 0 Minuten sein."})
+                raise forms.ValidationError(
+                    {"duration_requested": "Die Dauer muss größer 0 Minuten sein."}
+                )
         elif not self.has_error("duration_requested"):
-            raise forms.ValidationError({"duration_requested": "Es muss eine Dauer angegeben werden."})
+            raise forms.ValidationError(
+                {"duration_requested": "Es muss eine Dauer angegeben werden."}
+            )
 
         return cleaned_data
 
@@ -32,7 +38,9 @@ class ContributionForm(forms.ModelForm):
         if contributor is not None:
             contribution.fk_contributor = contributor
         else:
-            raise ValueError("Der Nutzeraccount muss ein Einreicher sein um sich auf Events zu bewerben.")
+            raise ValueError(
+                "Der Nutzeraccount muss ein Einreicher sein um sich auf Events zu bewerben."
+            )
 
         if commit:
             contribution.save()

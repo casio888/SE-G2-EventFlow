@@ -40,7 +40,6 @@ class Address(models.Model):
 
 
 class CustomUserOrganizer(User):
-
     """
     Represents an organizer account in the system.
 
@@ -58,10 +57,18 @@ class CustomUserOrganizer(User):
     address = models.ForeignKey(Address, on_delete=models.PROTECT)
 
     # Store the organizer's telephone number.
-    telephone = models.CharField(max_length=15,validators=[telephone_validator],)
+    telephone = models.CharField(
+        max_length=15,
+        validators=[telephone_validator],
+    )
 
     # Store an optional fax number.
-    fax = models.CharField(max_length=15,validators=[telephone_validator],blank=True,null=True,)
+    fax = models.CharField(
+        max_length=15,
+        validators=[telephone_validator],
+        blank=True,
+        null=True,
+    )
 
     class Meta:
         verbose_name = "Organizer"
@@ -78,12 +85,11 @@ class CustomUserOrganizer(User):
         Returns:
             str: Username of the organizer.
         """
-        
+
         return f"{self.username}"
 
 
 class CustomUserContributer(User):
-
     """
     Represents a contributor account in the system.
 
@@ -101,10 +107,19 @@ class CustomUserContributer(User):
     address = models.ForeignKey(Address, on_delete=models.PROTECT)
 
     # Store the contributor's telephone number.
-    telephone = models.CharField(max_length=15,validators=[telephone_validator],)
+    telephone = models.CharField(
+        max_length=15,
+        validators=[telephone_validator],
+    )
 
     # Store an optional fax number.
-    fax = models.CharField(max_length=15,validators=[telephone_validator],blank=True,null=True,)
+    fax = models.CharField(
+        max_length=15,
+        validators=[telephone_validator],
+        blank=True,
+        null=True,
+    )
+
     class Meta:
         verbose_name = "Contributor"
         verbose_name_plural = "Contributors"
@@ -116,6 +131,5 @@ class CustomUserContributer(User):
         Returns:
             str: Username of the contributor.
         """
-        
+
         return f"{self.username}"
-    

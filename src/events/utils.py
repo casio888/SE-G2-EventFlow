@@ -25,16 +25,17 @@ def _add_calendar_years(value: date, years: int) -> date:
 
 
 def get_event_form(request, event=None):
-    #checks correct Event-Form while saving a new event.
+    # checks correct Event-Form while saving a new event.
     from .forms import EventForm
 
     if request.method == "POST":
         return EventForm(request.POST, instance=event)
-    
+
     return EventForm(instance=event)
 
+
 def save_event_form(form):
-    #checks if the Event which should be saved has a correct form
+    # checks if the Event which should be saved has a correct form
     if form.is_valid():
         return form.save()
     return None
@@ -43,19 +44,18 @@ def save_event_form(form):
 def get_six_elements():
     # get the six nearests events out of the DB. If there arent enouth it would be filled up with a demonstator
     # If wanted change here to also get Events from the same date. And can be modified for other uses
-    event_list=list(Event.objects
-    .filter(start_date__gt=timezone.now())
-    .order_by('start_date')[:6]
-)  # get max 6 elements of Events and make list
+    event_list = list(
+        Event.objects.filter(start_date__gt=timezone.now()).order_by("start_date")[:6]
+    )  # get max 6 elements of Events and make list
     empty_event = {
-        'title': 'Demo',
-        'description': 'Es fehlen Events',
-        'start_date': None,
-        'end_date': None,
-        'location': 'Hinterkleinsiestdenicht',
-        }
+        "title": "Demo",
+        "description": "Es fehlen Events",
+        "start_date": None,
+        "end_date": None,
+        "location": "Hinterkleinsiestdenicht",
+    }
 
-    while len(event_list)< 6:
+    while len(event_list) < 6:
         event_list.append(empty_event)
 
     return event_list

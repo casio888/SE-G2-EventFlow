@@ -46,9 +46,7 @@ class TimeslotForm(forms.ModelForm):
         timeslot = super().save(commit=False)
         start_datetime = datetime.combine(date.min, timeslot.start)
         end_datetime = datetime.combine(date.min, timeslot.end)
-        timeslot.duration = int(
-            (end_datetime - start_datetime).total_seconds() / 60
-        )
+        timeslot.duration = int((end_datetime - start_datetime).total_seconds() / 60)
 
         if commit:
             timeslot.save()
@@ -94,15 +92,12 @@ class EventForm(forms.ModelForm):
         start_date = cleaned_data.get("start_date")
         end_date = cleaned_data.get("end_date")
         today = timezone.localdate()
-        latest_date = _add_calendar_years(
-            today, settings.MAX_EVENT_YEARS_IN_FUTURE
-        )
+        latest_date = _add_calendar_years(today, settings.MAX_EVENT_YEARS_IN_FUTURE)
 
         # Validate the start date.
         if start_date:
             start_date_unchanged = (
-                self.instance.pk
-                and start_date == self.instance.start_date
+                self.instance.pk and start_date == self.instance.start_date
             )
 
             if start_date < today and not start_date_unchanged:
@@ -135,7 +130,7 @@ class EventForm(forms.ModelForm):
 
         return cleaned_data
 
-    def save(self,organizer=None , commit=True):
+    def save(self, organizer=None, commit=True):
         """Save the event and create its associated timeslots.
 
         Returns:

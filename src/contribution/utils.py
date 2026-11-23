@@ -2,6 +2,7 @@ from .models import Contribution
 from events.models import Event
 from django.shortcuts import get_object_or_404, render
 
+
 def get_contributions_for_event(event_id):
     """
     Retrieve all contributions submitted for a specific event.
