@@ -1,3 +1,4 @@
+import json
 from calendar import isleap
 from datetime import date, time, timedelta
 from unittest.mock import patch
@@ -25,9 +26,8 @@ def create_organizer(username="organizer") -> CustomUserOrganizer:
         telephone="+491701234567",
     )
 
-
 class EventFormTests(TestCase):
-    """Test event form validation."""
+    """Test event and timeslot form validation."""
 
     def setUp(self):
         self.organizer = create_organizer()

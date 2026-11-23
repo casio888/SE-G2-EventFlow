@@ -8,6 +8,7 @@ from authentication.decorators import (
 from authentication.models import CustomUserContributer, CustomUserOrganizer
 from .forms import ContributionForm
 from .models import Contribution
+from .utils import get_contributions_for_event
 from events.models import Event
 from base.utils import redirect_to_referrer
 
@@ -61,3 +62,33 @@ def event_application(request, event_id):
 
     context = {'event': event, 'form': form}
     return render(request,'contribution/application.html',context)
+
+
+def event_contributions(request, event_id):
+    """
+    Display the contributions submitted for an event.
+
+    Retrieves the event by its ID and loads all related contributions.
+    If contributions exist, they are passed to the template. Otherwise,
+    a message indicating that no submissions are available is shown.
+    This view is intended for organizers.
+
+    Arguments:
+        request (HttpRequest): The HTTP request object.
+        event_id (int): The primary key of the event.
+
+    Returns:
+        HttpResponse: The rendered contribution list page containing the
+            event, its contributions or an informational message.
+    """
+    event = get_object_or_404(Event, pk=event_id)
+    contribution_list = get_contributions_for_event(event_id)
+    # checks if contributions does exist
+    context={"event":event}
+    if contribution_list.exists():
+        context['contributions']= contribution_list # TODO check if this works with the template formatting on empty/unset
+    else:
+        context['contributions']= []
+
+    return render(request,'contribution/contribution_list.html',context)
+# Create your views here.

@@ -82,6 +82,7 @@ def combined_form_data(slots=None, initial_forms=0, **event_overrides) -> dict:
     return data
 
 
+
 class EventCreateViewTests(TestCase):
     """Test combined event and timeslot creation."""
 
