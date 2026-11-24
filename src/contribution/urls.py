@@ -25,8 +25,18 @@ urlpatterns = [
     path("", views.event_list, name="event_list"),
     path("bewerben/<int:event_id>/", views.event_application, name="event_application"),
     path(
-        "events/<int:event_id>/contribution_list/",
+        "uebersicht/",
+        views.event_contributions,
+        name="contribution_overview",
+    ),
+    path(
+        "uebersicht/<int:event_id>/",
         views.event_contributions,
         name="event_contribution_list",
+    ),
+    path(
+        "events/<int:event_id>/contribution_list/",
+        views.event_contributions,
+        name="legacy_event_contribution_list",
     ),
 ]

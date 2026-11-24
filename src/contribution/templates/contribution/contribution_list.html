@@ -1,38 +1,53 @@
-{% extends "base_topside.html" %}
-{% load static %}
+{% extends "base_leftside.html" %}
 
 {% block content %}
-<main>
-    <section name="Event">
-       <!--Hier soll stehen, welches Event gerade angezeigt wird.-->
-    </section>
+<div class="container py-4">
+    <h1 class="mb-4">Einreichungen</h1>
 
-    <section name="table">
-    
-        <table id="table" >
-            <!--Tabelle wird automatisch gefüllt. Wenn dann muss nur der Kopf vorhanden sein.-->
-            <!-- |Marker | Name | Zeit | Ort | Kathegorien als Kopf-->
-            <thead>
-                <tr>
-                    <th data-column="Marker">Marker</th>
-                    <th data-column="Username">Name</th>
-                </tr>
-            </thead>
-            <tbody id="tableBody">
-                {% for contribution in contributions %}
-                <tr>
-                    <td>{{ contribution.accepted }}</td>
-                    <td>{{ contribution.fk_contributor.username }}</td>
-                </tr>
-                {%empty%}
-                <tr>
-                    <td colspan="5">Keine Bewerber gefunden</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </section>
-        
-    </section>
-</main>
+    {% if events %}
+        <nav class="d-flex flex-wrap gap-2 mb-4" aria-label="Veranstaltung auswählen">
+            {% for owned_event in events %}
+                <a
+                    class="btn {% if owned_event == event %}btn-primary{% else %}btn-outline-primary{% endif %}"
+                    href="{% url 'event_contribution_list' event_id=owned_event.id %}"
+                >
+                    {{ owned_event.title }}
+                </a>
+            {% endfor %}
+        </nav>
+
+        <h2 class="h4 mb-3">{{ event.title }}</h2>
+
+        <div class="table-responsive">
+            <table class="table table-striped align-middle">
+                <thead>
+                    <tr>
+                        <th>Einreicher</th>
+                        <th>Beschreibung</th>
+                        <th>Gewünschte Dauer</th>
+                        <th>Anforderungen</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for contribution in contributions %}
+                        <tr>
+                            <td>{{ contribution.fk_contributor.username }}</td>
+                            <td>{{ contribution.description }}</td>
+                            <td>{{ contribution.duration_requested }} Minuten</td>
+                            <td>{{ contribution.requirements }}</td>
+                            <td>{{ contribution.get_status_display }}</td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="5">Für diese Veranstaltung liegen noch keine Bewerbungen vor.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <p>Du hast noch keine eigenen Veranstaltungen.</p>
+    {% endif %}
+</div>
 {% endblock %}

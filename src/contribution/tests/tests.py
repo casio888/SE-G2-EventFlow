@@ -61,7 +61,7 @@ class ContributionFormTests(TestCase):
 
         self.assertEqual(Contribution.objects.count(), 1)
         self.assertEqual(contribution.fk_event, self.event)
-        self.assertFalse(contribution.accepted)
+        self.assertEqual(contribution.status, Contribution.Status.PENDING)
         self.assertEqual(contribution.duration_requested, 45)
         self.assertEqual(contribution.description, "Test contribbution")
         self.assertEqual(contribution.requirements, "Nothing")
@@ -113,7 +113,7 @@ class ContributionFormTests(TestCase):
         Contribution.objects.create(
             fk_event=self.event,
             fk_contributor=self.contributor,
-            accepted=False,
+            status=Contribution.Status.PENDING,
             duration_requested=45,
             description="Existing contribution",
             requirements="Nothing",

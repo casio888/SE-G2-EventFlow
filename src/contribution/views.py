@@ -68,35 +68,44 @@ def event_application(request, event_id):
     return render(request, "contribution/application.html", context)
 
 
-def event_contributions(request, event_id):
-    """
-    Display the contributions submitted for an event.
+@check_if_user_authneticated()
+@check_if_organizer_or_contributer(AccountType.ORGANIZER)
+def event_contributions(request, event_id=None):
+    """Display applications for an event owned by the current organizer.
 
-    Retrieves the event by its ID and loads all related contributions.
-    If contributions exist, they are passed to the template. Otherwise,
-    a message indicating that no submissions are available is shown.
-    This view is intended for organizers.
+    Authentication and organizer decorators restrict access to organizer accounts.
+    Without an event ID, the first owned event ordered by date and title is selected.
+    A supplied ID is resolved only within the organizer's events, preventing access
+    to applications submitted to events owned by another organizer.
 
     Arguments:
-        request (HttpRequest): The HTTP request object.
-        event_id (int): The primary key of the event.
+        request (HttpRequest): Incoming HTTP request.
+        event_id (int | None): Optional primary key of an owned event.
 
     Returns:
-        HttpResponse: The rendered contribution list page containing the
-            event, its contributions or an informational message.
+        HttpResponse: Rendered application overview for the selected event, or an
+            empty overview when the organizer owns no events.
     """
-    event = get_object_or_404(Event, pk=event_id)
-    contribution_list = get_contributions_for_event(event_id)
-    # checks if contributions does exist
-    context = {"event": event}
-    if contribution_list.exists():
-        context["contributions"] = (
-            contribution_list  # TODO check if this works with the template formatting on empty/unset
-        )
+    organizer = get_object_or_404(CustomUserOrganizer, pk=request.user.pk)
+    events = Event.objects.filter(event_owner=organizer).order_by("start_date", "title")
+
+    if event_id is None:
+        event = events.first()
     else:
-        context["contributions"] = []
+        event = get_object_or_404(events, pk=event_id)
 
-    return render(request, "contribution/contribution_list.html", context)
+    contributions = Contribution.objects.none()
+    if event is not None:
+        contributions = get_contributions_for_event(event.pk).select_related(
+            "fk_contributor"
+        )
 
-
-# Create your views here.
+    return render(
+        request,
+        "contribution/contribution_list.html",
+        {
+            "events": events,
+            "event": event,
+            "contributions": contributions,
+        },
+    )

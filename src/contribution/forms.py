@@ -15,7 +15,6 @@ class ContributionForm(forms.ModelForm):
     def __init__(self, *args, event, **kwargs):
         super().__init__(*args, **kwargs)
         self.instance.fk_event = event
-        self.instance.accepted = False
 
     def clean(self):
         cleaned_data = super().clean()
