@@ -26,6 +26,7 @@ def create_organizer(username="organizer") -> CustomUserOrganizer:
         telephone="+491701234567",
     )
 
+
 class EventFormTests(TestCase):
     """Test event and timeslot form validation."""
 
@@ -223,9 +224,7 @@ class TimeslotFormTests(TestCase):
 
         for field_name, value in invalid_values:
             with self.subTest(field=field_name, value=value):
-                form = TimeslotForm(
-                    data=self.form_data(**{field_name: value})
-                )
+                form = TimeslotForm(data=self.form_data(**{field_name: value}))
 
                 self.assertFalse(form.is_valid())
                 self.assertIn(field_name, form.errors)

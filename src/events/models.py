@@ -2,6 +2,7 @@ from django.db import models
 
 from authentication.models import CustomUserContributer, CustomUserOrganizer
 
+
 class Event(models.Model):
     """
     Repräsentiert eine Veranstaltung im System.
@@ -18,17 +19,18 @@ class Event(models.Model):
         created_at (datetime): Automatisch gesetztes Erstellungsdatum
     """
 
-    event_owner = models.ForeignKey(CustomUserOrganizer,on_delete=models.CASCADE)
+    event_owner = models.ForeignKey(CustomUserOrganizer, on_delete=models.CASCADE)
 
     title = models.CharField(max_length=200)
     description = models.TextField(blank=True)
     start_date = models.DateField()
     end_date = models.DateField()
-    location = models.CharField(max_length=200) 
+    location = models.CharField(max_length=200)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.title
+
 
 class Timeslot(models.Model):
     """A scheduled timeslot belonging to an event.
@@ -40,11 +42,8 @@ class Timeslot(models.Model):
         duration (int): Duration in minutes
         category (str): Timeslot category
     """
-    event = models.ForeignKey(
-        Event,
-        on_delete=models.CASCADE,
-        related_name="timeslots"
-    )
+
+    event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name="timeslots")
     start = models.TimeField()
     end = models.TimeField()
     duration = models.PositiveIntegerField()

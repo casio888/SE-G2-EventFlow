@@ -1,5 +1,5 @@
 from django.contrib import admin
-from authentication.models import CustomUserContributer,CustomUserOrganizer,Address
+from authentication.models import CustomUserContributer, CustomUserOrganizer, Address
 
 # Register your models here.
 

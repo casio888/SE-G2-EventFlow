@@ -2,11 +2,12 @@ from django.contrib.auth.models import User
 from django.db.models import ProtectedError
 from django.test import TestCase
 
-from .forms import UserContributerRegestrationForm,UserOrganizerRegestrationForm
+from .forms import UserContributerRegestrationForm, UserOrganizerRegestrationForm
 
 from .models import Address, CustomUserContributer, CustomUserOrganizer
 
-from django.contrib.auth.hashers import check_password  
+from django.contrib.auth.hashers import check_password
+
 
 def valid_data(**overrides):
     """Return valid registration data.
@@ -149,9 +150,9 @@ class OrganizerRegistrationErrorTests(TestCase):
         spaces, too long) and expects an error on the telephone field.
         """
         invalid_numbers = [
-            "12345",              # too short
-            "abc123456789",       # contains letters
-            "+49 170 1234567",    # contains spaces
+            "12345",  # too short
+            "abc123456789",  # contains letters
+            "+49 170 1234567",  # contains spaces
             "+4917012345678901",  # too long
         ]
         for number in invalid_numbers:
@@ -204,8 +205,14 @@ class OrganizerRegistrationErrorTests(TestCase):
         otherwise valid data and the form must report an error on it.
         """
         required = [
-            "username", "telephone", "country", "city",
-            "street", "houseNbr", "password1", "password2",
+            "username",
+            "telephone",
+            "country",
+            "city",
+            "street",
+            "houseNbr",
+            "password1",
+            "password2",
         ]
         for field in required:
             with self.subTest(field=field):
@@ -373,9 +380,7 @@ class AuthenticationModelTests(TestCase):
         The result must contain country, city, street and house number
         separated by commas.
         """
-        self.assertEqual(
-            str(self.address), "Deutschland, Dresden, Teststraße, 12"
-        )
+        self.assertEqual(str(self.address), "Deutschland, Dresden, Teststraße, 12")
 
     def test_organizer_str_returns_username(self):
         """Test the string representation of an organizer.

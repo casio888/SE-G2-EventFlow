@@ -1,13 +1,17 @@
 from django import forms
-from django.contrib.auth.models import User,Group
+from django.contrib.auth.models import User, Group
 from django.contrib.auth.forms import UserCreationForm
 from django.db import transaction
 
-from .models import CustomUserContributer, CustomUserOrganizer, Address, telephone_validator
+from .models import (
+    CustomUserContributer,
+    CustomUserOrganizer,
+    Address,
+    telephone_validator,
+)
 
 
 class UserOrganizerRegestrationForm(UserCreationForm):
-
     """
     Form for registering a new organizer account.
 
@@ -24,10 +28,17 @@ class UserOrganizerRegestrationForm(UserCreationForm):
     """
 
     # Validate the telephone number using the shared telephone validator.
-    telephone = forms.CharField(max_length=15, validators=[telephone_validator],)
+    telephone = forms.CharField(
+        max_length=15,
+        validators=[telephone_validator],
+    )
 
     # Collect an optional fax number and validate it if provided.
-    fax = forms.CharField(max_length=15, validators=[telephone_validator],required=False,)
+    fax = forms.CharField(
+        max_length=15,
+        validators=[telephone_validator],
+        required=False,
+    )
 
     # Collect the address details of the organization.
     country = forms.CharField(max_length=50)
@@ -53,7 +64,6 @@ class UserOrganizerRegestrationForm(UserCreationForm):
 
     @transaction.atomic
     def save(self, commit=True):
-    
         """
         Save the organizer registration form.
 
@@ -70,8 +80,8 @@ class UserOrganizerRegestrationForm(UserCreationForm):
         """
         user = super().save(commit=False)
 
-        user.telephone=self.cleaned_data["telephone"]
-        user.fax=self.cleaned_data["fax"]
+        user.telephone = self.cleaned_data["telephone"]
+        user.fax = self.cleaned_data["fax"]
 
         # Create a separate address record for the organizer.
         user.address, _ = Address.objects.get_or_create(
@@ -86,8 +96,8 @@ class UserOrganizerRegestrationForm(UserCreationForm):
 
         return user
 
-class UserContributerRegestrationForm(UserCreationForm):
 
+class UserContributerRegestrationForm(UserCreationForm):
     """
     Form for registering a new contributor account.
 
@@ -104,10 +114,17 @@ class UserContributerRegestrationForm(UserCreationForm):
     """
 
     # Validate the telephone number using the shared telephone validator.
-    telephone = forms.CharField(max_length=15, validators=[telephone_validator],)
+    telephone = forms.CharField(
+        max_length=15,
+        validators=[telephone_validator],
+    )
 
     # Collect an optional fax number and validate it if provided.
-    fax = forms.CharField(max_length=15, validators=[telephone_validator],required=False,)
+    fax = forms.CharField(
+        max_length=15,
+        validators=[telephone_validator],
+        required=False,
+    )
 
     # Collect the address details of the organization.
     country = forms.CharField(max_length=50)
@@ -151,8 +168,8 @@ class UserContributerRegestrationForm(UserCreationForm):
         """
         user = super().save(commit=False)
 
-        user.telephone=self.cleaned_data["telephone"]
-        user.fax=self.cleaned_data["fax"]
+        user.telephone = self.cleaned_data["telephone"]
+        user.fax = self.cleaned_data["fax"]
 
         user.address, _ = Address.objects.get_or_create(
             country=self.cleaned_data["country"],

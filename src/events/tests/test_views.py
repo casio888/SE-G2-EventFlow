@@ -82,7 +82,6 @@ def combined_form_data(slots=None, initial_forms=0, **event_overrides) -> dict:
     return data
 
 
-
 class EventCreateViewTests(TestCase):
     """Test combined event and timeslot creation."""
 
@@ -147,9 +146,7 @@ class EventCreateViewTests(TestCase):
         response = self.client.post(
             reverse("events:event_create"),
             combined_form_data(
-                start_date=(
-                    timezone.localdate() - timedelta(days=1)
-                ).isoformat(),
+                start_date=(timezone.localdate() - timedelta(days=1)).isoformat(),
             ),
         )
 
@@ -320,9 +317,7 @@ class EventEditViewTests(TestCase):
 
         self.assertEqual(response.status_code, 302)
         self.assertEqual(self.event.timeslots.count(), 3)
-        self.assertTrue(
-            self.event.timeslots.filter(pk=self.timeslot.pk).exists()
-        )
+        self.assertTrue(self.event.timeslots.filter(pk=self.timeslot.pk).exists())
         self.assertEqual(
             list(
                 self.event.timeslots.order_by("start").values_list(
@@ -370,9 +365,7 @@ class EventEditViewTests(TestCase):
         )
         self.assertTrue(Event.objects.filter(pk=self.event.pk).exists())
         self.assertFalse(Timeslot.objects.filter(pk=self.timeslot.pk).exists())
-        self.assertTrue(
-            Timeslot.objects.filter(pk=remaining_timeslot.pk).exists()
-        )
+        self.assertTrue(Timeslot.objects.filter(pk=remaining_timeslot.pk).exists())
 
     def test_deleting_multiple_timeslots_preserves_unmarked_timeslot(self):
         """Delete multiple marked timeslots and preserve the unmarked one."""
@@ -558,9 +551,7 @@ class EventEditViewTests(TestCase):
             end_date=self.event.end_date,
         )
 
-        response = self.client.get(
-            reverse("events:event_edit", args=[other_event.pk])
-        )
+        response = self.client.get(reverse("events:event_edit", args=[other_event.pk]))
 
         self.assertEqual(response.status_code, 404)
 
@@ -723,9 +714,7 @@ class EventDetailViewTests(TestCase):
             category="Workshop",
         )
 
-        response = self.client.get(
-            reverse("events:event_detail", args=[self.event.id])
-        )
+        response = self.client.get(reverse("events:event_detail", args=[self.event.id]))
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(

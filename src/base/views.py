@@ -15,9 +15,9 @@ def index(request: HttpRequest) -> HttpResponse:
     Returns:
         HttpResponse: The rendered index page.
     """
-    event_list= get_six_elements()
+    event_list = get_six_elements()
 
-    return render(request, "index.html", {'event_list':event_list})
+    return render(request, "index.html", {"event_list": event_list})
 
 
 def login_view(request: HttpRequest) -> HttpResponse:
@@ -46,7 +46,9 @@ def login_view(request: HttpRequest) -> HttpResponse:
 
                 return redirect("base:index")
 
-        return render(request, "login.html", {"error": "E-Mail oder Passwort ungültig."})
+        return render(
+            request, "login.html", {"error": "E-Mail oder Passwort ungültig."}
+        )
 
     return render(request, "login.html")
 

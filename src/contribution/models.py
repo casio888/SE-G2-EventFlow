@@ -2,6 +2,7 @@ from django.db import models
 from events.models import Event
 from authentication.models import CustomUserContributer
 
+
 class Contribution(models.Model):
     """Model for a User contribution to an event. Requirements holds requests from the contributer
     accepted=true means the event has accepted this contribution.
@@ -9,6 +10,7 @@ class Contribution(models.Model):
     Returns:
         _type_: _description_
     """
+
     fk_event = models.ForeignKey(Event, on_delete=models.CASCADE)
     fk_contributor = models.ForeignKey(CustomUserContributer, on_delete=models.CASCADE)
     accepted = models.BooleanField()
