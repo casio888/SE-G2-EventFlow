@@ -18,36 +18,113 @@
 
         <h2 class="h4 mb-3">{{ event.title }}</h2>
 
-        <div class="table-responsive">
-            <table class="table table-striped align-middle">
-                <thead>
-                    <tr>
-                        <th>Einreicher</th>
-                        <th>Beschreibung</th>
-                        <th>Gewünschte Dauer</th>
-                        <th>Anforderungen</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for contribution in contributions %}
-                        <tr>
-                            <td>{{ contribution.fk_contributor.username }}</td>
-                            <td>{{ contribution.description }}</td>
-                            <td>{{ contribution.duration_requested }} Minuten</td>
-                            <td>{{ contribution.requirements }}</td>
-                            <td>{{ contribution.get_status_display }}</td>
-                        </tr>
-                    {% empty %}
-                        <tr>
-                            <td colspan="5">Für diese Veranstaltung liegen noch keine Bewerbungen vor.</td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
+
+        <!-- Display the contribution(s) -->
+        <section>
+        {% for contribution in contributions %}
+
+            <form class="contribution-card" 
+                  method="post"
+                  action="{% url 'update_contribution' event_id=event.id contribution_id=contribution.id %}"
+                  style="border: 1px solid #ccc; padding: 1rem; margin-bottom: 1rem;">
+                {% csrf_token %}
+
+                <div>
+                    {% if contribution.is_favorite %}
+                        <button type="submit" name="action" value="remove_favorite"
+                                class="btn btn-star favorite-icon"
+                                aria-label="Aus Favoriten entfernen" style="color: gold;">
+                            &#9733;
+                        </button>
+                    {% else %}
+                        <button type="submit" name="action" value="add_favorite"
+                                class="btn btn-star"
+                                aria-label="Zu Favoriten hinzufügen">
+                            &#9734;
+                        </button>
+                    {% endif %}
+                </div>
+                <h3>{{ contribution.fk_contributor.username }}</h3>
+                <p>{{ contribution.fk_contributor.first_name }} {{ contribution.fk_contributor.last_name }}</p>
+                <a href="mailto:{{ contribution.fk_contributor.email }}">{{ contribution.fk_contributor.email }}</a>
+                <div>
+                    <button type="button" class="btn btn-accept"
+                            data-confirm-action="accept" aria-haspopup="dialog">
+                        Annehmen
+                    </button>
+
+                    <button type="button" class="btn btn-show-details"
+                            aria-label="Details anzeigen">
+                        i
+                    </button>
+
+                    <button type="button" class="btn btn-reject"
+                            data-confirm-action="reject" aria-haspopup="dialog">
+                        Ablehnen
+                    </button>
+                </div>
+
+                <dialog class="border-0 rounded shadow p-4"
+                        aria-labelledby="confirm-title-{{ contribution.pk }}"
+                        aria-describedby="confirm-text-{{ contribution.pk }}">
+                    <h3 id="confirm-title-{{ contribution.pk }}" class="h5">
+                        Entscheidung bestätigen
+                    </h3>
+
+                    <p id="confirm-text-{{ contribution.pk }}">
+                        Den Beitrag von <strong>{{ contribution.fk_contributor.username }}</strong>
+                        wirklich <span data-confirm-verb></span>?
+                    </p>
+
+                    <button type="submit" class="btn btn-primary" name="action" value="">
+                        Bestätigen
+                    </button>
+                    
+                    <button type="button" class="btn btn-secondary" data-confirm-cancel autofocus>
+                        Abbrechen
+                    </button>
+
+                </dialog>
+
+            </form>
+
+            <div class="contribution-details" style="border: 1px solid #ccc; padding: 1rem; margin-bottom: 1rem;">
+                <h4>Beitragsdauer</h4>
+                <p>{{ contribution.duration_requested }} Minuten</p>
+                <h4>Beschreibung</h4>
+                <p>{{ contribution.description }}</p>
+                <h4>Anforderungen</h4>
+                <p>{{ contribution.requirements}}</p>
+            </div>
+
+        {% empty %}
+            <p>Für diese Veranstaltung liegen noch keine Bewerbungen vor.</p>
+        {% endfor %}
+        </section>
     {% else %}
         <p>Du hast noch keine eigenen Veranstaltungen.</p>
     {% endif %}
 </div>
+
+<script>
+    document.querySelectorAll("form.contribution-card").forEach((form) => {
+        const dialog = form.querySelector("dialog");
+        const verb = dialog.querySelector("[data-confirm-verb]");
+        const confirmButton = dialog.querySelector('button[name="action"]');
+
+        form.querySelectorAll("[data-confirm-action]").forEach((button) => {
+            button.addEventListener("click", () => {
+                const action = button.dataset.confirmAction;
+
+                verb.textContent = action === "accept" ? "annehmen" : "ablehnen";
+                confirmButton.value = action;
+                dialog.showModal();
+            });
+        });
+
+        dialog.querySelector("[data-confirm-cancel]").addEventListener("click", () => {
+            dialog.close();
+        });
+    });
+</script>
 {% endblock %}

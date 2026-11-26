@@ -15,3 +15,10 @@ def get_contributions_for_event(event_id):
             The QuerySet is empty if no contributions exist.
     """
     return Contribution.objects.filter(fk_event__pk=event_id)
+
+
+def get_decision_status(action):
+    return {
+        "accept": Contribution.Status.ACCEPTED,
+        "reject": Contribution.Status.REJECTED,
+    }.get(action)

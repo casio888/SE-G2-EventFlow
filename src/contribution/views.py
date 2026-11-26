@@ -12,6 +12,11 @@ from .utils import get_contributions_for_event
 from events.models import Event
 from base.utils import redirect_to_referrer
 
+from django.db.models.functions import Lower
+from django.views.decorators.http import require_POST
+from django.contrib.auth.decorators import login_required
+
+
 
 def event_list(request):
     """Shows a List of all Events and Buttons to start submitting a contribution
@@ -96,8 +101,13 @@ def event_contributions(request, event_id=None):
 
     contributions = Contribution.objects.none()
     if event is not None:
-        contributions = get_contributions_for_event(event.pk).select_related(
-            "fk_contributor"
+        contributions = (
+            Contribution.objects.filter(
+                fk_event=event,
+                status__in=[Contribution.Status.PENDING,] # other possible values: Contribution.Status.ACCEPTED, Contribution.Status.REJECTED
+                )
+            .select_related("fk_contributor")
+            .order_by("-is_favorite", Lower("fk_contributor__last_name"), "pk") # "-is_favorite" is used for decending (true -> false) "is_favorite" ascending  
         )
 
     return render(
@@ -109,3 +119,46 @@ def event_contributions(request, event_id=None):
             "contributions": contributions,
         },
     )
+
+
+@check_if_user_authneticated()
+@check_if_organizer_or_contributer(AccountType.ORGANIZER)
+@require_POST
+def update_contribution(request, event_id, contribution_id):
+    """Update the status of a contribution based on the action taken by the organizer.
+
+    This view handles POST requests to accept or reject a contribution. It updates
+    the status of the specified contribution and redirects back to the contributions
+    overview page for the event.
+
+    Args:
+        request (HttpRequest): Incoming HTTP request.
+        event_id (int): Primary key of the event associated with the contribution.
+        contribution_id (int): Primary key of the contribution to update.
+    """
+    organizer = get_object_or_404(CustomUserOrganizer, pk=request.user.pk)
+    event = get_object_or_404(Event, pk=event_id, event_owner=organizer)
+    contribution = get_object_or_404(
+        Contribution, pk=contribution_id, fk_event=event
+    )
+    action = request.POST.get("action")
+
+    if action in {"accept", "reject"}:
+        status = (
+            Contribution.Status.ACCEPTED
+            if action == "accept"
+            else Contribution.Status.REJECTED
+        )
+        contribution.status = status
+        contribution.save(update_fields=["status"])
+        messages.success(
+            request,
+            f"Beitrag von {contribution.fk_contributor.username} wurde {status.label.lower()}.",
+        )
+    elif action in {"add_favorite", "remove_favorite"}:
+        contribution.is_favorite = action == "add_favorite"
+        contribution.save(update_fields=["is_favorite"])
+    else:
+        return HttpResponseBadRequest("Unbekannte Aktion.")
+
+    return redirect("event_contribution_list", event_id=event.pk)
