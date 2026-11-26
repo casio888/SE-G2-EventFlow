@@ -30,6 +30,7 @@ class Contribution(models.Model):
         choices=Status.choices,
         default=Status.PENDING,
     )
+    is_favorite = models.BooleanField(default=False, verbose_name="Favorit")
     duration_requested = models.PositiveIntegerField()
     description = models.TextField(max_length=400)
     requirements = models.TextField(max_length=400)

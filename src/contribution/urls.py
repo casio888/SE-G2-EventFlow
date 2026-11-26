@@ -39,4 +39,9 @@ urlpatterns = [
         views.event_contributions,
         name="legacy_event_contribution_list",
     ),
+    path(
+    "<int:event_id>/contributions/<int:contribution_id>/update/",
+    views.update_contribution,
+    name="update_contribution",
+    ),
 ]
