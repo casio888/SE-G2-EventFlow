@@ -18,6 +18,15 @@ def get_contributions_for_event(event_id):
 
 
 def get_decision_status(action):
+    """Map a decision action to a contribution status.
+
+    Args:
+        action (str | None): Submitted action, if present.
+
+    Returns:
+        Contribution.Status | None: The status for accept or reject,
+        or None for an unsupported action.
+    """
     return {
         "accept": Contribution.Status.ACCEPTED,
         "reject": Contribution.Status.REJECTED,

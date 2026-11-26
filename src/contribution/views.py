@@ -135,6 +135,9 @@ def update_contribution(request, event_id, contribution_id):
         request (HttpRequest): Incoming HTTP request.
         event_id (int): Primary key of the event associated with the contribution.
         contribution_id (int): Primary key of the contribution to update.
+
+    Returns:
+        HttpResponseRedirect: Redirects to the contributions overview page for the event.
     """
     organizer = get_object_or_404(CustomUserOrganizer, pk=request.user.pk)
     event = get_object_or_404(Event, pk=event_id, event_owner=organizer)
